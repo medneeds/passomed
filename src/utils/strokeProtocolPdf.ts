@@ -1,4 +1,5 @@
 import jsPDF from "jspdf";
+import networkFullLogo from "@/assets/passomed-full-logo.png";
 
 export interface StrokeProtocolPdfData {
   patient_name: string;

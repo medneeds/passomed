@@ -1,4 +1,5 @@
 import jsPDF from "jspdf";
+import networkFullLogo from "@/assets/passomed-full-logo.png";
 
 interface ProtocolData {
   patient_name: string;
