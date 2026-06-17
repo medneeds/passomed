@@ -234,7 +234,7 @@ export function AppSidebar({
 
   const sidebarContent = (
     <>
-       <SidebarHeader className="border-b border-sidebar-border px-3 py-5 bg-sidebar relative overflow-hidden">
+       <SidebarHeader className="border-b border-sidebar-border px-3 py-3 bg-sidebar relative overflow-hidden min-h-[76px] flex justify-center">
         {/* Subtle gradient accent line at top */}
         <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-gold/70 to-transparent" />
         
