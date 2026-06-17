@@ -223,9 +223,9 @@ export default function AuthPage() {
                 <img
                   src={logoPCross}
                   alt={`${whitelabel.platform.name} logo`}
-                  width={112}
-                  height={112}
-                  className="h-28 w-28 drop-shadow-[0_8px_24px_rgba(201,168,76,0.35)]"
+                  width={192}
+                  height={192}
+                  className="h-44 w-44 xl:h-52 xl:w-52 drop-shadow-[0_12px_32px_rgba(201,168,76,0.45)]"
                 />
               </div>
 
@@ -526,9 +526,9 @@ export default function AuthPage() {
               <img
                 src={logoPCross}
                 alt={`${whitelabel.platform.name} logo`}
-                width={80}
-                height={80}
-                className="h-20 w-20 drop-shadow-[0_6px_18px_rgba(201,168,76,0.35)]"
+                width={128}
+                height={128}
+                className="h-32 w-32 drop-shadow-[0_8px_22px_rgba(201,168,76,0.4)]"
               />
             </div>
 
