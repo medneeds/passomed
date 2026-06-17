@@ -40,7 +40,7 @@ interface BedSelectionDialogProps {
 }
 
 const sectorColorMap: Record<string, { bg: string; ring: string; text: string; label: string }> = {
-  red:    { bg: "bg-red-500",    ring: "ring-red-500/40",    text: "text-red-600 dark:text-red-400",       label: "Sala de Cuidados Especiais" },
+  red:    { bg: "bg-red-500",    ring: "ring-red-500/40",    text: "text-red-600 dark:text-red-400",       label: "Sala Vermelha" },
   yellow: { bg: "bg-yellow-500", ring: "ring-yellow-500/40", text: "text-yellow-600 dark:text-yellow-400", label: "Observação Amarela" },
   blue:   { bg: "bg-blue-500",   ring: "ring-blue-500/40",   text: "text-blue-600 dark:text-blue-400",     label: "Observação Azul" },
 };

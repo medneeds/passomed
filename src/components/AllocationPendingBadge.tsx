@@ -244,7 +244,7 @@ export function AllocationPendingBadge({ patient, onStatusChange }: AllocationPe
             open={bedPickerOpen}
             onOpenChange={setBedPickerOpen}
             sector={
-              patientRequest.requested_sector === "Cuidados Especiais"
+              patientRequest.requested_sector === "Sala Vermelha"
                 ? "red"
                 : patientRequest.requested_sector === "Observação Amarela"
                 ? "yellow"

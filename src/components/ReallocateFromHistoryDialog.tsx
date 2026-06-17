@@ -49,13 +49,13 @@ interface ReallocateFromHistoryDialogProps {
 }
 
 const sectorOptions = [
-  { value: "red", label: "Sala de Cuidados Especiais (Vermelha)" },
+  { value: "red", label: "Sala Vermelha" },
   { value: "yellow", label: "Observação Amarela" },
   { value: "blue", label: "Observação Azul" },
 ];
 
 const sectorLabels: Record<string, string> = {
-  red: "Sala de Cuidados Especiais",
+  red: "Sala Vermelha",
   yellow: "Observação Amarela",
   blue: "Observação Azul",
 };

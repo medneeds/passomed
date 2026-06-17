@@ -208,7 +208,7 @@ export function BedAllocationNotifications() {
 
   const getSectorColor = (sector: string) => {
     switch (sector) {
-      case "Cuidados Especiais":
+      case "Sala Vermelha":
         return "bg-red-500/20 text-red-500 border-red-500/30";
       case "Observação Amarela":
         return "bg-yellow-500/20 text-yellow-500 border-yellow-500/30";
@@ -221,7 +221,7 @@ export function BedAllocationNotifications() {
 
   const getSectorBorderColor = (sector: string) => {
     switch (sector) {
-      case "Cuidados Especiais": return "border-l-red-500";
+      case "Sala Vermelha": return "border-l-red-500";
       case "Observação Amarela": return "border-l-yellow-500";
       case "Observação Azul": return "border-l-blue-500";
       default: return "border-l-muted";
@@ -620,7 +620,7 @@ export function BedAllocationNotifications() {
           open={!!bedPickerRequest}
           onOpenChange={(o) => !o && setBedPickerRequest(null)}
           sector={
-            bedPickerRequest.requested_sector === "Cuidados Especiais"
+            bedPickerRequest.requested_sector === "Sala Vermelha"
               ? "red"
               : bedPickerRequest.requested_sector === "Observação Amarela"
               ? "yellow"

@@ -287,7 +287,7 @@ const sectorConfig = {
 };
 
 const sectorLabels = {
-  red: "Cuidados Especiais",
+  red: "Sala Vermelha",
   yellow: "Observação Amarela",
   blue: "Observação Azul",
   outside: "Fora das Alas"
@@ -1455,17 +1455,17 @@ export function PatientCard({ patient, onUpdate, onDelete, onUndelete, selection
       'red': 'sector-red',
       'yellow': 'sector-yellow', 
       'blue': 'sector-blue',
-      'Sala de Cuidados Especiais': 'sector-red',
+      'Sala Vermelha': 'sector-red',
       'Observação Amarela': 'sector-yellow',
       'Observação Azul': 'sector-blue',
     }[requestedSector] || 'sector-blue';
     
     // Map sector to display name
     const sectorDisplayName = {
-      'red': 'SALA DE CUIDADOS ESPECIAIS',
+      'red': 'SALA VERMELHA',
       'yellow': 'OBSERVAÇÃO AMARELA',
       'blue': 'OBSERVAÇÃO AZUL',
-      'Sala de Cuidados Especiais': 'SALA DE CUIDADOS ESPECIAIS',
+      'Sala Vermelha': 'SALA VERMELHA',
       'Observação Amarela': 'OBSERVAÇÃO AMARELA',
       'Observação Azul': 'OBSERVAÇÃO AZUL',
     }[requestedSector] || requestedSector.toUpperCase();

@@ -27,7 +27,7 @@ const COLORS = ['#ef4444', '#eab308', '#3b82f6', '#6b7280', '#8b5cf6', '#ec4899'
 
 // Sector color mapping based on hospital identity
 const SECTOR_COLORS: Record<string, string> = {
-  'Cuidados Especiais': '#ef4444',     // Red
+  'Sala Vermelha': '#ef4444',     // Red
   'Observação Amarela': '#eab308',      // Yellow
   'Observação Azul': '#3b82f6',         // Blue
   'Fora das Alas': '#6b7280',           // Gray
@@ -271,7 +271,7 @@ const DashboardPage = () => {
 
     if (data) {
       const sectorCounts = data.reduce((acc: any, patient: any) => {
-        const sector = patient.sector === 'red' ? 'Cuidados Especiais' :
+        const sector = patient.sector === 'red' ? 'Sala Vermelha' :
                       patient.sector === 'yellow' ? 'Observação Amarela' :
                       patient.sector === 'blue' ? 'Observação Azul' : 'Fora das Alas';
         acc[sector] = (acc[sector] || 0) + 1;

@@ -114,7 +114,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         }
         setAllowedDepartments([]);
       } else {
-        setAllowedDepartments(deptData?.map(d => d.department) || []);
+        const fetched = deptData?.map(d => d.department) || [];
+        // Admin/coordenador has full access to every department for demo/management purposes
+        const isAdmin = (roleData?.role as UserRole) === "admin";
+        setAllowedDepartments(
+          isAdmin
+            ? ["URGÊNCIA E EMERGÊNCIA ADULTO", "URGÊNCIA E EMERGÊNCIA PEDIÁTRICA", "UTI"]
+            : fetched
+        );
       }
     } catch (error) {
       if (import.meta.env.DEV) {

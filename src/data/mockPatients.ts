@@ -1,7 +1,7 @@
 import { Patient } from "@/types/patient";
 
 export const mockPatients: Patient[] = [
-  // Sala Vermelha - Cuidados Especiais (2 leitos)
+  // Sala Vermelha - Sala Vermelha (2 leitos)
   {
     id: "1",
     bedNumber: "V01",
