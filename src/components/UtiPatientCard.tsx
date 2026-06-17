@@ -919,7 +919,7 @@ export function UtiPatientCard({
     blue: {
       card: "bg-gradient-to-r from-emerald-50/60 via-background to-background dark:from-emerald-950/25 dark:via-card dark:to-card border-emerald-200/50 dark:border-emerald-900/40 border-l-[3px] border-l-primary/70 dark:border-l-primary-glow/70 hover:shadow-gold transition-shadow",
       bedBg: "bg-gradient-to-br from-primary via-primary to-primary-glow border-gold/60 shadow-sm",
-      bedText: "text-gold-foreground dark:text-gold drop-shadow-[0_1px_1px_rgba(0,0,0,0.4)]",
+      bedText: "text-gold font-extrabold tracking-wide drop-shadow-[0_1px_1px_rgba(0,0,0,0.5)]",
       col1: "bg-emerald-50/40 dark:bg-emerald-950/20 border-emerald-200/50 dark:border-emerald-900/30",
       col1Icon: "text-primary/70 dark:text-primary-glow/80",
       col2: "bg-emerald-50/40 dark:bg-emerald-950/20 border-emerald-200/50 dark:border-emerald-900/30",
@@ -932,7 +932,7 @@ export function UtiPatientCard({
     yellow: {
       card: "bg-gradient-to-r from-emerald-50/60 via-background to-background dark:from-emerald-950/25 dark:via-card dark:to-card border-emerald-200/50 dark:border-emerald-900/40 border-l-[3px] border-l-gold/80 dark:border-l-gold/80 hover:shadow-gold transition-shadow",
       bedBg: "bg-gradient-to-br from-primary via-primary to-primary-glow border-gold/70 shadow-sm",
-      bedText: "text-gold-foreground dark:text-gold drop-shadow-[0_1px_1px_rgba(0,0,0,0.4)]",
+      bedText: "text-gold font-extrabold tracking-wide drop-shadow-[0_1px_1px_rgba(0,0,0,0.5)]",
       col1: "bg-emerald-50/40 dark:bg-emerald-950/20 border-emerald-200/50 dark:border-emerald-900/30",
       col1Icon: "text-primary/70 dark:text-primary-glow/80",
       col2: "bg-emerald-50/40 dark:bg-emerald-950/20 border-emerald-200/50 dark:border-emerald-900/30",
