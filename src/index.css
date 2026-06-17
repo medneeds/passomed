@@ -513,7 +513,7 @@
   }
 
   .allocation-status-bar.sector-blue {
-    background: linear-gradient(to right, hsl(210 80% 42% / 0.2) 0%, hsl(210 80% 42% / 0.05) 100%);
+    background: linear-gradient(to right, hsl(var(--stable) / 0.2) 0%, hsl(var(--stable) / 0.05) 100%);
   }
 
   /* Status colors - icon and text same color */
