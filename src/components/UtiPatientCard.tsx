@@ -918,8 +918,8 @@ export function UtiPatientCard({
   const colorSchemes = {
     blue: {
       card: "bg-gradient-to-r from-emerald-50/60 via-background to-background dark:from-emerald-950/25 dark:via-card dark:to-card border-emerald-200/50 dark:border-emerald-900/40 border-l-[3px] border-l-primary/70 dark:border-l-primary-glow/70 hover:shadow-gold transition-shadow",
-      bedBg: "bg-primary border border-gold/60 shadow-sm",
-      bedText: "text-gold font-extrabold tracking-wider",
+      bedBg: "bg-primary dark:bg-emerald-950 border border-gold/60 dark:border-gold/80 shadow-sm dark:shadow-[0_0_0_1px_hsl(var(--gold)/0.25)]",
+      bedText: "text-gold dark:text-[hsl(var(--gold))] font-extrabold tracking-wider dark:[text-shadow:0_0_8px_hsl(var(--gold)/0.45)]",
       col1: "bg-emerald-50/40 dark:bg-emerald-950/20 border-emerald-200/50 dark:border-emerald-900/30",
       col1Icon: "text-primary/70 dark:text-primary-glow/80",
       col2: "bg-emerald-50/40 dark:bg-emerald-950/20 border-emerald-200/50 dark:border-emerald-900/30",
@@ -931,8 +931,8 @@ export function UtiPatientCard({
     },
     yellow: {
       card: "bg-gradient-to-r from-emerald-50/60 via-background to-background dark:from-emerald-950/25 dark:via-card dark:to-card border-emerald-200/50 dark:border-emerald-900/40 border-l-[3px] border-l-gold/80 dark:border-l-gold/80 hover:shadow-gold transition-shadow",
-      bedBg: "bg-primary border border-gold/70 shadow-sm",
-      bedText: "text-gold font-extrabold tracking-wider",
+      bedBg: "bg-primary dark:bg-amber-950 border border-gold/70 dark:border-gold/85 shadow-sm dark:shadow-[0_0_0_1px_hsl(var(--gold)/0.3)]",
+      bedText: "text-gold dark:text-[hsl(var(--gold))] font-extrabold tracking-wider dark:[text-shadow:0_0_8px_hsl(var(--gold)/0.5)]",
       col1: "bg-emerald-50/40 dark:bg-emerald-950/20 border-emerald-200/50 dark:border-emerald-900/30",
       col1Icon: "text-primary/70 dark:text-primary-glow/80",
       col2: "bg-emerald-50/40 dark:bg-emerald-950/20 border-emerald-200/50 dark:border-emerald-900/30",
