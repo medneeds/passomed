@@ -1,5 +1,5 @@
 import jsPDF from "jspdf";
-import networkFullLogo from "@/assets/hapvida-notredame-full-logo.png";
+import networkFullLogo from "@/assets/passomed-full-logo.png";
 
 interface ProtocolData {
   patient_name: string;
@@ -52,7 +52,7 @@ interface ProtocolData {
   notes: string | null;
 }
 
-const PRIMARY = [0, 80, 157]; // Hapvida blue
+const PRIMARY = [0, 80, 157]; // Brand blue
 const ACCENT = [220, 38, 38]; // red for sepsis
 const DARK = [30, 30, 30];
 const LIGHT_BG = [245, 247, 250];
@@ -92,10 +92,10 @@ export function generateSepsisProtocolPdf(data: ProtocolData) {
     doc.setFont("helvetica", "bold");
     doc.setFontSize(13);
     doc.setTextColor(PRIMARY[0], PRIMARY[1], PRIMARY[2]);
-    doc.text("HAPVIDA", M, y);
+    doc.text("PASSOMED", M, y);
     doc.setFontSize(8);
     doc.setTextColor(GRAY[0], GRAY[1], GRAY[2]);
-    doc.text("NOTREDAME INTERMÉDICA", M + 28, y);
+    doc.text("PLATAFORMA", M + 28, y);
   }
 
   // Title - right aligned, vertically centered with logo
@@ -318,7 +318,7 @@ export function generateSepsisProtocolPdf(data: ProtocolData) {
   doc.setDrawColor(200, 200, 200);
   doc.line(M, fY, W - M, fY);
   doc.setFont("helvetica", "normal"); doc.setFontSize(6); doc.setTextColor(GRAY[0], GRAY[1], GRAY[2]);
-  doc.text("HAPVIDA NOTREDAME INTERMÉDICA — Protocolo de Sepse Adulto", M, fY + 3);
+  doc.text("PASSOMED — Protocolo de Sepse Adulto", M, fY + 3);
   doc.text(`Gerado em: ${new Date().toLocaleString("pt-BR")}`, W - M, fY + 3, { align: "right" });
 
   // Bottom accent

@@ -79,7 +79,7 @@ export function LoadingScreen({ onComplete, duration = 2500 }: LoadingScreenProp
       <div className="relative z-10 flex flex-col items-center gap-10">
         {/* Logo da rede removida a pedido */}
 
-        {/* Brand Name - HapMap 2.0 */}
+        {/* Brand Name - PassoMed 1.0 */}
         <div 
           className="flex flex-col items-center gap-4"
           style={{ 

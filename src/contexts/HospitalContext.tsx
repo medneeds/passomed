@@ -74,15 +74,14 @@ export function HospitalProvider({ children }: { children: ReactNode }) {
         }
       }
 
-      // Set default to Maranhão and Hospital Guarás
-      const maState = statesData?.find(s => s.abbreviation === 'MA');
-      const guarasHospital = hospitalsData?.find(h => h.name.toUpperCase().includes('GUARÁS') || h.name.toUpperCase().includes('GUARAS'));
-
-      if (maState && guarasHospital) {
-        setCurrentState(maState);
-        setCurrentHospitalState(guarasHospital);
-        localStorage.setItem(STORAGE_KEY_STATE, maState.id);
-        localStorage.setItem(STORAGE_KEY_HOSPITAL, guarasHospital.id);
+      // Default: primeiro estado e primeira unidade disponíveis (whitelabel-agnostic).
+      const defaultState = statesData?.[0];
+      const defaultHospital = hospitalsData?.find(h => h.state_id === defaultState?.id) ?? hospitalsData?.[0];
+      if (defaultState && defaultHospital) {
+        setCurrentState(defaultState);
+        setCurrentHospitalState(defaultHospital);
+        localStorage.setItem(STORAGE_KEY_STATE, defaultState.id);
+        localStorage.setItem(STORAGE_KEY_HOSPITAL, defaultHospital.id);
       }
     } catch (error) {
       console.error('Error fetching states and hospitals:', error);

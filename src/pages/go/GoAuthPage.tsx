@@ -32,7 +32,7 @@ export default function GoAuthPage() {
       toast.error("Credenciais inválidas");
       setLoading(false);
     } else {
-      toast.success("Bem-vindo ao HAPMAP GO");
+      toast.success("Bem-vindo ao PASSOMED GO");
       navigate("/go", { replace: true });
     }
   };
@@ -44,7 +44,7 @@ export default function GoAuthPage() {
           to="/auth"
           className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
         >
-          <ArrowLeft className="h-4 w-4" /> Voltar ao HAPMAP
+          <ArrowLeft className="h-4 w-4" /> Voltar ao PASSOMED
         </Link>
 
         <Card className="p-8 border-2 shadow-2xl backdrop-blur-sm bg-card/95">
@@ -53,7 +53,7 @@ export default function GoAuthPage() {
               <Activity className="h-8 w-8 text-primary-foreground" strokeWidth={2.5} />
             </div>
             <h1 className="text-3xl font-bold tracking-tight">
-              HAPMAP <span className="text-primary">GO</span>
+              PASSOMED <span className="text-primary">GO</span>
             </h1>
             <p className="text-sm text-muted-foreground mt-2">
               Gestão Operacional Hospitalar
@@ -113,12 +113,12 @@ export default function GoAuthPage() {
           </form>
 
           <div className="mt-6 pt-6 border-t text-center text-xs text-muted-foreground">
-            Use as mesmas credenciais do HAPMAP.
+            Use as mesmas credenciais do PASSOMED.
           </div>
         </Card>
 
         <p className="text-center text-xs text-muted-foreground">
-          HAPMAP GO • Sistema de Gestão Operacional
+          PASSOMED GO • Sistema de Gestão Operacional
         </p>
       </div>
     </div>

@@ -34,7 +34,7 @@ export function GoLayout({ children }: { children: ReactNode }) {
             </div>
             <div className="flex flex-col leading-tight">
               <span className="font-bold text-base">
-                HAPMAP <span className="text-primary">GO</span>
+                PASSOMED <span className="text-primary">GO</span>
               </span>
               <span className="text-[10px] text-muted-foreground uppercase tracking-wider">
                 Gestão Operacional
@@ -74,7 +74,7 @@ export function GoLayout({ children }: { children: ReactNode }) {
             <Button variant="ghost" size="sm" asChild>
               <Link to="/">
                 <ArrowLeftRight className="h-4 w-4 mr-1" />
-                <span className="hidden sm:inline">HAPMAP</span>
+                <span className="hidden sm:inline">PASSOMED</span>
               </Link>
             </Button>
             <Button variant="ghost" size="icon" onClick={handleLogout} title="Sair">
@@ -110,7 +110,7 @@ export function GoLayout({ children }: { children: ReactNode }) {
       <main className="flex-1 container mx-auto px-4 py-6">{children}</main>
 
       <footer className="border-t bg-card py-3 text-center text-xs text-muted-foreground">
-        HAPMAP GO • Módulo Operacional sincronizado com HAPMAP
+        PASSOMED GO • Módulo Operacional sincronizado com PASSOMED
       </footer>
     </div>
   );

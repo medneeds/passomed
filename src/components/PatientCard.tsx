@@ -5490,7 +5490,7 @@ export function PatientCard({ patient, onUpdate, onDelete, onUndelete, selection
 </style></head><body>
 <div class="page">
   <div class="watermark"><img src="${networkLogoUrl}" alt="" /></div>
-  <div class="header"><div class="logo-main"><img src="${networkLogoUrl}" alt="Hapvida NotreDame Intermédica" /></div></div>
+  <div class="header"><div class="logo-main"><img src="${networkLogoUrl}" alt="PassoMed" /></div></div>
   <div class="title-bar"><h1>Relatório Médico</h1><span class="hospital-name">${whitelabel.institution.hospitalName}</span></div>
   <div class="patient-strip">
     <div class="field"><span class="field-label">Paciente</span><span class="field-value">${patient.name}</span></div>

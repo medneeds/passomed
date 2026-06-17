@@ -179,8 +179,8 @@ export default function DocumentsPage() {
           className="relative overflow-hidden border-primary/30 shadow-lg bg-gradient-to-r from-primary/5 via-background to-primary/5 group cursor-pointer hover:shadow-xl hover:border-primary/50 transition-all duration-500"
           onClick={() => {
             const link = document.createElement("a");
-            link.href = "/documents/modelo-admissao-evolucao-hapmap.odt";
-            link.download = "MODELO_DE_ADMISSÃO-EVOLUÇÃO_-_HAPMAP.odt";
+            link.href = "/documents/modelo-admissao-evolucao.odt";
+            link.download = "MODELO_DE_ADMISSAO-EVOLUCAO.odt";
             link.click();
           }}
         >
@@ -199,7 +199,7 @@ export default function DocumentsPage() {
                   Modelo de Admissão / Evolução
                 </h3>
                 <Badge className="bg-primary/15 text-primary border-primary/30 text-[10px]">
-                  HAPMAP
+                  MODELO
                 </Badge>
               </div>
               <p className="text-sm text-muted-foreground">

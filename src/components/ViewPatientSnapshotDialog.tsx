@@ -57,7 +57,7 @@ export function ViewPatientSnapshotDialog({
       return `<ol style="margin:0;padding-left:18px;">${items.map(i => `<li style="font-size:12px;margin-bottom:3px;text-transform:uppercase;">${i}</li>`).join("")}</ol>`;
     };
 
-    const hapmapLogoUrl = whitelabel.logos.platform;
+    const platformLogoUrl = whitelabel.logos.platform;
     const networkLogoUrl = whitelabel.logos.networkFull;
 
     const printWindow = window.open("", "_blank");
@@ -92,7 +92,7 @@ export function ViewPatientSnapshotDialog({
       <body>
         <div class="header">
           <div class="header-left">
-            <img src="${hapmapLogoUrl}" alt="HapMap" />
+            <img src="${platformLogoUrl}" alt="PassoMed" />
             <div>
               <div class="title">Caso Clínico do Paciente</div>
               <div class="subtitle">${whitelabel.institution.hospitalName}</div>
