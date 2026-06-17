@@ -10,8 +10,6 @@ import {
   LockKeyhole,
   Shield,
   Bell,
-  PanelLeftClose,
-  PanelLeft,
   KeyRound,
   ArrowRightLeft,
 } from "lucide-react";
@@ -59,7 +57,7 @@ export function AppSidebar({
 }: { 
   onOpenHandover?: () => void;
 }) {
-  const { open, setOpen, openMobile, setOpenMobile, state } = useSidebar();
+  const { openMobile, setOpenMobile, state } = useSidebar();
   const navigate = useNavigate();
   const { signOut, user, role } = useAuth();
   const isMobile = useIsMobile();
@@ -555,19 +553,6 @@ export function AppSidebar({
         className="border-r border-sidebar-border bg-sidebar transition-all duration-300 data-[state=collapsed]:w-[72px]"
       >
         {sidebarContent}
-        {isCollapsed && (
-          <div className="flex justify-center py-2 border-t border-border/30">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setOpen(true)}
-              className="h-8 w-8 text-muted-foreground hover:text-foreground"
-              title="Expandir menu"
-            >
-              <PanelLeft className="h-4 w-4" />
-            </Button>
-          </div>
-        )}
       </Sidebar>
 
       <AlertDialog open={showPasswordDialog} onOpenChange={setShowPasswordDialog}>
