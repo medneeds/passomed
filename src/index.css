@@ -18,47 +18,52 @@
   
   :root {
     /* PassoMed — Esmeralda Prestige (light) */
-    --background: 42 38% 96%;
+    --background: 150 25% 97%;
     --foreground: 160 40% 10%;
     --card: 0 0% 100%;
     --card-foreground: 160 40% 10%;
     --popover: 0 0% 100%;
     --popover-foreground: 160 40% 10%;
     --primary: 160 84% 16%;
-    --primary-foreground: 42 38% 96%;
+    --primary-foreground: 150 25% 97%;
     --primary-glow: 162 80% 26%;
-    --secondary: 150 18% 92%;
+    --secondary: 150 22% 93%;
     --secondary-foreground: 160 40% 14%;
-    --muted: 150 20% 94%;
+    --muted: 150 22% 95%;
     --muted-foreground: 160 12% 38%;
-    --accent: 44 60% 54%;
-    --accent-foreground: 160 40% 10%;
+    /* Accent = hover/interaction surface — soft emerald tint, NOT gold */
+    --accent: 160 40% 92%;
+    --accent-foreground: 160 84% 16%;
+    /* Gold = intentional luxury accent (badges, dividers, icons) */
+    --gold: 44 58% 50%;
+    --gold-foreground: 160 50% 8%;
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
     --critical: 0 72% 51%;
     --critical-foreground: 0 0% 100%;
     --warning: 45 93% 47%;
     --warning-foreground: 0 0% 100%;
-    --stable: 162 70% 32%;
+    /* Stable = "Observação Azul" — keep distinctly blue but harmonized with emerald (slate-teal blue) */
+    --stable: 200 70% 38%;
     --stable-foreground: 0 0% 100%;
-    --border: 150 20% 84%;
-    --input: 150 20% 84%;
+    --border: 150 18% 86%;
+    --input: 150 18% 86%;
     --ring: 160 84% 22%;
     --radius: 0.75rem;
     
     --gradient-primary: linear-gradient(135deg, hsl(160 84% 16%) 0%, hsl(162 80% 26%) 100%);
-    --gradient-card: linear-gradient(to bottom, hsl(0 0% 100% / 0.96) 0%, hsl(42 38% 99% / 0.92) 50%, hsl(42 38% 96% / 0.85) 100%);
-    --gradient-emerald: linear-gradient(135deg, hsl(160 84% 14%) 0%, hsl(160 70% 22%) 60%, hsl(44 60% 54% / 0.15) 100%);
-    --gradient-gold: linear-gradient(135deg, hsl(44 60% 54%) 0%, hsl(40 55% 44%) 100%);
+    --gradient-card: linear-gradient(to bottom, hsl(0 0% 100% / 0.98) 0%, hsl(150 25% 99% / 0.94) 50%, hsl(150 25% 97% / 0.88) 100%);
+    --gradient-emerald: linear-gradient(135deg, hsl(160 84% 14%) 0%, hsl(160 70% 22%) 60%, hsl(44 58% 50% / 0.18) 100%);
+    --gradient-gold: linear-gradient(135deg, hsl(44 58% 50%) 0%, hsl(40 55% 44%) 100%);
     --gradient-critical: linear-gradient(to right, hsl(0 72% 51% / 0.2) 0%, hsl(0 72% 51% / 0.05) 100%);
     --gradient-warning: linear-gradient(to right, hsl(45 93% 47% / 0.2) 0%, hsl(45 93% 47% / 0.05) 100%);
-    --gradient-stable: linear-gradient(to right, hsl(162 70% 32% / 0.2) 0%, hsl(162 70% 32% / 0.05) 100%);
+    --gradient-stable: linear-gradient(to right, hsl(200 70% 38% / 0.2) 0%, hsl(200 70% 38% / 0.05) 100%);
     
     --shadow-sm: 0 1px 2px 0 hsl(160 40% 10% / 0.06);
     --shadow-md: 0 4px 12px -2px hsl(160 40% 10% / 0.08), 0 2px 4px -2px hsl(160 40% 10% / 0.06);
     --shadow-lg: 0 12px 32px -8px hsl(160 84% 14% / 0.18), 0 4px 8px -4px hsl(160 40% 10% / 0.08);
     --shadow-glow: 0 0 48px hsl(160 84% 22% / 0.22);
-    --shadow-gold: 0 8px 24px -10px hsl(44 60% 44% / 0.45);
+    --shadow-gold: 0 8px 24px -10px hsl(44 58% 40% / 0.4);
     
     --transition-base: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -68,14 +73,15 @@
     --status-discussing: 199 89% 48%;
     --status-rejected: 0 72% 51%;
 
-    --sidebar-background: 160 50% 8%;
-    --sidebar-foreground: 42 30% 92%;
-    --sidebar-primary: 44 60% 54%;
-    --sidebar-primary-foreground: 160 50% 8%;
-    --sidebar-accent: 160 40% 14%;
-    --sidebar-accent-foreground: 42 30% 92%;
-    --sidebar-border: 160 30% 18%;
-    --sidebar-ring: 44 60% 54%;
+    /* Sidebar (light) — cream/white surface, emerald text, soft emerald hover */
+    --sidebar-background: 150 28% 98%;
+    --sidebar-foreground: 160 40% 14%;
+    --sidebar-primary: 160 84% 16%;
+    --sidebar-primary-foreground: 150 25% 97%;
+    --sidebar-accent: 160 35% 93%;
+    --sidebar-accent-foreground: 160 84% 16%;
+    --sidebar-border: 150 18% 88%;
+    --sidebar-ring: 160 84% 22%;
   }
 
   .dark {
@@ -93,18 +99,20 @@
     --secondary-foreground: 42 30% 94%;
     --muted: 160 22% 14%;
     --muted-foreground: 150 12% 65%;
-    --accent: 44 55% 58%;
-    --accent-foreground: 160 50% 6%;
+    --accent: 160 35% 18%;
+    --accent-foreground: 42 30% 94%;
+    --gold: 44 55% 58%;
+    --gold-foreground: 160 50% 6%;
     --destructive: 0 62% 45%;
     --destructive-foreground: 0 0% 100%;
     --critical: 0 62% 45%;
     --critical-foreground: 0 0% 100%;
     --warning: 45 80% 45%;
     --warning-foreground: 0 0% 100%;
-    --stable: 162 60% 48%;
+    --stable: 200 65% 50%;
     --stable-foreground: 0 0% 100%;
-    --border: 160 22% 20%;
-    --input: 160 22% 20%;
+    --border: 160 22% 18%;
+    --input: 160 22% 18%;
     --ring: 162 70% 48%;
     
     --gradient-primary: linear-gradient(135deg, hsl(162 70% 38%) 0%, hsl(158 75% 22%) 100%);
@@ -113,7 +121,7 @@
     --gradient-gold: linear-gradient(135deg, hsl(44 55% 58%) 0%, hsl(40 50% 44%) 100%);
     --gradient-critical: linear-gradient(to right, hsl(0 62% 45% / 0.2) 0%, hsl(0 62% 45% / 0.05) 100%);
     --gradient-warning: linear-gradient(to right, hsl(45 80% 45% / 0.2) 0%, hsl(45 80% 45% / 0.05) 100%);
-    --gradient-stable: linear-gradient(to right, hsl(162 60% 48% / 0.2) 0%, hsl(162 60% 48% / 0.05) 100%);
+    --gradient-stable: linear-gradient(to right, hsl(200 65% 50% / 0.2) 0%, hsl(200 65% 50% / 0.05) 100%);
     
     --shadow-sm: 0 1px 2px 0 hsl(0 0% 0% / 0.4);
     --shadow-md: 0 4px 12px -2px hsl(0 0% 0% / 0.5), 0 2px 4px -2px hsl(0 0% 0% / 0.3);
@@ -121,14 +129,15 @@
     --shadow-glow: 0 0 48px hsl(162 70% 48% / 0.3);
     --shadow-gold: 0 8px 24px -10px hsl(44 55% 50% / 0.4);
 
-    --sidebar-background: 160 40% 5%;
+    /* Sidebar (dark) — deep emerald with cream text and emerald hover */
+    --sidebar-background: 160 42% 7%;
     --sidebar-foreground: 42 30% 92%;
-    --sidebar-primary: 44 55% 58%;
+    --sidebar-primary: 162 70% 48%;
     --sidebar-primary-foreground: 160 50% 6%;
-    --sidebar-accent: 160 32% 12%;
+    --sidebar-accent: 160 32% 14%;
     --sidebar-accent-foreground: 42 30% 92%;
-    --sidebar-border: 160 25% 16%;
-    --sidebar-ring: 44 55% 58%;
+    --sidebar-border: 160 28% 16%;
+    --sidebar-ring: 162 70% 48%;
   }
 
   * {
