@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
-import { LogIn, User, Lock, Sparkles, Building2, Eye, EyeOff, Shield, FileCheck, UserPlus, Users } from "lucide-react";
+import { LogIn, User, Lock, Sparkles, Building2, Eye, EyeOff, Shield, FileCheck, UserPlus } from "lucide-react";
 import { z } from "zod";
 import { whitelabel } from "@/config/whitelabel";
 import { LoadingScreen } from "@/components/LoadingScreen";
@@ -54,7 +54,6 @@ export default function AuthPage() {
   const [selectedState, setSelectedState] = useState<string>("");
   const [selectedHospitalId, setSelectedHospitalId] = useState<string>("");
   const [selectedDepartment, setSelectedDepartment] = useState<Department>("URGÊNCIA E EMERGÊNCIA ADULTO");
-  const [selectedUserType, setSelectedUserType] = useState<string>("");
 
   // Filter hospitals by selected state
   const filteredHospitals = selectedState 
@@ -71,10 +70,6 @@ export default function AuthPage() {
     e.preventDefault();
 
     // Validate selections
-    if (!selectedUserType) {
-      toast.error("SELECIONE A CATEGORIA DE USUÁRIO");
-      return;
-    }
     if (!selectedState) {
       toast.error("SELECIONE UM ESTADO");
       return;
