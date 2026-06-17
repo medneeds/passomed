@@ -220,13 +220,18 @@ export default function AuthPage() {
             <div className="relative z-10 text-center max-w-md animate-in fade-in-0 slide-in-from-left-8 duration-1000">
               {/* Logo P+ */}
               <div className="flex justify-center mb-4 animate-in fade-in-0 zoom-in-95 duration-1000">
-                <img
-                  src={logoPCross}
-                  alt={`${whitelabel.platform.name} logo`}
-                  width={192}
-                  height={192}
-                  className="h-44 w-44 xl:h-52 xl:w-52 drop-shadow-[0_12px_32px_rgba(201,168,76,0.45)]"
-                />
+                <div className="relative flex items-center justify-center mx-auto">
+                  {/* Radiating halos behind the P */}
+                  <div className="pointer-events-none absolute inset-0 -m-16 rounded-full bg-[radial-gradient(circle,rgba(201,168,76,0.55)_0%,rgba(201,168,76,0.25)_35%,transparent_70%)] blur-3xl animate-pulse" />
+                  <div className="pointer-events-none absolute inset-0 -m-8 rounded-full bg-[radial-gradient(circle,rgba(255,235,170,0.45)_0%,transparent_65%)] blur-2xl" />
+                  <img
+                    src={logoPCross}
+                    alt={`${whitelabel.platform.name} logo`}
+                    width={192}
+                    height={192}
+                    className="relative h-44 w-44 xl:h-52 xl:w-52 drop-shadow-[0_0_28px_rgba(201,168,76,0.85)] [filter:drop-shadow(0_0_14px_rgba(255,225,150,0.7))_drop-shadow(0_18px_38px_rgba(201,168,76,0.55))]"
+                  />
+                </div>
               </div>
 
               {/* Brand Name - Logo Style - smaller */}
@@ -523,13 +528,17 @@ export default function AuthPage() {
           <div className="text-center mb-4 animate-in fade-in-0 slide-in-from-top-8 duration-1000">
             {/* Logo P+ */}
             <div className="flex justify-center mb-3">
-              <img
-                src={logoPCross}
-                alt={`${whitelabel.platform.name} logo`}
-                width={128}
-                height={128}
-                className="h-32 w-32 drop-shadow-[0_8px_22px_rgba(201,168,76,0.4)]"
-              />
+              <div className="relative flex items-center justify-center mx-auto">
+                <div className="pointer-events-none absolute inset-0 -m-12 rounded-full bg-[radial-gradient(circle,rgba(201,168,76,0.55)_0%,rgba(201,168,76,0.22)_40%,transparent_70%)] blur-3xl animate-pulse" />
+                <div className="pointer-events-none absolute inset-0 -m-6 rounded-full bg-[radial-gradient(circle,rgba(255,235,170,0.45)_0%,transparent_65%)] blur-2xl" />
+                <img
+                  src={logoPCross}
+                  alt={`${whitelabel.platform.name} logo`}
+                  width={128}
+                  height={128}
+                  className="relative h-32 w-32 drop-shadow-[0_0_22px_rgba(201,168,76,0.85)] [filter:drop-shadow(0_0_12px_rgba(255,225,150,0.7))_drop-shadow(0_12px_28px_rgba(201,168,76,0.5))]"
+                />
+              </div>
             </div>
 
             <div className="animate-in fade-in-0 slide-in-from-bottom-4 duration-1000 delay-150">
