@@ -54,7 +54,7 @@ export default function GoOverviewPage() {
       <div>
         <h1 className="text-3xl font-bold tracking-tight">Visão Geral</h1>
         <p className="text-muted-foreground">
-          Painel operacional do HAPMAP GO — sincronizado em tempo real.
+          Painel operacional do PASSOMED GO — sincronizado em tempo real.
         </p>
       </div>
 

@@ -291,7 +291,7 @@ export default function GoIndicatorsPage() {
       <div>
         <h1 className="text-3xl font-bold tracking-tight">Indicadores Operacionais</h1>
         <p className="text-muted-foreground">
-          KPIs detalhados de tempos, eficiência e fluxo a partir dos registros do HAPMAP GO.
+          KPIs detalhados de tempos, eficiência e fluxo a partir dos registros do PASSOMED GO.
         </p>
       </div>
 

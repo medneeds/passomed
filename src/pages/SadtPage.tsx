@@ -8,8 +8,8 @@ export default function SadtPage() {
   const [searchQuery, setSearchQuery] = useState("");
 
   const documents = [
-    { file: "hapvida-guia-sp-sadt.pdf", title: "Guia SP-SADT Hapvida - Formato Retrato", orientation: "Retrato" },
-    { file: "hapvida-guia-sp-sadt-paisagem.pdf", title: "Guia SP-SADT Hapvida - Formato Paisagem", orientation: "Paisagem" },
+    { file: "guia-sp-sadt.pdf", title: "Guia SP-SADT - Formato Retrato", orientation: "Retrato" },
+    { file: "guia-sp-sadt-paisagem.pdf", title: "Guia SP-SADT - Formato Paisagem", orientation: "Paisagem" },
   ];
 
   const filteredDocuments = documents.filter(doc =>
