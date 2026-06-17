@@ -8,8 +8,6 @@ import { KeyboardShortcutsDialog } from "@/components/KeyboardShortcutsDialog";
 import { GlobalSearchDialog } from "@/components/GlobalSearchDialog";
 import { PageTransition } from "@/components/PageTransition";
 
-import { FloatingSidebarTrigger } from "@/components/FloatingSidebarTrigger";
-
 interface MainLayoutProps {
   children: ReactNode;
   onOpenHandover?: () => void;
@@ -27,8 +25,6 @@ export function MainLayout({ children, onOpenHandover }: MainLayoutProps) {
     <SidebarProvider>
       <div className="min-h-screen flex w-full bg-background relative">
         <AppSidebar onOpenHandover={onOpenHandover} />
-        <FloatingSidebarTrigger />
-        
         <div className="flex-1 flex flex-col w-full">
           <main className="flex-1 overflow-auto">
             <PageTransition>
