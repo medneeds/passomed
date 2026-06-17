@@ -169,21 +169,21 @@ export function UtiSectorSection({
   const [internalIsOpen, setInternalIsOpen] = useState(patients.length > 0);
   const [allCardsCollapsed, setAllCardsCollapsed] = useState(true);
 
-  // Header color schemes — clean & neutral. Base sempre branca/cinza, com fina linha de acento
+  // Header color schemes — neutra com discreta identidade por UTI (UTI 1 azul, UTI 2 âmbar)
   const headerStyles = {
     blue: {
-      bg: "bg-slate-50/80 dark:bg-slate-900/40 border-l-2 border-l-blue-500/70 dark:border-l-blue-400/70",
-      title: "text-slate-700 dark:text-slate-200",
-      button: "border-slate-300/60 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/40 hover:border-slate-400/60",
-      chevron: "text-slate-500 dark:text-slate-400",
-      counter: "border-slate-300/60 bg-white dark:bg-slate-800/60"
+      bg: "bg-gradient-to-r from-sky-50/90 via-slate-50/70 to-transparent dark:from-sky-950/30 dark:via-slate-900/40 dark:to-transparent border-l-[3px] border-l-sky-500/70 dark:border-l-sky-400/70",
+      title: "text-sky-900 dark:text-sky-100",
+      button: "border-sky-300/50 text-sky-700 dark:text-sky-200 hover:bg-sky-100/60 dark:hover:bg-sky-900/30 hover:border-sky-400/60",
+      chevron: "text-sky-600/80 dark:text-sky-300/80",
+      counter: "border-sky-300/50 bg-white/80 dark:bg-sky-950/50 text-sky-800 dark:text-sky-100"
     },
     yellow: {
-      bg: "bg-slate-50/80 dark:bg-slate-900/40 border-l-2 border-l-slate-500/70 dark:border-l-slate-400/70",
-      title: "text-slate-700 dark:text-slate-200",
-      button: "border-slate-300/60 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/40 hover:border-slate-400/60",
-      chevron: "text-slate-500 dark:text-slate-400",
-      counter: "border-slate-300/60 bg-white dark:bg-slate-800/60"
+      bg: "bg-gradient-to-r from-amber-50/90 via-slate-50/70 to-transparent dark:from-amber-950/25 dark:via-slate-900/40 dark:to-transparent border-l-[3px] border-l-amber-500/70 dark:border-l-amber-400/70",
+      title: "text-amber-900 dark:text-amber-100",
+      button: "border-amber-300/50 text-amber-800 dark:text-amber-200 hover:bg-amber-100/60 dark:hover:bg-amber-900/30 hover:border-amber-400/60",
+      chevron: "text-amber-700/80 dark:text-amber-300/80",
+      counter: "border-amber-300/50 bg-white/80 dark:bg-amber-950/40 text-amber-900 dark:text-amber-100"
     }
   };
   const headerClass = headerStyles[colorVariant].bg;
