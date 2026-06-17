@@ -229,10 +229,10 @@ export default function AuthPage() {
                 <div className="inline-flex items-baseline gap-1.5">
                   <h1 className="text-6xl xl:text-7xl tracking-tighter inline-flex items-baseline">
                     <span className="font-black bg-gradient-to-br from-white via-white to-white/70 bg-clip-text text-transparent drop-shadow-lg">
-                      {whitelabel.platform.name.slice(0, 3)}
+                      {whitelabel.platform.name.slice(0, 5)}
                     </span>
                     <span className="font-light text-white/80 -ml-0.5">
-                      {whitelabel.platform.name.slice(3)}
+                      {whitelabel.platform.name.slice(5)}
                     </span>
                   </h1>
                   <span className="text-[9px] font-medium text-white/40 tracking-wider border border-white/20 rounded-full px-1.5 py-0.5 self-start mt-1.5">
@@ -566,10 +566,10 @@ export default function AuthPage() {
               <div className="inline-flex items-baseline gap-1">
                 <h1 className="text-5xl tracking-tighter inline-flex items-baseline">
                   <span className="font-black bg-gradient-to-br from-white via-white to-white/70 bg-clip-text text-transparent drop-shadow-lg">
-                    {whitelabel.platform.name.slice(0, 3)}
+                    {whitelabel.platform.name.slice(0, 5)}
                   </span>
                   <span className="font-light text-white/80 -ml-0.5">
-                    {whitelabel.platform.name.slice(3)}
+                    {whitelabel.platform.name.slice(5)}
                   </span>
                 </h1>
                 <span className="text-[7px] font-medium text-white/40 tracking-wider border border-white/20 rounded-full px-1 py-0.5 self-start">
