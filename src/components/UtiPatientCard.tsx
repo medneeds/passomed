@@ -917,8 +917,8 @@ export function UtiPatientCard({
   // Color schemes — paleta Esmeralda Prestige + identidade discreta por UTI
   const colorSchemes = {
     blue: {
-      card: "bg-gradient-to-r from-sky-50/60 via-white to-white dark:from-sky-950/20 dark:via-slate-900/60 dark:to-slate-900/60 border-emerald-200/50 dark:border-emerald-900/40 border-l-[3px] border-l-sky-500/70 dark:border-l-sky-400/70 hover:shadow-gold transition-shadow",
-      bedBg: "bg-gradient-to-br from-primary via-primary to-sky-700 dark:from-primary dark:via-primary dark:to-sky-600 border-gold/40",
+      card: "bg-gradient-to-r from-emerald-50/60 via-background to-background dark:from-emerald-950/25 dark:via-card dark:to-card border-emerald-200/50 dark:border-emerald-900/40 border-l-[3px] border-l-primary/70 dark:border-l-primary-glow/70 hover:shadow-gold transition-shadow",
+      bedBg: "bg-gradient-to-br from-primary via-primary to-primary-glow border-gold/50",
       bedText: "text-gold",
       col1: "bg-emerald-50/40 dark:bg-emerald-950/20 border-emerald-200/50 dark:border-emerald-900/30",
       col1Icon: "text-primary/70 dark:text-primary-glow/80",
@@ -930,8 +930,8 @@ export function UtiPatientCard({
       col4Icon: "text-primary/70 dark:text-primary-glow/80",
     },
     yellow: {
-      card: "bg-gradient-to-r from-amber-50/50 via-white to-white dark:from-amber-950/15 dark:via-slate-900/60 dark:to-slate-900/60 border-emerald-200/50 dark:border-emerald-900/40 border-l-[3px] border-l-amber-500/70 dark:border-l-amber-400/70 hover:shadow-gold transition-shadow",
-      bedBg: "bg-gradient-to-br from-primary via-primary to-amber-700 dark:from-primary dark:via-primary dark:to-amber-600 border-gold/40",
+      card: "bg-gradient-to-r from-emerald-50/60 via-background to-background dark:from-emerald-950/25 dark:via-card dark:to-card border-emerald-200/50 dark:border-emerald-900/40 border-l-[3px] border-l-gold/80 dark:border-l-gold/80 hover:shadow-gold transition-shadow",
+      bedBg: "bg-gradient-to-br from-primary via-primary to-primary-glow border-gold/60",
       bedText: "text-gold",
       col1: "bg-emerald-50/40 dark:bg-emerald-950/20 border-emerald-200/50 dark:border-emerald-900/30",
       col1Icon: "text-primary/70 dark:text-primary-glow/80",
