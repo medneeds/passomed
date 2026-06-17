@@ -1067,30 +1067,27 @@ const Index = () => {
         <div className={printMode ? 'print-hide' : ''}>
           {/* Header */}
           <DynamicHeader>
-            <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent print:hidden"></div>
-            <div className="container mx-auto px-2 sm:px-4 py-2 sm:py-3 print:py-0.5 print:px-1">
-              <div className="flex items-center justify-between gap-2">
+            <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-gold/40 to-transparent print:hidden"></div>
+            <div className="container mx-auto px-2 sm:px-4 print:py-0.5 print:px-1 min-h-[76px] print:min-h-0 flex items-center">
+              <div className="flex items-center justify-between gap-2 w-full">
                 {/* Left side: Sidebar button + Title + Department selector */}
                 <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
                   <SidebarTrigger className="print:hidden flex-shrink-0 text-white hover:text-white hover:bg-white/25 border-white/30 hover:border-white/50 data-[state=open]:bg-white/25 transition-all duration-200" />
                   
-                  <div className="min-w-0 flex-1 flex flex-col gap-1.5">
-                    <div className="flex items-center gap-2 flex-wrap">
-                      <h1 className="text-base sm:text-2xl font-bold text-white print:text-xs uppercase tracking-tight truncate">Mapa de Pacientes</h1>
-                      {currentDepartment === "UTI" && <DeathReviewBadge department={currentDepartment} />}
-                    </div>
+                  <div className="min-w-0 flex-1 flex items-center gap-3 flex-wrap">
                     <div className="print:hidden">
                       <DropdownMenu>
                         <DropdownMenuTrigger asChild>
-                          <button className="inline-flex items-center gap-1.5 h-9 md:h-7 px-4 md:px-3 bg-white/10 backdrop-blur-sm border border-white/20 text-white text-sm md:text-xs font-semibold hover:bg-white/20 hover:border-white/40 transition-all duration-200 rounded-full cursor-pointer shadow-sm hover:shadow-md">
-                            <Building2 className="h-4 md:h-3.5 w-4 md:w-3.5 flex-shrink-0" />
+                          <button className="inline-flex items-center gap-2 h-10 md:h-11 px-4 md:px-5 bg-white/10 backdrop-blur-sm border border-gold/40 text-white text-sm md:text-base font-display font-medium tracking-wide hover:bg-white/20 hover:border-gold/60 transition-all duration-200 rounded-full cursor-pointer shadow-md hover:shadow-lg">
+                            <Building2 className="h-4 md:h-4 w-4 md:w-4 flex-shrink-0 text-gold/90" />
                             <span className="md:hidden truncate">
                               {getDepartmentLabel(currentDepartment)}
                             </span>
                             <span className="hidden md:inline truncate max-w-none">{getDepartmentLabel(currentDepartment)}</span>
-                            <ChevronDown className="h-4 md:h-3.5 w-4 md:w-3.5 flex-shrink-0 opacity-70" />
+                            <ChevronDown className="h-4 md:h-4 w-4 md:w-4 flex-shrink-0 opacity-70" />
                           </button>
                         </DropdownMenuTrigger>
+                    {currentDepartment === "UTI" && <DeathReviewBadge department={currentDepartment} />}
                         <DropdownMenuContent className="bg-background border border-border shadow-lg z-[9999] min-w-[280px]">
                           {authLoading ? (
                             <DropdownMenuItem disabled className="text-sm py-2.5 px-3">
