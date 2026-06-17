@@ -1471,7 +1471,7 @@ const Index = () => {
                         onPrintPatient={handlePrintPatient}
                         onRefetch={refetch}
                         customTitle="UNIDADE DE TERAPIA INTENSIVA 1"
-                        customIcon={<span className="w-2.5 h-2.5 rounded-full bg-blue-500/80 border border-blue-300/60" />}
+                        customIcon={<span className="w-2.5 h-2.5 rounded-full bg-primary border border-gold/50" />}
                         colorVariant="blue"
                         allPatients={patients}
                         currentUtiUnit="UTI 1"
@@ -1493,7 +1493,7 @@ const Index = () => {
                         onPrintPatient={handlePrintPatient}
                         onRefetch={refetch}
                         customTitle="UNIDADE DE TERAPIA INTENSIVA 2"
-                        customIcon={<span className="w-2.5 h-2.5 rounded-full bg-slate-500/80 border border-slate-400/60" />}
+                        customIcon={<span className="w-2.5 h-2.5 rounded-full bg-gold border border-primary/40" />}
                         colorVariant="yellow"
                         allPatients={patients}
                         currentUtiUnit="UTI 2"
