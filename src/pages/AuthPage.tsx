@@ -217,8 +217,17 @@ export default function AuthPage() {
             <div className="absolute bottom-[15%] right-[10%] w-64 h-64 bg-gradient-radial from-white/8 to-transparent rounded-full blur-3xl animate-[float_12s_ease-in-out_infinite_2s]" />
             
             <div className="relative z-10 text-center max-w-md animate-in fade-in-0 slide-in-from-left-8 duration-1000">
-              {/* Logo da rede removida a pedido */}
-              
+              {/* Logo P+ */}
+              <div className="flex justify-center mb-4 animate-in fade-in-0 zoom-in-95 duration-1000">
+                <img
+                  src={logoPCross}
+                  alt={`${whitelabel.platform.name} logo`}
+                  width={112}
+                  height={112}
+                  className="h-28 w-28 drop-shadow-[0_8px_24px_rgba(201,168,76,0.35)]"
+                />
+              </div>
+
               {/* Brand Name - Logo Style - smaller */}
               <div className="animate-in fade-in-0 slide-in-from-bottom-4 duration-1000 delay-150 mb-3">
                 <div className="inline-flex items-baseline gap-1.5">
