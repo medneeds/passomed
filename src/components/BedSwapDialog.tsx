@@ -27,7 +27,7 @@ interface BedSwapDialogProps {
 }
 
 const sectorLabels: Record<string, string> = {
-  red: "Cuidados Especiais",
+  red: "Sala Vermelha",
   yellow: "Obs. Amarela",
   blue: "Obs. Azul",
   outside: "Fora das Alas",

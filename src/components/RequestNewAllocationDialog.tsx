@@ -31,11 +31,11 @@ import { cn } from "@/lib/utils";
 interface RequestNewAllocationDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  targetSector: "Cuidados Especiais" | "Observação Amarela" | "Observação Azul";
+  targetSector: "Sala Vermelha" | "Observação Amarela" | "Observação Azul";
 }
 
 const sectorToInternalSector: Record<string, Patient['sector']> = {
-  "Cuidados Especiais": "red",
+  "Sala Vermelha": "red",
   "Observação Amarela": "yellow",
   "Observação Azul": "blue",
 };
@@ -378,7 +378,7 @@ export function RequestNewAllocationDialog({
 
   const getSectorColor = () => {
     switch (targetSector) {
-      case "Cuidados Especiais": return "text-red-500";
+      case "Sala Vermelha": return "text-red-500";
       case "Observação Amarela": return "text-yellow-500";
       case "Observação Azul": return "text-blue-500";
       default: return "";
@@ -387,7 +387,7 @@ export function RequestNewAllocationDialog({
 
   const getSectorBgColor = () => {
     switch (targetSector) {
-      case "Cuidados Especiais": return "bg-red-500/10 border-red-500/30";
+      case "Sala Vermelha": return "bg-red-500/10 border-red-500/30";
       case "Observação Amarela": return "bg-yellow-500/10 border-yellow-500/30";
       case "Observação Azul": return "bg-blue-500/10 border-blue-500/30";
       default: return "bg-muted/50";

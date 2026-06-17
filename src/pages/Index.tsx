@@ -220,7 +220,7 @@ const Index = () => {
   const [isDeleteSelectedDialogOpen, setIsDeleteSelectedDialogOpen] = useState(false);
   const [handoverDialogOpen, setHandoverDialogOpen] = useState(false);
   const [allocationDialogOpen, setAllocationDialogOpen] = useState(false);
-  const [allocationTargetSector, setAllocationTargetSector] = useState<"Cuidados Especiais" | "Observação Amarela" | "Observação Azul">("Cuidados Especiais");
+  const [allocationTargetSector, setAllocationTargetSector] = useState<"Sala Vermelha" | "Observação Amarela" | "Observação Azul">("Sala Vermelha");
   const [utiAllocationDialogOpen, setUtiAllocationDialogOpen] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
@@ -527,8 +527,8 @@ const Index = () => {
 
     // For porta users, clicking on specialized sectors opens allocation request dialog
     if (role === 'porta' && (sector === 'red' || sector === 'yellow' || sector === 'blue')) {
-      const sectorMap: Record<string, "Cuidados Especiais" | "Observação Amarela" | "Observação Azul"> = {
-        'red': 'Cuidados Especiais',
+      const sectorMap: Record<string, "Sala Vermelha" | "Observação Amarela" | "Observação Azul"> = {
+        'red': 'Sala Vermelha',
         'yellow': 'Observação Amarela',
         'blue': 'Observação Azul',
       };
@@ -552,8 +552,8 @@ const Index = () => {
 
   // Open the regulation/queue request dialog targeting a specific emergency sector.
   const handleRequestFromQueue = (sector: Patient['sector']) => {
-    const sectorMap: Partial<Record<Patient['sector'], "Cuidados Especiais" | "Observação Amarela" | "Observação Azul">> = {
-      red: 'Cuidados Especiais',
+    const sectorMap: Partial<Record<Patient['sector'], "Sala Vermelha" | "Observação Amarela" | "Observação Azul">> = {
+      red: 'Sala Vermelha',
       yellow: 'Observação Amarela',
       blue: 'Observação Azul',
     };
@@ -793,7 +793,7 @@ const Index = () => {
       toast({
         title: "Paciente realocado",
         description: `${patient.name} foi realocado para ${
-          newSector === 'red' ? 'Cuidados Especiais' :
+          newSector === 'red' ? 'Sala Vermelha' :
           newSector === 'yellow' ? 'Observação Amarela' :
           newSector === 'blue' ? 'Observação Azul' : 'Fora das Alas'
         } (leito ${newBedNumber}).`,

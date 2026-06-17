@@ -22,7 +22,7 @@ interface ViewPatientSnapshotDialogProps {
 }
 
 const sectorNames = {
-  red: "Sala de Cuidados Especiais",
+  red: "Sala Vermelha",
   yellow: "Observação Amarela",
   blue: "Observação Azul",
   outside: "Fora das Alas",

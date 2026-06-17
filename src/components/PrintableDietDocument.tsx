@@ -19,7 +19,7 @@ interface PrintableDietDocumentProps {
   onClose: () => void;
 }
 const sectorLabels: Record<string, string> = {
-  red: "Sala de Cuidados Especiais",
+  red: "Sala Vermelha",
   yellow: "Observação Amarela",
   blue: "Observação Azul",
   outside: "Fora das Alas"

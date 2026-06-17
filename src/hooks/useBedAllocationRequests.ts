@@ -214,7 +214,7 @@ export function useBedAllocationRequests() {
 
       // Map sector name to db sector value
       const sectorMap: Record<string, string> = {
-        "Cuidados Especiais": "red",
+        "Sala Vermelha": "red",
         "Observação Amarela": "yellow",
         "Observação Azul": "blue",
       };
