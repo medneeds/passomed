@@ -40,19 +40,19 @@ const sectorInfo = {
   red: {
     title: "Cuidados Intensivos",
     subtitle: "Leitos UTI",
-    icon: "🏥",
+    icon: "",
     gradientClass: "bg-primary/15 dark:bg-primary/25 border-l-4 border-l-primary"
   },
   yellow: {
     title: "Semi-Intensivo",
     subtitle: "Leitos Semi",
-    icon: "🟡",
+    icon: "",
     gradientClass: "bg-primary/15 dark:bg-primary/25 border-l-4 border-l-primary"
   },
   blue: {
     title: "Observação UTI",
     subtitle: "Aguardando vaga",
-    icon: "🔵",
+    icon: "",
     gradientClass: "bg-primary/15 dark:bg-primary/25 border-l-4 border-l-primary"
   }
 };
