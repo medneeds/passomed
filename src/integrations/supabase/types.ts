@@ -2695,6 +2695,10 @@ export type Database = {
       setup_medicoporta_user: { Args: never; Returns: undefined }
       setup_medicouti_user: { Args: never; Returns: undefined }
       setup_visitante_user: { Args: never; Returns: undefined }
+      user_can_access_hospital_unit: {
+        Args: { _hospital_unit_id: string; _user_id: string }
+        Returns: boolean
+      }
     }
     Enums: {
       app_role:
