@@ -1,0 +1,1074 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  html,
+  body {
+    @apply m-0 p-0 h-full;
+  }
+  
+  body {
+    @apply bg-background text-foreground;
+  }
+  
+  :root {
+    --background: 210 20% 98%;
+    --foreground: 210 20% 12%;
+    --card: 0 0% 100%;
+    --card-foreground: 210 20% 12%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 20% 12%;
+    --primary: 210 80% 42%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 210 15% 92%;
+    --secondary-foreground: 210 20% 12%;
+    --muted: 210 15% 95%;
+    --muted-foreground: 210 10% 45%;
+    --accent: 210 60% 88%;
+    --accent-foreground: 210 80% 28%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --critical: 0 72% 51%;
+    --critical-foreground: 0 0% 100%;
+    --warning: 45 93% 47%;
+    --warning-foreground: 0 0% 100%;
+    --stable: 210 80% 42%;
+    --stable-foreground: 0 0% 100%;
+    --border: 210 20% 88%;
+    --input: 210 20% 88%;
+    --ring: 210 80% 42%;
+    --radius: 0.75rem;
+    
+    --gradient-primary: linear-gradient(135deg, hsl(210 80% 42%) 0%, hsl(210 70% 35%) 100%);
+    --gradient-card: linear-gradient(to bottom, hsl(0 0% 100% / 0.95) 0%, hsl(0 0% 100% / 0.9) 50%, hsl(0 0% 100% / 0.8) 100%);
+    --gradient-critical: linear-gradient(to right, hsl(0 72% 51% / 0.2) 0%, hsl(0 72% 51% / 0.05) 100%);
+    --gradient-warning: linear-gradient(to right, hsl(45 93% 47% / 0.2) 0%, hsl(45 93% 47% / 0.05) 100%);
+    --gradient-stable: linear-gradient(to right, hsl(210 80% 42% / 0.2) 0%, hsl(210 80% 42% / 0.05) 100%);
+    
+    --shadow-sm: 0 1px 2px 0 hsl(210 20% 12% / 0.05);
+    --shadow-md: 0 4px 6px -1px hsl(210 20% 12% / 0.1), 0 2px 4px -2px hsl(210 20% 12% / 0.1);
+    --shadow-lg: 0 10px 15px -3px hsl(210 20% 12% / 0.1), 0 4px 6px -4px hsl(210 20% 12% / 0.1);
+    --shadow-glow: 0 0 40px hsl(210 80% 42% / 0.15);
+    
+    --transition-base: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* Allocation Status Bar Colors */
+    --status-pending: 45 93% 47%;
+    --status-discussing: 199 89% 48%;
+    --status-rejected: 0 72% 51%;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 210 30% 8%;
+    --foreground: 210 20% 98%;
+    --card: 210 25% 12%;
+    --card-foreground: 210 20% 98%;
+    --popover: 210 25% 12%;
+    --popover-foreground: 210 20% 98%;
+    --primary: 210 70% 55%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 210 20% 18%;
+    --secondary-foreground: 210 20% 98%;
+    --muted: 210 20% 18%;
+    --muted-foreground: 210 15% 65%;
+    --accent: 210 50% 25%;
+    --accent-foreground: 210 70% 75%;
+    --destructive: 0 62% 45%;
+    --destructive-foreground: 0 0% 100%;
+    --critical: 0 62% 45%;
+    --critical-foreground: 0 0% 100%;
+    --warning: 45 80% 45%;
+    --warning-foreground: 0 0% 100%;
+    --stable: 210 70% 55%;
+    --stable-foreground: 0 0% 100%;
+    --border: 210 20% 22%;
+    --input: 210 20% 22%;
+    --ring: 210 70% 65%;
+    
+    --gradient-primary: linear-gradient(135deg, hsl(210 70% 55%) 0%, hsl(210 60% 45%) 100%);
+    --gradient-card: linear-gradient(to bottom, hsl(210 25% 12% / 0.95) 0%, hsl(210 25% 12% / 0.9) 50%, hsl(210 25% 12% / 0.8) 100%);
+    --gradient-critical: linear-gradient(to right, hsl(0 62% 45% / 0.2) 0%, hsl(0 62% 45% / 0.05) 100%);
+    --gradient-warning: linear-gradient(to right, hsl(45 80% 45% / 0.2) 0%, hsl(45 80% 45% / 0.05) 100%);
+    --gradient-stable: linear-gradient(to right, hsl(210 70% 55% / 0.2) 0%, hsl(210 70% 55% / 0.05) 100%);
+    
+    --shadow-sm: 0 1px 2px 0 hsl(210 20% 98% / 0.05);
+    --shadow-md: 0 4px 6px -1px hsl(210 20% 98% / 0.1), 0 2px 4px -2px hsl(210 20% 98% / 0.1);
+    --shadow-lg: 0 10px 15px -3px hsl(210 20% 98% / 0.1), 0 4px 6px -4px hsl(210 20% 98% / 0.1);
+    --shadow-glow: 0 0 40px hsl(210 70% 65% / 0.2);
+
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  /* Force light tokens inside print previews / PDF dialogs */
+  .print-light {
+    color-scheme: light;
+    --background: 0 0% 100%;
+    --foreground: 210 20% 12%;
+    --card: 0 0% 100%;
+    --card-foreground: 210 20% 12%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 20% 12%;
+    --secondary: 210 15% 92%;
+    --secondary-foreground: 210 20% 12%;
+    --muted: 210 15% 95%;
+    --muted-foreground: 210 10% 45%;
+    --accent: 210 60% 88%;
+    --accent-foreground: 210 80% 28%;
+    --border: 210 20% 88%;
+    --input: 210 20% 88%;
+    --ring: 210 80% 42%;
+  }
+
+  /* Hide print layout on screen */
+  .print-layout-container {
+    display: none;
+  }
+}
+
+/* Custom scrollbar styles */
+.scrollbar-thin {
+  scrollbar-width: thin;
+}
+
+.scrollbar-thin::-webkit-scrollbar {
+  height: 6px;
+  width: 6px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground) / 0.3);
+  border-radius: 3px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.5);
+}
+
+.dark .scrollbar-thin::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground) / 0.4);
+}
+
+.dark .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.6);
+}
+
+/* Bottom scrollbar - visible and elegant */
+.scrollbar-thin-bottom {
+  scrollbar-width: auto;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.scrollbar-thin-bottom::-webkit-scrollbar {
+  height: 14px;
+}
+
+.scrollbar-thin-bottom::-webkit-scrollbar-track {
+  background: linear-gradient(
+    to bottom,
+    hsl(var(--muted) / 0.3) 0%,
+    hsl(var(--muted) / 0.5) 50%,
+    hsl(var(--muted) / 0.3) 100%
+  );
+  border-radius: 7px;
+  margin: 0 4px;
+  border: 1px solid hsl(var(--border) / 0.3);
+}
+
+.scrollbar-thin-bottom::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    135deg,
+    hsl(var(--primary) / 0.5) 0%,
+    hsl(var(--primary) / 0.7) 50%,
+    hsl(var(--primary) / 0.5) 100%
+  );
+  border-radius: 7px;
+  border: 2px solid hsl(var(--background) / 0.5);
+  box-shadow: 
+    inset 0 1px 2px hsl(var(--primary-foreground) / 0.2),
+    0 1px 3px hsl(var(--foreground) / 0.1);
+  transition: all 0.2s ease;
+}
+
+.scrollbar-thin-bottom::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    135deg,
+    hsl(var(--primary) / 0.7) 0%,
+    hsl(var(--primary) / 0.9) 50%,
+    hsl(var(--primary) / 0.7) 100%
+  );
+  box-shadow: 
+    inset 0 1px 2px hsl(var(--primary-foreground) / 0.3),
+    0 2px 6px hsl(var(--primary) / 0.3);
+}
+
+.scrollbar-thin-bottom::-webkit-scrollbar-thumb:active {
+  background: hsl(var(--primary));
+}
+
+/* Dark mode adjustments */
+.dark .scrollbar-thin-bottom::-webkit-scrollbar-track {
+  background: linear-gradient(
+    to bottom,
+    hsl(var(--muted) / 0.4) 0%,
+    hsl(var(--muted) / 0.6) 50%,
+    hsl(var(--muted) / 0.4) 100%
+  );
+  border-color: hsl(var(--border) / 0.4);
+}
+
+.dark .scrollbar-thin-bottom::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    135deg,
+    hsl(var(--primary) / 0.6) 0%,
+    hsl(var(--primary) / 0.8) 50%,
+    hsl(var(--primary) / 0.6) 100%
+  );
+  border-color: hsl(var(--background) / 0.6);
+}
+
+.dark .scrollbar-thin-bottom::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    135deg,
+    hsl(var(--primary) / 0.8) 0%,
+    hsl(var(--primary)) 50%,
+    hsl(var(--primary) / 0.8) 100%
+  );
+}
+
+@media print {
+  /* Page size/margins are defined by the specific print components (portrait/landscape).
+     Keeping this global block without forcing a single orientation prevents overflow/scrollbars. */
+
+  * {
+    print-color-adjust: exact !important;
+    -webkit-print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+  
+  html {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+  
+  body {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+    position: relative;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  /* Prevent scrollbars from being rendered into PDF */
+  #root {
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  /* MainLayout uses overflow-auto; during print this can render scrollbars into the PDF */
+  main {
+    overflow: visible !important;
+    height: auto !important;
+  }
+
+  main::-webkit-scrollbar {
+    width: 0 !important;
+    height: 0 !important;
+    display: none !important;
+  }
+
+  .print-layout-container {
+    overflow: visible !important;
+  }
+
+  .print-layout-container,
+  .print-layout-container * {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+  }
+
+  .print-layout-container *::-webkit-scrollbar {
+    width: 0 !important;
+    height: 0 !important;
+    display: none !important;
+  }
+  
+  /* Marca d'água - Logo HapMap à esquerda */
+  body::before {
+    content: "";
+    position: fixed;
+    top: 1cm;
+    left: 1cm;
+    width: 120px;
+    height: 40px;
+    background-image: url('/hapvida-logo.jpg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: left center;
+    opacity: 0.15;
+    z-index: 0;
+    pointer-events: none;
+  }
+  
+  /* Marca d'água - Logo Hapvida Notre Dame à direita */
+  body::after {
+    content: "";
+    position: fixed;
+    top: 1cm;
+    right: 1cm;
+    width: 180px;
+    height: 40px;
+    background-image: url('/hapvida-notredame-full-logo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right center;
+    opacity: 0.15;
+    z-index: 0;
+    pointer-events: none;
+  }
+  
+  /* Hide sidebar and navigation */
+  aside,
+  [data-sidebar],
+  header,
+  footer,
+  nav {
+    display: none !important;
+  }
+  
+  /* Hide main dashboard content when printing */
+  .dashboard-screen-content {
+    display: none !important;
+  }
+  
+  /* Hide main content when printing */
+  .print-hide {
+    display: none !important;
+  }
+  
+  /* Hide all buttons, inputs, and interactive elements during print */
+  button:not(.print-show),
+  input,
+  textarea,
+  select,
+  [role="button"],
+  [role="textbox"],
+  .cursor-pointer,
+  [data-state],
+  [data-radix-collection-item],
+  [data-radix-popper-content-wrapper] {
+    display: none !important;
+  }
+  
+  /* Show only print layout */
+  .print-layout-container {
+    display: block !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    position: relative;
+    z-index: 1;
+  }
+  
+  /* Mobile print optimizations */
+  @supports (-webkit-touch-callout: none) {
+    body {
+      -webkit-print-color-adjust: exact !important;
+    }
+    
+    * {
+      -webkit-print-color-adjust: exact !important;
+    }
+  }
+  
+  /* Force visibility of print content on mobile */
+  .print-layout-container * {
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+}
+
+
+@layer utilities {
+  /* Custom animations for auth page */
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+
+  @keyframes shimmer {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  @keyframes drift {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: 50px 50px;
+    }
+  }
+
+  .bg-gradient-radial {
+    background: radial-gradient(circle, var(--tw-gradient-stops));
+  }
+
+  /* Palliative butterfly animations */
+  @keyframes butterfly-gentle-float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    25% { transform: translateY(-2px) rotate(2deg); }
+    75% { transform: translateY(1px) rotate(-1deg); }
+  }
+
+  @keyframes butterfly-fly-away {
+    0% { transform: translateX(0) translateY(0) rotate(0deg); opacity: 1; }
+    20% { transform: translateX(8px) translateY(-6px) rotate(-8deg); opacity: 1; }
+    40% { transform: translateX(18px) translateY(-3px) rotate(5deg); opacity: 0.9; }
+    60% { transform: translateX(28px) translateY(-8px) rotate(-5deg); opacity: 0.7; }
+    80% { transform: translateX(16px) translateY(-4px) rotate(3deg); opacity: 0.85; }
+    100% { transform: translateX(0) translateY(0) rotate(0deg); opacity: 1; }
+  }
+
+  .butterfly-float {
+    animation: butterfly-gentle-float 3s ease-in-out infinite;
+  }
+
+  .butterfly-fly {
+    animation: butterfly-fly-away 2s ease-in-out forwards !important;
+  }
+
+  /* Allocation Status Bar - Sector-based colors */
+  .allocation-status-bar {
+    position: relative;
+    overflow: hidden;
+    border-radius: 0.5rem 0.5rem 0 0;
+    box-shadow: 
+      inset 0 1px 0 rgba(255, 255, 255, 0.3),
+      0 2px 8px rgba(0, 0, 0, 0.12);
+  }
+
+  .allocation-status-bar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      110deg,
+      transparent 20%,
+      rgba(255, 255, 255, 0.4) 40%,
+      rgba(255, 255, 255, 0.6) 50%,
+      rgba(255, 255, 255, 0.4) 60%,
+      transparent 80%
+    );
+    animation: shimmer 2.5s ease-in-out infinite;
+    z-index: 1;
+  }
+
+  /* Sector-based background colors - matching section gradients */
+  .allocation-status-bar.sector-red {
+    background: linear-gradient(to right, hsl(0 72% 51% / 0.2) 0%, hsl(0 72% 51% / 0.05) 100%);
+  }
+
+  .allocation-status-bar.sector-yellow {
+    background: linear-gradient(to right, hsl(45 93% 47% / 0.2) 0%, hsl(45 93% 47% / 0.05) 100%);
+  }
+
+  .allocation-status-bar.sector-blue {
+    background: linear-gradient(to right, hsl(210 80% 42% / 0.2) 0%, hsl(210 80% 42% / 0.05) 100%);
+  }
+
+  /* Status colors - icon and text same color */
+  .allocation-status-bar .status-pending,
+  .allocation-status-bar .icon-pending {
+    color: hsl(25 100% 35%);
+  }
+
+  .allocation-status-bar .status-discussing,
+  .allocation-status-bar .icon-discussing {
+    color: hsl(199 100% 30%);
+  }
+
+  .allocation-status-bar .status-rejected,
+  .allocation-status-bar .icon-rejected {
+    color: hsl(0 80% 30%);
+  }
+
+  /* Destination and time - same style */
+  .allocation-status-bar .status-destination,
+  .allocation-status-bar .status-time {
+    color: hsl(220 20% 25%);
+    font-weight: 600;
+  }
+
+  /* Separator dot */
+  .allocation-status-bar .separator {
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: bold;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Dark mode adjustments */
+  .dark .allocation-status-bar.sector-red {
+    background: linear-gradient(to right, hsl(0 62% 45% / 0.2) 0%, hsl(0 62% 45% / 0.05) 100%);
+  }
+  .dark .allocation-status-bar.sector-yellow {
+    background: linear-gradient(to right, hsl(45 80% 45% / 0.2) 0%, hsl(45 80% 45% / 0.05) 100%);
+  }
+  .dark .allocation-status-bar.sector-blue {
+    background: linear-gradient(to right, hsl(210 70% 55% / 0.2) 0%, hsl(210 70% 55% / 0.05) 100%);
+  }
+
+  .dark .allocation-status-bar::before {
+    background: linear-gradient(
+      110deg,
+      transparent 20%,
+      rgba(255, 255, 255, 0.25) 40%,
+      rgba(255, 255, 255, 0.4) 50%,
+      rgba(255, 255, 255, 0.25) 60%,
+      transparent 80%
+    );
+  }
+
+  .dark .allocation-status-bar .status-pending,
+  .dark .allocation-status-bar .icon-pending {
+    color: hsl(35 100% 65%);
+  }
+
+  .dark .allocation-status-bar .status-discussing,
+  .dark .allocation-status-bar .icon-discussing {
+    color: hsl(199 100% 70%);
+  }
+
+  .dark .allocation-status-bar .status-rejected,
+  .dark .allocation-status-bar .icon-rejected {
+    color: hsl(0 80% 70%);
+  }
+
+  .dark .allocation-status-bar .status-destination,
+  .dark .allocation-status-bar .status-time {
+    color: hsl(220 15% 80%);
+  }
+
+  /* Sepsis Status Bar - Same shimmer as allocation bar, sector-harmonized */
+  .sepsis-status-bar {
+    position: relative;
+    overflow: hidden;
+    border-radius: 0.5rem 0.5rem 0 0;
+    box-shadow: 
+      inset 0 1px 0 rgba(255, 255, 255, 0.3),
+      0 2px 8px rgba(0, 0, 0, 0.12);
+  }
+
+  /* Shimmer only active while treatment (HC + ATB) is incomplete */
+  .sepsis-status-bar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      110deg,
+      transparent 20%,
+      rgba(255, 255, 255, 0.4) 40%,
+      rgba(255, 255, 255, 0.6) 50%,
+      rgba(255, 255, 255, 0.4) 60%,
+      transparent 80%
+    );
+    animation: none;
+    z-index: 1;
+    opacity: 0;
+  }
+
+  .sepsis-status-bar.sepsis-shimmer-active::before {
+    animation: shimmer 2.5s ease-in-out infinite;
+    opacity: 1;
+  }
+
+  .sepsis-status-bar.sector-red {
+    background: linear-gradient(to right, hsl(0 72% 51% / 0.28) 0%, hsl(0 72% 51% / 0.10) 100%);
+    border-bottom: 2px solid hsl(0 72% 51% / 0.35);
+  }
+  .sepsis-status-bar.sector-yellow {
+    background: linear-gradient(to right, hsl(45 93% 47% / 0.28) 0%, hsl(45 93% 47% / 0.10) 100%);
+    border-bottom: 2px solid hsl(45 93% 47% / 0.35);
+  }
+  .sepsis-status-bar.sector-blue {
+    background: linear-gradient(to right, hsl(210 80% 42% / 0.28) 0%, hsl(210 80% 42% / 0.10) 100%);
+    border-bottom: 2px solid hsl(210 80% 42% / 0.35);
+  }
+
+  /* Sector-harmonized text colors for active state */
+  .sepsis-status-bar.sector-red .sepsis-active {
+    color: hsl(0 80% 38%);
+  }
+  .sepsis-status-bar.sector-yellow .sepsis-active {
+    color: hsl(25 100% 32%);
+  }
+  .sepsis-status-bar.sector-blue .sepsis-active {
+    color: hsl(210 80% 30%);
+  }
+
+  .sepsis-status-bar .sepsis-expired {
+    color: hsl(0 80% 35%);
+  }
+  .sepsis-status-bar .sepsis-finalized {
+    color: hsl(142 71% 45%);
+  }
+  .sepsis-status-bar .separator {
+    color: hsl(0 0% 40%);
+    font-weight: bold;
+  }
+
+  /* Dark mode */
+  .dark .sepsis-status-bar.sector-red {
+    background: linear-gradient(to right, hsl(0 62% 45% / 0.28) 0%, hsl(0 62% 45% / 0.10) 100%);
+    border-bottom: 2px solid hsl(0 62% 45% / 0.35);
+  }
+  .dark .sepsis-status-bar.sector-yellow {
+    background: linear-gradient(to right, hsl(45 80% 45% / 0.28) 0%, hsl(45 80% 45% / 0.10) 100%);
+    border-bottom: 2px solid hsl(45 80% 45% / 0.35);
+  }
+  .dark .sepsis-status-bar.sector-blue {
+    background: linear-gradient(to right, hsl(210 70% 55% / 0.28) 0%, hsl(210 70% 55% / 0.10) 100%);
+    border-bottom: 2px solid hsl(210 70% 55% / 0.35);
+  }
+  .dark .sepsis-status-bar::before {
+    background: linear-gradient(
+      110deg,
+      transparent 20%,
+      rgba(255, 255, 255, 0.25) 40%,
+      rgba(255, 255, 255, 0.4) 50%,
+      rgba(255, 255, 255, 0.25) 60%,
+      transparent 80%
+    );
+  }
+  .dark .sepsis-status-bar.sector-red .sepsis-active {
+    color: hsl(0 80% 70%);
+  }
+  .dark .sepsis-status-bar.sector-yellow .sepsis-active {
+    color: hsl(45 100% 65%);
+  }
+  .dark .sepsis-status-bar.sector-blue .sepsis-active {
+    color: hsl(210 80% 75%);
+  }
+  .dark .sepsis-status-bar .sepsis-expired {
+    color: hsl(0 80% 70%);
+  }
+  .dark .sepsis-status-bar .sepsis-finalized {
+    color: hsl(142 71% 45%);
+  }
+  .dark .sepsis-status-bar .separator {
+    color: hsl(0 0% 70%);
+  }
+
+  /* Tactile button feedback - ripple + scale */
+  .btn-tactile {
+    @apply relative overflow-hidden transition-transform duration-150 active:scale-95;
+  }
+
+  .btn-tactile::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at var(--ripple-x, 50%) var(--ripple-y, 50%), hsl(var(--primary-foreground) / 0.2) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+
+  .btn-tactile:active::after {
+    opacity: 1;
+  }
+}
+
+/* Force consistent text contrast on autofilled inputs */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-text-fill-color: #111827 !important;
+  -webkit-box-shadow: 0 0 0 30px #f9fafb inset !important;
+  box-shadow: 0 0 0 30px #f9fafb inset !important;
+  caret-color: #111827 !important;
+  transition: background-color 5000s ease-in-out 0s;
+  font-size: inherit !important;
+  color: #111827 !important;
+}
+
+/* Ensure select triggers always show dark text */
+[data-radix-select-trigger] {
+  color: #111827 !important;
+}
+
+/* Force select placeholder to be visible */
+[data-radix-select-trigger] [data-placeholder] {
+  color: #6b7280 !important;
+  opacity: 1 !important;
+}
+
+/* Force all input text to be dark on light backgrounds (auth page) */
+.bg-white input[type="text"],
+.bg-white input[type="password"],
+.bg-white input[type="email"],
+.bg-white input[type="tel"],
+.bg-white input[type="number"] {
+  color: #111827 !important;
+  -webkit-text-fill-color: #111827 !important;
+  caret-color: #111827 !important;
+}
+
+.bg-white input::placeholder {
+  color: #6b7280 !important;
+  -webkit-text-fill-color: #6b7280 !important;
+  opacity: 1 !important;
+}
+
+/* Ensure select values are visible on white backgrounds */
+.bg-white [data-radix-select-trigger] span {
+  color: #111827 !important;
+  -webkit-text-fill-color: #111827 !important;
+}
+
+.bg-white [data-radix-select-trigger] [data-placeholder] span {
+  color: #6b7280 !important;
+  -webkit-text-fill-color: #6b7280 !important;
+}
+
+/* ============== Palliative Farewell Animations ============== */
+@keyframes farewell-backdrop-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes farewell-backdrop-out {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+/* Organic, curved entrance — like a real butterfly finding its way */
+/* Z-depth approach — butterfly flies in from deep space toward the screen,
+   landing on the glass. Starts huge + blurred (close to viewer? no — far
+   in 3D space behind the screen, projected large), curves down and forward,
+   crisps up at landing. */
+@keyframes farewell-butterfly-enter {
+  0% {
+    transform: translate3d(-35vw, -45vh, -800px) rotate(-22deg) scale(2.6);
+    opacity: 0;
+    filter: blur(18px) brightness(1.4);
+  }
+  20% {
+    opacity: 0.7;
+    filter: blur(12px) brightness(1.3);
+  }
+  45% {
+    transform: translate3d(-12vw, -8vh, -300px) rotate(8deg) scale(1.6);
+    filter: blur(5px) brightness(1.15);
+    opacity: 0.95;
+  }
+  72% {
+    transform: translate3d(4vw, 4vh, -80px) rotate(-3deg) scale(1.15);
+    filter: blur(1.5px) brightness(1.05);
+    opacity: 1;
+  }
+  88% {
+    /* Tiny bounce as it touches the glass */
+    transform: translate3d(0, -6px, 10px) rotate(1deg) scale(1.02);
+    filter: blur(0) brightness(1);
+  }
+  100% {
+    /* Landed on the glass — perfectly crisp, slightly forward */
+    transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+    opacity: 1;
+    filter: blur(0) brightness(1);
+  }
+}
+
+/* LIVE flight — dynamic, organic figure-8 / lemniscate trajectory.
+   Butterfly drifts up-left, swoops back, glides up-right and returns to
+   the landing point. Combined with wing flap (SVG <animate>) it feels alive. */
+@keyframes farewell-butterfly-live {
+  0%   { transform: translate3d(0, 0, 0)         rotate(0deg)   scale(1); }
+  10%  { transform: translate3d(-30px, -18px, 0) rotate(-6deg)  scale(1.02); }
+  22%  { transform: translate3d(-55px, -42px, 0) rotate(-10deg) scale(1.05); }
+  35%  { transform: translate3d(-25px, -65px, 0) rotate(-3deg)  scale(1.08); }
+  45%  { transform: translate3d(8px,   -50px, 0) rotate(4deg)   scale(1.06); }
+  55%  { transform: translate3d(40px,  -30px, 0) rotate(8deg)   scale(1.04); }
+  68%  { transform: translate3d(60px,  -10px, 0) rotate(11deg)  scale(1.03); }
+  80%  { transform: translate3d(35px,   18px, 0) rotate(5deg)   scale(1.01); }
+  92%  { transform: translate3d(8px,    8px,  0) rotate(1deg)   scale(1); }
+  100% { transform: translate3d(0, 0, 0)         rotate(0deg)   scale(1); }
+}
+
+/* Take-off — pushes back from glass, gains depth, then ascends */
+@keyframes farewell-butterfly-exit {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+    opacity: 1;
+    filter: blur(0);
+  }
+  15% {
+    /* Tiny crouch before lift-off */
+    transform: translate3d(0, 4px, -30px) rotate(-2deg) scale(0.96);
+    filter: blur(0.5px);
+  }
+  40% {
+    transform: translate3d(10vw, -22vh, -200px) rotate(10deg) scale(1.1);
+    opacity: 0.9;
+    filter: blur(2px) brightness(1.2);
+  }
+  70% {
+    transform: translate3d(22vw, -65vh, -500px) rotate(22deg) scale(1.4);
+    opacity: 0.55;
+    filter: blur(5px) brightness(1.4);
+  }
+  100% {
+    transform: translate3d(35vw, -120vh, -900px) rotate(36deg) scale(2);
+    opacity: 0;
+    filter: blur(12px) brightness(1.6);
+  }
+}
+
+/* Soft drop-shadow on the "glass" beneath the butterfly — grows on landing */
+@keyframes farewell-shadow-land {
+  0%   { opacity: 0; transform: translateX(-50%) scale(0.2); filter: blur(2px); }
+  72%  { opacity: 0; transform: translateX(-50%) scale(0.4); filter: blur(4px); }
+  88%  { opacity: 0.55; transform: translateX(-50%) scale(0.85); filter: blur(8px); }
+  100% { opacity: 0.45; transform: translateX(-50%) scale(1); filter: blur(10px); }
+}
+@keyframes farewell-shadow-pause {
+  0%, 100% { opacity: 0.45; transform: translateX(-50%) scale(1); }
+  50%      { opacity: 0.5; transform: translateX(-50%) scale(1.03); }
+}
+@keyframes farewell-shadow-exit {
+  0%   { opacity: 0.45; transform: translateX(-50%) scale(1); filter: blur(10px); }
+  40%  { opacity: 0.2; transform: translateX(-50%) scale(0.6); filter: blur(14px); }
+  100% { opacity: 0; transform: translateX(-50%) scale(0.2); filter: blur(20px); }
+}
+
+/* Glass-impact ripple — concentric ring expanding when butterfly lands */
+@keyframes farewell-ripple {
+  0%   { transform: translate(-50%, -50%) scale(0.4); opacity: 0; }
+  10%  { opacity: 0.7; }
+  100% { transform: translate(-50%, -50%) scale(2.4); opacity: 0; }
+}
+
+/* Subtle glass sheen — diagonal highlight that drifts across the screen */
+@keyframes farewell-glass-sheen {
+  0%   { transform: translateX(-100%) skewX(-20deg); opacity: 0; }
+  20%  { opacity: 0.35; }
+  80%  { opacity: 0.35; }
+  100% { transform: translateX(150%) skewX(-20deg); opacity: 0; }
+}
+
+
+
+@keyframes farewell-aura-pulse {
+  0%, 100% { transform: scale(1); opacity: 0.35; }
+  50%      { transform: scale(1.25); opacity: 0.6; }
+}
+
+@keyframes farewell-rays-rotate {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to   { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes farewell-particle-rise {
+  0% {
+    transform: translate3d(0, 0, 0) scale(0.5);
+    opacity: 0;
+  }
+  15% { opacity: 1; }
+  85% { opacity: 0.8; }
+  100% {
+    transform: translate3d(var(--drift, 0px), -110vh, 0) scale(1.1);
+    opacity: 0;
+  }
+}
+
+@keyframes farewell-vignette-breathe {
+  0%, 100% { opacity: 0.55; }
+  50%      { opacity: 0.85; }
+}
+
+@keyframes farewell-reflection-in {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 24px, 0);
+    letter-spacing: 0.05em;
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    letter-spacing: 0;
+  }
+}
+
+.farewell-backdrop {
+  animation: farewell-backdrop-in 900ms ease-out both;
+  will-change: opacity;
+}
+
+.farewell-backdrop-exit {
+  animation: farewell-backdrop-out 1100ms ease-in both;
+}
+
+.farewell-butterfly-enter {
+  animation: farewell-butterfly-enter 2.8s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  will-change: transform, opacity, filter;
+}
+
+.farewell-butterfly-live {
+  /* Replays the entrance once, then loops the dynamic flight indefinitely
+     (no auto-exit — only the user button stops it). */
+  animation:
+    farewell-butterfly-enter 2.8s cubic-bezier(0.22, 0.61, 0.36, 1) both,
+    farewell-butterfly-live 7s ease-in-out 2.8s infinite;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.farewell-butterfly-exit {
+  animation: farewell-butterfly-exit 3.2s cubic-bezier(0.45, 0, 0.55, 1) both;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  will-change: transform, opacity, filter;
+}
+
+/* 3D scene container — gives perspective so translateZ has meaning */
+.farewell-scene {
+  perspective: 1400px;
+  perspective-origin: 50% 45%;
+}
+
+/* Drop shadow projected onto the "glass" beneath the butterfly */
+.farewell-shadow-land {
+  animation: farewell-shadow-land 2.8s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+.farewell-shadow-pause {
+  animation:
+    farewell-shadow-land 2.8s cubic-bezier(0.22, 0.61, 0.36, 1) both,
+    farewell-shadow-pause 5s ease-in-out 2.8s infinite;
+}
+.farewell-shadow-exit {
+  animation: farewell-shadow-exit 1.6s ease-in both;
+}
+
+/* Concentric ripple rings on landing */
+.farewell-ripple {
+  animation: farewell-ripple 1.6s cubic-bezier(0.16, 1, 0.3, 1) 2.55s both;
+}
+.farewell-ripple-2 {
+  animation: farewell-ripple 1.9s cubic-bezier(0.16, 1, 0.3, 1) 2.7s both;
+}
+
+/* Diagonal glass sheen — sweeps across the surface once on landing */
+.farewell-glass-sheen {
+  animation: farewell-glass-sheen 3.2s ease-in-out 2.6s both;
+}
+
+.farewell-aura {
+  animation: farewell-aura-pulse 3.5s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+.farewell-rays {
+  animation: farewell-rays-rotate 60s linear infinite;
+  will-change: transform;
+}
+
+.farewell-particle {
+  animation: farewell-particle-rise var(--life, 9s) linear var(--delay, 0s) infinite;
+  will-change: transform, opacity;
+}
+
+.farewell-vignette {
+  animation: farewell-vignette-breathe 6s ease-in-out infinite;
+  will-change: opacity;
+}
+
+.farewell-reflection {
+  transition: opacity 1400ms ease-out, transform 1400ms ease-out;
+  will-change: opacity, transform;
+}
+
+.farewell-reflection-active {
+  animation: farewell-reflection-in 1600ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .farewell-backdrop,
+  .farewell-backdrop-exit,
+  .farewell-butterfly-enter,
+  .farewell-butterfly-live,
+  .farewell-butterfly-exit,
+  .farewell-aura,
+  .farewell-rays,
+  .farewell-particle,
+  .farewell-vignette {
+    animation-duration: 400ms !important;
+    animation-iteration-count: 1 !important;
+  }
+  .farewell-reflection,
+  .farewell-reflection-active {
+    transition-duration: 300ms !important;
+    animation-duration: 400ms !important;
+  }
+}
+
+.duration-1500 {
+  transition-duration: 1500ms;
+}
