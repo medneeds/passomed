@@ -914,33 +914,33 @@ export function UtiPatientCard({
     onRefetch?.();
   };
 
-  // Color schemes — neutral & clean. Base branca/slate, acento fino azul (UTI 1) ou slate-grafite (UTI 2)
+  // Color schemes — paleta Esmeralda Prestige + identidade discreta por UTI
   const colorSchemes = {
     blue: {
-      card: "bg-white dark:bg-slate-900/60 border-slate-200/80 dark:border-slate-700/60 border-l-2 border-l-blue-500/60",
-      bedBg: "bg-blue-50 dark:bg-blue-950/40 border-blue-200/70 dark:border-blue-800/40",
-      bedText: "text-blue-700 dark:text-blue-300",
-      col1: "bg-slate-50/80 dark:bg-slate-800/30 border-slate-200/70 dark:border-slate-700/40",
-      col1Icon: "text-slate-500 dark:text-slate-400",
-      col2: "bg-slate-50/80 dark:bg-slate-800/30 border-slate-200/70 dark:border-slate-700/40",
-      col2Icon: "text-slate-500 dark:text-slate-400",
-      col3: "bg-slate-50/80 dark:bg-slate-800/30 border-slate-200/70 dark:border-slate-700/40",
-      col3Icon: "text-slate-500 dark:text-slate-400",
-      col4: "bg-slate-50/80 dark:bg-slate-800/30 border-slate-200/70 dark:border-slate-700/40",
-      col4Icon: "text-slate-500 dark:text-slate-400",
+      card: "bg-gradient-to-r from-sky-50/60 via-white to-white dark:from-sky-950/20 dark:via-slate-900/60 dark:to-slate-900/60 border-emerald-200/50 dark:border-emerald-900/40 border-l-[3px] border-l-sky-500/70 dark:border-l-sky-400/70 hover:shadow-gold transition-shadow",
+      bedBg: "bg-gradient-to-br from-primary via-primary to-sky-700 dark:from-primary dark:via-primary dark:to-sky-600 border-gold/40",
+      bedText: "text-gold",
+      col1: "bg-emerald-50/40 dark:bg-emerald-950/20 border-emerald-200/50 dark:border-emerald-900/30",
+      col1Icon: "text-primary/70 dark:text-primary-glow/80",
+      col2: "bg-emerald-50/40 dark:bg-emerald-950/20 border-emerald-200/50 dark:border-emerald-900/30",
+      col2Icon: "text-primary/70 dark:text-primary-glow/80",
+      col3: "bg-emerald-50/40 dark:bg-emerald-950/20 border-emerald-200/50 dark:border-emerald-900/30",
+      col3Icon: "text-primary/70 dark:text-primary-glow/80",
+      col4: "bg-emerald-50/40 dark:bg-emerald-950/20 border-emerald-200/50 dark:border-emerald-900/30",
+      col4Icon: "text-primary/70 dark:text-primary-glow/80",
     },
     yellow: {
-      card: "bg-white dark:bg-slate-900/60 border-slate-200/80 dark:border-slate-700/60 border-l-2 border-l-slate-500/60",
-      bedBg: "bg-slate-100 dark:bg-slate-800/50 border-slate-300/60 dark:border-slate-600/50",
-      bedText: "text-slate-700 dark:text-slate-200",
-      col1: "bg-slate-50/80 dark:bg-slate-800/30 border-slate-200/70 dark:border-slate-700/40",
-      col1Icon: "text-slate-500 dark:text-slate-400",
-      col2: "bg-slate-50/80 dark:bg-slate-800/30 border-slate-200/70 dark:border-slate-700/40",
-      col2Icon: "text-slate-500 dark:text-slate-400",
-      col3: "bg-slate-50/80 dark:bg-slate-800/30 border-slate-200/70 dark:border-slate-700/40",
-      col3Icon: "text-slate-500 dark:text-slate-400",
-      col4: "bg-slate-50/80 dark:bg-slate-800/30 border-slate-200/70 dark:border-slate-700/40",
-      col4Icon: "text-slate-500 dark:text-slate-400",
+      card: "bg-gradient-to-r from-amber-50/50 via-white to-white dark:from-amber-950/15 dark:via-slate-900/60 dark:to-slate-900/60 border-emerald-200/50 dark:border-emerald-900/40 border-l-[3px] border-l-amber-500/70 dark:border-l-amber-400/70 hover:shadow-gold transition-shadow",
+      bedBg: "bg-gradient-to-br from-primary via-primary to-amber-700 dark:from-primary dark:via-primary dark:to-amber-600 border-gold/40",
+      bedText: "text-gold",
+      col1: "bg-emerald-50/40 dark:bg-emerald-950/20 border-emerald-200/50 dark:border-emerald-900/30",
+      col1Icon: "text-primary/70 dark:text-primary-glow/80",
+      col2: "bg-emerald-50/40 dark:bg-emerald-950/20 border-emerald-200/50 dark:border-emerald-900/30",
+      col2Icon: "text-primary/70 dark:text-primary-glow/80",
+      col3: "bg-emerald-50/40 dark:bg-emerald-950/20 border-emerald-200/50 dark:border-emerald-900/30",
+      col3Icon: "text-primary/70 dark:text-primary-glow/80",
+      col4: "bg-emerald-50/40 dark:bg-emerald-950/20 border-emerald-200/50 dark:border-emerald-900/30",
+      col4Icon: "text-primary/70 dark:text-primary-glow/80",
     }
   };
 
