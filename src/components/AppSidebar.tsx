@@ -246,10 +246,10 @@ export function AppSidebar({
                 <div className="flex items-baseline gap-1.5">
                   <h1 className="text-3xl tracking-tighter inline-flex items-baseline">
                     <span className="font-black bg-gradient-to-br from-primary via-primary to-primary/70 bg-clip-text text-transparent drop-shadow-sm">
-                      {whitelabel.platform.name.slice(0, 3)}
+                      {whitelabel.platform.name.slice(0, 5)}
                     </span>
                     <span className="font-extralight bg-gradient-to-b from-muted-foreground to-muted-foreground/50 bg-clip-text text-transparent -ml-0.5">
-                      {whitelabel.platform.name.slice(3)}
+                      {whitelabel.platform.name.slice(5)}
                     </span>
                   </h1>
                   <span className="text-[7px] font-semibold bg-gradient-to-r from-primary/80 to-primary/50 bg-clip-text text-transparent tracking-widest border border-primary/20 rounded-full px-2 py-0.5 self-start mt-1.5 backdrop-blur-sm">
@@ -270,7 +270,7 @@ export function AppSidebar({
             ) : (
               <div className="flex flex-col items-center gap-0.5">
                 <span className="text-xl font-black bg-gradient-to-br from-primary to-primary/60 bg-clip-text text-transparent tracking-tighter leading-none">
-                  {whitelabel.platform.name.slice(0, 2)}
+                  {whitelabel.platform.name.slice(0, 1)}
                 </span>
                 <div className="h-0.5 w-3 rounded-full bg-gradient-to-r from-primary/40 to-primary/10" />
               </div>
