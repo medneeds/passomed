@@ -26,16 +26,16 @@ export function UtiUnitSelector({ patients, onSelect }: UtiUnitSelectorProps) {
       unit: 'UTI 1',
       title: 'Unidade de Terapia Intensiva 1',
       subtitle: 'Leitos U01 — U10',
-      accentBorder: 'border-l-sky-500/70',
-      accentDot: 'bg-sky-500',
+      accentBorder: 'border-l-primary/70',
+      accentDot: 'bg-primary',
       list: uti1,
     },
     {
       unit: 'UTI 2',
       title: 'Unidade de Terapia Intensiva 2',
       subtitle: 'Leitos U01 — U10',
-      accentBorder: 'border-l-amber-500/70',
-      accentDot: 'bg-amber-500',
+      accentBorder: 'border-l-gold/80',
+      accentDot: 'bg-gold',
       list: uti2,
     },
   ];
@@ -87,15 +87,15 @@ export function UtiUnitSelector({ patients, onSelect }: UtiUnitSelectorProps) {
                       {c.subtitle}
                     </p>
                   </div>
-                  <div className="p-2 rounded-lg bg-gradient-to-br from-primary to-primary-glow border border-gold/30 shadow-sm">
-                    <BedDouble className="h-5 w-5 text-gold" />
+                  <div className="p-2.5 rounded-lg bg-primary border border-gold/50 shadow-md">
+                    <BedDouble className="h-5 w-5 text-gold" strokeWidth={2.25} />
                   </div>
                 </div>
 
                 <div className="flex items-center justify-between pt-4 border-t border-emerald-100 dark:border-emerald-900/40">
                   <div className="flex items-center gap-4">
                     <div className="flex items-center gap-1.5">
-                      <Users className="h-3.5 w-3.5 text-primary/60 dark:text-primary-glow/70" />
+                      <Users className="h-3.5 w-3.5 text-primary dark:text-primary-glow" strokeWidth={2.25} />
                       <span className="text-xs text-muted-foreground">Ocupados</span>
                       <span className="text-sm font-semibold text-foreground">
                         {occupied}/{total}
