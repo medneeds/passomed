@@ -599,19 +599,19 @@ export function ClinicalAnalyticsReport({ onClose }: { onClose: () => void }) {
           <div class="watermark"><img src="${platformLogoUrl}" /></div>
           
           <div class="header">
-            <img src="${platformLogoUrl}" alt="HapMap" />
+            <img src="${platformLogoUrl}" alt="PassoMed" />
             <div class="header-center">
               <h1>Relatório Analítico Clínico</h1>
               <p>Análise Epidemiológica e de Gravidade — <span class="period-badge">${periodTypeLabel}</span> ${label}</p>
             </div>
-            <img src="${networkLogoUrl}" alt="Hapvida NotreDame Intermédica" />
+            <img src="${networkLogoUrl}" alt="PassoMed" />
           </div>
           
           <div class="meta-bar">
             <span><strong>Setor:</strong> ${reportData.sector}</span>
             <span><strong>Período:</strong> ${reportData.period}</span>
             <span><strong>Total de Movimentações:</strong> ${reportData.totalMovements}</span>
-            <span><strong>Gerado por:</strong> HapMap 2.0 — IA Analítica</span>
+            <span><strong>Gerado por:</strong> PassoMed 1.0 — Analítica</span>
           </div>
           
           <div class="kpi-row">
@@ -657,12 +657,12 @@ export function ClinicalAnalyticsReport({ onClose }: { onClose: () => void }) {
           <div class="page-break"></div>
           
           <div class="header">
-            <img src="${platformLogoUrl}" alt="HapMap" />
+            <img src="${platformLogoUrl}" alt="PassoMed" />
             <div class="header-center">
               <h1>Relatório Analítico Clínico</h1>
               <p>Recorrência e Distribuição Sindrômica — ${label}</p>
             </div>
-            <img src="${networkLogoUrl}" alt="Hapvida NotreDame Intermédica" />
+            <img src="${networkLogoUrl}" alt="PassoMed" />
           </div>
 
           <h2 class="section-title purple">3. Pacientes Recorrentes — Análise de Padrão</h2>
@@ -959,7 +959,7 @@ export function ClinicalAnalyticsReport({ onClose }: { onClose: () => void }) {
           <div ref={printRef} className="max-w-4xl mx-auto bg-white text-black rounded-lg shadow-lg p-8 animate-fade-in" style={{ fontFamily: "'Segoe UI', sans-serif" }}>
             {/* Header */}
             <div className="flex items-center justify-between pb-3 border-b-[3px] border-[#013ba6] mb-4">
-              <img src={platformLogoUrl} alt="HapMap" className="h-12" />
+              <img src={platformLogoUrl} alt="PassoMed" className="h-12" />
               <div className="text-center flex-1 px-4">
                 <h1 className="text-xl font-extrabold text-[#013ba6] tracking-wide uppercase">Relatório Analítico Clínico</h1>
                 <p className="text-xs text-gray-500">
@@ -970,7 +970,7 @@ export function ClinicalAnalyticsReport({ onClose }: { onClose: () => void }) {
                   {" "}{currentPeriodLabel}
                 </p>
               </div>
-              <img src={networkLogoUrl} alt="Hapvida" className="h-10" />
+              <img src={networkLogoUrl} alt="PassoMed" className="h-10" />
             </div>
 
             {/* Meta */}

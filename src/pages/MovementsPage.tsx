@@ -310,7 +310,7 @@ export default function MovementsPage() {
       `;
     }).join("");
 
-    const hapmapLogoUrl = whitelabel.logos.platform;
+    const platformLogoUrl = whitelabel.logos.platform;
     const networkLogoUrl = whitelabel.logos.networkFull;
 
     const printWindow = window.open("", "_blank");
@@ -345,7 +345,7 @@ export default function MovementsPage() {
       <body>
         <div class="header">
           <div class="header-left">
-            <img src="${hapmapLogoUrl}" alt="HapMap" />
+            <img src="${platformLogoUrl}" alt="PassoMed" />
             <div>
               <div class="title">HISTÓRICO DE MOVIMENTAÇÕES</div>
               <div class="subtitle">${currentDepartment} • ${whitelabel.institution.hospitalName}</div>
