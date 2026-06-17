@@ -84,11 +84,11 @@ function UtiRow(props: UtiRowProps) {
   // Vacancy toggle button styles — neutral palette across both UTIs
   const vacancyButtonStyles = {
     blue: {
-      vacant: "border-blue-400/50 text-blue-600 dark:text-blue-300 hover:bg-blue-50 dark:hover:bg-blue-950/30",
+      vacant: "border-primary/40 text-primary dark:text-primary-glow hover:bg-primary/10 dark:hover:bg-primary/20",
       occupied: "border-muted-foreground/30 text-muted-foreground hover:bg-muted/30"
     },
     yellow: {
-      vacant: "border-slate-400/60 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/30",
+      vacant: "border-gold/40 text-primary dark:text-primary-glow hover:bg-gold/10 dark:hover:bg-gold/15",
       occupied: "border-muted-foreground/30 text-muted-foreground hover:bg-muted/30"
     }
   };
