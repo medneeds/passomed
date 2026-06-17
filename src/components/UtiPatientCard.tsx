@@ -196,16 +196,16 @@ function SortableItem({ id, index, value, onEdit, onDelete, showDragHandle = tru
   // Highlight color styles — neutral, sutil, sem barulho visual
   const highlightStyles = {
     blue: {
-      bg: "bg-blue-50/70 dark:bg-blue-950/30 border-l-2 border-l-blue-400/70 dark:border-l-blue-400/70 pl-1.5",
-      number: "text-blue-600 dark:text-blue-300",
-      text: "text-slate-800 dark:text-slate-100",
-      star: "fill-blue-500 text-blue-500"
+      bg: "bg-emerald-50/60 dark:bg-emerald-950/30 border-l-2 border-l-primary/60 dark:border-l-primary-glow/60 pl-1.5",
+      number: "text-primary dark:text-primary-glow",
+      text: "text-foreground",
+      star: "fill-gold text-gold"
     },
     yellow: {
-      bg: "bg-slate-100/80 dark:bg-slate-800/40 border-l-2 border-l-slate-500/70 dark:border-l-slate-400/70 pl-1.5",
-      number: "text-slate-600 dark:text-slate-300",
-      text: "text-slate-800 dark:text-slate-100",
-      star: "fill-slate-500 text-slate-500"
+      bg: "bg-emerald-50/60 dark:bg-emerald-950/30 border-l-2 border-l-gold/60 dark:border-l-gold/60 pl-1.5",
+      number: "text-primary dark:text-primary-glow",
+      text: "text-foreground",
+      star: "fill-gold text-gold"
     }
   };
   const hStyles = highlightStyles[highlightColorVariant];
@@ -1042,8 +1042,8 @@ export function UtiPatientCard({
                 className={cn(
                   "h-7 text-xs gap-1.5",
                   colorVariant === 'blue'
-                    ? "border-blue-400/50 text-blue-600 dark:text-blue-300 hover:bg-blue-50 dark:hover:bg-blue-950/30"
-                    : "border-slate-400/60 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/40"
+                    ? "border-primary/40 text-primary dark:text-primary-glow hover:bg-primary/10 dark:hover:bg-primary/20"
+                    : "border-gold/40 text-primary dark:text-primary-glow hover:bg-gold/10 dark:hover:bg-gold/15"
                 )}
               >
                 <UserPlus className="h-3.5 w-3.5" />
@@ -1171,16 +1171,16 @@ export function UtiPatientCard({
                     daysInUti > 4
                       ? "bg-red-50 dark:bg-red-950/30 border-red-300/60 dark:border-red-700/50"
                       : colorVariant === 'yellow'
-                        ? "bg-slate-50 dark:bg-slate-800/40 border-slate-300/60 dark:border-slate-600/50"
-                        : "bg-blue-50 dark:bg-blue-950/30 border-blue-200/70 dark:border-blue-800/40"
+                        ? "bg-emerald-50/60 dark:bg-emerald-950/30 border-gold/40 dark:border-gold/40"
+                        : "bg-emerald-50/60 dark:bg-emerald-950/30 border-primary/30 dark:border-primary/40"
                   )}>
                     <span className={cn(
                       "text-[9px] font-bold",
                       daysInUti > 4
                         ? "text-red-700 dark:text-red-300"
                         : colorVariant === 'yellow'
-                          ? "text-slate-600 dark:text-slate-300"
-                          : "text-blue-700 dark:text-blue-300"
+                          ? "text-primary dark:text-primary-glow"
+                          : "text-primary dark:text-primary-glow"
                     )}>
                       DIH:
                     </span>
@@ -1189,8 +1189,8 @@ export function UtiPatientCard({
                       daysInUti > 4
                         ? "text-red-700 dark:text-red-300"
                         : colorVariant === 'yellow'
-                          ? "text-slate-700 dark:text-slate-200"
-                          : "text-blue-700 dark:text-blue-300"
+                          ? "text-primary dark:text-primary-glow"
+                          : "text-primary dark:text-primary-glow"
                     )}>
                       {daysInUti}
                     </span>
@@ -1357,7 +1357,7 @@ export function UtiPatientCard({
                       <DropdownMenuLabel className="text-xs text-muted-foreground">Realocação</DropdownMenuLabel>
                       
                       <DropdownMenuItem onClick={() => setIsReallocationDialogOpen(true)}>
-                        <BedDouble className="h-4 w-4 mr-2 text-blue-500" />
+                        <BedDouble className="h-4 w-4 mr-2 text-primary" />
                         Realocar Leito/UTI
                       </DropdownMenuItem>
                       
@@ -1370,7 +1370,7 @@ export function UtiPatientCard({
                       </DropdownMenuItem>
                       
                       <DropdownMenuItem onClick={() => handleMovement("TRANSFERÊNCIA")}>
-                        <ArrowLeftRight className="h-4 w-4 mr-2 text-blue-500" />
+                        <ArrowLeftRight className="h-4 w-4 mr-2 text-primary" />
                         Transferência
                       </DropdownMenuItem>
                       
