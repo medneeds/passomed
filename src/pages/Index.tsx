@@ -1422,15 +1422,15 @@ const Index = () => {
                 ) : (
                   <div className="space-y-4">
                     {/* UTI Unit Toggle (top) */}
-                    <div className="flex items-center justify-between gap-3 p-2 rounded-xl border border-slate-200/70 dark:border-slate-700/60 bg-white dark:bg-slate-900/40 print:hidden">
-                      <div className="inline-flex items-center gap-1 bg-slate-100/80 dark:bg-slate-800/60 rounded-lg p-1">
+                    <div className="flex items-center justify-between gap-3 p-2 rounded-xl border border-emerald-200/50 dark:border-emerald-900/40 bg-card print:hidden">
+                      <div className="inline-flex items-center gap-1 bg-emerald-50/70 dark:bg-emerald-950/40 rounded-lg p-1">
                         <button
                           onClick={() => setSelectedUtiUnit('UTI 1')}
                           className={cn(
                             "px-3 py-1.5 text-xs font-semibold rounded-md transition-all",
                             selectedUtiUnit === 'UTI 1'
-                              ? "bg-white dark:bg-slate-700 text-blue-700 dark:text-blue-300 shadow-sm border-l-2 border-l-blue-500/70"
-                              : "text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200"
+                              ? "bg-background text-primary dark:text-primary-glow shadow-sm border-l-2 border-l-primary/70"
+                              : "text-muted-foreground hover:text-foreground"
                           )}
                         >
                           UTI 1
@@ -1440,8 +1440,8 @@ const Index = () => {
                           className={cn(
                             "px-3 py-1.5 text-xs font-semibold rounded-md transition-all",
                             selectedUtiUnit === 'UTI 2'
-                              ? "bg-white dark:bg-slate-700 text-slate-700 dark:text-slate-200 shadow-sm border-l-2 border-l-slate-500/70"
-                              : "text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200"
+                              ? "bg-background text-primary dark:text-primary-glow shadow-sm border-l-2 border-l-gold/80"
+                              : "text-muted-foreground hover:text-foreground"
                           )}
                         >
                           UTI 2
@@ -1449,7 +1449,7 @@ const Index = () => {
                       </div>
                       <button
                         onClick={() => setSelectedUtiUnit(null)}
-                        className="text-[11px] font-medium text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 transition-colors px-2 py-1 rounded-md hover:bg-slate-50 dark:hover:bg-slate-800/40"
+                        className="text-[11px] font-medium text-muted-foreground hover:text-primary dark:hover:text-primary-glow transition-colors px-2 py-1 rounded-md hover:bg-emerald-50/60 dark:hover:bg-emerald-950/30"
                       >
                         Trocar unidade
                       </button>
