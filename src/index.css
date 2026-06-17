@@ -17,43 +17,48 @@
   }
   
   :root {
-    --background: 210 20% 98%;
-    --foreground: 210 20% 12%;
+    /* PassoMed — Esmeralda Prestige (light) */
+    --background: 42 38% 96%;
+    --foreground: 160 40% 10%;
     --card: 0 0% 100%;
-    --card-foreground: 210 20% 12%;
+    --card-foreground: 160 40% 10%;
     --popover: 0 0% 100%;
-    --popover-foreground: 210 20% 12%;
-    --primary: 210 80% 42%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 210 15% 92%;
-    --secondary-foreground: 210 20% 12%;
-    --muted: 210 15% 95%;
-    --muted-foreground: 210 10% 45%;
-    --accent: 210 60% 88%;
-    --accent-foreground: 210 80% 28%;
+    --popover-foreground: 160 40% 10%;
+    --primary: 160 84% 16%;
+    --primary-foreground: 42 38% 96%;
+    --primary-glow: 162 80% 26%;
+    --secondary: 150 18% 92%;
+    --secondary-foreground: 160 40% 14%;
+    --muted: 150 20% 94%;
+    --muted-foreground: 160 12% 38%;
+    --accent: 44 60% 54%;
+    --accent-foreground: 160 40% 10%;
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
     --critical: 0 72% 51%;
     --critical-foreground: 0 0% 100%;
     --warning: 45 93% 47%;
     --warning-foreground: 0 0% 100%;
-    --stable: 210 80% 42%;
+    --stable: 162 70% 32%;
     --stable-foreground: 0 0% 100%;
-    --border: 210 20% 88%;
-    --input: 210 20% 88%;
-    --ring: 210 80% 42%;
+    --border: 150 20% 84%;
+    --input: 150 20% 84%;
+    --ring: 160 84% 22%;
     --radius: 0.75rem;
     
-    --gradient-primary: linear-gradient(135deg, hsl(210 80% 42%) 0%, hsl(210 70% 35%) 100%);
-    --gradient-card: linear-gradient(to bottom, hsl(0 0% 100% / 0.95) 0%, hsl(0 0% 100% / 0.9) 50%, hsl(0 0% 100% / 0.8) 100%);
+    --gradient-primary: linear-gradient(135deg, hsl(160 84% 16%) 0%, hsl(162 80% 26%) 100%);
+    --gradient-card: linear-gradient(to bottom, hsl(0 0% 100% / 0.96) 0%, hsl(42 38% 99% / 0.92) 50%, hsl(42 38% 96% / 0.85) 100%);
+    --gradient-emerald: linear-gradient(135deg, hsl(160 84% 14%) 0%, hsl(160 70% 22%) 60%, hsl(44 60% 54% / 0.15) 100%);
+    --gradient-gold: linear-gradient(135deg, hsl(44 60% 54%) 0%, hsl(40 55% 44%) 100%);
     --gradient-critical: linear-gradient(to right, hsl(0 72% 51% / 0.2) 0%, hsl(0 72% 51% / 0.05) 100%);
     --gradient-warning: linear-gradient(to right, hsl(45 93% 47% / 0.2) 0%, hsl(45 93% 47% / 0.05) 100%);
-    --gradient-stable: linear-gradient(to right, hsl(210 80% 42% / 0.2) 0%, hsl(210 80% 42% / 0.05) 100%);
+    --gradient-stable: linear-gradient(to right, hsl(162 70% 32% / 0.2) 0%, hsl(162 70% 32% / 0.05) 100%);
     
-    --shadow-sm: 0 1px 2px 0 hsl(210 20% 12% / 0.05);
-    --shadow-md: 0 4px 6px -1px hsl(210 20% 12% / 0.1), 0 2px 4px -2px hsl(210 20% 12% / 0.1);
-    --shadow-lg: 0 10px 15px -3px hsl(210 20% 12% / 0.1), 0 4px 6px -4px hsl(210 20% 12% / 0.1);
-    --shadow-glow: 0 0 40px hsl(210 80% 42% / 0.15);
+    --shadow-sm: 0 1px 2px 0 hsl(160 40% 10% / 0.06);
+    --shadow-md: 0 4px 12px -2px hsl(160 40% 10% / 0.08), 0 2px 4px -2px hsl(160 40% 10% / 0.06);
+    --shadow-lg: 0 12px 32px -8px hsl(160 84% 14% / 0.18), 0 4px 8px -4px hsl(160 40% 10% / 0.08);
+    --shadow-glow: 0 0 48px hsl(160 84% 22% / 0.22);
+    --shadow-gold: 0 8px 24px -10px hsl(44 60% 44% / 0.45);
     
     --transition-base: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -63,62 +68,67 @@
     --status-discussing: 199 89% 48%;
     --status-rejected: 0 72% 51%;
 
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-background: 160 50% 8%;
+    --sidebar-foreground: 42 30% 92%;
+    --sidebar-primary: 44 60% 54%;
+    --sidebar-primary-foreground: 160 50% 8%;
+    --sidebar-accent: 160 40% 14%;
+    --sidebar-accent-foreground: 42 30% 92%;
+    --sidebar-border: 160 30% 18%;
+    --sidebar-ring: 44 60% 54%;
   }
 
   .dark {
-    --background: 210 30% 8%;
-    --foreground: 210 20% 98%;
-    --card: 210 25% 12%;
-    --card-foreground: 210 20% 98%;
-    --popover: 210 25% 12%;
-    --popover-foreground: 210 20% 98%;
-    --primary: 210 70% 55%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 210 20% 18%;
-    --secondary-foreground: 210 20% 98%;
-    --muted: 210 20% 18%;
-    --muted-foreground: 210 15% 65%;
-    --accent: 210 50% 25%;
-    --accent-foreground: 210 70% 75%;
+    /* PassoMed — Esmeralda Prestige (dark) */
+    --background: 160 35% 6%;
+    --foreground: 42 30% 94%;
+    --card: 160 32% 10%;
+    --card-foreground: 42 30% 94%;
+    --popover: 160 32% 10%;
+    --popover-foreground: 42 30% 94%;
+    --primary: 162 70% 42%;
+    --primary-foreground: 160 50% 6%;
+    --primary-glow: 158 80% 55%;
+    --secondary: 160 25% 16%;
+    --secondary-foreground: 42 30% 94%;
+    --muted: 160 22% 14%;
+    --muted-foreground: 150 12% 65%;
+    --accent: 44 55% 58%;
+    --accent-foreground: 160 50% 6%;
     --destructive: 0 62% 45%;
     --destructive-foreground: 0 0% 100%;
     --critical: 0 62% 45%;
     --critical-foreground: 0 0% 100%;
     --warning: 45 80% 45%;
     --warning-foreground: 0 0% 100%;
-    --stable: 210 70% 55%;
+    --stable: 162 60% 48%;
     --stable-foreground: 0 0% 100%;
-    --border: 210 20% 22%;
-    --input: 210 20% 22%;
-    --ring: 210 70% 65%;
+    --border: 160 22% 20%;
+    --input: 160 22% 20%;
+    --ring: 162 70% 48%;
     
-    --gradient-primary: linear-gradient(135deg, hsl(210 70% 55%) 0%, hsl(210 60% 45%) 100%);
-    --gradient-card: linear-gradient(to bottom, hsl(210 25% 12% / 0.95) 0%, hsl(210 25% 12% / 0.9) 50%, hsl(210 25% 12% / 0.8) 100%);
+    --gradient-primary: linear-gradient(135deg, hsl(162 70% 38%) 0%, hsl(158 75% 22%) 100%);
+    --gradient-card: linear-gradient(to bottom, hsl(160 32% 10% / 0.96) 0%, hsl(160 30% 12% / 0.9) 50%, hsl(160 28% 14% / 0.82) 100%);
+    --gradient-emerald: linear-gradient(135deg, hsl(160 60% 14%) 0%, hsl(162 55% 22%) 60%, hsl(44 55% 58% / 0.12) 100%);
+    --gradient-gold: linear-gradient(135deg, hsl(44 55% 58%) 0%, hsl(40 50% 44%) 100%);
     --gradient-critical: linear-gradient(to right, hsl(0 62% 45% / 0.2) 0%, hsl(0 62% 45% / 0.05) 100%);
     --gradient-warning: linear-gradient(to right, hsl(45 80% 45% / 0.2) 0%, hsl(45 80% 45% / 0.05) 100%);
-    --gradient-stable: linear-gradient(to right, hsl(210 70% 55% / 0.2) 0%, hsl(210 70% 55% / 0.05) 100%);
+    --gradient-stable: linear-gradient(to right, hsl(162 60% 48% / 0.2) 0%, hsl(162 60% 48% / 0.05) 100%);
     
-    --shadow-sm: 0 1px 2px 0 hsl(210 20% 98% / 0.05);
-    --shadow-md: 0 4px 6px -1px hsl(210 20% 98% / 0.1), 0 2px 4px -2px hsl(210 20% 98% / 0.1);
-    --shadow-lg: 0 10px 15px -3px hsl(210 20% 98% / 0.1), 0 4px 6px -4px hsl(210 20% 98% / 0.1);
-    --shadow-glow: 0 0 40px hsl(210 70% 65% / 0.2);
+    --shadow-sm: 0 1px 2px 0 hsl(0 0% 0% / 0.4);
+    --shadow-md: 0 4px 12px -2px hsl(0 0% 0% / 0.5), 0 2px 4px -2px hsl(0 0% 0% / 0.3);
+    --shadow-lg: 0 12px 32px -8px hsl(160 80% 6% / 0.7), 0 4px 8px -4px hsl(0 0% 0% / 0.4);
+    --shadow-glow: 0 0 48px hsl(162 70% 48% / 0.3);
+    --shadow-gold: 0 8px 24px -10px hsl(44 55% 50% / 0.4);
 
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-background: 160 40% 5%;
+    --sidebar-foreground: 42 30% 92%;
+    --sidebar-primary: 44 55% 58%;
+    --sidebar-primary-foreground: 160 50% 6%;
+    --sidebar-accent: 160 32% 12%;
+    --sidebar-accent-foreground: 42 30% 92%;
+    --sidebar-border: 160 25% 16%;
+    --sidebar-ring: 44 55% 58%;
   }
 
   * {
