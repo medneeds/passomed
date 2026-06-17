@@ -85,12 +85,15 @@ export default {
         'gradient-critical': 'var(--gradient-critical)',
         'gradient-warning': 'var(--gradient-warning)',
         'gradient-stable': 'var(--gradient-stable)',
+        'gradient-emerald': 'var(--gradient-emerald)',
+        'gradient-gold': 'var(--gradient-gold)',
       },
       boxShadow: {
         'sm': 'var(--shadow-sm)',
         'md': 'var(--shadow-md)',
         'lg': 'var(--shadow-lg)',
         'glow': 'var(--shadow-glow)',
+        'gold': 'var(--shadow-gold)',
       },
       transitionTimingFunction: {
         'smooth': 'cubic-bezier(0.4, 0, 0.2, 1)',
