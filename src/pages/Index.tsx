@@ -1072,13 +1072,13 @@ const Index = () => {
               <div className="flex items-center justify-between gap-2 w-full">
                 {/* Left side: Sidebar button + Title + Department selector */}
                 <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
-                  <SidebarTrigger className="print:hidden flex-shrink-0 text-white hover:text-white hover:bg-white/25 border-white/30 hover:border-white/50 data-[state=open]:bg-white/25 transition-all duration-200" />
+                  <SidebarTrigger className="print:hidden flex-shrink-0 h-11 w-11 rounded-full text-white hover:text-white hover:bg-white/25 border border-white/30 hover:border-white/50 data-[state=open]:bg-white/25 transition-all duration-200" />
                   
                   <div className="min-w-0 flex-1 flex items-center gap-3 flex-wrap">
                     <div className="print:hidden">
                       <DropdownMenu>
                         <DropdownMenuTrigger asChild>
-                          <button className="inline-flex items-center gap-2 h-10 md:h-11 px-4 md:px-5 bg-white/10 backdrop-blur-sm border border-gold/40 text-white text-sm md:text-base font-display font-medium tracking-wide hover:bg-white/20 hover:border-gold/60 transition-all duration-200 rounded-full cursor-pointer shadow-md hover:shadow-lg">
+                          <button className="inline-flex items-center gap-2 h-11 px-4 md:px-5 bg-white/10 backdrop-blur-sm border border-gold/40 text-white text-sm md:text-base font-display font-medium tracking-wide hover:bg-white/20 hover:border-gold/60 transition-all duration-200 rounded-full cursor-pointer shadow-md hover:shadow-lg">
                             <Building2 className="h-4 md:h-4 w-4 md:w-4 flex-shrink-0 text-gold/90" />
                             <span className="md:hidden truncate">
                               {getDepartmentLabel(currentDepartment)}
@@ -1147,7 +1147,7 @@ const Index = () => {
                     variant="outline"
                     size="icon"
                     onClick={() => setSearchOpen(true)}
-                    className="print:hidden h-11 w-11 sm:h-8 sm:w-8 bg-white/10 border-white/20 text-white hover:bg-white/20 hover:text-white hover:border-white/40 transition-all duration-200"
+                    className="print:hidden h-11 w-11 rounded-full bg-white/10 border-white/20 text-white hover:bg-white/20 hover:text-white hover:border-white/40 transition-all duration-200"
                     title="Buscar paciente (Ctrl+K)"
                   >
                     <Search className="h-4 w-4" />
