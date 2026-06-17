@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Sparkles } from "lucide-react";
 import { whitelabel } from "@/config/whitelabel";
+import logoPCross from "@/assets/logo-p-cross.png";
 
 interface LoadingScreenProps {
   onComplete?: () => void;
@@ -77,7 +78,22 @@ export function LoadingScreen({ onComplete, duration = 2500 }: LoadingScreenProp
 
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center gap-10">
-        {/* Logo da rede removida a pedido */}
+        {/* Logo P + cruz médica */}
+        <div
+          className="flex justify-center"
+          style={{
+            animation: 'fadeSlideUp 0.8s ease-out 0s forwards',
+            opacity: 0,
+          }}
+        >
+          <img
+            src={logoPCross}
+            alt={`${whitelabel.platform.name} logo`}
+            width={176}
+            height={176}
+            className="h-40 w-40 sm:h-44 sm:w-44 drop-shadow-[0_12px_32px_rgba(201,168,76,0.45)]"
+          />
+        </div>
 
         {/* Brand Name - PassoMed 1.0 */}
         <div 
