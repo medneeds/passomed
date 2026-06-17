@@ -38,7 +38,7 @@ export function LoadingScreen({ onComplete, duration = 2500 }: LoadingScreenProp
 
   return (
     <div
-      className={`fixed inset-0 z-50 flex flex-col items-center justify-center bg-gradient-to-br from-[#013ba6] via-[#0146bd] to-[#0152d4] transition-all duration-400 ${
+      className={`fixed inset-0 z-50 flex flex-col items-center justify-center bg-gradient-to-br from-[#064e3b] via-[#0a5f44] to-[#0d7a5f] transition-all duration-400 ${
         isVisible ? "opacity-100 scale-100" : "opacity-0 scale-105 pointer-events-none"
       }`}
     >

@@ -182,7 +182,7 @@ export default function AuditLogsPage() {
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-[#013ba6] to-[#0152d4] flex items-center justify-center shadow-lg">
+            <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-[#064e3b] to-[#0d7a5f] flex items-center justify-center shadow-lg">
               <Shield className="h-6 w-6 text-white" />
             </div>
             <div>
@@ -285,7 +285,7 @@ export default function AuditLogsPage() {
             <ScrollArea className="h-[500px]">
               {isLoading ? (
                 <div className="flex items-center justify-center h-32">
-                  <div className="h-6 w-6 border-2 border-[#013ba6] border-t-transparent rounded-full animate-spin" />
+                  <div className="h-6 w-6 border-2 border-[#064e3b] border-t-transparent rounded-full animate-spin" />
                 </div>
               ) : filteredLogs.length === 0 ? (
                 <div className="flex flex-col items-center justify-center h-32 text-gray-500">
@@ -351,7 +351,7 @@ export default function AuditLogsPage() {
                               <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
                                 <DialogHeader>
                                   <DialogTitle className="flex items-center gap-2">
-                                    <Shield className="h-5 w-5 text-[#013ba6]" />
+                                    <Shield className="h-5 w-5 text-[#064e3b]" />
                                     Detalhes do Registro de Auditoria
                                   </DialogTitle>
                                 </DialogHeader>

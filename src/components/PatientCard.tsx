@@ -5435,7 +5435,7 @@ export function PatientCard({ patient, onUpdate, onDelete, onUndelete, selection
   .page { width: 100%; margin: 0 auto; position: relative; }
 
   .header {
-    background: linear-gradient(135deg, #002b80 0%, #013ba6 40%, #0152d4 100%);
+    background: linear-gradient(135deg, #002b80 0%, #064e3b 40%, #0d7a5f 100%);
     padding: 20px 36px 16px; display: flex; align-items: center; justify-content: center;
     position: relative;
   }
@@ -5449,7 +5449,7 @@ export function PatientCard({ patient, onUpdate, onDelete, onUndelete, selection
     background: #f8fafc; border-bottom: 1px solid #e2e8f0;
     padding: 10px 36px; display: flex; align-items: center; justify-content: space-between;
   }
-  .title-bar h1 { font-size: 10pt; font-weight: 700; color: #013ba6; text-transform: uppercase; letter-spacing: 2px; }
+  .title-bar h1 { font-size: 10pt; font-weight: 700; color: #064e3b; text-transform: uppercase; letter-spacing: 2px; }
   .title-bar .hospital-name { font-size: 7.5pt; color: #64748b; font-weight: 500; }
 
   .patient-strip {
@@ -5466,10 +5466,10 @@ export function PatientCard({ patient, onUpdate, onDelete, onUndelete, selection
   }
   .body-content .section-title {
     font-size: 7pt; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 800;
-    color: #013ba6; margin-bottom: 10px; padding-bottom: 5px;
+    color: #064e3b; margin-bottom: 10px; padding-bottom: 5px;
     border-bottom: 1.5px solid #dbeafe; display: flex; align-items: center; gap: 6px;
   }
-  .body-content .section-title::before { content: ''; width: 3px; height: 12px; background: #013ba6; border-radius: 2px; }
+  .body-content .section-title::before { content: ''; width: 3px; height: 12px; background: #064e3b; border-radius: 2px; }
   .body-text { text-align: justify; word-break: break-word; }
 
    .watermark {
@@ -5479,7 +5479,7 @@ export function PatientCard({ patient, onUpdate, onDelete, onUndelete, selection
   .watermark img { width: 320px; }
 
   .footer { position: fixed; bottom: 0; left: 0; right: 0; background: #fff; }
-  .footer-accent { height: 2px; background: linear-gradient(90deg, #013ba6, #0152d4, #38bdf8, #0152d4, #013ba6); }
+  .footer-accent { height: 2px; background: linear-gradient(90deg, #064e3b, #0d7a5f, #38bdf8, #0d7a5f, #064e3b); }
   .footer-content { padding: 8px 36px; display: flex; align-items: center; justify-content: space-between; }
   .footer-content .address { font-size: 6pt; color: #94a3b8; line-height: 1.4; max-width: 55%; }
   .footer-content .meta { font-size: 6pt; color: #94a3b8; text-align: right; line-height: 1.4; }

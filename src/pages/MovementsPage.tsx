@@ -325,20 +325,20 @@ export default function MovementsPage() {
           @page { size: A4 landscape; margin: 18mm 15mm 15mm 15mm; }
           * { margin: 0; padding: 0; box-sizing: border-box; }
           body { font-family: 'Segoe UI', Tahoma, sans-serif; color: #1a1a1a; background: #fff; }
-          .header { display: flex; align-items: center; justify-content: space-between; border-bottom: 3px solid #013ba6; padding-bottom: 12px; margin-bottom: 16px; }
+          .header { display: flex; align-items: center; justify-content: space-between; border-bottom: 3px solid #064e3b; padding-bottom: 12px; margin-bottom: 16px; }
           .header-left { display: flex; align-items: center; gap: 16px; }
           .header-left img { height: 42px; object-fit: contain; }
           .header-right img { height: 38px; object-fit: contain; }
-          .title { font-size: 18px; font-weight: 700; color: #013ba6; }
+          .title { font-size: 18px; font-weight: 700; color: #064e3b; }
           .subtitle { font-size: 11px; color: #666; margin-top: 2px; }
           .meta { display: flex; gap: 24px; margin-bottom: 14px; font-size: 11px; color: #555; }
           .meta span { font-weight: 600; color: #1a1a1a; }
           .stats { display: flex; gap: 12px; margin-bottom: 16px; }
           .stat-box { padding: 8px 16px; border-radius: 6px; font-size: 11px; font-weight: 600; }
           table { width: 100%; border-collapse: collapse; }
-          th { background: #013ba6; color: #fff; padding: 8px; font-size: 10px; text-align: left; text-transform: uppercase; letter-spacing: 0.5px; }
+          th { background: #064e3b; color: #fff; padding: 8px; font-size: 10px; text-align: left; text-transform: uppercase; letter-spacing: 0.5px; }
           tr:nth-child(even) { background: #f8fafc; }
-          .footer { margin-top: 20px; padding-top: 10px; border-top: 2px solid #013ba6; display: flex; justify-content: space-between; font-size: 9px; color: #888; }
+          .footer { margin-top: 20px; padding-top: 10px; border-top: 2px solid #064e3b; display: flex; justify-content: space-between; font-size: 9px; color: #888; }
           @media print { body { -webkit-print-color-adjust: exact; print-color-adjust: exact; } }
         </style>
       </head>

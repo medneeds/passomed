@@ -158,7 +158,7 @@ function DynamicHeader({ children }: { children: React.ReactNode }) {
   
   return (
     <header 
-      className="border-b border-white/10 bg-gradient-to-r from-[#011d54] via-[#013ba6] to-[#0256d4] backdrop-blur-xl fixed top-0 right-0 z-50 shadow-[0_4px_20px_-4px_rgba(1,59,166,0.5)] print:static print:border-b print:shadow-none print:mb-1 print:pb-0.5 transition-[left] duration-200 ease-linear"
+      className="border-b border-white/10 bg-gradient-emerald backdrop-blur-xl fixed top-0 right-0 z-50 shadow-lg print:static print:border-b print:shadow-none print:mb-1 print:pb-0.5 transition-[left] duration-200 ease-linear"
       style={{
         left: isMobile ? 0 : (state === 'collapsed' ? 'var(--sidebar-width-icon)' : 'var(--sidebar-width)')
       }}
@@ -1163,7 +1163,7 @@ const Index = () => {
                         variant={selectionMode ? "default" : "outline"}
                         size="icon"
                         onClick={handleToggleSelectionMode}
-                        className={`print:hidden h-11 w-11 transition-all duration-200 ${selectionMode ? 'bg-white text-[#013ba6] shadow-md' : 'bg-white/10 border-white/20 text-white hover:bg-white/20 hover:text-white hover:border-white/40'}`}
+                        className={`print:hidden h-11 w-11 transition-all duration-200 ${selectionMode ? 'bg-white text-[#064e3b] shadow-md' : 'bg-white/10 border-white/20 text-white hover:bg-white/20 hover:text-white hover:border-white/40'}`}
                         title="Modo de seleção"
                       >
                         <CheckSquare className="h-5 w-5" />
@@ -1174,7 +1174,7 @@ const Index = () => {
                             variant="outline"
                             size="icon"
                             onClick={handlePrintSelected}
-                            className="print:hidden h-11 w-11 bg-gradient-to-br from-sky-400 via-blue-500 to-indigo-600 text-white border-0 shadow-[0_0_18px_-2px_rgba(56,189,248,0.65)] hover:shadow-[0_0_24px_-2px_rgba(56,189,248,0.85)] hover:brightness-110 transition-all"
+                            className="print:hidden h-11 w-11 bg-gradient-gold text-gold-foreground border-0 shadow-gold hover:brightness-110 transition-all"
                             title={`Imprimir ${selectedPatients.size}`}
                           >
                             <Printer className="h-5 w-5" />
@@ -1301,7 +1301,7 @@ const Index = () => {
                               variant={selectionMode ? "default" : "outline"}
                               size="icon"
                               onClick={handleToggleSelectionMode}
-                              className={`h-8 w-8 transition-all duration-200 ${selectionMode ? 'bg-white text-[#013ba6] shadow-md' : 'bg-white/10 border-white/20 text-white hover:bg-white/20 hover:text-white hover:border-white/40'}`}>
+                              className={`h-8 w-8 transition-all duration-200 ${selectionMode ? 'bg-white text-[#064e3b] shadow-md' : 'bg-white/10 border-white/20 text-white hover:bg-white/20 hover:text-white hover:border-white/40'}`}>
                               <CheckSquare className="h-4 w-4" />
                             </Button>
                           </TooltipTrigger>
@@ -1312,7 +1312,7 @@ const Index = () => {
                             <Tooltip>
                               <TooltipTrigger asChild>
                                 <Button variant="outline" size="icon" onClick={handlePrintSelected}
-                                  className="h-8 w-8 bg-gradient-to-br from-sky-400 via-blue-500 to-indigo-600 text-white border-0 shadow-[0_0_14px_-2px_rgba(56,189,248,0.6)] hover:shadow-[0_0_20px_-2px_rgba(56,189,248,0.85)] hover:brightness-110 hover:scale-105 transition-all">
+                                  className="h-8 w-8 bg-gradient-gold text-gold-foreground border-0 shadow-gold hover:brightness-110 hover:scale-105 transition-all">
                                   <Printer className="h-4 w-4" />
                                 </Button>
                               </TooltipTrigger>
@@ -1332,7 +1332,7 @@ const Index = () => {
                         <Tooltip>
                           <TooltipTrigger asChild>
                             <Button variant="outline" size="icon" onClick={handlePrintCompact}
-                              className="hidden sm:flex h-8 w-8 bg-gradient-to-br from-sky-400 via-blue-500 to-indigo-600 text-white border-0 shadow-[0_0_14px_-2px_rgba(56,189,248,0.6)] hover:shadow-[0_0_20px_-2px_rgba(56,189,248,0.85)] hover:brightness-110 hover:scale-105 transition-all">
+                              className="hidden sm:flex h-8 w-8 bg-gradient-gold text-gold-foreground border-0 shadow-gold hover:brightness-110 hover:scale-105 transition-all">
                               <Printer className="h-4 w-4" />
                             </Button>
                           </TooltipTrigger>
@@ -1350,7 +1350,7 @@ const Index = () => {
                         <Tooltip>
                           <TooltipTrigger asChild>
                             <Button variant="outline" size="icon" onClick={toggleNamesHidden}
-                              className={`hidden sm:flex h-8 w-8 transition-all duration-200 ${namesHidden ? 'bg-white text-[#013ba6] shadow-md' : 'bg-white/10 border-white/20 text-white hover:bg-white/20 hover:text-white hover:border-white/40'}`}>
+                              className={`hidden sm:flex h-8 w-8 transition-all duration-200 ${namesHidden ? 'bg-white text-[#064e3b] shadow-md' : 'bg-white/10 border-white/20 text-white hover:bg-white/20 hover:text-white hover:border-white/40'}`}>
                               {namesHidden ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                             </Button>
                           </TooltipTrigger>

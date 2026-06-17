@@ -59,13 +59,13 @@ export const whitelabel = {
   // ── Cores do Tema (gradiente principal) ──
   theme: {
     /** Cor primária do gradiente (from) */
-    gradientFrom: "#013ba6",
+    gradientFrom: "#064e3b",
     /** Cor intermediária do gradiente (via) */
-    gradientVia: "#0146bd",
+    gradientVia: "#0a5f44",
     /** Cor final do gradiente (to) */
-    gradientTo: "#0152d4",
+    gradientTo: "#0d7a5f",
     /** Classe Tailwind do gradiente de fundo principal */
-    bgGradient: "bg-gradient-to-br from-[#013ba6] via-[#0146bd] to-[#0152d4]",
+    bgGradient: "bg-gradient-to-br from-[#064e3b] via-[#0a5f44] to-[#0d7a5f]",
   },
 
   // ── Créditos / Rodapé ──

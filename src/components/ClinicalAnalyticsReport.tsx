@@ -506,22 +506,22 @@ export function ClinicalAnalyticsReport({ onClose }: { onClose: () => void }) {
             }
             .header {
               display: flex; align-items: center; justify-content: space-between;
-              padding-bottom: 10px; border-bottom: 3px solid #013ba6;
+              padding-bottom: 10px; border-bottom: 3px solid #064e3b;
               margin-bottom: 14px;
             }
             .header img { height: 50px; width: auto; object-fit: contain; }
             .header-center { text-align: center; flex: 1; padding: 0 16px; }
-            .header-center h1 { font-size: 14pt; color: #013ba6; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 2px; }
+            .header-center h1 { font-size: 14pt; color: #064e3b; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 2px; }
             .header-center p { font-size: 8pt; color: #64748b; }
             .meta-bar {
               display: flex; justify-content: space-between; align-items: center;
               background: #f0f4ff; padding: 6px 12px; border-radius: 6px;
               margin-bottom: 14px; font-size: 8pt; color: #334155;
             }
-            .meta-bar strong { color: #013ba6; }
+            .meta-bar strong { color: #064e3b; }
             .section-title {
-              font-size: 11pt; font-weight: 700; color: #013ba6;
-              border-left: 4px solid #013ba6; padding-left: 8px;
+              font-size: 11pt; font-weight: 700; color: #064e3b;
+              border-left: 4px solid #064e3b; padding-left: 8px;
               margin: 14px 0 8px 0; text-transform: uppercase; letter-spacing: 0.5px;
             }
             .section-title.red { color: #dc2626; border-color: #dc2626; }
@@ -535,12 +535,12 @@ export function ClinicalAnalyticsReport({ onClose }: { onClose: () => void }) {
               flex: 1; background: #f8fafc; border: 1px solid #e2e8f0;
               border-radius: 8px; padding: 10px 14px; text-align: center;
             }
-            .kpi-card .value { font-size: 22pt; font-weight: 800; color: #013ba6; }
+            .kpi-card .value { font-size: 22pt; font-weight: 800; color: #064e3b; }
             .kpi-card .label { font-size: 7pt; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; }
             .kpi-card.death .value { color: #dc2626; }
             
             table { width: 100%; border-collapse: collapse; margin-bottom: 12px; font-size: 8pt; }
-            th { background: #013ba6; color: white; padding: 5px 6px; text-align: left; font-weight: 600; font-size: 7pt; text-transform: uppercase; letter-spacing: 0.3px; }
+            th { background: #064e3b; color: white; padding: 5px 6px; text-align: left; font-weight: 600; font-size: 7pt; text-transform: uppercase; letter-spacing: 0.3px; }
             td { padding: 4px 6px; border-bottom: 1px solid #e2e8f0; vertical-align: top; }
             tr:nth-child(even) { background: #f8fafc; }
             
@@ -563,7 +563,7 @@ export function ClinicalAnalyticsReport({ onClose }: { onClose: () => void }) {
             }
             .syndrome-bar .bar-label { width: 260px; font-size: 8pt; text-align: right; }
             .syndrome-bar .bar-track { flex: 1; height: 14px; background: #e2e8f0; border-radius: 3px; overflow: hidden; }
-            .syndrome-bar .bar-fill { height: 100%; background: linear-gradient(90deg, #013ba6, #0152d4); border-radius: 3px; }
+            .syndrome-bar .bar-fill { height: 100%; background: linear-gradient(90deg, #064e3b, #0d7a5f); border-radius: 3px; }
             .syndrome-bar .bar-value { width: 60px; font-size: 7.5pt; color: #334155; font-weight: 600; }
             
             .insight-box {
@@ -574,7 +574,7 @@ export function ClinicalAnalyticsReport({ onClose }: { onClose: () => void }) {
             .insight-box strong { color: #15803d; }
             
             .footer {
-              margin-top: 20px; padding-top: 10px; border-top: 2px solid #013ba6;
+              margin-top: 20px; padding-top: 10px; border-top: 2px solid #064e3b;
               display: flex; justify-content: space-between; font-size: 7pt; color: #94a3b8;
             }
             .watermark {
@@ -590,7 +590,7 @@ export function ClinicalAnalyticsReport({ onClose }: { onClose: () => void }) {
               text-align: center; padding: 20px; color: #94a3b8; font-style: italic; font-size: 9pt;
             }
             .period-badge {
-              display: inline-block; background: #013ba6; color: white; padding: 2px 10px;
+              display: inline-block; background: #064e3b; color: white; padding: 2px 10px;
               border-radius: 12px; font-size: 7pt; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;
             }
           </style>
@@ -958,13 +958,13 @@ export function ClinicalAnalyticsReport({ onClose }: { onClose: () => void }) {
         ) : (
           <div ref={printRef} className="max-w-4xl mx-auto bg-white text-black rounded-lg shadow-lg p-8 animate-fade-in" style={{ fontFamily: "'Segoe UI', sans-serif" }}>
             {/* Header */}
-            <div className="flex items-center justify-between pb-3 border-b-[3px] border-[#013ba6] mb-4">
+            <div className="flex items-center justify-between pb-3 border-b-[3px] border-[#064e3b] mb-4">
               <img src={platformLogoUrl} alt="PassoMed" className="h-12" />
               <div className="text-center flex-1 px-4">
-                <h1 className="text-xl font-extrabold text-[#013ba6] tracking-wide uppercase">Relatório Analítico Clínico</h1>
+                <h1 className="text-xl font-extrabold text-[#064e3b] tracking-wide uppercase">Relatório Analítico Clínico</h1>
                 <p className="text-xs text-gray-500">
                   Análise Epidemiológica e de Gravidade — 
-                  <span className="inline-block bg-[#013ba6] text-white px-2 py-0.5 rounded-full text-[10px] font-semibold ml-1">
+                  <span className="inline-block bg-[#064e3b] text-white px-2 py-0.5 rounded-full text-[10px] font-semibold ml-1">
                     {periodType === "mensal" ? "MENSAL" : periodType === "trimestral" ? "TRIMESTRAL" : "SEMESTRAL"}
                   </span>
                   {" "}{currentPeriodLabel}
@@ -975,20 +975,20 @@ export function ClinicalAnalyticsReport({ onClose }: { onClose: () => void }) {
 
             {/* Meta */}
             <div className="flex justify-between bg-blue-50 px-3 py-2 rounded-md mb-4 text-xs text-gray-600">
-              <span><strong className="text-[#013ba6]">Setor:</strong> {reportData.sector}</span>
-              <span><strong className="text-[#013ba6]">Período:</strong> {reportData.period}</span>
-              <span><strong className="text-[#013ba6]">Total:</strong> {reportData.totalMovements} movimentações</span>
+              <span><strong className="text-[#064e3b]">Setor:</strong> {reportData.sector}</span>
+              <span><strong className="text-[#064e3b]">Período:</strong> {reportData.period}</span>
+              <span><strong className="text-[#064e3b]">Total:</strong> {reportData.totalMovements} movimentações</span>
             </div>
 
             {/* KPIs */}
             <div className="grid grid-cols-6 gap-2 mb-5">
               {[
-                { v: reportData.totalMovements, l: "Movimentações", c: "text-[#013ba6]" },
-                { v: reportData.totalAltas, l: "Altas", c: "text-[#013ba6]" },
-                { v: reportData.totalTransferencias, l: "Transferências", c: "text-[#013ba6]" },
+                { v: reportData.totalMovements, l: "Movimentações", c: "text-[#064e3b]" },
+                { v: reportData.totalAltas, l: "Altas", c: "text-[#064e3b]" },
+                { v: reportData.totalTransferencias, l: "Transferências", c: "text-[#064e3b]" },
                 { v: reportData.totalObitos, l: "Óbitos", c: "text-red-600" },
-                { v: reportData.utiTransfers.length, l: "UTI", c: "text-[#013ba6]" },
-                { v: reportData.recurrentPatients.length, l: "Recorrentes", c: "text-[#013ba6]" },
+                { v: reportData.utiTransfers.length, l: "UTI", c: "text-[#064e3b]" },
+                { v: reportData.recurrentPatients.length, l: "Recorrentes", c: "text-[#064e3b]" },
               ].map((kpi, i) => (
                 <div key={i} className="border rounded-lg p-2 text-center bg-gray-50">
                   <div className={`text-2xl font-extrabold ${kpi.c}`}>{kpi.v}</div>
@@ -1071,7 +1071,7 @@ export function ClinicalAnalyticsReport({ onClose }: { onClose: () => void }) {
                   <div key={i} className="flex items-center gap-2 text-xs">
                     <span className="w-64 text-right text-gray-700">{s.name}</span>
                     <div className="flex-1 h-3.5 bg-gray-200 rounded overflow-hidden">
-                      <div className="h-full bg-gradient-to-r from-[#013ba6] to-[#0152d4] rounded" style={{ width: `${Math.min(s.percentage * 2.5, 100)}%` }} />
+                      <div className="h-full bg-gradient-to-r from-[#064e3b] to-[#0d7a5f] rounded" style={{ width: `${Math.min(s.percentage * 2.5, 100)}%` }} />
                     </div>
                     <span className="w-16 text-gray-600 font-semibold">{s.count} ({s.percentage}%)</span>
                   </div>
@@ -1106,7 +1106,7 @@ export function ClinicalAnalyticsReport({ onClose }: { onClose: () => void }) {
             </div>
 
             {/* Footer */}
-            <div className="pt-3 border-t-2 border-[#013ba6] flex justify-between text-[9px] text-gray-400">
+            <div className="pt-3 border-t-2 border-[#064e3b] flex justify-between text-[9px] text-gray-400">
               <span>{whitelabel.platform.fullName} — {whitelabel.institution.networkName}</span>
               <span>{whitelabel.credits.authorSignature}</span>
             </div>
