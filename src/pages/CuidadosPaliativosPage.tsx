@@ -12,7 +12,7 @@ export default function CuidadosPaliativosPage() {
   const handleDownload = () => {
     const link = document.createElement('a');
     link.href = docUrl;
-    link.download = 'TERMO_CUIDADOS_PALIATIVOS_HOSPITAL_GUARAS.docx';
+    link.download = 'TERMO_CUIDADOS_PALIATIVOS.docx';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);

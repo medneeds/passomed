@@ -39,7 +39,6 @@ import AdminUnitsPage from "./pages/AdminUnitsPage";
 import AdminCoordinatorsPage from "./pages/AdminCoordinatorsPage";
 
 
-import PresentationPage from "./pages/PresentationPage";
 import SepsisProtocolsAdminPage from "./pages/SepsisProtocolsAdminPage";
 import StrokeProtocolsAdminPage from "./pages/StrokeProtocolsAdminPage";
 import ChestPainProtocolsAdminPage from "./pages/ChestPainProtocolsAdminPage";
@@ -312,7 +311,6 @@ const App = () => {
             </ProtectedRoute>
           }
         />
-        <Route path="/presentation" element={<PresentationPage />} />
         <Route
           path="/admin/sepsis-protocols"
           element={
@@ -343,7 +341,7 @@ const App = () => {
             </ProtectedRoute>
           }
         />
-        {/* HAPMAP GO — Módulo Operacional */}
+        {/* PASSOMED GO — Módulo Operacional */}
         <Route path="/go/auth" element={<GoAuthPage />} />
         <Route path="/go" element={<GoProtectedRoute><GoOverviewPage /></GoProtectedRoute>} />
         <Route path="/go/conductors" element={<GoProtectedRoute><GoConductorsPage /></GoProtectedRoute>} />

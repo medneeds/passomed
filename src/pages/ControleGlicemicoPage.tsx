@@ -11,7 +11,7 @@ export default function ControleGlicemicoPage() {
   const handleDownload = () => {
     const link = document.createElement('a');
     link.href = pdfUrl;
-    link.download = 'PROTOCOLO_CONTROLE_GLICEMICO_HAPVIDA.pdf';
+    link.download = 'PROTOCOLO_CONTROLE_GLICEMICO.pdf';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -47,9 +47,6 @@ export default function ControleGlicemicoPage() {
             </div>
             
             <div className="flex gap-2 flex-wrap">
-              <Badge variant="secondary" className="uppercase bg-emerald-500/10 text-emerald-700 dark:text-emerald-400">
-                Rede Hapvida
-              </Badge>
               <Badge variant="secondary" className="uppercase">
                 Protocolo Institucional
               </Badge>
@@ -65,7 +62,7 @@ export default function ControleGlicemicoPage() {
               Formulário de Controle Glicêmico
             </CardTitle>
             <CardDescription className="text-base uppercase">
-              Protocolo de Insulina - Rede Hapvida
+              Protocolo de Insulina
             </CardDescription>
           </CardHeader>
           <CardContent className="p-8 space-y-6">

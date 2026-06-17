@@ -10,22 +10,20 @@
 
 // ─── LOGOS ────────────────────────────────────────────────────────────────────
 // Importe os assets de logo aqui. Para white-label, substitua os imports.
-import networkFullLogo from "@/assets/hapvida-notredame-full-logo.png";
-import networkCompactLogo from "@/assets/hapvida-notredame-logo.png";
-import hospitalLogo from "@/assets/hospital-guaras-logo.png";
-import hapmapLogo from "@/assets/hapmap-logo.png";
+import platformFullLogo from "@/assets/passomed-full-logo.png";
+import platformIconLogo from "@/assets/passomed-icon.png";
 
 // ─── CONFIGURAÇÃO PRINCIPAL ──────────────────────────────────────────────────
 
 export const whitelabel = {
   // ── Identidade da Plataforma ──
   platform: {
-    /** Nome principal da plataforma (ex: "HapMap") */
-    name: "HapMap",
+    /** Nome principal da plataforma (ex: "PassoMed") */
+    name: "PassoMed",
     /** Versão exibida ao lado do nome */
-    version: "2.0",
+    version: "1.0",
     /** Nome completo para documentos e títulos */
-    fullName: "HapMap 2.0",
+    fullName: "PassoMed 1.0",
     /** Slogan principal exibido na tela de login e loading */
     slogan: "Tecnologia que valoriza seu tempo. Inteligência que salva vidas.",
     /** Texto de carregamento */
@@ -35,27 +33,27 @@ export const whitelabel = {
   // ── Identidade da Rede/Instituição ──
   institution: {
     /** Nome da rede hospitalar */
-    networkName: "Hapvida NotreDame Intermédica",
+    networkName: "Instituição",
     /** Nome abreviado da rede */
-    networkShortName: "Hapvida",
+    networkShortName: "Instituição",
     /** Nome do hospital padrão (usado como placeholder e em documentos) */
-    hospitalName: "Hospital Guarás",
+    hospitalName: "Hospital",
     /** Alt text para o logo da rede */
-    networkLogoAlt: "Hapvida NotreDame Intermédica",
+    networkLogoAlt: "Logotipo da Instituição",
     /** Alt text para o logo do hospital */
-    hospitalLogoAlt: "Hospital Guarás",
+    hospitalLogoAlt: "Logotipo do Hospital",
   },
 
   // ── Logos ──
   logos: {
     /** Logo completo da rede (usado em loading, login, impressão) */
-    networkFull: networkFullLogo,
+    networkFull: platformFullLogo,
     /** Logo compacto da rede (usado na sidebar) */
-    networkCompact: networkCompactLogo,
+    networkCompact: platformIconLogo,
     /** Logo do hospital (usado em cabeçalhos de documentos) */
-    hospital: hospitalLogo,
-    /** Logo da plataforma HapMap (usado na sidebar) */
-    platform: hapmapLogo,
+    hospital: platformIconLogo,
+    /** Logo da plataforma PassoMed (usado na sidebar) */
+    platform: platformIconLogo,
   },
 
   // ── Cores do Tema (gradiente principal) ──
@@ -73,13 +71,13 @@ export const whitelabel = {
   // ── Créditos / Rodapé ──
   credits: {
     /** Nome do desenvolvedor/empresa */
-    developerName: "Medneeds",
+    developerName: "PassoMed",
     /** Texto completo do rodapé de desenvolvimento */
-    developerLabel: "Desenvolvido por",
+    developerLabel: "Plataforma",
     /** Assinatura do autor (usada em documentos impressos) */
-    authorSignature: "Desenvolvido por Artur Batista",
+    authorSignature: "PassoMed",
     /** Texto curto para footer fixo */
-    footerText: "Desenvolvido por Artur Batista",
+    footerText: "PassoMed",
   },
 
   // ── Conformidade / Legal ──
@@ -87,7 +85,7 @@ export const whitelabel = {
     /** Referências legais exibidas na tela de login */
     legalReferences: "Lei 13.709/2018 (LGPD) • CFM 1.821/2007",
     /** Nome do sistema em termos de consentimento */
-    systemNameInTerms: "HapMap",
+    systemNameInTerms: "PassoMed",
     /** Texto do badge de conformidade */
     complianceBadgeTitle: "Em Conformidade",
   },
@@ -96,14 +94,14 @@ export const whitelabel = {
   loginFeatures: [
     "Gestão inteligente de leitos em tempo real",
     "Visão completa do paciente em um clique",
-    "IA integrada para suporte à decisão clínica",
+    "Documentação clínica padronizada e auditável",
     "Conformidade LGPD e CFM 1.821/2007",
   ],
 
   // ── Senha do Painel Admin ──
   admin: {
     /** Senha de acesso ao painel administrativo */
-    panelPassword: "NOTREDAME",
+    panelPassword: "ADMIN1",
   },
 
   // ── Documentos Impressos ──
@@ -114,7 +112,7 @@ export const whitelabel = {
     /** Texto de confidencialidade */
     confidentialityText: "Documento Confidencial",
     /** Nome do sistema para geração de documentos */
-    systemLabel: "HapMap - Sistema de Gestão Hospitalar",
+    systemLabel: "PassoMed - Sistema de Gestão Hospitalar",
   },
 } as const;
 
