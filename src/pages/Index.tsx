@@ -1087,7 +1087,6 @@ const Index = () => {
                             <ChevronDown className="h-4 md:h-4 w-4 md:w-4 flex-shrink-0 opacity-70" />
                           </button>
                         </DropdownMenuTrigger>
-                    {currentDepartment === "UTI" && <DeathReviewBadge department={currentDepartment} />}
                         <DropdownMenuContent className="bg-background border border-border shadow-lg z-[9999] min-w-[280px]">
                           {authLoading ? (
                             <DropdownMenuItem disabled className="text-sm py-2.5 px-3">
@@ -1137,6 +1136,7 @@ const Index = () => {
                         </DropdownMenuContent>
                       </DropdownMenu>
                     </div>
+                    {currentDepartment === "UTI" && <DeathReviewBadge department={currentDepartment} />}
                   </div>
                 </div>
 
