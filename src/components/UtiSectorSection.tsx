@@ -84,11 +84,11 @@ function UtiRow(props: UtiRowProps) {
   // Vacancy toggle button styles — neutral palette across both UTIs
   const vacancyButtonStyles = {
     blue: {
-      vacant: "border-blue-400/50 text-blue-600 dark:text-blue-300 hover:bg-blue-50 dark:hover:bg-blue-950/30",
+      vacant: "border-primary/40 text-primary dark:text-primary-glow hover:bg-primary/10 dark:hover:bg-primary/20",
       occupied: "border-muted-foreground/30 text-muted-foreground hover:bg-muted/30"
     },
     yellow: {
-      vacant: "border-slate-400/60 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/30",
+      vacant: "border-gold/40 text-primary dark:text-primary-glow hover:bg-gold/10 dark:hover:bg-gold/15",
       occupied: "border-muted-foreground/30 text-muted-foreground hover:bg-muted/30"
     }
   };
@@ -172,18 +172,18 @@ export function UtiSectorSection({
   // Header color schemes — neutra com discreta identidade por UTI (UTI 1 azul, UTI 2 âmbar)
   const headerStyles = {
     blue: {
-      bg: "bg-gradient-to-r from-sky-50/90 via-slate-50/70 to-transparent dark:from-sky-950/30 dark:via-slate-900/40 dark:to-transparent border-l-[3px] border-l-sky-500/70 dark:border-l-sky-400/70",
-      title: "text-sky-900 dark:text-sky-100",
-      button: "border-sky-300/50 text-sky-700 dark:text-sky-200 hover:bg-sky-100/60 dark:hover:bg-sky-900/30 hover:border-sky-400/60",
-      chevron: "text-sky-600/80 dark:text-sky-300/80",
-      counter: "border-sky-300/50 bg-white/80 dark:bg-sky-950/50 text-sky-800 dark:text-sky-100"
+      bg: "bg-gradient-to-r from-emerald-50/80 via-background to-transparent dark:from-emerald-950/30 dark:via-background dark:to-transparent border-l-[3px] border-l-primary/70 dark:border-l-primary-glow/70",
+      title: "text-foreground",
+      button: "border-primary/30 text-primary dark:text-primary-glow hover:bg-primary/10 dark:hover:bg-primary/20 hover:border-primary/50",
+      chevron: "text-primary/70 dark:text-primary-glow/80",
+      counter: "border-primary/30 bg-background/80 dark:bg-emerald-950/40 text-primary dark:text-primary-glow"
     },
     yellow: {
-      bg: "bg-gradient-to-r from-amber-50/90 via-slate-50/70 to-transparent dark:from-amber-950/25 dark:via-slate-900/40 dark:to-transparent border-l-[3px] border-l-amber-500/70 dark:border-l-amber-400/70",
-      title: "text-amber-900 dark:text-amber-100",
-      button: "border-amber-300/50 text-amber-800 dark:text-amber-200 hover:bg-amber-100/60 dark:hover:bg-amber-900/30 hover:border-amber-400/60",
-      chevron: "text-amber-700/80 dark:text-amber-300/80",
-      counter: "border-amber-300/50 bg-white/80 dark:bg-amber-950/40 text-amber-900 dark:text-amber-100"
+      bg: "bg-gradient-to-r from-emerald-50/80 via-background to-transparent dark:from-emerald-950/30 dark:via-background dark:to-transparent border-l-[3px] border-l-gold/80 dark:border-l-gold/80",
+      title: "text-foreground",
+      button: "border-gold/40 text-primary dark:text-primary-glow hover:bg-gold/10 dark:hover:bg-gold/15 hover:border-gold/60",
+      chevron: "text-primary/70 dark:text-primary-glow/80",
+      counter: "border-gold/40 bg-background/80 dark:bg-emerald-950/40 text-primary dark:text-primary-glow"
     }
   };
   const headerClass = headerStyles[colorVariant].bg;
