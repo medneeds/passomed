@@ -72,20 +72,20 @@ export function ViewPatientSnapshotDialog({
           @page { size: A4 portrait; margin: 18mm; }
           * { margin: 0; padding: 0; box-sizing: border-box; }
           body { font-family: 'Segoe UI', Tahoma, sans-serif; color: #1a1a1a; background: #fff; }
-          .header { display: flex; align-items: center; justify-content: space-between; border-bottom: 3px solid #013ba6; padding-bottom: 12px; margin-bottom: 18px; }
+          .header { display: flex; align-items: center; justify-content: space-between; border-bottom: 3px solid #064e3b; padding-bottom: 12px; margin-bottom: 18px; }
           .header-left { display: flex; align-items: center; gap: 14px; }
           .header-left img { height: 40px; object-fit: contain; }
           .header-right img { height: 36px; object-fit: contain; }
-          .title { font-size: 16px; font-weight: 700; color: #013ba6; text-transform: uppercase; }
+          .title { font-size: 16px; font-weight: 700; color: #064e3b; text-transform: uppercase; }
           .subtitle { font-size: 11px; color: #666; margin-top: 2px; }
           .patient-header { background: #f0f4ff; border: 1px solid #c7d2fe; border-radius: 8px; padding: 14px 18px; margin-bottom: 18px; }
           .patient-name { font-size: 18px; font-weight: 700; text-transform: uppercase; color: #1e293b; }
           .patient-meta { display: flex; gap: 20px; margin-top: 6px; font-size: 12px; color: #475569; }
           .patient-meta span { font-weight: 600; color: #1e293b; }
           .section { margin-bottom: 16px; }
-          .section-title { font-size: 13px; font-weight: 700; color: #013ba6; text-transform: uppercase; border-bottom: 1px solid #e2e8f0; padding-bottom: 4px; margin-bottom: 8px; }
+          .section-title { font-size: 13px; font-weight: 700; color: #064e3b; text-transform: uppercase; border-bottom: 1px solid #e2e8f0; padding-bottom: 4px; margin-bottom: 8px; }
           .anamnese-box { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 12px; font-size: 12px; white-space: pre-wrap; text-transform: uppercase; }
-          .footer { margin-top: 24px; padding-top: 10px; border-top: 2px solid #013ba6; display: flex; justify-content: space-between; font-size: 9px; color: #888; }
+          .footer { margin-top: 24px; padding-top: 10px; border-top: 2px solid #064e3b; display: flex; justify-content: space-between; font-size: 9px; color: #888; }
           @media print { body { -webkit-print-color-adjust: exact; print-color-adjust: exact; } }
         </style>
       </head>

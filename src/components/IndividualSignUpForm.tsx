@@ -276,7 +276,7 @@ export function IndividualSignUpForm({
 
       {/* Header */}
       <div className="text-center mb-4">
-        <div className="inline-flex items-center justify-center h-12 w-12 rounded-xl bg-gradient-to-br from-[#013ba6] to-[#0152d4] shadow-lg mb-3">
+        <div className="inline-flex items-center justify-center h-12 w-12 rounded-xl bg-gradient-to-br from-[#064e3b] to-[#0d7a5f] shadow-lg mb-3">
           <UserPlus className="h-6 w-6 text-white" />
         </div>
         <h2 className="text-lg font-bold text-gray-900 uppercase">Cadastro Individual</h2>
@@ -359,7 +359,7 @@ export function IndividualSignUpForm({
         
         <div className="grid grid-cols-5 gap-2">
           {([
-            { role: "medico" as const, label: "Medicina", sublabel: "CRM", icon: Stethoscope, color: "border-[#013ba6] bg-[#013ba6]/5", textColor: "text-[#013ba6]" },
+            { role: "medico" as const, label: "Medicina", sublabel: "CRM", icon: Stethoscope, color: "border-[#064e3b] bg-[#064e3b]/5", textColor: "text-[#064e3b]" },
             { role: "enfermagem" as const, label: "Enfermagem", sublabel: "COREN", icon: Heart, color: "border-pink-600 bg-pink-50", textColor: "text-pink-600" },
             { role: "fisioterapia" as const, label: "Fisioterapia", sublabel: "CREFITO", icon: Dumbbell, color: "border-emerald-600 bg-emerald-50", textColor: "text-emerald-600" },
             { role: "recepcao" as const, label: "Administrativo", sublabel: "Recepção", icon: ClipboardList, color: "border-cyan-600 bg-cyan-50", textColor: "text-cyan-600" },
@@ -394,7 +394,7 @@ export function IndividualSignUpForm({
             <p className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">PERFIL DE ACESSO MÉDICO</p>
             <div className="grid grid-cols-2 gap-3">
               {([
-                { role: "medico" as const, label: "Líder", icon: Stethoscope, desc: "Edita livremente os pacientes do mapa", color: "border-[#013ba6] bg-[#013ba6]/5", textColor: "text-[#013ba6]" },
+                { role: "medico" as const, label: "Líder", icon: Stethoscope, desc: "Edita livremente os pacientes do mapa", color: "border-[#064e3b] bg-[#064e3b]/5", textColor: "text-[#064e3b]" },
                 { role: "porta" as const, label: "Porta", icon: DoorOpen, desc: "Edita apenas pacientes que solicitou leito", color: "border-teal-600 bg-teal-50", textColor: "text-teal-600" },
                 { role: "prescritor" as const, label: "Prescritor", icon: Stethoscope, desc: "Acesso para prescrição médica", color: "border-orange-600 bg-orange-50", textColor: "text-orange-600" },
                 { role: "uti" as const, label: "UTI", icon: Stethoscope, desc: "Acesso dedicado à UTI", color: "border-rose-600 bg-rose-50", textColor: "text-rose-600" },
@@ -705,7 +705,7 @@ export function IndividualSignUpForm({
       <Button
         type="submit"
         disabled={loading}
-        className="w-full h-11 bg-gradient-to-r from-[#013ba6] to-[#0152d4] hover:from-[#012d80] hover:to-[#013ba6] text-white font-bold uppercase rounded-xl shadow-lg transition-all duration-300 hover:shadow-xl"
+        className="w-full h-11 bg-gradient-to-r from-[#064e3b] to-[#0d7a5f] hover:from-[#043629] hover:to-[#064e3b] text-white font-bold uppercase rounded-xl shadow-lg transition-all duration-300 hover:shadow-xl"
       >
         {loading ? (
           <div className="flex items-center gap-2">

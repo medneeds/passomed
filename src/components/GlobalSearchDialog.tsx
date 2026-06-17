@@ -175,7 +175,7 @@ function printPatientCase(data: {
 
   const movementInfo = data.movement_type ? `
     <div style="background:#f0f4ff;border:1px solid #d0d8ef;border-radius:6px;padding:10px 14px;margin-bottom:14px;">
-      <p style="font-size:12px;font-weight:700;color:#013ba6;margin-bottom:4px;">MOVIMENTAÇÃO: ${(movementTypeLabel[data.movement_type] || data.movement_type).toUpperCase()}</p>
+      <p style="font-size:12px;font-weight:700;color:#064e3b;margin-bottom:4px;">MOVIMENTAÇÃO: ${(movementTypeLabel[data.movement_type] || data.movement_type).toUpperCase()}</p>
       ${data.destination ? `<p style="font-size:11px;">Destino: ${data.destination}</p>` : ''}
       ${data.responsible_doctor ? `<p style="font-size:11px;">Médico: ${data.responsible_doctor}</p>` : ''}
       ${data.notes ? `<p style="font-size:11px;">Notas: ${data.notes}</p>` : ''}
@@ -193,18 +193,18 @@ function printPatientCase(data: {
       @page { size: A4 portrait; margin: 18mm; }
       * { margin:0; padding:0; box-sizing:border-box; }
       body { font-family:'Segoe UI',Tahoma,sans-serif; color:#1a1a1a; background:#fff; }
-      .header { display:flex; align-items:center; justify-content:space-between; border-bottom:3px solid #013ba6; padding-bottom:12px; margin-bottom:18px; }
+      .header { display:flex; align-items:center; justify-content:space-between; border-bottom:3px solid #064e3b; padding-bottom:12px; margin-bottom:18px; }
       .header-left { display:flex; align-items:center; gap:14px; }
       .header-left img { height:40px; object-fit:contain; }
       .header-right img { height:36px; object-fit:contain; }
-      .title { font-size:16px; font-weight:700; color:#013ba6; text-transform:uppercase; }
+      .title { font-size:16px; font-weight:700; color:#064e3b; text-transform:uppercase; }
       .subtitle { font-size:11px; color:#666; margin-top:2px; }
       .patient-info { display:flex; flex-wrap:wrap; gap:8px 20px; background:#f8f9fa; border-radius:8px; padding:12px 16px; margin-bottom:14px; }
       .info-item { font-size:11px; }
-      .info-item strong { color:#013ba6; }
+      .info-item strong { color:#064e3b; }
       .section { margin-bottom:12px; }
-      .section-title { font-size:12px; font-weight:700; color:#013ba6; text-transform:uppercase; border-bottom:1px solid #e0e0e0; padding-bottom:3px; margin-bottom:6px; }
-      .footer { margin-top:20px; border-top:2px solid #013ba6; padding-top:10px; display:flex; justify-content:space-between; font-size:10px; color:#888; }
+      .section-title { font-size:12px; font-weight:700; color:#064e3b; text-transform:uppercase; border-bottom:1px solid #e0e0e0; padding-bottom:3px; margin-bottom:6px; }
+      .footer { margin-top:20px; border-top:2px solid #064e3b; padding-top:10px; display:flex; justify-content:space-between; font-size:10px; color:#888; }
     </style>
     </head><body>
     <div class="header">

@@ -1163,7 +1163,7 @@ const Index = () => {
                         variant={selectionMode ? "default" : "outline"}
                         size="icon"
                         onClick={handleToggleSelectionMode}
-                        className={`print:hidden h-11 w-11 transition-all duration-200 ${selectionMode ? 'bg-white text-[#013ba6] shadow-md' : 'bg-white/10 border-white/20 text-white hover:bg-white/20 hover:text-white hover:border-white/40'}`}
+                        className={`print:hidden h-11 w-11 transition-all duration-200 ${selectionMode ? 'bg-white text-[#064e3b] shadow-md' : 'bg-white/10 border-white/20 text-white hover:bg-white/20 hover:text-white hover:border-white/40'}`}
                         title="Modo de seleção"
                       >
                         <CheckSquare className="h-5 w-5" />
@@ -1301,7 +1301,7 @@ const Index = () => {
                               variant={selectionMode ? "default" : "outline"}
                               size="icon"
                               onClick={handleToggleSelectionMode}
-                              className={`h-8 w-8 transition-all duration-200 ${selectionMode ? 'bg-white text-[#013ba6] shadow-md' : 'bg-white/10 border-white/20 text-white hover:bg-white/20 hover:text-white hover:border-white/40'}`}>
+                              className={`h-8 w-8 transition-all duration-200 ${selectionMode ? 'bg-white text-[#064e3b] shadow-md' : 'bg-white/10 border-white/20 text-white hover:bg-white/20 hover:text-white hover:border-white/40'}`}>
                               <CheckSquare className="h-4 w-4" />
                             </Button>
                           </TooltipTrigger>
@@ -1350,7 +1350,7 @@ const Index = () => {
                         <Tooltip>
                           <TooltipTrigger asChild>
                             <Button variant="outline" size="icon" onClick={toggleNamesHidden}
-                              className={`hidden sm:flex h-8 w-8 transition-all duration-200 ${namesHidden ? 'bg-white text-[#013ba6] shadow-md' : 'bg-white/10 border-white/20 text-white hover:bg-white/20 hover:text-white hover:border-white/40'}`}>
+                              className={`hidden sm:flex h-8 w-8 transition-all duration-200 ${namesHidden ? 'bg-white text-[#064e3b] shadow-md' : 'bg-white/10 border-white/20 text-white hover:bg-white/20 hover:text-white hover:border-white/40'}`}>
                               {namesHidden ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                             </Button>
                           </TooltipTrigger>
