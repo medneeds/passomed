@@ -1452,7 +1452,7 @@ export function UtiPatientCard({
                 <InlineEditableTextarea
                   value={patient.admissionHistory || ""}
                   onUpdate={(v) => handleUpdateField("admissionHistory", v)}
-                  placeholder="ANAMNESE | EVOLUÇÕES RELEVANTES..."
+                  placeholder="Clique para adicionar"
                 />
               </div>
 
