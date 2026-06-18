@@ -1399,6 +1399,15 @@ export function UtiPatientCard({
           <CollapsibleContent>
             <div className="border-t border-border/30 p-3 space-y-3 bg-muted/5">
               
+              {/* MOTIVO DA ADMISSÃO (antes de dispositivos) */}
+              <InlineEditableArray
+                items={motivoAdmissao}
+                onUpdate={(items) => handleUpdateField("utiAdmissionReason", items)}
+                label="MOTIVO DA ADMISSÃO"
+                colorClass="bg-muted/50 border border-border/50"
+                alwaysShowAll
+              />
+
               {/* Patient safety items */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
                 <InlineEditableArray
@@ -1423,6 +1432,15 @@ export function UtiPatientCard({
                   alwaysShowAll
                 />
               </div>
+
+              {/* SETOR DE ORIGEM (antes de especialidades) */}
+              <InlineEditableArray
+                items={setorOrigem}
+                onUpdate={(items) => handleUpdateField("utiOriginSector", items)}
+                label="SETOR DE ORIGEM"
+                colorClass="bg-muted/50 border border-border/50"
+                alwaysShowAll
+              />
 
               {/* 🔵 CLÍNICO - Clinical evolution */}
               <div className="space-y-2">
@@ -1454,30 +1472,6 @@ export function UtiPatientCard({
                   onUpdate={(v) => handleUpdateField("admissionHistory", v)}
                   placeholder="Clique para adicionar"
                 />
-              </div>
-
-              {/* 📁 ADMINISTRATIVO */}
-              <div className="space-y-2">
-                <div className="flex items-center gap-2">
-                  <FolderOpen className="h-3.5 w-3.5 text-slate-400" />
-                  <span className="text-[10px] font-bold text-slate-500 dark:text-slate-500 uppercase tracking-wider">ADMINISTRATIVO</span>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                  <InlineEditableArray
-                    items={setorOrigem}
-                    onUpdate={(items) => handleUpdateField("utiOriginSector", items)}
-                    label="SETOR DE ORIGEM"
-                    colorClass="bg-muted/30 border border-border/30"
-                    alwaysShowAll
-                  />
-                  <InlineEditableArray
-                    items={motivoAdmissao}
-                    onUpdate={(items) => handleUpdateField("utiAdmissionReason", items)}
-                    label="MOTIVO DA ADMISSÃO"
-                    colorClass="bg-muted/30 border border-border/30"
-                    alwaysShowAll
-                  />
-                </div>
               </div>
             </div>
           </CollapsibleContent>
