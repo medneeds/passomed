@@ -1469,7 +1469,7 @@ export function UtiPatientCard({
                   <FolderOpen className="h-3.5 w-3.5 text-slate-400" />
                   <span className="text-[10px] font-bold text-slate-500 dark:text-slate-500 uppercase tracking-wider">ADMINISTRATIVO</span>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-2">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                   <InlineEditableArray
                     items={setorOrigem}
                     onUpdate={(items) => handleUpdateField("utiOriginSector", items)}
@@ -1484,24 +1484,6 @@ export function UtiPatientCard({
                     colorClass="bg-muted/30 border border-border/30"
                     alwaysShowAll
                   />
-                  <div className="bg-muted/30 border border-border/30 rounded-md p-2">
-                    <span className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wide block mb-1">ADMISSÃO UTI</span>
-                    <InlineEditableField
-                      value={getFieldArray("utiAdmissionDate")[0] || ""}
-                      onUpdate={(v) => handleUpdateField("utiAdmissionDate", v ? [v] : [])}
-                      placeholder="DD/MM/AAAA"
-                      className="text-sm"
-                    />
-                  </div>
-                  <div className="bg-muted/30 border border-border/30 rounded-md p-2">
-                    <span className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wide block mb-1">PREVISÃO DE ALTA</span>
-                    <InlineEditableField
-                      value={previsaoAlta[0] || ""}
-                      onUpdate={(v) => handleUpdateField("utiDischargePrediction", v ? [v] : [])}
-                      placeholder="DD/MM/AAAA"
-                      className="text-sm"
-                    />
-                  </div>
                 </div>
               </div>
             </div>
