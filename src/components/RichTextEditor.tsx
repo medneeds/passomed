@@ -71,7 +71,7 @@ export function RichTextEditor({
   return (
     <div
       className={cn(
-        "bg-background border border-primary/30 rounded overflow-hidden",
+        "rich-text-editor bg-background border border-primary/30 rounded overflow-hidden",
         className
       )}
       onClick={(e) => e.stopPropagation()}
@@ -145,7 +145,7 @@ export function RichTextEditor({
       >
         <EditorContent
           editor={editor}
-          className="min-h-[120px] h-full [&_.ProseMirror]:min-h-[120px] [&_.ProseMirror]:h-full"
+          className="min-h-[120px] h-full"
           onMouseDown={(e) => {
             if (e.target === e.currentTarget) {
               e.preventDefault();
