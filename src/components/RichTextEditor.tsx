@@ -1,7 +1,8 @@
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
+import Underline from "@tiptap/extension-underline";
 import { useEffect } from "react";
-import { Bold, Italic, Strikethrough, List, ListOrdered } from "lucide-react";
+import { Bold, Italic, Underline as UnderlineIcon, Strikethrough, List, ListOrdered } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface RichTextEditorProps {
@@ -22,7 +23,7 @@ export function RichTextEditor({
   onBlur,
 }: RichTextEditorProps) {
   const editor = useEditor({
-    extensions: [StarterKit],
+    extensions: [StarterKit, Underline],
     content: value || "",
     autofocus: autoFocus ? "end" : false,
     editorProps: {
@@ -82,6 +83,14 @@ export function RichTextEditor({
           title="Itálico (Ctrl+I)"
         >
           <Italic className="h-3 w-3" />
+        </button>
+        <button
+          type="button"
+          className={btn(editor.isActive("underline"))}
+          onClick={() => editor.chain().focus().toggleUnderline().run()}
+          title="Sublinhado (Ctrl+U)"
+        >
+          <UnderlineIcon className="h-3 w-3" />
         </button>
         <button
           type="button"
