@@ -1426,10 +1426,6 @@ export function UtiPatientCard({
 
               {/* 🔵 CLÍNICO - Clinical evolution */}
               <div className="space-y-2">
-                <div className="flex items-center gap-2">
-                  <Stethoscope className="h-3.5 w-3.5 text-slate-500" />
-                  <span className="text-[10px] font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider">CLÍNICO</span>
-                </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                   <InlineEditableArray
                     items={especialidades}
