@@ -29,6 +29,7 @@ import { PatientMovementDialog } from "./PatientMovementDialog";
 import { UtiReallocationDialog } from "./UtiReallocationDialog";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { Badge } from "@/components/ui/badge";
+import { RichTextEditor } from "./RichTextEditor";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -1404,7 +1405,7 @@ export function UtiPatientCard({
                 <span className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wide block">
                   MOTIVO DE ADMISSÃO | ANAMNESE | EVOLUÇÕES RELEVANTES
                 </span>
-                <InlineEditableTextarea
+                <RichTextEditor
                   value={patient.admissionHistory || ""}
                   onUpdate={(v) => handleUpdateField("admissionHistory", v)}
                   placeholder="Clique para adicionar"
