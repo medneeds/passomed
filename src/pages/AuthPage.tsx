@@ -212,16 +212,14 @@ export default function AuthPage() {
         {/* DESKTOP: Split-screen layout - more compact */}
         <div className="hidden lg:flex w-full h-screen relative z-10">
           {/* Left Panel - Branding - more compact */}
-          <div className="w-[45%] xl:w-1/2 flex flex-col items-center justify-between py-8 px-6 xl:py-10 xl:px-10 relative">
-            {/* Spacer top to keep branding visually centered */}
-            <div aria-hidden className="h-2 shrink-0" />
+          <div className="w-[45%] xl:w-1/2 flex flex-col items-center justify-center py-10 px-6 xl:py-12 xl:px-10 relative">
             {/* Gradient orbs for left panel */}
             <div className="absolute top-[10%] left-[5%] w-48 h-48 bg-gradient-radial from-white/10 to-transparent rounded-full blur-2xl animate-[float_10s_ease-in-out_infinite]" />
             <div className="absolute bottom-[15%] right-[10%] w-64 h-64 bg-gradient-radial from-white/8 to-transparent rounded-full blur-3xl animate-[float_12s_ease-in-out_infinite_2s]" />
             
             <div className="relative z-10 text-center max-w-md animate-in fade-in-0 slide-in-from-left-8 duration-1000">
               {/* Logo P+ */}
-              <div className="flex justify-center mt-10 xl:mt-12 mb-1 animate-in fade-in-0 zoom-in-95 duration-1000">
+              <div className="flex justify-center mb-1 animate-in fade-in-0 zoom-in-95 duration-1000">
                 <div className="relative flex items-center justify-center mx-auto">
                   {/* Radiating halos behind the P */}
                   <div className="pointer-events-none absolute inset-0 -m-16 rounded-full bg-[radial-gradient(circle,rgba(201,168,76,0.55)_0%,rgba(201,168,76,0.25)_35%,transparent_70%)] blur-3xl animate-pulse" />
@@ -292,8 +290,8 @@ export default function AuthPage() {
               </div>
             </div>
             
-            {/* Footer on left panel - in flow to avoid overlap */}
-            <div className="mt-4 w-full text-center relative z-10">
+            {/* Footer on left panel - proportional spacing */}
+            <div className="mt-8 w-full text-center relative z-10">
               <p className="text-[9px] text-white/30 uppercase tracking-widest">{whitelabel.credits.developerLabel}</p>
               <p className="text-[10px] text-white/50 font-semibold mt-0.5">{whitelabel.credits.developerName}</p>
             </div>
