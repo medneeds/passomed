@@ -23,13 +23,19 @@ export function RichTextEditor({
   onBlur,
 }: RichTextEditorProps) {
   const editor = useEditor({
-    extensions: [StarterKit, Underline],
+    extensions: [
+      StarterKit.configure({
+        bulletList: { keepMarks: true },
+        orderedList: { keepMarks: true },
+      }),
+      Underline,
+    ],
     content: value || "",
     autofocus: autoFocus ? "end" : false,
     editorProps: {
       attributes: {
         class:
-          "prose prose-sm dark:prose-invert max-w-none focus:outline-none uppercase text-xs px-2 py-1.5",
+          "prose prose-sm dark:prose-invert max-w-none min-h-[120px] focus:outline-none uppercase text-xs px-2 py-1.5 cursor-text [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5 [&_li]:pl-1 [&_li>p]:my-0 [&_p]:my-1",
       },
     },
     onUpdate: ({ editor }) => {
@@ -74,6 +80,7 @@ export function RichTextEditor({
         <button
           type="button"
           className={btn(editor.isActive("bold"))}
+          onMouseDown={(e) => e.preventDefault()}
           onClick={() => editor.chain().focus().toggleBold().run()}
           title="Negrito (Ctrl+B)"
         >
@@ -82,6 +89,7 @@ export function RichTextEditor({
         <button
           type="button"
           className={btn(editor.isActive("italic"))}
+          onMouseDown={(e) => e.preventDefault()}
           onClick={() => editor.chain().focus().toggleItalic().run()}
           title="Itálico (Ctrl+I)"
         >
@@ -90,6 +98,7 @@ export function RichTextEditor({
         <button
           type="button"
           className={btn(editor.isActive("underline"))}
+          onMouseDown={(e) => e.preventDefault()}
           onClick={() => editor.chain().focus().toggleUnderline().run()}
           title="Sublinhado (Ctrl+U)"
         >
@@ -98,6 +107,7 @@ export function RichTextEditor({
         <button
           type="button"
           className={btn(editor.isActive("strike"))}
+          onMouseDown={(e) => e.preventDefault()}
           onClick={() => editor.chain().focus().toggleStrike().run()}
           title="Tachado"
         >
@@ -107,6 +117,7 @@ export function RichTextEditor({
         <button
           type="button"
           className={btn(editor.isActive("bulletList"))}
+          onMouseDown={(e) => e.preventDefault()}
           onClick={() => editor.chain().focus().toggleBulletList().run()}
           title="Lista com tópicos"
         >
@@ -115,6 +126,7 @@ export function RichTextEditor({
         <button
           type="button"
           className={btn(editor.isActive("orderedList"))}
+          onMouseDown={(e) => e.preventDefault()}
           onClick={() => editor.chain().focus().toggleOrderedList().run()}
           title="Lista numerada"
         >
@@ -122,10 +134,25 @@ export function RichTextEditor({
         </button>
       </div>
       <div
-        className="resize-y overflow-auto min-h-[120px] max-h-[800px]"
+        className="resize-y overflow-auto min-h-[120px] max-h-[800px] cursor-text"
         style={{ resize: "vertical" }}
+        onMouseDown={(e) => {
+          if (e.target === e.currentTarget) {
+            e.preventDefault();
+            editor.chain().focus("end").run();
+          }
+        }}
       >
-        <EditorContent editor={editor} />
+        <EditorContent
+          editor={editor}
+          className="min-h-[120px] h-full [&_.ProseMirror]:min-h-[120px] [&_.ProseMirror]:h-full"
+          onMouseDown={(e) => {
+            if (e.target === e.currentTarget) {
+              e.preventDefault();
+              editor.chain().focus("end").run();
+            }
+          }}
+        />
       </div>
     </div>
   );
