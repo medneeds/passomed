@@ -42,6 +42,9 @@ export function RichTextEditor({
   // Sync external value changes
   useEffect(() => {
     if (!editor) return;
+    // Don't overwrite content while the user is actively typing —
+    // the parent re-sends the saved value and was resetting the cursor.
+    if (editor.isFocused) return;
     const current = editor.getHTML();
     const next = value || "";
     if (next !== current && next !== (current === "<p></p>" ? "" : current)) {
