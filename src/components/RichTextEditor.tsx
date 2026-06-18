@@ -109,7 +109,12 @@ export function RichTextEditor({
           <ListOrdered className="h-3 w-3" />
         </button>
       </div>
-      <EditorContent editor={editor} />
+      <div
+        className="resize-y overflow-auto min-h-[120px] max-h-[800px]"
+        style={{ resize: "vertical" }}
+      >
+        <EditorContent editor={editor} />
+      </div>
     </div>
   );
 }
