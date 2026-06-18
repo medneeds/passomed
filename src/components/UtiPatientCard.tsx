@@ -1399,14 +1399,17 @@ export function UtiPatientCard({
           <CollapsibleContent>
             <div className="border-t border-border/30 p-3 space-y-3 bg-muted/5">
               
-              {/* MOTIVO DA ADMISSÃO (antes de dispositivos) */}
-              <InlineEditableArray
-                items={motivoAdmissao}
-                onUpdate={(items) => handleUpdateField("utiAdmissionReason", items)}
-                label="MOTIVO DA ADMISSÃO"
-                colorClass="bg-muted/50 border border-border/50"
-                alwaysShowAll
-              />
+              {/* MOTIVO DE ADMISSÃO | ANAMNESE | EVOLUÇÕES RELEVANTES */}
+              <div className="bg-muted/50 border border-border/50 rounded-md p-2 space-y-1">
+                <span className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wide block">
+                  MOTIVO DE ADMISSÃO | ANAMNESE | EVOLUÇÕES RELEVANTES
+                </span>
+                <InlineEditableTextarea
+                  value={patient.admissionHistory || ""}
+                  onUpdate={(v) => handleUpdateField("admissionHistory", v)}
+                  placeholder="Clique para adicionar"
+                />
+              </div>
 
               {/* Patient safety items */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
@@ -1460,17 +1463,6 @@ export function UtiPatientCard({
                 </div>
               </div>
 
-              {/* 📝 ANAMNESE | EVOLUÇÕES RELEVANTES */}
-              <div className="bg-muted/50 border border-border/50 rounded-md p-2 space-y-1">
-                <span className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wide block">
-                  ANAMNESE | EVOLUÇÕES RELEVANTES
-                </span>
-                <InlineEditableTextarea
-                  value={patient.admissionHistory || ""}
-                  onUpdate={(v) => handleUpdateField("admissionHistory", v)}
-                  placeholder="Clique para adicionar"
-                />
-              </div>
             </div>
           </CollapsibleContent>
         </Collapsible>
