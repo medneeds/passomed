@@ -137,9 +137,8 @@ export function RichTextEditor({
       <div
         className="resize-y overflow-auto min-h-[120px] max-h-[800px] cursor-text"
         style={{ resize: "vertical" }}
-        onMouseDown={(e) => {
+        onClick={(e) => {
           if (e.target === e.currentTarget) {
-            e.preventDefault();
             editor.chain().focus("end").run();
           }
         }}
@@ -147,9 +146,8 @@ export function RichTextEditor({
         <EditorContent
           editor={editor}
           className="min-h-[120px] h-full"
-          onMouseDown={(e) => {
+          onClick={(e) => {
             if (e.target === e.currentTarget) {
-              e.preventDefault();
               editor.chain().focus("end").run();
             }
           }}
