@@ -212,12 +212,12 @@ export default function AuthPage() {
         {/* DESKTOP: Split-screen layout - more compact */}
         <div className="hidden lg:flex w-full h-screen relative z-10">
           {/* Left Panel - Branding - more compact */}
-          <div className="w-[45%] xl:w-1/2 flex flex-col items-center justify-center py-10 px-6 xl:py-12 xl:px-10 relative">
+          <div className="w-[45%] xl:w-1/2 flex flex-col items-center justify-between pt-10 pb-6 px-6 xl:pt-14 xl:pb-8 xl:px-10 relative">
             {/* Gradient orbs for left panel */}
             <div className="absolute top-[10%] left-[5%] w-48 h-48 bg-gradient-radial from-white/10 to-transparent rounded-full blur-2xl animate-[float_10s_ease-in-out_infinite]" />
             <div className="absolute bottom-[15%] right-[10%] w-64 h-64 bg-gradient-radial from-white/8 to-transparent rounded-full blur-3xl animate-[float_12s_ease-in-out_infinite_2s]" />
             
-            <div className="relative z-10 text-center max-w-md animate-in fade-in-0 slide-in-from-left-8 duration-1000">
+            <div className="relative z-10 text-center max-w-md animate-in fade-in-0 slide-in-from-left-8 duration-1000 my-auto">
               {/* Logo P+ */}
               <div className="flex justify-center mb-1 animate-in fade-in-0 zoom-in-95 duration-1000">
                 <div className="relative flex items-center justify-center mx-auto">
@@ -291,7 +291,7 @@ export default function AuthPage() {
             </div>
             
             {/* Footer on left panel - proportional spacing */}
-            <div className="mt-8 w-full text-center relative z-10">
+            <div className="mt-6 w-full text-center relative z-10">
               <p className="text-[9px] text-white/30 uppercase tracking-widest">{whitelabel.credits.developerLabel}</p>
               <p className="text-[10px] text-white/50 font-semibold mt-0.5">{whitelabel.credits.developerName}</p>
             </div>
