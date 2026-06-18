@@ -110,11 +110,6 @@ export function RichTextEditor({
         </button>
       </div>
       <EditorContent editor={editor} />
-      {editor.isEmpty && (
-        <div className="pointer-events-none -mt-[calc(120px+0.5rem)] px-2 py-1.5 text-xs text-muted-foreground/50 italic h-[120px]">
-          {placeholder}
-        </div>
-      )}
     </div>
   );
 }
