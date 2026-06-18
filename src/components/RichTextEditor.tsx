@@ -75,6 +75,7 @@ export function RichTextEditor({
         className
       )}
       onClick={(e) => e.stopPropagation()}
+      onPointerDown={(e) => e.stopPropagation()}
     >
       <div className="flex items-center gap-0.5 border-b border-border/50 px-1.5 py-1 bg-muted/40">
         <button
