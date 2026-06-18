@@ -28,7 +28,7 @@ export function RichTextEditor({
     editorProps: {
       attributes: {
         class:
-          "prose prose-sm dark:prose-invert max-w-none min-h-[120px] focus:outline-none uppercase text-xs px-2 py-1.5",
+          "prose prose-sm dark:prose-invert max-w-none focus:outline-none uppercase text-xs px-2 py-1.5",
       },
     },
     onUpdate: ({ editor }) => {
@@ -109,7 +109,12 @@ export function RichTextEditor({
           <ListOrdered className="h-3 w-3" />
         </button>
       </div>
-      <EditorContent editor={editor} />
+      <div
+        className="resize-y overflow-auto min-h-[120px] max-h-[800px]"
+        style={{ resize: "vertical" }}
+      >
+        <EditorContent editor={editor} />
+      </div>
     </div>
   );
 }
