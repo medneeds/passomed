@@ -28,7 +28,7 @@ export function RichTextEditor({
     editorProps: {
       attributes: {
         class:
-          "prose prose-sm dark:prose-invert max-w-none min-h-[120px] focus:outline-none uppercase text-xs px-2 py-1.5",
+          "prose prose-sm dark:prose-invert max-w-none focus:outline-none uppercase text-xs px-2 py-1.5",
       },
     },
     onUpdate: ({ editor }) => {
