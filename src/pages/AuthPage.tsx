@@ -219,7 +219,7 @@ export default function AuthPage() {
             
             <div className="relative z-10 text-center max-w-md animate-in fade-in-0 slide-in-from-left-8 duration-1000">
               {/* Logo P+ */}
-              <div className="flex justify-center mb-4 animate-in fade-in-0 zoom-in-95 duration-1000">
+              <div className="flex justify-center mt-8 xl:mt-10 mb-4 animate-in fade-in-0 zoom-in-95 duration-1000">
                 <div className="relative flex items-center justify-center mx-auto">
                   {/* Radiating halos behind the P */}
                   <div className="pointer-events-none absolute inset-0 -m-16 rounded-full bg-[radial-gradient(circle,rgba(201,168,76,0.55)_0%,rgba(201,168,76,0.25)_35%,transparent_70%)] blur-3xl animate-pulse" />
@@ -527,7 +527,7 @@ export default function AuthPage() {
           {/* Logo Section */}
           <div className="text-center mb-4 animate-in fade-in-0 slide-in-from-top-8 duration-1000">
             {/* Logo P+ */}
-            <div className="flex justify-center mb-3">
+            <div className="flex justify-center mt-6 mb-3">
               <div className="relative flex items-center justify-center mx-auto">
                 <div className="pointer-events-none absolute inset-0 -m-12 rounded-full bg-[radial-gradient(circle,rgba(201,168,76,0.55)_0%,rgba(201,168,76,0.22)_40%,transparent_70%)] blur-3xl animate-pulse" />
                 <div className="pointer-events-none absolute inset-0 -m-6 rounded-full bg-[radial-gradient(circle,rgba(255,235,170,0.45)_0%,transparent_65%)] blur-2xl" />
