@@ -1399,36 +1399,29 @@ export function UtiPatientCard({
           <CollapsibleContent>
             <div className="border-t border-border/30 p-3 space-y-3 bg-muted/5">
               
-              {/* 🔴 CRÍTICO - Patient safety items */}
-              <div className="space-y-2">
-                <div className="flex items-center gap-2">
-                  <AlertTriangle className="h-3.5 w-3.5 text-red-500" />
-                  <span className="text-[10px] font-bold text-red-600 uppercase tracking-wider">CRÍTICO</span>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
-                  <InlineEditableArray
-                    items={dispositivos}
-                    onUpdate={(items) => handleUpdateField("utiDevices", items)}
-                    label="DISPOSITIVOS"
-                    colorClass="bg-red-50/50 dark:bg-red-900/10 border border-red-200/30 dark:border-red-800/20"
-                    alwaysShowAll
-                  />
-                  <InlineEditableArray
-                    items={alergias}
-                    onUpdate={(items) => handleUpdateField("utiAllergies", items)}
-                    label="ALERGIAS"
-                    colorClass="bg-red-50/50 dark:bg-red-900/10 border border-red-200/30 dark:border-red-800/20"
-                    alwaysShowAll
-                  />
-                  <InlineEditableArray
-                    items={culturasAtb}
-                    onUpdate={(items) => handleUpdateField("utiCulturesAntibiotics", items)}
-                    label="CULTURAS / ATB"
-                    icon={<Pill className="h-3 w-3 text-red-400" />}
-                    colorClass="bg-red-50/50 dark:bg-red-900/10 border border-red-200/30 dark:border-red-800/20"
-                    alwaysShowAll
-                  />
-                </div>
+              {/* Patient safety items */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+                <InlineEditableArray
+                  items={dispositivos}
+                  onUpdate={(items) => handleUpdateField("utiDevices", items)}
+                  label="DISPOSITIVOS"
+                  colorClass="bg-muted/50 border border-border/50"
+                  alwaysShowAll
+                />
+                <InlineEditableArray
+                  items={alergias}
+                  onUpdate={(items) => handleUpdateField("utiAllergies", items)}
+                  label="ALERGIAS"
+                  colorClass="bg-muted/50 border border-border/50"
+                  alwaysShowAll
+                />
+                <InlineEditableArray
+                  items={culturasAtb}
+                  onUpdate={(items) => handleUpdateField("utiCulturesAntibiotics", items)}
+                  label="CULTURAS / ATB"
+                  colorClass="bg-muted/50 border border-border/50"
+                  alwaysShowAll
+                />
               </div>
 
               {/* 🔵 CLÍNICO - Clinical evolution */}
