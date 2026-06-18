@@ -219,7 +219,7 @@ export default function AuthPage() {
             
             <div className="relative z-10 text-center max-w-md animate-in fade-in-0 slide-in-from-left-8 duration-1000">
               {/* Logo P+ */}
-              <div className="flex justify-center mt-10 xl:mt-12 mb-2 animate-in fade-in-0 zoom-in-95 duration-1000">
+              <div className="flex justify-center mt-10 xl:mt-12 mb-1 animate-in fade-in-0 zoom-in-95 duration-1000">
                 <div className="relative flex items-center justify-center mx-auto">
                   {/* Radiating halos behind the P */}
                   <div className="pointer-events-none absolute inset-0 -m-16 rounded-full bg-[radial-gradient(circle,rgba(201,168,76,0.55)_0%,rgba(201,168,76,0.25)_35%,transparent_70%)] blur-3xl animate-pulse" />
@@ -235,7 +235,7 @@ export default function AuthPage() {
               </div>
 
               {/* Brand Name - Logo Style - smaller */}
-              <div className="animate-in fade-in-0 slide-in-from-bottom-4 duration-1000 delay-150 mb-1.5">
+              <div className="animate-in fade-in-0 slide-in-from-bottom-4 duration-1000 delay-150 mb-1">
                 <div className="inline-flex items-baseline gap-1.5">
                   <h1 className="text-6xl xl:text-7xl tracking-tighter inline-flex items-baseline">
                     <span className="font-black bg-gradient-to-br from-white via-white to-white/70 bg-clip-text text-transparent drop-shadow-lg">
@@ -253,19 +253,19 @@ export default function AuthPage() {
               </div>
               
               {/* Slogan - smaller */}
-              <p className="text-white/60 text-sm xl:text-base font-light tracking-wide animate-in fade-in-0 slide-in-from-bottom-4 duration-1000 delay-300 mb-3 italic">
+              <p className="text-white/60 text-sm xl:text-base font-light tracking-wide animate-in fade-in-0 slide-in-from-bottom-4 duration-1000 delay-300 mb-2 italic">
                 {whitelabel.platform.slogan}
               </p>
               
               {/* Elegant divider - smaller */}
-              <div className="flex items-center justify-center gap-3 mb-3 animate-in fade-in-0 duration-1000 delay-400">
+              <div className="flex items-center justify-center gap-3 mb-2 animate-in fade-in-0 duration-1000 delay-400">
                 <div className="h-px w-12 bg-gradient-to-r from-transparent to-white/30" />
                 <Sparkles className="h-3 w-3 text-white/40" />
                 <div className="h-px w-12 bg-gradient-to-l from-transparent to-white/30" />
               </div>
               
               {/* Feature highlights - more compact */}
-              <div className="space-y-2 text-left animate-in fade-in-0 slide-in-from-bottom-4 duration-1000 delay-500">
+              <div className="space-y-1.5 text-left animate-in fade-in-0 slide-in-from-bottom-4 duration-1000 delay-500">
                 {whitelabel.loginFeatures.map((feature, idx) => (
                   <div key={idx} className="flex items-center gap-3 text-white/60 hover:text-white/90 transition-colors duration-300 group">
                     <div className="h-8 w-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-white/10 group-hover:border-white/20 transition-all duration-300">
@@ -277,7 +277,7 @@ export default function AuthPage() {
               </div>
               
               {/* LGPD Compliance Badge - smaller */}
-              <div className="mt-3 animate-in fade-in-0 slide-in-from-bottom-4 duration-1000 delay-700">
+              <div className="mt-2 animate-in fade-in-0 slide-in-from-bottom-4 duration-1000 delay-700">
                 <div className="inline-flex items-center gap-2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg px-3 py-2">
                   <div className="h-8 w-8 rounded-md bg-gradient-to-br from-green-500/20 to-emerald-500/20 border border-green-400/30 flex items-center justify-center">
                     <FileCheck className="h-4 w-4 text-green-400" />
