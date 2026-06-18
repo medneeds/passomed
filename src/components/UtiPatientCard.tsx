@@ -1433,18 +1433,16 @@ export function UtiPatientCard({
                 />
               </div>
 
-              {/* SETOR DE ORIGEM (antes de especialidades) */}
-              <InlineEditableArray
-                items={setorOrigem}
-                onUpdate={(items) => handleUpdateField("utiOriginSector", items)}
-                label="SETOR DE ORIGEM"
-                colorClass="bg-muted/50 border border-border/50"
-                alwaysShowAll
-              />
-
               {/* 🔵 CLÍNICO - Clinical evolution */}
               <div className="space-y-2">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+                  <InlineEditableArray
+                    items={setorOrigem}
+                    onUpdate={(items) => handleUpdateField("utiOriginSector", items)}
+                    label="SETOR DE ORIGEM"
+                    colorClass="bg-muted/50 border border-border/50"
+                    alwaysShowAll
+                  />
                   <InlineEditableArray
                     items={especialidades}
                     onUpdate={(items) => handleUpdateField("utiSpecialties", items)}
