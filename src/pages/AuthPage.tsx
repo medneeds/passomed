@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useDepartment, DEPARTMENTS, Department, getDepartmentLabel } from "@/contexts/DepartmentContext";
 import { useHospital } from "@/contexts/HospitalContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -43,6 +43,7 @@ export default function AuthPage() {
   const { setCurrentDepartment } = useDepartment();
   const { states, hospitals, setCurrentHospital, isLoading: hospitalLoading } = useHospital();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showLoadingScreen, setShowLoadingScreen] = useState(false);
@@ -55,6 +56,55 @@ export default function AuthPage() {
   const [selectedState, setSelectedState] = useState<string>("");
   const [selectedHospitalId, setSelectedHospitalId] = useState<string>("");
   const [selectedDepartment, setSelectedDepartment] = useState<Department>("URGÊNCIA E EMERGÊNCIA ADULTO");
+
+  // ------------------------------------------------------------------
+  // Demo deep-link: /auth?demo=uti  ou  /auth?demo=urg
+  // Pré-preenche credenciais, estado, unidade e setor para exibição
+  // ao vivo da plataforma já isolada no departamento escolhido.
+  // ------------------------------------------------------------------
+  const demoParam = (searchParams.get("demo") || "").toLowerCase();
+  const demoConfig = useMemo(() => {
+    if (demoParam === "uti") {
+      return {
+        username: "DEMO.UTI",
+        password: "UTI001",
+        department: "UTI" as Department,
+        label: "UTI",
+      };
+    }
+    if (demoParam === "urg" || demoParam === "urgencia" || demoParam === "emergencia") {
+      return {
+        username: "DEMO.URG",
+        password: "URG001",
+        department: "URGÊNCIA E EMERGÊNCIA ADULTO" as Department,
+        label: "Urgência e Emergência Adulto",
+      };
+    }
+    return null;
+  }, [demoParam]);
+
+  // Pré-preenche tudo assim que o demo é detectado
+  useEffect(() => {
+    if (!demoConfig) return;
+    setLoginData({ username: demoConfig.username, password: demoConfig.password });
+    setSelectedDepartment(demoConfig.department);
+  }, [demoConfig]);
+
+  // Auto-seleciona o primeiro estado e a primeira unidade quando carregam
+  useEffect(() => {
+    if (!demoConfig) return;
+    if (!selectedState && states.length > 0) {
+      setSelectedState(states[0].id);
+    }
+  }, [demoConfig, states, selectedState]);
+
+  useEffect(() => {
+    if (!demoConfig) return;
+    if (selectedState && !selectedHospitalId) {
+      const firstHospital = hospitals.find((h) => h.state_id === selectedState);
+      if (firstHospital) setSelectedHospitalId(firstHospital.id);
+    }
+  }, [demoConfig, selectedState, selectedHospitalId, hospitals]);
 
   // Filter hospitals by selected state
   const filteredHospitals = selectedState 
@@ -318,6 +368,21 @@ export default function AuthPage() {
                 <h2 className="text-base font-bold text-gray-900 uppercase">Acesse sua conta</h2>
               </div>
 
+              {demoConfig && (
+                <div className="mb-3 rounded-lg border border-[#0d7a5f]/30 bg-gradient-to-br from-[#064e3b]/5 to-[#0d7a5f]/10 p-2.5 text-center animate-in fade-in-0 zoom-in-95 duration-500">
+                  <div className="flex items-center justify-center gap-1 mb-1">
+                    <Sparkles className="h-3 w-3 text-[#064e3b]" />
+                    <span className="text-[9px] font-bold uppercase tracking-wider text-[#064e3b]">
+                      Modo Demonstração
+                    </span>
+                  </div>
+                  <p className="text-[10px] text-gray-700 leading-tight">
+                    Acesso ao vivo isolado em <strong className="uppercase">{demoConfig.label}</strong>.
+                    Basta clicar em <strong>Entrar</strong>.
+                  </p>
+                </div>
+              )}
+
               {/* Form content - minimal spacing */}
               <form onSubmit={handleLogin} className="space-y-2">
                 {/* Hierarchical Selection Section */}
@@ -574,6 +639,21 @@ export default function AuthPage() {
                 <p className="text-[10px] text-gray-500 italic">{whitelabel.platform.slogan.split('.')[0]}</p>
               </div>
             </div>
+
+            {demoConfig && (
+              <div className="mb-3 rounded-lg border border-[#0d7a5f]/30 bg-gradient-to-br from-[#064e3b]/5 to-[#0d7a5f]/10 p-3 text-center relative z-10 animate-in fade-in-0 zoom-in-95 duration-500">
+                <div className="flex items-center justify-center gap-1.5 mb-1">
+                  <Sparkles className="h-3.5 w-3.5 text-[#064e3b]" />
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#064e3b]">
+                    Modo Demonstração
+                  </span>
+                </div>
+                <p className="text-[11px] text-gray-700 leading-tight">
+                  Acesso ao vivo isolado em <strong className="uppercase">{demoConfig.label}</strong>.
+                  Basta clicar em <strong>Entrar</strong>.
+                </p>
+              </div>
+            )}
 
             <form onSubmit={handleLogin} className="space-y-2.5 relative z-10">
               {/* Hierarchical Selection Section */}
