@@ -17,6 +17,8 @@ export default {
         sans: ['Karla', 'ui-sans-serif', 'system-ui', 'sans-serif'],
         display: ['"Cormorant Garamond"', 'ui-serif', 'Georgia', 'serif'],
         serif: ['"Cormorant Garamond"', 'ui-serif', 'Georgia', 'serif'],
+        'landing-display': ['"DM Serif Display"', 'ui-serif', 'Georgia', 'serif'],
+        'landing-sans': ['"Fira Sans"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",
