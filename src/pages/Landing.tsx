@@ -1,5 +1,5 @@
-import { useEffect } from "react";
-import { ArrowRight, Check, Shield, Bed, ClipboardList, Activity, Layers, Lock, ChevronDown, Repeat } from "lucide-react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
+import { ArrowRight, Check, Shield, Bed, ClipboardList, Activity, Layers, Lock, ChevronDown, Repeat, LogIn } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
@@ -7,6 +7,8 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { PlatformPreview } from "@/components/landing/PlatformPreview";
+import logoP from "@/assets/logo-p-cross.png";
+import logoFull from "@/assets/passomed-full-logo.png";
 
 /**
  * Landing comercial do PassoMed (SaaS).
@@ -15,29 +17,135 @@ import { PlatformPreview } from "@/components/landing/PlatformPreview";
  */
 
 const CONTACT_HREF = "mailto:contato@passomed.com.br?subject=Agendar%20demonstra%C3%A7%C3%A3o%20PassoMed";
+const AUTH_HREF = "/auth";
 
-const Eyebrow = ({ children }: { children: React.ReactNode }) => (
+const Eyebrow = ({ children }: { children: ReactNode }) => (
   <span className="inline-block text-[0.72rem] md:text-xs font-landing-sans font-semibold uppercase tracking-[0.28em] text-gold">
     {children}
   </span>
 );
 
-const SectionTitle = ({
-  eyebrow,
+/**
+ * Reveal — fade + translate ao entrar no viewport. Anima uma vez.
+ */
+const Reveal = ({
   children,
+  delay = 0,
+  className = "",
+  as: As = "div",
+}: {
+  children: ReactNode;
+  delay?: number;
+  className?: string;
+  as?: "div" | "section" | "article" | "header";
+}) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    if (!ref.current) return;
+    if (typeof IntersectionObserver === "undefined") {
+      setVisible(true);
+      return;
+    }
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          obs.disconnect();
+        }
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -8% 0px" },
+    );
+    obs.observe(ref.current);
+    return () => obs.disconnect();
+  }, []);
+  return (
+    <As
+      ref={ref as never}
+      style={{ transitionDelay: `${delay}ms` }}
+      className={`transform-gpu transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
+        visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+      } ${className}`}
+    >
+      {children}
+    </As>
+  );
+};
+
+/**
+ * SectionShell — layout horizontal no desktop amplo (xl+).
+ * Eyebrow + título + subtítulo na coluna esquerda (sticky), conteúdo à direita.
+ * No mobile/tablet, tudo empilha naturalmente.
+ */
+const SectionShell = ({
+  id,
+  eyebrow,
+  title,
+  subtitle,
+  children,
+  align = "left",
+  variant = "default",
   className = "",
 }: {
+  id?: string;
   eyebrow?: string;
-  children: React.ReactNode;
+  title: ReactNode;
+  subtitle?: ReactNode;
+  children: ReactNode;
+  align?: "left" | "center";
+  variant?: "default" | "muted" | "emerald";
   className?: string;
-}) => (
-  <div className={`max-w-3xl ${className}`}>
-    {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
-    <h2 className="mt-4 font-landing-display text-3xl sm:text-4xl md:text-5xl leading-[1.08] tracking-tight text-foreground">
-      {children}
-    </h2>
-  </div>
-);
+}) => {
+  const isEmerald = variant === "emerald";
+  const titleColor = isEmerald ? "text-primary-foreground" : "text-foreground";
+  const subColor = isEmerald
+    ? "text-primary-foreground/85"
+    : "text-muted-foreground";
+  const variantBg =
+    variant === "muted"
+      ? "bg-secondary/40 border-y border-border/60"
+      : variant === "emerald"
+      ? "relative overflow-hidden bg-gradient-emerald"
+      : "";
+
+  return (
+    <section id={id} className={`${variantBg} ${className}`}>
+      <div className="container py-20 md:py-28">
+        <div className="grid gap-10 xl:grid-cols-12 xl:gap-16">
+          <Reveal
+            className={`xl:col-span-4 xl:sticky xl:top-28 xl:self-start ${
+              align === "center" ? "text-center xl:text-left" : ""
+            }`}
+          >
+            {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
+            <h2
+              className={`mt-4 font-landing-display text-3xl sm:text-4xl xl:text-[2.75rem] leading-[1.05] tracking-tight ${titleColor}`}
+            >
+              {title}
+            </h2>
+            {subtitle && (
+              <p
+                className={`mt-5 text-base md:text-lg leading-relaxed max-w-xl ${subColor} ${
+                  align === "center" ? "mx-auto xl:mx-0" : ""
+                }`}
+              >
+                {subtitle}
+              </p>
+            )}
+            <div className="mt-7 hidden xl:flex items-center gap-2 opacity-60">
+              <img src={logoP} alt="" aria-hidden className="h-5 w-5 object-contain" />
+              <span className="h-px w-12 bg-gold/40" />
+            </div>
+          </Reveal>
+
+          <Reveal delay={120} className="xl:col-span-8">
+            {children}
+          </Reveal>
+        </div>
+      </div>
+    </section>
+  );
+};
 
 export default function Landing() {
   useEffect(() => {
