@@ -86,6 +86,7 @@ const SectionShell = ({
   align = "left",
   variant = "default",
   className = "",
+  fullWidthContent = false,
 }: {
   id?: string;
   eyebrow?: string;
@@ -95,6 +96,7 @@ const SectionShell = ({
   align?: "left" | "center";
   variant?: "default" | "muted" | "emerald";
   className?: string;
+  fullWidthContent?: boolean;
 }) => {
   const isEmerald = variant === "emerald";
   const titleColor = isEmerald ? "text-primary-foreground" : "text-foreground";
@@ -111,11 +113,21 @@ const SectionShell = ({
   return (
     <section id={id} className={`${variantBg} ${className}`}>
       <div className="container py-20 md:py-28">
-        <div className="grid gap-10 xl:grid-cols-12 xl:gap-16">
+        <div
+          className={
+            fullWidthContent
+              ? "space-y-12"
+              : "grid gap-10 xl:grid-cols-12 xl:gap-16"
+          }
+        >
           <Reveal
-            className={`xl:col-span-4 xl:sticky xl:top-28 xl:self-start ${
-              align === "center" ? "text-center xl:text-left" : ""
-            }`}
+            className={
+              fullWidthContent
+                ? `max-w-3xl ${align === "center" ? "mx-auto text-center" : ""}`
+                : `xl:col-span-4 xl:sticky xl:top-28 xl:self-start ${
+                    align === "center" ? "text-center xl:text-left" : ""
+                  }`
+            }
           >
             {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
             <h2
@@ -138,7 +150,10 @@ const SectionShell = ({
             </div>
           </Reveal>
 
-          <Reveal delay={120} className="xl:col-span-8">
+          <Reveal
+            delay={120}
+            className={fullWidthContent ? "w-full" : "xl:col-span-8"}
+          >
             {children}
           </Reveal>
         </div>
@@ -258,33 +273,33 @@ export default function Landing() {
         <div className="absolute -top-32 -right-32 h-[480px] w-[480px] rounded-full bg-primary/8 blur-3xl -z-10" />
         <div className="absolute -bottom-40 -left-32 h-[420px] w-[420px] rounded-full bg-gold/10 blur-3xl -z-10" />
 
-        <div className="container grid lg:grid-cols-[1.05fr_1fr] gap-12 lg:gap-16 items-center py-20 md:py-28">
-          <div className="max-w-2xl">
+        <div className="container py-20 md:py-24 space-y-14 md:space-y-16">
+          <div className="max-w-4xl">
             <Eyebrow>Plataforma de passagem de plantão · à beira leito</Eyebrow>
             <div className="mt-5 inline-flex items-center gap-2 rounded-full border border-gold/40 bg-gold/10 px-3 py-1 text-xs font-medium text-gold">
               <Repeat className="h-3 w-3" />
               O passômetro médico evoluiu.
             </div>
-            <h1 className="mt-6 font-landing-display text-[2.5rem] sm:text-5xl md:text-[3.75rem] leading-[1.02] tracking-tight text-foreground">
+            <h1 className="mt-6 font-landing-display text-[2.5rem] sm:text-5xl md:text-[3.5rem] xl:text-[4rem] leading-[1.02] tracking-tight text-foreground">
               Cada decisão clínica registrada.{" "}
               <span className="text-primary">Cada leito visto.</span>{" "}
               Cada plantão passado sem ruído.
             </h1>
-            <p className="mt-7 max-w-xl text-base md:text-lg leading-relaxed text-muted-foreground">
+            <p className="mt-7 max-w-2xl text-base md:text-lg leading-relaxed text-muted-foreground">
               O PassoMed transforma a passagem de plantão em um fluxo único: mapa de leitos, decisões clínicas, exames, plano terapêutico e protocolos da unidade — tudo na mesma tela em que o médico atende.
             </p>
 
             <div className="mt-9 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
               <a
                 href={CONTACT_HREF}
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-7 py-3.5 text-sm md:text-base font-medium text-primary-foreground shadow-md hover:shadow-glow transition-all"
+                className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full bg-primary px-7 py-3.5 text-sm md:text-base font-medium text-primary-foreground shadow-md hover:shadow-glow transition-all"
               >
                 Agendar demonstração e conversa
                 <ArrowRight className="h-4 w-4" />
               </a>
               <button
                 onClick={scrollToPlatform}
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-border bg-card px-7 py-3.5 text-sm md:text-base font-medium text-foreground hover:border-primary/40 hover:bg-accent transition-all"
+                className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full border border-border bg-card px-7 py-3.5 text-sm md:text-base font-medium text-foreground hover:border-primary/40 hover:bg-accent transition-all"
               >
                 Conhecer a plataforma
                 <ChevronDown className="h-4 w-4" />
@@ -295,8 +310,10 @@ export default function Landing() {
             </p>
           </div>
 
-          {/* Mockup vivo do Mapa — swipe entre setores */}
-          <PlatformPreview />
+          {/* Mockup vivo do Mapa — full-width abaixo do bloco principal */}
+          <div className="w-full">
+            <PlatformPreview />
+          </div>
         </div>
       </section>
 
@@ -358,6 +375,7 @@ export default function Landing() {
       {/* ── 04 SOLUÇÃO ──────────────────────────────────────── */}
       <SectionShell
         variant="emerald"
+        fullWidthContent
         eyebrow="A proposta"
         title={<>Um mapa vivo do seu setor hospitalar. Em tempo real.</>}
         subtitle="O PassoMed transforma cada leito do seu setor em um registro clínico vivo — da admissão ao desfecho. Deslize entre Urgência, UTI e Enfermaria."

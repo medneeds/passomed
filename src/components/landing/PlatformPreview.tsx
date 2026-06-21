@@ -41,14 +41,21 @@ interface BedCardData {
 }
 
 // ─── Linha (paciente) e Tabela ──────────────────────────────────────────
+//
+// Estratégia de colunas:
+// • Mobile/tablet (<lg): larguras mínimas em px + overflow-x-auto no wrapper,
+//   com a primeira coluna (Leito/Paciente) sticky à esquerda.
+// • Desktop amplo (lg+): colunas fluidas com pesos flex (basis-0) preenchendo
+//   100% da largura do mockup — nada de scroll horizontal, nada de corte.
 
 const COL_WIDTHS = {
-  leito: "w-[200px] min-w-[200px]",
-  hipotese: "w-[220px] min-w-[220px]",
-  plano: "w-[240px] min-w-[240px]",
-  exames: "w-[200px] min-w-[200px]",
-  programacoes: "w-[200px] min-w-[200px]",
-  pendencias: "w-[220px] min-w-[220px]",
+  // pesos relativos | min-width para mobile scroll
+  leito:        "lg:flex-[2_2_0] basis-[200px] min-w-[200px]",
+  hipotese:     "lg:flex-[2_2_0] basis-[200px] min-w-[200px]",
+  plano:        "lg:flex-[2.4_2.4_0] basis-[220px] min-w-[220px]",
+  exames:       "lg:flex-[1.6_1.6_0] basis-[180px] min-w-[180px]",
+  programacoes: "lg:flex-[1.8_1.8_0] basis-[190px] min-w-[190px]",
+  pendencias:   "lg:flex-[2_2_0] basis-[200px] min-w-[200px]",
 } as const;
 
 const ColHeader = ({
@@ -98,7 +105,7 @@ const BedRow = ({ data }: { data: BedCardData }) => (
   <div className="flex border-t border-border/60 hover:bg-accent/30 transition-colors">
     {/* Leito + Paciente (sticky em mobile) */}
     <div
-      className={`${COL_WIDTHS.leito} sticky left-0 z-10 bg-card border-r border-border/60 p-3 flex flex-col gap-1.5`}
+      className={`${COL_WIDTHS.leito} sticky left-0 lg:static z-10 bg-card border-r border-border/60 p-3 flex flex-col gap-1.5`}
     >
       <div className="flex items-center justify-between text-[0.6rem] font-semibold tracking-wider">
         <span className="inline-flex items-center gap-1 rounded-md bg-primary/10 px-1.5 py-0.5 text-primary">
@@ -147,11 +154,11 @@ const BedRow = ({ data }: { data: BedCardData }) => (
 
 const SectorTable = ({ beds }: { beds: BedCardData[] }) => (
   <div className="rounded-xl border border-border bg-card shadow-sm overflow-hidden">
-    <div className="overflow-x-auto">
-      <div className="min-w-max">
+    <div className="overflow-x-auto lg:overflow-visible">
+      <div className="min-w-max lg:min-w-0 lg:w-full">
         {/* Header */}
         <div className="flex bg-secondary/60 border-b border-border">
-          <div className={`${COL_WIDTHS.leito} sticky left-0 z-10 bg-secondary/80 backdrop-blur border-r border-border p-3`}>
+          <div className={`${COL_WIDTHS.leito} sticky left-0 lg:static z-10 bg-secondary/80 backdrop-blur border-r border-border p-3`}>
             <ColHeader icon={Bed} label="Leito · Paciente" />
           </div>
           <div className={`${COL_WIDTHS.hipotese} p-3 border-r border-border`}>
@@ -410,15 +417,6 @@ export function PlatformPreview({ compact = false }: { compact?: boolean }) {
         </div>
       </div>
 
-      {/* Floating annotations (only on desktop, only first view) */}
-      <div className="hidden lg:flex absolute -left-5 top-32 items-center gap-2 rounded-full border border-border bg-card/95 backdrop-blur px-3.5 py-1.5 shadow-md pointer-events-none">
-        <span className="h-2 w-2 rounded-full bg-primary animate-pulse" />
-        <span className="text-xs font-medium text-foreground">Tempo real</span>
-      </div>
-      <div className="hidden lg:flex absolute -right-5 top-1/2 items-center gap-2 rounded-full border border-border bg-card/95 backdrop-blur px-3.5 py-1.5 shadow-md pointer-events-none">
-        <span className="h-2 w-2 rounded-full bg-gold" />
-        <span className="text-xs font-medium text-foreground">Plantão pronto</span>
-      </div>
     </div>
   );
 }
