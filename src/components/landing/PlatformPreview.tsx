@@ -3,9 +3,10 @@ import { Activity, AlertCircle, Bed, CheckCircle2, ChevronLeft, ChevronRight, Cl
 import useEmblaCarousel from "embla-carousel-react";
 
 /**
- * Mockup interativo da plataforma — substitui as imagens geradas por
- * componentes React reais, com nomenclatura fiel ao PassoMed:
- * Hipótese Diagnóstica, Exames, Plano Terapêutico, Programações, Pendências.
+ * Mockup interativo da plataforma — tabela horizontal (linhas = pacientes,
+ * colunas = Hipótese / Plano / Exames / Programações / Pendências). Em telas
+ * estreitas a primeira coluna (Leito/Paciente) fica sticky e o restante
+ * rola horizontalmente, evitando escape de informação.
  *
  * Swipe horizontal entre setores: Urgência, UTI e Enfermaria.
  */
@@ -39,106 +40,144 @@ interface BedCardData {
   highlight?: string;
 }
 
-const BedCard = ({ data }: { data: BedCardData }) => (
-  <article className="rounded-xl border border-border bg-card p-3.5 shadow-sm hover:shadow-md transition-shadow flex flex-col gap-2.5">
-    {/* Header */}
-    <header className="flex items-center justify-between text-[0.65rem] font-semibold tracking-wider">
-      <div className="flex items-center gap-1.5">
+// ─── Linha (paciente) e Tabela ──────────────────────────────────────────
+
+const COL_WIDTHS = {
+  leito: "w-[200px] min-w-[200px]",
+  hipotese: "w-[220px] min-w-[220px]",
+  plano: "w-[240px] min-w-[240px]",
+  exames: "w-[200px] min-w-[200px]",
+  programacoes: "w-[200px] min-w-[200px]",
+  pendencias: "w-[220px] min-w-[220px]",
+} as const;
+
+const ColHeader = ({
+  icon: Icon,
+  label,
+  className,
+  tone = "muted",
+}: {
+  icon: typeof Activity;
+  label: string;
+  className?: string;
+  tone?: "muted" | "gold";
+}) => (
+  <div
+    className={`flex items-center gap-1 text-[0.6rem] font-semibold tracking-[0.18em] uppercase ${
+      tone === "gold" ? "text-gold" : "text-muted-foreground"
+    } ${className ?? ""}`}
+  >
+    <Icon className="h-2.5 w-2.5" />
+    {label}
+  </div>
+);
+
+const Bullets = ({
+  items,
+  marker = "·",
+  markerClass = "text-primary/70",
+}: {
+  items?: string[];
+  marker?: string;
+  markerClass?: string;
+}) =>
+  items && items.length ? (
+    <ul className="space-y-0.5 text-[0.7rem] text-foreground/80 leading-snug">
+      {items.map((it) => (
+        <li key={it} className="flex gap-1.5">
+          <span className={markerClass}>{marker}</span>
+          <span className="break-words">{it}</span>
+        </li>
+      ))}
+    </ul>
+  ) : (
+    <span className="text-[0.65rem] text-muted-foreground/60">—</span>
+  );
+
+const BedRow = ({ data }: { data: BedCardData }) => (
+  <div className="flex border-t border-border/60 hover:bg-accent/30 transition-colors">
+    {/* Leito + Paciente (sticky em mobile) */}
+    <div
+      className={`${COL_WIDTHS.leito} sticky left-0 z-10 bg-card border-r border-border/60 p-3 flex flex-col gap-1.5`}
+    >
+      <div className="flex items-center justify-between text-[0.6rem] font-semibold tracking-wider">
         <span className="inline-flex items-center gap-1 rounded-md bg-primary/10 px-1.5 py-0.5 text-primary">
           <Bed className="h-2.5 w-2.5" /> {data.bed}
         </span>
-        <span className="text-muted-foreground">{data.sector}</span>
+        <span className="inline-flex items-center gap-1 text-muted-foreground">
+          <span className={`h-1.5 w-1.5 rounded-full ${statusDot[data.status]}`} />
+          {statusLabel[data.status]}
+        </span>
       </div>
-      <div className="flex items-center gap-1.5">
-        <span className={`h-1.5 w-1.5 rounded-full ${statusDot[data.status]}`} />
-        <span className="text-muted-foreground">{statusLabel[data.status]}</span>
-      </div>
-    </header>
-
-    {/* Patient */}
-    <div className="flex items-baseline justify-between">
-      <h4 className="font-landing-sans text-sm font-semibold text-foreground tracking-tight">
+      <div className="font-landing-sans text-sm font-semibold text-foreground tracking-tight leading-tight break-words">
         {data.patient}
-      </h4>
-      <span className="text-[0.65rem] text-muted-foreground tabular-nums">{data.age} · {data.stayTime}</span>
+      </div>
+      <div className="text-[0.6rem] text-muted-foreground tabular-nums">
+        {data.age} · {data.stayTime} · {data.sector}
+      </div>
     </div>
 
-    {/* Hipótese */}
-    <div>
-      <div className="flex items-center gap-1 text-[0.6rem] font-semibold tracking-[0.18em] text-gold uppercase">
-        <Stethoscope className="h-2.5 w-2.5" />
-        Hipótese diagnóstica
-      </div>
-      <p className="mt-0.5 text-xs font-medium text-foreground leading-snug">{data.hipotese}</p>
+    <div className={`${COL_WIDTHS.hipotese} p-3 border-r border-border/60`}>
+      <p className="text-xs font-medium text-foreground leading-snug break-words">
+        {data.hipotese}
+      </p>
     </div>
 
-    {/* Plano */}
-    <div>
-      <div className="flex items-center gap-1 text-[0.6rem] font-semibold tracking-[0.18em] text-muted-foreground uppercase">
-        <Pill className="h-2.5 w-2.5" />
-        Plano terapêutico
-      </div>
-      <ul className="mt-0.5 space-y-0.5 text-[0.7rem] text-foreground/80 leading-snug">
-        {data.plano.map((p) => (
-          <li key={p} className="flex gap-1.5">
-            <span className="text-primary/70">·</span>
-            <span>{p}</span>
-          </li>
-        ))}
-      </ul>
+    <div className={`${COL_WIDTHS.plano} p-3 border-r border-border/60`}>
+      <Bullets items={data.plano} />
     </div>
 
-    {/* Exames + Programações (grid) */}
-    {(data.exames || data.programacoes) && (
-      <div className="grid grid-cols-2 gap-2 pt-1 border-t border-border/60">
-        {data.exames && (
-          <div>
-            <div className="flex items-center gap-1 text-[0.6rem] font-semibold tracking-[0.18em] text-muted-foreground uppercase">
-              <TestTube2 className="h-2.5 w-2.5" />
-              Exames
-            </div>
-            <ul className="mt-0.5 space-y-0.5 text-[0.65rem] text-foreground/75 leading-snug">
-              {data.exames.map((e) => <li key={e}>· {e}</li>)}
-            </ul>
-          </div>
-        )}
-        {data.programacoes && (
-          <div>
-            <div className="flex items-center gap-1 text-[0.6rem] font-semibold tracking-[0.18em] text-muted-foreground uppercase">
-              <ClipboardList className="h-2.5 w-2.5" />
-              Programações
-            </div>
-            <ul className="mt-0.5 space-y-0.5 text-[0.65rem] text-foreground/75 leading-snug">
-              {data.programacoes.map((p) => <li key={p}>· {p}</li>)}
-            </ul>
-          </div>
-        )}
-      </div>
-    )}
+    <div className={`${COL_WIDTHS.exames} p-3 border-r border-border/60`}>
+      <Bullets items={data.exames} markerClass="text-muted-foreground" />
+    </div>
 
-    {/* Pendências */}
-    {data.pendencias && (
-      <div className="pt-1 border-t border-border/60">
-        <div className="flex items-center justify-between text-[0.6rem] font-semibold tracking-[0.18em] uppercase">
-          <div className="flex items-center gap-1 text-gold">
-            <AlertCircle className="h-2.5 w-2.5" />
-            Pendências
+    <div className={`${COL_WIDTHS.programacoes} p-3 border-r border-border/60`}>
+      <Bullets items={data.programacoes} markerClass="text-muted-foreground" />
+    </div>
+
+    <div className={`${COL_WIDTHS.pendencias} p-3`}>
+      {data.pendencias && data.pendencias.length ? (
+        <Bullets items={data.pendencias} marker="→" markerClass="text-gold" />
+      ) : (
+        <span className="text-[0.65rem] text-muted-foreground/60">—</span>
+      )}
+    </div>
+  </div>
+);
+
+const SectorTable = ({ beds }: { beds: BedCardData[] }) => (
+  <div className="rounded-xl border border-border bg-card shadow-sm overflow-hidden">
+    <div className="overflow-x-auto">
+      <div className="min-w-max">
+        {/* Header */}
+        <div className="flex bg-secondary/60 border-b border-border">
+          <div className={`${COL_WIDTHS.leito} sticky left-0 z-10 bg-secondary/80 backdrop-blur border-r border-border p-3`}>
+            <ColHeader icon={Bed} label="Leito · Paciente" />
           </div>
-          <span className="inline-flex items-center justify-center rounded-full bg-gold/15 px-1.5 py-0.5 text-gold text-[0.6rem] font-bold">
-            {data.pendencias.length}
-          </span>
+          <div className={`${COL_WIDTHS.hipotese} p-3 border-r border-border`}>
+            <ColHeader icon={Stethoscope} label="Hipótese diagnóstica" tone="gold" />
+          </div>
+          <div className={`${COL_WIDTHS.plano} p-3 border-r border-border`}>
+            <ColHeader icon={Pill} label="Plano terapêutico" />
+          </div>
+          <div className={`${COL_WIDTHS.exames} p-3 border-r border-border`}>
+            <ColHeader icon={TestTube2} label="Exames" />
+          </div>
+          <div className={`${COL_WIDTHS.programacoes} p-3 border-r border-border`}>
+            <ColHeader icon={ClipboardList} label="Programações" />
+          </div>
+          <div className={`${COL_WIDTHS.pendencias} p-3`}>
+            <ColHeader icon={AlertCircle} label="Pendências" tone="gold" />
+          </div>
         </div>
-        <ul className="mt-0.5 space-y-0.5 text-[0.65rem] text-foreground/80 leading-snug">
-          {data.pendencias.map((p) => (
-            <li key={p} className="flex gap-1">
-              <span className="text-gold">→</span>
-              <span>{p}</span>
-            </li>
-          ))}
-        </ul>
+
+        {/* Rows */}
+        {beds.map((b) => (
+          <BedRow key={b.bed} data={b} />
+        ))}
       </div>
-    )}
-  </article>
+    </div>
+  </div>
 );
 
 // ─── Mock data por setor ──────────────────────────────────────────────────
@@ -331,9 +370,10 @@ export function PlatformPreview({ compact = false }: { compact?: boolean }) {
           <div className="flex">
             {SCREENS.map((s) => (
               <div key={s.id} className="relative shrink-0 grow-0 basis-full p-4 md:p-6">
-                <div className={`grid gap-3 ${compact ? "grid-cols-1 md:grid-cols-3" : "grid-cols-1 md:grid-cols-3"}`}>
-                  {s.beds.map((b) => <BedCard key={b.bed} data={b} />)}
-                </div>
+                <SectorTable beds={s.beds} />
+                <p className="mt-2 text-[0.65rem] text-muted-foreground md:hidden text-center">
+                  Deslize a tabela horizontalmente para ver todas as colunas →
+                </p>
               </div>
             ))}
           </div>
