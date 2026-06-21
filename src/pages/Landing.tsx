@@ -608,10 +608,18 @@ export default function Landing() {
       <footer className="border-t border-border bg-background">
         <div className="container py-12 grid md:grid-cols-3 gap-8 text-sm">
           <div>
-            <div className="font-landing-display text-2xl text-foreground">PassoMed</div>
-            <p className="mt-3 text-muted-foreground max-w-xs">
+            <div className="flex items-center gap-2.5">
+              <img src={logoP} alt="" aria-hidden className="h-7 w-7 object-contain" />
+              <span className="font-landing-display text-2xl text-foreground leading-none">PassoMed</span>
+            </div>
+            <p className="mt-4 text-muted-foreground max-w-xs">
               Plataforma clínica à beira leito. Desenhada para o médico que prescreve, evolui e passa o plantão.
             </p>
+            <img
+              src={logoFull}
+              alt="PassoMed"
+              className="mt-6 h-8 w-auto object-contain opacity-50 hidden md:block"
+            />
           </div>
           <div>
             <h4 className="font-semibold text-foreground">Navegar</h4>
