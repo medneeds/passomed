@@ -22,6 +22,7 @@ import AltoCustoPage from "./pages/AltoCustoPage";
 import SadtPage from "./pages/SadtPage";
 import MovementsPage from "./pages/MovementsPage";
 import AuthPage from "./pages/AuthPage";
+import Landing from "./pages/Landing";
 
 import DashboardPage from "./pages/DashboardPage";
 import PriorizacaoCirurgicaPage from "./pages/PriorizacaoCirurgicaPage";
@@ -64,6 +65,7 @@ const App = () => {
         <Sonner />
         <Routes>
           <Route path="/auth" element={<AuthPage />} />
+          <Route path="/landing" element={<Landing />} />
           <Route
             path="/"
             element={

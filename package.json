@@ -15,6 +15,8 @@
     "@dnd-kit/sortable": "^10.0.0",
     "@dnd-kit/utilities": "^3.2.2",
     "@fontsource/cormorant-garamond": "^5.2.11",
+    "@fontsource/dm-serif-display": "^5.2.8",
+    "@fontsource/fira-sans": "^5.2.7",
     "@fontsource/karla": "^5.2.8",
     "@hookform/resolvers": "^3.10.0",
     "@playwright/test": "^1.57.0",
