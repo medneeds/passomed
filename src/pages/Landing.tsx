@@ -16,7 +16,9 @@ import logoFull from "@/assets/passomed-full-logo.png";
  * Tokens semânticos da paleta Emerald Prestige reaproveitados do app.
  */
 
-const CONTACT_HREF = "mailto:contato@passomed.com.br?subject=Agendar%20demonstra%C3%A7%C3%A3o%20PassoMed";
+const CONTACT_HREF = `https://wa.me/5598981659576?text=${encodeURIComponent(
+  "Olá, Artur! Gostaria de mais informações sobre o PassoMed."
+)}`;
 const AUTH_HREF = "/auth";
 
 const Eyebrow = ({ children }: { children: ReactNode }) => (
