@@ -1,12 +1,12 @@
 import { useEffect } from "react";
-import { ArrowRight, Check, Shield, Bed, ClipboardList, Activity, Layers, Lock, ChevronDown } from "lucide-react";
+import { ArrowRight, Check, Shield, Bed, ClipboardList, Activity, Layers, Lock, ChevronDown, Repeat } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import mapaMockup from "@/assets/landing-mapa-mockup.jpg";
+import { PlatformPreview } from "@/components/landing/PlatformPreview";
 
 /**
  * Landing comercial do PassoMed (SaaS).
@@ -43,9 +43,9 @@ export default function Landing() {
   useEffect(() => {
     const prevTitle = document.title;
     document.title =
-      "PassoMed — Plataforma clínica à beira leito | Mapa, plantão e protocolos";
+      "PassoMed — Plataforma de passagem de plantão à beira leito";
     const desc =
-      "O PassoMed unifica mapa de leitos, decisões clínicas, passagem de plantão e protocolos da unidade em uma plataforma desenhada para a beira leito.";
+      "O passômetro médico evoluiu. O PassoMed unifica mapa de leitos, decisões clínicas, passagem de plantão e protocolos da unidade em uma plataforma desenhada para a beira leito.";
     const setMeta = (name: string, content: string, attr: "name" | "property" = "name") => {
       let el = document.querySelector(`meta[${attr}="${name}"]`);
       if (!el) {
@@ -137,14 +137,18 @@ export default function Landing() {
 
         <div className="container grid lg:grid-cols-[1.05fr_1fr] gap-12 lg:gap-16 items-center py-20 md:py-28">
           <div className="max-w-2xl">
-            <Eyebrow>Plataforma clínica à beira leito</Eyebrow>
+            <Eyebrow>Plataforma de passagem de plantão · à beira leito</Eyebrow>
+            <div className="mt-5 inline-flex items-center gap-2 rounded-full border border-gold/40 bg-gold/10 px-3 py-1 text-xs font-medium text-gold">
+              <Repeat className="h-3 w-3" />
+              O passômetro médico evoluiu.
+            </div>
             <h1 className="mt-6 font-landing-display text-[2.5rem] sm:text-5xl md:text-[3.75rem] leading-[1.02] tracking-tight text-foreground">
               Cada decisão clínica registrada.{" "}
               <span className="text-primary">Cada leito visto.</span>{" "}
               Cada plantão passado sem ruído.
             </h1>
             <p className="mt-7 max-w-xl text-base md:text-lg leading-relaxed text-muted-foreground">
-              O PassoMed unifica mapa de leitos, decisões clínicas, passagem de plantão e os principais protocolos da unidade — em uma plataforma desenhada para ganho de velocidade na atividade médica.
+              O PassoMed transforma a passagem de plantão em um fluxo único: mapa de leitos, decisões clínicas, exames, plano terapêutico e protocolos da unidade — tudo na mesma tela em que o médico atende.
             </p>
 
             <div className="mt-9 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
@@ -168,32 +172,8 @@ export default function Landing() {
             </p>
           </div>
 
-          {/* Mockup do Mapa */}
-          <div className="relative">
-            <div className="absolute -inset-6 rounded-3xl bg-gradient-emerald opacity-30 blur-2xl" />
-            <div className="relative rounded-2xl border border-border/60 bg-card shadow-lg overflow-hidden">
-              <img
-                src={mapaMockup}
-                alt="Mapa de leitos do PassoMed em tempo real"
-                width={1280}
-                height={896}
-                className="w-full h-auto"
-              />
-            </div>
-            {/* anotações flutuantes */}
-            <div className="hidden md:flex absolute -left-4 top-10 items-center gap-2 rounded-full border border-border bg-card/95 backdrop-blur px-3.5 py-1.5 shadow-md">
-              <span className="h-2 w-2 rounded-full bg-primary animate-pulse" />
-              <span className="text-xs font-medium text-foreground">Tempo real</span>
-            </div>
-            <div className="hidden md:flex absolute -right-4 top-1/3 items-center gap-2 rounded-full border border-border bg-card/95 backdrop-blur px-3.5 py-1.5 shadow-md">
-              <span className="h-2 w-2 rounded-full bg-gold" />
-              <span className="text-xs font-medium text-foreground">Leito vago</span>
-            </div>
-            <div className="hidden md:flex absolute -right-2 bottom-12 items-center gap-2 rounded-full border border-border bg-card/95 backdrop-blur px-3.5 py-1.5 shadow-md">
-              <span className="h-2 w-2 rounded-full bg-stable" />
-              <span className="text-xs font-medium text-foreground">Plantão atualizado</span>
-            </div>
-          </div>
+          {/* Mockup vivo do Mapa — swipe entre setores */}
+          <PlatformPreview />
         </div>
       </section>
 
@@ -253,27 +233,18 @@ export default function Landing() {
 
       {/* ── 04 SOLUÇÃO ──────────────────────────────────────── */}
       <section className="relative overflow-hidden bg-gradient-emerald">
-        <div className="container py-20 md:py-28 grid lg:grid-cols-2 gap-12 items-center">
-          <div>
+        <div className="container py-20 md:py-28">
+          <div className="max-w-3xl mx-auto text-center">
             <Eyebrow>A proposta</Eyebrow>
             <h2 className="mt-4 font-landing-display text-3xl sm:text-4xl md:text-[2.75rem] leading-[1.08] tracking-tight text-primary-foreground">
               Um mapa vivo do seu setor hospitalar. Em tempo real.
             </h2>
-            <p className="mt-6 text-base md:text-lg leading-relaxed text-primary-foreground/85 max-w-xl">
-              O PassoMed transforma cada leito do seu setor de trabalho em um registro clínico vivo — da admissão ao desfecho.
+            <p className="mt-6 text-base md:text-lg leading-relaxed text-primary-foreground/85 max-w-2xl mx-auto">
+              O PassoMed transforma cada leito do seu setor de trabalho em um registro clínico vivo — da admissão ao desfecho. Deslize abaixo para ver como o mapa se comporta em Urgência, UTI e Enfermaria.
             </p>
           </div>
-          <div className="relative">
-            <div className="rounded-2xl border border-primary-foreground/10 bg-card/95 shadow-lg overflow-hidden">
-              <img
-                src={mapaMockup}
-                alt="Mapa de leitos com anotações em tempo real"
-                loading="lazy"
-                width={1280}
-                height={896}
-                className="w-full h-auto"
-              />
-            </div>
+          <div className="relative mt-14 max-w-5xl mx-auto">
+            <PlatformPreview />
           </div>
         </div>
       </section>
