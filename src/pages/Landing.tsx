@@ -208,32 +208,47 @@ export default function Landing() {
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground font-landing-sans antialiased selection:bg-gold/30 selection:text-foreground">
+    <div className="min-h-screen scroll-smooth bg-background text-foreground font-landing-sans antialiased selection:bg-gold/30 selection:text-foreground">
       {/* ── NAV ─────────────────────────────────────────────── */}
       <header className="sticky top-0 z-50 border-b border-border/60 bg-background/85 backdrop-blur supports-[backdrop-filter]:bg-background/70">
-        <div className="container flex h-16 items-center justify-between">
-          <a href="/landing" className="flex items-baseline gap-2">
-            <span className="font-landing-display text-2xl tracking-tight text-foreground">
+        <div className="container flex h-16 items-center justify-between gap-4">
+          <a href="/landing" className="flex items-center gap-2.5 group">
+            <img
+              src={logoP}
+              alt=""
+              aria-hidden
+              className="h-8 w-8 object-contain transition-transform duration-500 ease-out group-hover:rotate-[3deg]"
+            />
+            <span className="font-landing-display text-2xl tracking-tight text-foreground leading-none">
               PassoMed
             </span>
-            <span className="text-[0.65rem] uppercase tracking-[0.22em] text-gold">
+            <span className="hidden sm:inline text-[0.6rem] uppercase tracking-[0.22em] text-gold border-l border-border pl-2 ml-1">
               Clinical
             </span>
           </a>
-          <nav className="hidden md:flex items-center gap-8 text-sm text-muted-foreground">
+          <nav className="hidden lg:flex items-center gap-7 text-sm text-muted-foreground">
             <button onClick={scrollToPlatform} className="hover:text-foreground transition-colors">Plataforma</button>
             <a href="#modulos" className="hover:text-foreground transition-colors">Módulos</a>
             <a href="#diferenciais" className="hover:text-foreground transition-colors">Diferenciais</a>
             <a href="#contratar" className="hover:text-foreground transition-colors">Contratar</a>
             <a href="#faq" className="hover:text-foreground transition-colors">FAQ</a>
           </nav>
-          <a
-            href={CONTACT_HREF}
-            className="hidden sm:inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground shadow-sm hover:shadow-glow transition-all"
-          >
-            Agendar demonstração
-            <ArrowRight className="h-4 w-4" />
-          </a>
+          <div className="flex items-center gap-2 md:gap-3">
+            <a
+              href={AUTH_HREF}
+              className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card/60 px-3.5 py-2 md:px-4 md:py-2.5 text-xs md:text-sm font-medium text-foreground hover:border-primary/40 hover:bg-accent transition-all"
+            >
+              <LogIn className="h-3.5 w-3.5" />
+              Entrar
+            </a>
+            <a
+              href={CONTACT_HREF}
+              className="hidden sm:inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2.5 md:px-5 text-xs md:text-sm font-medium text-primary-foreground shadow-sm hover:shadow-glow transition-all"
+            >
+              Agendar demonstração
+              <ArrowRight className="h-4 w-4" />
+            </a>
+          </div>
         </div>
       </header>
 
