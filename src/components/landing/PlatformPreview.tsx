@@ -370,9 +370,10 @@ export function PlatformPreview({ compact = false }: { compact?: boolean }) {
           <div className="flex">
             {SCREENS.map((s) => (
               <div key={s.id} className="relative shrink-0 grow-0 basis-full p-4 md:p-6">
-                <div className={`grid gap-3 ${compact ? "grid-cols-1 md:grid-cols-3" : "grid-cols-1 md:grid-cols-3"}`}>
-                  {s.beds.map((b) => <BedCard key={b.bed} data={b} />)}
-                </div>
+                <SectorTable beds={s.beds} />
+                <p className="mt-2 text-[0.65rem] text-muted-foreground md:hidden text-center">
+                  Deslize a tabela horizontalmente para ver todas as colunas →
+                </p>
               </div>
             ))}
           </div>
