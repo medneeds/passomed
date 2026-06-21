@@ -640,6 +640,21 @@ export default function AuthPage() {
               </div>
             </div>
 
+            {demoConfig && (
+              <div className="mb-3 rounded-lg border border-[#0d7a5f]/30 bg-gradient-to-br from-[#064e3b]/5 to-[#0d7a5f]/10 p-3 text-center relative z-10 animate-in fade-in-0 zoom-in-95 duration-500">
+                <div className="flex items-center justify-center gap-1.5 mb-1">
+                  <Sparkles className="h-3.5 w-3.5 text-[#064e3b]" />
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#064e3b]">
+                    Modo Demonstração
+                  </span>
+                </div>
+                <p className="text-[11px] text-gray-700 leading-tight">
+                  Acesso ao vivo isolado em <strong className="uppercase">{demoConfig.label}</strong>.
+                  Basta clicar em <strong>Entrar</strong>.
+                </p>
+              </div>
+            )}
+
             <form onSubmit={handleLogin} className="space-y-2.5 relative z-10">
               {/* Hierarchical Selection Section */}
               <div className="space-y-2.5 pb-2.5 border-b border-gray-200">
