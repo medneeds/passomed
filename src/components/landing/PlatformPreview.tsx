@@ -187,6 +187,85 @@ const SectorTable = ({ beds }: { beds: BedCardData[] }) => (
   </div>
 );
 
+// ─── Mobile: card vertical por paciente (sem scroll horizontal) ─────────
+
+const MobileField = ({
+  icon: Icon,
+  label,
+  children,
+  tone = "muted",
+}: {
+  icon: typeof Activity;
+  label: string;
+  children: React.ReactNode;
+  tone?: "muted" | "gold";
+}) => (
+  <div className="space-y-1">
+    <div
+      className={`flex items-center gap-1 text-[0.55rem] font-semibold tracking-[0.18em] uppercase ${
+        tone === "gold" ? "text-gold" : "text-muted-foreground"
+      }`}
+    >
+      <Icon className="h-2.5 w-2.5" />
+      {label}
+    </div>
+    <div className="text-[0.72rem] text-foreground/85 leading-snug">{children}</div>
+  </div>
+);
+
+const MobileBedCard = ({ data }: { data: BedCardData }) => (
+  <article className="rounded-xl border border-border bg-card shadow-sm overflow-hidden">
+    <header className="flex items-center justify-between gap-2 border-b border-border/60 bg-secondary/40 px-3 py-2">
+      <span className="inline-flex items-center gap-1 rounded-md bg-primary/10 px-1.5 py-0.5 text-[0.65rem] font-semibold text-primary">
+        <Bed className="h-3 w-3" /> {data.bed}
+      </span>
+      <span className="inline-flex items-center gap-1 text-[0.6rem] font-semibold tracking-wider text-muted-foreground">
+        <span className={`h-1.5 w-1.5 rounded-full ${statusDot[data.status]}`} />
+        {statusLabel[data.status]}
+      </span>
+    </header>
+    <div className="px-3 pt-3 pb-1">
+      <h4 className="font-landing-sans text-[0.95rem] font-semibold text-foreground tracking-tight leading-tight break-words">
+        {data.patient}
+      </h4>
+      <p className="mt-0.5 text-[0.6rem] text-muted-foreground tabular-nums">
+        {data.age} · {data.stayTime} · {data.sector}
+      </p>
+    </div>
+    <div className="grid grid-cols-1 gap-3 px-3 py-3">
+      <MobileField icon={Stethoscope} label="Hipótese diagnóstica" tone="gold">
+        <span className="font-medium text-foreground break-words">{data.hipotese}</span>
+      </MobileField>
+      <MobileField icon={Pill} label="Plano terapêutico">
+        <Bullets items={data.plano} />
+      </MobileField>
+      <div className="grid grid-cols-2 gap-3">
+        <MobileField icon={TestTube2} label="Exames">
+          <Bullets items={data.exames} markerClass="text-muted-foreground" />
+        </MobileField>
+        <MobileField icon={ClipboardList} label="Programações">
+          <Bullets items={data.programacoes} markerClass="text-muted-foreground" />
+        </MobileField>
+      </div>
+      <MobileField icon={AlertCircle} label="Pendências" tone="gold">
+        {data.pendencias && data.pendencias.length ? (
+          <Bullets items={data.pendencias} marker="→" markerClass="text-gold" />
+        ) : (
+          <span className="text-[0.65rem] text-muted-foreground/60">—</span>
+        )}
+      </MobileField>
+    </div>
+  </article>
+);
+
+const SectorMobileList = ({ beds }: { beds: BedCardData[] }) => (
+  <div className="space-y-3">
+    {beds.map((b) => (
+      <MobileBedCard key={b.bed} data={b} />
+    ))}
+  </div>
+);
+
 // ─── Mock data por setor ──────────────────────────────────────────────────
 
 const URGENCIA: BedCardData[] = [
@@ -376,11 +455,18 @@ export function PlatformPreview({ compact = false }: { compact?: boolean }) {
         <div ref={emblaRef} className="overflow-hidden bg-secondary/20">
           <div className="flex">
             {SCREENS.map((s) => (
-              <div key={s.id} className="relative shrink-0 grow-0 basis-full p-4 md:p-6">
-                <SectorTable beds={s.beds} />
-                <p className="mt-2 text-[0.65rem] text-muted-foreground md:hidden text-center">
-                  Deslize a tabela horizontalmente para ver todas as colunas →
-                </p>
+              <div key={s.id} className="relative shrink-0 grow-0 basis-full p-3 sm:p-4 md:p-6">
+                {/* Mobile: lista de cards verticais (sem scroll horizontal) */}
+                <div className="lg:hidden">
+                  <SectorMobileList beds={s.beds} />
+                  <p className="mt-3 text-[0.65rem] text-muted-foreground text-center">
+                    ← Deslize lateralmente para mudar de setor →
+                  </p>
+                </div>
+                {/* Desktop: tabela horizontal completa */}
+                <div className="hidden lg:block">
+                  <SectorTable beds={s.beds} />
+                </div>
               </div>
             ))}
           </div>
