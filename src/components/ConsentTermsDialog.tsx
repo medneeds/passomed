@@ -77,8 +77,8 @@ export function ConsentTermsDialog({ open, onAccept, userId }: ConsentTermsDialo
 
   return (
     <Dialog open={open} onOpenChange={() => {}}>
-      <DialogContent className="max-w-3xl max-h-[90vh] overflow-hidden" onPointerDownOutside={(e) => e.preventDefault()}>
-        <DialogHeader>
+      <DialogContent className="max-w-3xl max-h-[90vh] flex flex-col overflow-hidden" onPointerDownOutside={(e) => e.preventDefault()}>
+        <DialogHeader className="shrink-0">
           <DialogTitle className="flex items-center gap-2 text-xl">
             <Shield className="h-6 w-6 text-primary" />
             Termos de Uso e Política de Privacidade
@@ -89,7 +89,7 @@ export function ConsentTermsDialog({ open, onAccept, userId }: ConsentTermsDialo
           </DialogDescription>
         </DialogHeader>
 
-        <ScrollArea className="h-[400px] pr-4">
+        <ScrollArea className="flex-1 min-h-0 pr-4">
           <div className="space-y-6">
             {/* Termos de Uso */}
             <section className="space-y-3">
@@ -189,7 +189,7 @@ export function ConsentTermsDialog({ open, onAccept, userId }: ConsentTermsDialo
           </div>
         </ScrollArea>
 
-        <div className="space-y-4 pt-4 border-t">
+        <div className="space-y-4 pt-4 border-t shrink-0">
           <div className="space-y-3">
             <div className="flex items-start space-x-3">
               <Checkbox
