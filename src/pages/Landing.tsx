@@ -656,7 +656,7 @@ export default function Landing() {
             <ul className="mt-3 space-y-2 text-muted-foreground">
               <li>LGPD — Lei nº 13.709/2018</li>
               <li>Isolamento por unidade hospitalar</li>
-              <li><a href={CONTACT_HREF} className="hover:text-foreground transition-colors">contato@passomed.com.br</a></li>
+              <li><a href={CONTACT_HREF} target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">WhatsApp: (98) 98165-9576</a></li>
             </ul>
           </div>
         </div>
