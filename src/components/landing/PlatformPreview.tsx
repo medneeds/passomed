@@ -3,9 +3,10 @@ import { Activity, AlertCircle, Bed, CheckCircle2, ChevronLeft, ChevronRight, Cl
 import useEmblaCarousel from "embla-carousel-react";
 
 /**
- * Mockup interativo da plataforma — substitui as imagens geradas por
- * componentes React reais, com nomenclatura fiel ao PassoMed:
- * Hipótese Diagnóstica, Exames, Plano Terapêutico, Programações, Pendências.
+ * Mockup interativo da plataforma — tabela horizontal (linhas = pacientes,
+ * colunas = Hipótese / Plano / Exames / Programações / Pendências). Em telas
+ * estreitas a primeira coluna (Leito/Paciente) fica sticky e o restante
+ * rola horizontalmente, evitando escape de informação.
  *
  * Swipe horizontal entre setores: Urgência, UTI e Enfermaria.
  */
