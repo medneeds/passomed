@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useDepartment, DEPARTMENTS, Department, getDepartmentLabel } from "@/contexts/DepartmentContext";
 import { useHospital } from "@/contexts/HospitalContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -43,6 +43,7 @@ export default function AuthPage() {
   const { setCurrentDepartment } = useDepartment();
   const { states, hospitals, setCurrentHospital, isLoading: hospitalLoading } = useHospital();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showLoadingScreen, setShowLoadingScreen] = useState(false);
@@ -55,6 +56,55 @@ export default function AuthPage() {
   const [selectedState, setSelectedState] = useState<string>("");
   const [selectedHospitalId, setSelectedHospitalId] = useState<string>("");
   const [selectedDepartment, setSelectedDepartment] = useState<Department>("URGÊNCIA E EMERGÊNCIA ADULTO");
+
+  // ------------------------------------------------------------------
+  // Demo deep-link: /auth?demo=uti  ou  /auth?demo=urg
+  // Pré-preenche credenciais, estado, unidade e setor para exibição
+  // ao vivo da plataforma já isolada no departamento escolhido.
+  // ------------------------------------------------------------------
+  const demoParam = (searchParams.get("demo") || "").toLowerCase();
+  const demoConfig = useMemo(() => {
+    if (demoParam === "uti") {
+      return {
+        username: "DEMO.UTI",
+        password: "UTI001",
+        department: "UTI" as Department,
+        label: "UTI",
+      };
+    }
+    if (demoParam === "urg" || demoParam === "urgencia" || demoParam === "emergencia") {
+      return {
+        username: "DEMO.URG",
+        password: "URG001",
+        department: "URGÊNCIA E EMERGÊNCIA ADULTO" as Department,
+        label: "Urgência e Emergência Adulto",
+      };
+    }
+    return null;
+  }, [demoParam]);
+
+  // Pré-preenche tudo assim que o demo é detectado
+  useEffect(() => {
+    if (!demoConfig) return;
+    setLoginData({ username: demoConfig.username, password: demoConfig.password });
+    setSelectedDepartment(demoConfig.department);
+  }, [demoConfig]);
+
+  // Auto-seleciona o primeiro estado e a primeira unidade quando carregam
+  useEffect(() => {
+    if (!demoConfig) return;
+    if (!selectedState && states.length > 0) {
+      setSelectedState(states[0].id);
+    }
+  }, [demoConfig, states, selectedState]);
+
+  useEffect(() => {
+    if (!demoConfig) return;
+    if (selectedState && !selectedHospitalId) {
+      const firstHospital = hospitals.find((h) => h.state_id === selectedState);
+      if (firstHospital) setSelectedHospitalId(firstHospital.id);
+    }
+  }, [demoConfig, selectedState, selectedHospitalId, hospitals]);
 
   // Filter hospitals by selected state
   const filteredHospitals = selectedState 
