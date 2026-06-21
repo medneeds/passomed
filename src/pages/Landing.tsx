@@ -288,7 +288,7 @@ export default function Landing() {
               Cada plantão passado sem ruído.
             </h1>
             <p className="mt-7 max-w-2xl text-base md:text-lg leading-relaxed text-muted-foreground">
-              O PassoMed transforma a passagem de plantão em um fluxo único: mapa de leitos, decisões clínicas, exames, plano terapêutico e protocolos da unidade — tudo na mesma tela em que o médico atende.
+              O PassoMed transforma a passagem de plantão em um fluxo único: mapa de leitos, decisões clínicas, exames, plano terapêutico e protocolos da unidade — tudo na mesma tela.
             </p>
 
             <div className="mt-9 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
