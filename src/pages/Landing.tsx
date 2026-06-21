@@ -16,7 +16,9 @@ import logoFull from "@/assets/passomed-full-logo.png";
  * Tokens semânticos da paleta Emerald Prestige reaproveitados do app.
  */
 
-const CONTACT_HREF = "mailto:contato@passomed.com.br?subject=Agendar%20demonstra%C3%A7%C3%A3o%20PassoMed";
+const CONTACT_HREF = `https://wa.me/5598981659576?text=${encodeURIComponent(
+  "Olá, Artur! Gostaria de mais informações sobre o PassoMed."
+)}`;
 const AUTH_HREF = "/auth";
 
 const Eyebrow = ({ children }: { children: ReactNode }) => (
@@ -654,7 +656,7 @@ export default function Landing() {
             <ul className="mt-3 space-y-2 text-muted-foreground">
               <li>LGPD — Lei nº 13.709/2018</li>
               <li>Isolamento por unidade hospitalar</li>
-              <li><a href={CONTACT_HREF} className="hover:text-foreground transition-colors">contato@passomed.com.br</a></li>
+              <li><a href={CONTACT_HREF} target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">WhatsApp: (98) 98165-9576</a></li>
             </ul>
           </div>
         </div>
