@@ -86,6 +86,7 @@ const SectionShell = ({
   align = "left",
   variant = "default",
   className = "",
+  fullWidthContent = false,
 }: {
   id?: string;
   eyebrow?: string;
@@ -95,6 +96,7 @@ const SectionShell = ({
   align?: "left" | "center";
   variant?: "default" | "muted" | "emerald";
   className?: string;
+  fullWidthContent?: boolean;
 }) => {
   const isEmerald = variant === "emerald";
   const titleColor = isEmerald ? "text-primary-foreground" : "text-foreground";
@@ -111,11 +113,21 @@ const SectionShell = ({
   return (
     <section id={id} className={`${variantBg} ${className}`}>
       <div className="container py-20 md:py-28">
-        <div className="grid gap-10 xl:grid-cols-12 xl:gap-16">
+        <div
+          className={
+            fullWidthContent
+              ? "space-y-12"
+              : "grid gap-10 xl:grid-cols-12 xl:gap-16"
+          }
+        >
           <Reveal
-            className={`xl:col-span-4 xl:sticky xl:top-28 xl:self-start ${
-              align === "center" ? "text-center xl:text-left" : ""
-            }`}
+            className={
+              fullWidthContent
+                ? `max-w-3xl ${align === "center" ? "mx-auto text-center" : ""}`
+                : `xl:col-span-4 xl:sticky xl:top-28 xl:self-start ${
+                    align === "center" ? "text-center xl:text-left" : ""
+                  }`
+            }
           >
             {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
             <h2
@@ -138,7 +150,10 @@ const SectionShell = ({
             </div>
           </Reveal>
 
-          <Reveal delay={120} className="xl:col-span-8">
+          <Reveal
+            delay={120}
+            className={fullWidthContent ? "w-full" : "xl:col-span-8"}
+          >
             {children}
           </Reveal>
         </div>
