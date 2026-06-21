@@ -158,7 +158,7 @@ const SectorTable = ({ beds }: { beds: BedCardData[] }) => (
       <div className="min-w-max lg:min-w-0 lg:w-full">
         {/* Header */}
         <div className="flex bg-secondary/60 border-b border-border">
-          <div className={`${COL_WIDTHS.leito} sticky left-0 z-10 bg-secondary/80 backdrop-blur border-r border-border p-3`}>
+          <div className={`${COL_WIDTHS.leito} sticky left-0 lg:static z-10 bg-secondary/80 backdrop-blur border-r border-border p-3`}>
             <ColHeader icon={Bed} label="Leito · Paciente" />
           </div>
           <div className={`${COL_WIDTHS.hipotese} p-3 border-r border-border`}>
@@ -417,15 +417,6 @@ export function PlatformPreview({ compact = false }: { compact?: boolean }) {
         </div>
       </div>
 
-      {/* Floating annotations (only on desktop, only first view) */}
-      <div className="hidden lg:flex absolute -left-5 top-32 items-center gap-2 rounded-full border border-border bg-card/95 backdrop-blur px-3.5 py-1.5 shadow-md pointer-events-none">
-        <span className="h-2 w-2 rounded-full bg-primary animate-pulse" />
-        <span className="text-xs font-medium text-foreground">Tempo real</span>
-      </div>
-      <div className="hidden lg:flex absolute -right-5 top-1/2 items-center gap-2 rounded-full border border-border bg-card/95 backdrop-blur px-3.5 py-1.5 shadow-md pointer-events-none">
-        <span className="h-2 w-2 rounded-full bg-gold" />
-        <span className="text-xs font-medium text-foreground">Plantão pronto</span>
-      </div>
     </div>
   );
 }
