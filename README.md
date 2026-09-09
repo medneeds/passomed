@@ -1,73 +1,32 @@
-# Welcome to your Lovable project
+# PassoMed
 
-## Project info
+Quero iniciar um novo projeto. Será um projeto de uma plataforma médica que funcionará como se fosse um MAPA de pacientes. Será um mapa de controle de paciente internos e em observação na emergência de um hospital. Os leitos são divididos em Setores (Sala de Cuidados Especiais / Sala Vermelha, Observação Amarela e Observação Azul, com a categorização em colunas divididas em nº do leito, nome do paciente, idade, hipóteses diagnósticas, antecedentes mórbidos pessoais, exames relevantes, pendências e programação.
 
-**URL**: https://lovable.dev/projects/e3a22fbd-3938-40cf-b893-0b6a5806f5c8
+Ter a possibilidade de expandir cada linha de paciente com os detalhes da história admissional ou anamnese completa de solicitação de internação.
 
-## How can I edit this code?
+Pense sobre e complemente com o que achar relevante. 
 
-There are several ways of editing your application.
+Que seja uma plataforma fácil, bonita e intuitiva de usar.
 
-**Use Lovable**
+This project was built with [Lovable](https://lovable.dev).
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/e3a22fbd-3938-40cf-b893-0b6a5806f5c8) and start prompting.
+**Live app**: https://passomed.lovable.app
 
-Changes made via Lovable will be committed automatically to this repo.
+## Build with Lovable
 
-**Use your preferred IDE**
+Continue developing this project in the [Lovable editor](https://lovable.dev/projects/50a8d884-620d-4405-a3ce-f0d69150aa1a).
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+- **Ship faster**: describe what you want to build and Lovable handles the code.
+- **Stay in sync**: every change made in Lovable is committed straight to this repository.
+- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## Development
 
-Follow these steps:
+Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
+git clone <this-repository-url>
+cd <repository-name>
 npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
 npm run dev
 ```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/e3a22fbd-3938-40cf-b893-0b6a5806f5c8) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
