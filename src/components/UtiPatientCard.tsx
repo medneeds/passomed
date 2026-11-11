@@ -1,3 +1,4 @@
+import { releaseBedForFilling } from "@/utils/releaseBed";
 import { Patient } from "@/types/patient";
 import { useState, useRef, useEffect, useMemo } from "react";
 import { Button } from "@/components/ui/button";
@@ -969,6 +970,12 @@ export function UtiPatientCard({
 
   // Toggle bed vacancy status
   const handleToggleVacancy = (isVacant: boolean) => {
+    // Liberar um leito vago sempre começa limpo (sem data de nascimento,
+    // datas de admissão ou listas do paciente anterior).
+    if (!isVacant && patient.isVacant) {
+      onUpdate(releaseBedForFilling(patient));
+      return;
+    }
     onUpdate({
       ...patient,
       isVacant

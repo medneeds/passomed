@@ -1,3 +1,4 @@
+import { releaseBedForFilling } from "@/utils/releaseBed";
 import { Patient, SectorType } from "@/types/patient";
 import { ReactNode } from "react";
 import { UtiPatientCard } from "./UtiPatientCard";
@@ -75,9 +76,14 @@ interface UtiRowProps {
 function UtiRow(props: UtiRowProps) {
   // Toggle vacancy handler
   const handleToggleVacancy = () => {
+    if (props.patient.isVacant) {
+      // Liberar para um novo paciente: nada do ocupante anterior pode voltar.
+      props.onUpdate(releaseBedForFilling(props.patient));
+      return;
+    }
     props.onUpdate({
       ...props.patient,
-      isVacant: !props.patient.isVacant
+      isVacant: true
     });
   };
 

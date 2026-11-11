@@ -1,3 +1,4 @@
+import { releaseBedForFilling } from "@/utils/releaseBed";
 import { Patient, SectorType } from "@/types/patient";
 import { SECTOR_BED_CONFIG } from "@/utils/bedNaming";
 import { getFixedBedCount } from "@/utils/bedCapacityStore";
@@ -343,7 +344,10 @@ export function SectorSection({
                               bedNumber={patient.bedNumber}
                               sector={sector}
                               onAllocateNew={() =>
-                                onUpdatePatient({ ...patient, isVacant: false, bedStatus: 'available', bedMaintenanceReason: null, bedMaintenanceStartedAt: null, bedMaintenanceStartedBy: null })
+                                onUpdatePatient(releaseBedForFilling(patient, {
+                                  admissionDate: new Date().toISOString().slice(0, 16).replace('T', ' '),
+                                  patientCategory: patient.patientCategory,
+                                }))
                               }
                               onAllocateFromQueue={
                                 onRequestFromQueue ? () => onRequestFromQueue(sector) : undefined

@@ -1,3 +1,4 @@
+import { RELEASED_BED_FIELDS } from "@/utils/releaseBed";
 import { useState, useEffect } from "react";
 import { SectorSection } from "@/components/SectorSection";
 import { SectorBedIcon } from "@/components/SectorBedIcon";
@@ -447,6 +448,8 @@ const Index = () => {
     if (vacantPlaceholderId) {
       try {
         await dbUpdatePatient(vacantPlaceholderId, {
+          // Apaga qualquer resíduo do ocupante anterior (nascimento, datas da UTI, listas…)
+          ...RELEASED_BED_FIELDS,
           id: vacantPlaceholderId,
           bedNumber: newBedNumber,
           name: "",
