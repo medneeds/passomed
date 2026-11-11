@@ -1,5 +1,6 @@
 import { FormEvent, useEffect, useId, useRef, useState } from "react";
 import { ArrowRight, CheckCircle2, Loader2, MessageCircle } from "lucide-react";
+import { Link } from "react-router-dom";
 import { db } from "@/integrations/supabase/untyped";
 import {
   EMPTY_LEAD, LEAD_CYCLES, LEAD_SECTORS, LeadCycle, LeadErrors, LeadFormValues, LeadSector,
@@ -265,8 +266,12 @@ export function LeadForm({ whatsappHref }: { whatsappHref: string }) {
         )}
       </button>
       <p className="mt-3 text-center text-xs leading-relaxed text-muted-foreground">
-        Ao enviar, você concorda em ser contatado pela equipe do PassoMed sobre esta solicitação. Usamos seus dados só para
-        isso, conforme a LGPD.
+        Ao enviar, você concorda em ser contatado pela equipe do PassoMed sobre esta solicitação. Seus dados são
+        usados só para isso, conforme a{" "}
+        <Link to="/privacidade" className="font-medium text-foreground underline underline-offset-4">
+          Política de Privacidade
+        </Link>{" "}
+        e a LGPD.
       </p>
     </form>
   );

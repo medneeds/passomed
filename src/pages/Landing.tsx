@@ -8,6 +8,9 @@ import {
 } from "@/components/ui/accordion";
 import { ExperienceShowcase } from "@/components/landing/ExperienceShowcase";
 import { LeadForm } from "@/components/landing/LeadForm";
+import { SiteFooter } from "@/components/SiteFooter";
+import { CookieNotice } from "@/components/CookieNotice";
+import { Link } from "react-router-dom";
 import { BedPricingCalculator } from "@/components/landing/BedPricingCalculator";
 import logoP from "@/assets/logo-p-cross.png";
 import logoFull from "@/assets/passomed-full-logo.png";
@@ -749,7 +752,7 @@ export default function Landing() {
               <span className="font-landing-display text-2xl text-foreground leading-none">PassoMed</span>
             </div>
             <p className="mt-4 text-muted-foreground max-w-xs">
-              PassoMed Clinical Pass. Plataforma de gestão de leitos, desenhada para quem cuida do setor e passa o plantão. O PassoMed não substitui a passagem de plantão presencial à beira-leito: é uma ferramenta de apoio ao registro de pendências, programações e planos terapêuticos, em conformidade com a LGPD.
+              PassoMed Clinical Pass. Plataforma de gestão de leitos, desenhada para quem cuida do setor e passa o plantão.
             </p>
             <img
               src={logoFull}
@@ -772,17 +775,15 @@ export default function Landing() {
             <ul className="mt-3 space-y-2 text-muted-foreground">
               <li>LGPD — Lei nº 13.709/2018</li>
               <li>Isolamento por unidade hospitalar</li>
+              <li><Link to="/privacidade" className="hover:text-foreground transition-colors">Política de Privacidade</Link></li>
+              <li><Link to="/termos" className="hover:text-foreground transition-colors">Termos de Uso</Link></li>
               <li><a href={CONTACT_HREF} target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">WhatsApp: (98) 98165-9576</a></li>
             </ul>
           </div>
         </div>
-        <div className="border-t border-border">
-          <div className="container py-5 flex flex-col md:flex-row items-center justify-between gap-2 text-xs text-muted-foreground">
-            <span>© {new Date().getFullYear()} PassoMed. Todos os direitos reservados.</span>
-            <span>Brasil · pt-BR</span>
-          </div>
-        </div>
+        <SiteFooter />
       </footer>
+      <CookieNotice />
     </div>
   );
 }

@@ -9,55 +9,59 @@ import { ProtectedRoute } from "@/components/ProtectedRoute";
 import { MainLayout } from "@/components/MainLayout";
 import { PrivacyProvider } from "@/contexts/PrivacyContext";
 import { PalliativeFarewellProvider } from "@/contexts/PalliativeFarewellContext";
-import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
-import { useState } from "react";
-import HandoversPage from "./pages/HandoversPage";
-import DocumentsPage from "./pages/DocumentsPage";
-import SepsisProtocolPage from "./pages/SepsisProtocolPage";
-import UltrassomProtocolPage from "./pages/UltrassomProtocolPage";
-import TomografiasPage from "./pages/TomografiasPage";
-import HemoderivadosPage from "./pages/HemoderivadosPage";
-import RegulacoesPage from "./pages/RegulacoesPage";
-import OpmePage from "./pages/OpmePage";
-import AltoCustoPage from "./pages/AltoCustoPage";
-import SadtPage from "./pages/SadtPage";
-import MovementsPage from "./pages/MovementsPage";
+import { Suspense, lazy, useState } from "react";
 import AuthPage from "./pages/AuthPage";
 import Landing from "./pages/Landing";
 
-import DashboardPage from "./pages/DashboardPage";
-import PriorizacaoCirurgicaPage from "./pages/PriorizacaoCirurgicaPage";
-import ControleGlicemicoPage from "./pages/ControleGlicemicoPage";
-import CuidadosPaliativosPage from "./pages/CuidadosPaliativosPage";
-import FluxoPaliativacaoPage from "./pages/FluxoPaliativacaoPage";
-import DhdDashboardPage from "./pages/DhdDashboardPage";
-import DhdRegistrationPage from "./pages/DhdRegistrationPage";
-import DhdHistoryPage from "./pages/DhdHistoryPage";
-import AuditLogsPage from "./pages/AuditLogsPage";
-import UserManagementPage from "./pages/UserManagementPage";
-import PrivacyPage from "./pages/PrivacyPage";
-import AdminStatesPage from "./pages/AdminStatesPage";
-import AdminUnitsPage from "./pages/AdminUnitsPage";
-import AdminCoordinatorsPage from "./pages/AdminCoordinatorsPage";
-import AdminBedsPage from "./pages/AdminBedsPage";
-import AdminFieldsPage from "./pages/AdminFieldsPage";
-import AdminLeadsPage from "./pages/AdminLeadsPage";
-import AdminBrandingPage from "./pages/AdminBrandingPage";
-import AdminInstitutionsPage from "./pages/AdminInstitutionsPage";
 import { AdminRoute } from "@/components/AdminRoute";
 import { DemoBanner } from "@/components/DemoBanner";
 
 
-import SepsisProtocolsAdminPage from "./pages/SepsisProtocolsAdminPage";
-import StrokeProtocolsAdminPage from "./pages/StrokeProtocolsAdminPage";
-import ChestPainProtocolsAdminPage from "./pages/ChestPainProtocolsAdminPage";
-import GoAuthPage from "./pages/go/GoAuthPage";
 import { GoProtectedRoute } from "./pages/go/GoProtectedRoute";
-import GoOverviewPage from "./pages/go/GoOverviewPage";
-import GoConductorsPage from "./pages/go/GoConductorsPage";
-import GoBedsPage from "./pages/go/GoBedsPage";
-import GoIndicatorsPage from "./pages/go/GoIndicatorsPage";
+
+// Telas internas carregam sob demanda: a landing não baixa o código do sistema inteiro.
+const Index = lazy(() => import("./pages/Index"));
+const HandoversPage = lazy(() => import("./pages/HandoversPage"));
+const DocumentsPage = lazy(() => import("./pages/DocumentsPage"));
+const SepsisProtocolPage = lazy(() => import("./pages/SepsisProtocolPage"));
+const UltrassomProtocolPage = lazy(() => import("./pages/UltrassomProtocolPage"));
+const TomografiasPage = lazy(() => import("./pages/TomografiasPage"));
+const HemoderivadosPage = lazy(() => import("./pages/HemoderivadosPage"));
+const RegulacoesPage = lazy(() => import("./pages/RegulacoesPage"));
+const OpmePage = lazy(() => import("./pages/OpmePage"));
+const AltoCustoPage = lazy(() => import("./pages/AltoCustoPage"));
+const SadtPage = lazy(() => import("./pages/SadtPage"));
+const MovementsPage = lazy(() => import("./pages/MovementsPage"));
+const DashboardPage = lazy(() => import("./pages/DashboardPage"));
+const PriorizacaoCirurgicaPage = lazy(() => import("./pages/PriorizacaoCirurgicaPage"));
+const ControleGlicemicoPage = lazy(() => import("./pages/ControleGlicemicoPage"));
+const CuidadosPaliativosPage = lazy(() => import("./pages/CuidadosPaliativosPage"));
+const FluxoPaliativacaoPage = lazy(() => import("./pages/FluxoPaliativacaoPage"));
+const DhdDashboardPage = lazy(() => import("./pages/DhdDashboardPage"));
+const DhdRegistrationPage = lazy(() => import("./pages/DhdRegistrationPage"));
+const DhdHistoryPage = lazy(() => import("./pages/DhdHistoryPage"));
+const AuditLogsPage = lazy(() => import("./pages/AuditLogsPage"));
+const UserManagementPage = lazy(() => import("./pages/UserManagementPage"));
+const PrivacyPage = lazy(() => import("./pages/PrivacyPage"));
+const AdminStatesPage = lazy(() => import("./pages/AdminStatesPage"));
+const AdminUnitsPage = lazy(() => import("./pages/AdminUnitsPage"));
+const AdminCoordinatorsPage = lazy(() => import("./pages/AdminCoordinatorsPage"));
+const AdminBedsPage = lazy(() => import("./pages/AdminBedsPage"));
+const AdminFieldsPage = lazy(() => import("./pages/AdminFieldsPage"));
+const AdminLeadsPage = lazy(() => import("./pages/AdminLeadsPage"));
+const AdminBrandingPage = lazy(() => import("./pages/AdminBrandingPage"));
+const AdminInstitutionsPage = lazy(() => import("./pages/AdminInstitutionsPage"));
+const SepsisProtocolsAdminPage = lazy(() => import("./pages/SepsisProtocolsAdminPage"));
+const StrokeProtocolsAdminPage = lazy(() => import("./pages/StrokeProtocolsAdminPage"));
+const ChestPainProtocolsAdminPage = lazy(() => import("./pages/ChestPainProtocolsAdminPage"));
+const GoAuthPage = lazy(() => import("./pages/go/GoAuthPage"));
+const GoOverviewPage = lazy(() => import("./pages/go/GoOverviewPage"));
+const GoConductorsPage = lazy(() => import("./pages/go/GoConductorsPage"));
+const GoBedsPage = lazy(() => import("./pages/go/GoBedsPage"));
+const GoIndicatorsPage = lazy(() => import("./pages/go/GoIndicatorsPage"));
+const Privacidade = lazy(() => import("./pages/legal/Privacidade"));
+const Termos = lazy(() => import("./pages/legal/Termos"));
 
 
 const queryClient = new QueryClient();
@@ -93,9 +97,12 @@ const App = () => {
         <DemoBanner />
         <Toaster />
         <Sonner />
+        <Suspense fallback={null}>
         <Routes>
           <Route path="/auth" element={<AuthPage />} />
           <Route path="/landing" element={<Landing />} />
+          <Route path="/privacidade" element={<Privacidade />} />
+          <Route path="/termos" element={<Termos />} />
           <Route path="/" element={<HomeRoute />} />
         <Route
           path="/handovers"
@@ -381,6 +388,7 @@ const App = () => {
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
         <Route path="*" element={<NotFound />} />
       </Routes>
+        </Suspense>
     </TooltipProvider>
       </PalliativeFarewellProvider>
       </PrivacyProvider>
