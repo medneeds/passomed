@@ -331,7 +331,7 @@ export default function Landing() {
               poster={`${import.meta.env.BASE_URL}media/passomed-apresentacao-capa.jpg`}
               aria-label="Vídeo de apresentação do PassoMed, com 1 minuto de duração"
             >
-              <source src={`${import.meta.env.BASE_URL}media/passomed-apresentacao.mp4`} type="video/mp4" />
+              <source src={`${import.meta.env.BASE_URL}media/passomed-apresentacao.mp4?v=2`} type="video/mp4" />
             </video>
           </div>
 
@@ -749,7 +749,7 @@ export default function Landing() {
               <span className="font-landing-display text-2xl text-foreground leading-none">PassoMed</span>
             </div>
             <p className="mt-4 text-muted-foreground max-w-xs">
-              PassoMed Clinical Pass. Plataforma de gestão de leitos, desenhada para quem cuida do setor e passa o plantão.
+              PassoMed Clinical Pass. Plataforma de gestão de leitos, desenhada para quem cuida do setor e passa o plantão. O PassoMed não substitui a passagem de plantão presencial à beira-leito: é uma ferramenta de apoio ao registro de pendências, programações e planos terapêuticos, em conformidade com a LGPD.
             </p>
             <img
               src={logoFull}
