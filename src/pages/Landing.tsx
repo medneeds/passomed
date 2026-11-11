@@ -318,6 +318,23 @@ export default function Landing() {
             </p>
           </div>
 
+          {/* Vídeo de apresentação (1 minuto) */}
+          <div className="w-full">
+            <p className="mb-3 text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
+              Conheça em 1 minuto
+            </p>
+            <video
+              className="aspect-video w-full rounded-2xl border border-border bg-primary shadow-xl"
+              controls
+              playsInline
+              preload="none"
+              poster={`${import.meta.env.BASE_URL}media/passomed-apresentacao-capa.jpg`}
+              aria-label="Vídeo de apresentação do PassoMed, com 1 minuto de duração"
+            >
+              <source src={`${import.meta.env.BASE_URL}media/passomed-apresentacao.mp4`} type="video/mp4" />
+            </video>
+          </div>
+
           {/* Demonstração navegável da plataforma */}
           <div className="w-full">
             <p className="mb-3 text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
