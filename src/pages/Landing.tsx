@@ -278,14 +278,13 @@ export default function Landing() {
         <div className="absolute -top-32 -right-32 h-[480px] w-[480px] rounded-full bg-primary/8 blur-3xl -z-10" />
         <div className="absolute -bottom-40 -left-32 h-[420px] w-[420px] rounded-full bg-gold/10 blur-3xl -z-10" />
 
-        <div className="container py-20 md:py-24 space-y-14 md:space-y-16">
+        <div className="container pt-8 pb-16 md:pt-12 md:pb-20 space-y-10 md:space-y-12">
           <div className="max-w-4xl">
-            <Eyebrow>Plataforma de gestão de leitos · Clinical Pass</Eyebrow>
-            <div className="mt-5 inline-flex items-center gap-2 rounded-full border border-gold/40 bg-gold/10 px-3 py-1 text-xs font-medium text-gold">
-              <Repeat className="h-3 w-3" />
-              Muito além do passômetro.
-            </div>
-            <h1 className="mt-6 font-landing-display text-[2.5rem] sm:text-5xl md:text-[3.5rem] xl:text-[4rem] leading-[1.02] tracking-tight text-foreground">
+            <p className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-gold/10 px-4 py-1.5 text-sm font-medium text-foreground">
+              <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-gold" aria-hidden />
+              A sua unidade merece muito mais que um simples passômetro médico.
+            </p>
+            <h1 className="mt-5 font-landing-display text-[2.5rem] sm:text-5xl md:text-[3.5rem] xl:text-[4rem] leading-[1.02] tracking-tight text-foreground">
               Gestão de leitos em tempo real.{" "}
               <span className="text-primary">Pendências à vista.</span>{" "}
               Plantão passado sem ruído.
