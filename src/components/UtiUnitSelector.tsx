@@ -74,7 +74,7 @@ export function UtiUnitSelector({ patients, onSelect }: UtiUnitSelectorProps) {
             const total = c.list.length;
             return (
               <button
-                key={c.unit}
+                key={inpatientUnitLabel(currentDepartment, c.unit)}
                 onClick={() => onSelect(c.unit)}
                 className={cn(
                   "group text-left rounded-2xl border bg-card",
@@ -88,7 +88,7 @@ export function UtiUnitSelector({ patients, onSelect }: UtiUnitSelectorProps) {
                   <div>
                     <p className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wider text-primary/80 dark:text-primary-glow/90 mb-1">
                       <span className={cn("h-1.5 w-1.5 rounded-full", c.accentDot)} />
-                      {c.unit}
+                      {inpatientUnitLabel(currentDepartment, c.unit)}
                     </p>
                     <h2 className="text-lg sm:text-xl font-semibold text-foreground leading-tight">
                       {c.title}
