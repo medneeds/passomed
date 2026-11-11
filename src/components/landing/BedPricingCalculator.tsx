@@ -144,7 +144,7 @@ export function BedPricingCalculator() {
             >
               {option.label}
               {option.tag && (
-                <span className={`rounded-full px-2 py-0.5 text-[0.65rem] font-semibold ${cycle === option.value ? "bg-white/20" : "bg-gold/15 text-foreground"}`}>
+                <span className={`whitespace-nowrap rounded-full px-1.5 py-0.5 text-[0.6rem] font-semibold ${cycle === option.value ? "bg-white/20" : "bg-gold/15 text-foreground"}`}>
                   {option.tag}
                 </span>
               )}
