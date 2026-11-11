@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import {
   ArrowLeftRight, ArrowRight, BarChart3, BedDouble, Bell, CalendarDays, Check, ClipboardList, FileText, FolderOpen,
-  GripVertical, Hash, LayoutGrid, LogOut, MoreVertical, Plus, Printer, Search, StickyNote, Upload, UserPlus, Zap,
+  GripVertical, Hash, LayoutGrid, LogOut, Settings2, MoreVertical, Plus, Printer, Search, StickyNote, Upload, UserPlus, Zap,
 } from "lucide-react";
 import logoP from "@/assets/logo-p-cross.png";
 
@@ -17,8 +17,8 @@ import logoP from "@/assets/logo-p-cross.png";
 type SceneId = "mapa" | "acoes" | "plantao" | "documentos" | "codigos" | "notas" | "gestao";
 
 const SCENES: { id: SceneId; label: string; short: string; icon: typeof LayoutGrid; caption: string }[] = [
-  { id: "mapa", label: "Mapa de leitos", short: "Mapa", icon: LayoutGrid, caption: "Cada leito é um cartão vivo. Você acrescenta, destaca e reorganiza direto nele, na emergência e na UTI." },
-  { id: "acoes", label: "Movimentações", short: "Movimentar", icon: ArrowLeftRight, caption: "Transferência, realocação, alta e solicitação de vaga saem do próprio leito, e o histórico acompanha o paciente." },
+  { id: "mapa", label: "Mapa de leitos", short: "Mapa", icon: LayoutGrid, caption: "Cada leito é um cartão vivo, na emergência, na UTI e na enfermaria. E a gestão escolhe quais campos cada setor registra." },
+  { id: "acoes", label: "Movimentações", short: "Movimentar", icon: ArrowLeftRight, caption: "Transferência, realocação e alta saem do próprio leito. Altas, óbitos e transferências externas ficam no histórico." },
   { id: "plantao", label: "Passagem de plantão", short: "Plantão", icon: ClipboardList, caption: "As pendências destacadas ao longo do turno viram a lista de quem entra." },
   { id: "documentos", label: "Documentos da unidade", short: "Documentos", icon: FolderOpen, caption: "Protocolos, termos e fichas da sua instituição em um lugar só, organizados por unidade." },
   { id: "codigos", label: "Códigos e procedimentos", short: "Códigos", icon: Hash, caption: "O código CID sai da própria hipótese diagnóstica, e as solicitações da unidade ficam a um toque." },
@@ -28,7 +28,7 @@ const SCENES: { id: SceneId; label: string; short: string; icon: typeof LayoutGr
 
 const AUTO_ADVANCE_MS = 7000;
 /** O mapa roda a demonstração da Sala Vermelha e depois a da UTI. */
-const MAP_ADVANCE_MS = 29000;
+const MAP_ADVANCE_MS = 44000;
 
 function usePrefersReducedMotion() {
   const [reduced, setReduced] = useState(false);
@@ -139,6 +139,7 @@ const SECTOR = {
   red: { wrap: "border-red-200 bg-red-50", chip: "bg-red-100 text-red-800 border-red-200", bar: "border-l-red-500", text: "text-red-900" },
   yellow: { wrap: "border-amber-200 bg-amber-50", chip: "bg-amber-100 text-amber-900 border-amber-200", bar: "border-l-amber-500", text: "text-amber-950" },
   blue: { wrap: "border-sky-200 bg-sky-50", chip: "bg-sky-100 text-sky-900 border-sky-200", bar: "border-l-sky-500", text: "text-sky-950" },
+  ward: { wrap: "border-teal-200 bg-teal-50", chip: "bg-teal-100 text-teal-900 border-teal-200", bar: "border-l-teal-500", text: "text-teal-950" },
   uti: { wrap: "border-indigo-200 bg-indigo-50", chip: "bg-indigo-100 text-indigo-900 border-indigo-200", bar: "border-l-indigo-500", text: "text-indigo-950" },
 } as const;
 
@@ -187,7 +188,14 @@ type BedDemo = {
 
 const it = (text: string, hl = false): Item => ({ id: text, text, hl });
 
-const BEDS: Record<"vermelha" | "uti", BedDemo> = {
+type SectorTab = "vermelha" | "uti" | "enfermaria";
+const SECTOR_TABS: { id: SectorTab; label: string }[] = [
+  { id: "vermelha", label: "Emergência" },
+  { id: "uti", label: "UTI" },
+  { id: "enfermaria", label: "Enfermaria" },
+];
+
+const BEDS: Record<SectorTab, BedDemo> = {
   vermelha: {
     tone: "red",
     sector: "Sala Vermelha",
@@ -234,6 +242,29 @@ const BEDS: Record<"vermelha" | "uti", BedDemo> = {
     dragTo: 0,
     grid: "sm:grid-cols-2 xl:grid-cols-4",
   },
+  enfermaria: {
+    tone: "ward",
+    sector: "Enfermaria Clínica",
+    count: "24/30",
+    bed: "E12",
+    name: "ANA FICTÍCIA PEREIRA",
+    meta: ["58 anos", "Nasc. 21/06/1968", "Admissão 06/11", "D6 de internação"],
+    forecast: "Previsão de alta: 12/11",
+    columns: [
+      { key: "hd", title: "Hipóteses / Diagnósticos", items: [it("PNEUMONIA COMUNITÁRIA"), it("DM2 DESCOMPENSADO")] },
+      { key: "ant", title: "Antecedentes / Comorbidades", items: [it("HAS"), it("DM2")] },
+      { key: "ex", title: "Exames", items: [it("PCR 48, EM QUEDA"), it("GLICEMIAS 140 A 180")] },
+      { key: "pt", title: "Plano Terapêutico", items: [it("CEFTRIAXONA D6/7"), it("INSULINA BASAL-BOLUS")] },
+      { key: "dieta", title: "Dieta", items: [it("ORAL PARA DIABETES")] },
+      { key: "pp", title: "Programações / Pendências", items: [it("TRANSIÇÃO PARA VIA ORAL", true), it("ORIENTAÇÃO DE ALTA"), it("RECEITA E RELATÓRIO")] },
+    ],
+    target: "pp",
+    addText: "RETORNO EM 7 DIAS",
+    highlightIndex: 1,
+    unhighlightIndex: 0,
+    dragTo: 0,
+    grid: "sm:grid-cols-2 xl:grid-cols-3",
+  },
 };
 
 const STEP = { idle: 0, typing: 1, saved: 2, hlOn: 3, hlOff: 4, lift: 5, move: 6, drop: 7, rest: 8 } as const;
@@ -266,7 +297,8 @@ function stepDuration(step: number, bed: BedDemo) {
 }
 
 function MapScene({ reduced }: { reduced: boolean }) {
-  const [tab, setTab] = useState<"vermelha" | "uti">("vermelha");
+  const [tab, setTab] = useState<SectorTab>("vermelha");
+  const [hidden, setHidden] = useState<Record<string, boolean>>({});
   const [pinned, setPinned] = useState(false);
   const [step, setStep] = useState<number>(reduced ? LAST_STEP : STEP.idle);
   const [typed, setTyped] = useState(0);
@@ -284,7 +316,7 @@ function MapScene({ reduced }: { reduced: boolean }) {
         return;
       }
       // fim do roteiro: alterna o setor (ou repete, se a pessoa escolheu um)
-      if (!pinned) setTab((current) => (current === "vermelha" ? "uti" : "vermelha"));
+      if (!pinned) setTab((current) => SECTOR_TABS[(SECTOR_TABS.findIndex((t) => t.id === current) + 1) % SECTOR_TABS.length].id);
       setStep(STEP.idle);
     }, stepDuration(step, bed));
     return () => window.clearTimeout(timer);
@@ -303,7 +335,13 @@ function MapScene({ reduced }: { reduced: boolean }) {
     return () => window.clearInterval(timer);
   }, [step, bed.addText]);
 
-  const choose = (next: "vermelha" | "uti") => {
+  const toggleField = (key: string) => {
+    setPinned(true);
+    setHidden((current) => ({ ...current, [`${tab}:${key}`]: !current[`${tab}:${key}`] }));
+  };
+  const isHidden = (key: string) => !!hidden[`${tab}:${key}`];
+
+  const choose = (next: SectorTab) => {
     setPinned(true);
     setTab(next);
     setStep(reduced ? LAST_STEP : STEP.idle);
@@ -311,8 +349,8 @@ function MapScene({ reduced }: { reduced: boolean }) {
 
   return (
     <div className="space-y-3">
-      <div role="group" aria-label="Setor" className="flex gap-2">
-        {(["vermelha", "uti"] as const).map((id) => (
+      <div role="group" aria-label="Setor" className="flex flex-wrap gap-2">
+        {SECTOR_TABS.map(({ id, label }) => (
           <button
             key={id}
             type="button"
@@ -322,7 +360,7 @@ function MapScene({ reduced }: { reduced: boolean }) {
               tab === id ? "border-primary bg-primary text-primary-foreground" : "border-border bg-background text-muted-foreground hover:text-foreground"
             }`}
           >
-            {id === "vermelha" ? "Emergência · Sala Vermelha" : "UTI"}
+            {label}
           </button>
         ))}
       </div>
@@ -352,7 +390,7 @@ function MapScene({ reduced }: { reduced: boolean }) {
         </div>
 
         <div className={`mt-3 grid gap-x-4 gap-y-3 ${bed.grid}`}>
-          {bed.columns.map((column) =>
+          {bed.columns.filter((column) => !isHidden(column.key)).map((column) =>
             column.key === bed.target ? (
               <AnimatedColumn key={column.key} column={column} bed={bed} step={step} typed={typed} />
             ) : (
@@ -366,6 +404,35 @@ function MapScene({ reduced }: { reduced: boolean }) {
         <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-gold" aria-hidden />
         {HINTS[step]}
       </p>
+
+      <div className="rounded-xl border border-gold/50 bg-gold/10 p-3">
+        <p className="flex items-center gap-2 text-sm font-semibold text-foreground">
+          <Settings2 className="h-4 w-4 shrink-0 text-primary" aria-hidden />
+          Campos deste setor: a gestão da unidade escolhe
+        </p>
+        <p className="mt-1 text-xs text-muted-foreground">Não registra algum fluxo? Desligue o campo e a coluna sai do leito. Experimente:</p>
+        <div className="mt-2.5 flex flex-wrap gap-2">
+          {bed.columns.map((column) => {
+            const locked = column.key === bed.target;
+            const on = !isHidden(column.key);
+            return (
+              <button
+                key={column.key}
+                type="button"
+                aria-pressed={on}
+                disabled={locked}
+                onClick={() => toggleField(column.key)}
+                className={`flex min-h-9 items-center gap-1.5 rounded-full border px-3 text-xs font-medium transition-colors ${
+                  on ? "border-primary bg-primary text-primary-foreground" : "border-border bg-background text-muted-foreground line-through"
+                } ${locked ? "opacity-70" : ""}`}
+              >
+                {on && <Check className="h-3 w-3" aria-hidden />}
+                {column.title}
+              </button>
+            );
+          })}
+        </div>
+      </div>
     </div>
   );
 }
@@ -485,6 +552,13 @@ function AnimatedColumn({ column, bed, step, typed }: { column: Column; bed: Bed
 
 /* ── Cena 2: ações do paciente e movimentação ─────────────────────────── */
 
+const HISTORY = [
+  { kind: "Alta", tone: "bg-emerald-100 text-emerald-800", name: "RITA FICTÍCIA LIMA", detail: "Observação Amarela A05 · alta hospitalar", when: "11/11 · 08h40" },
+  { kind: "Transf. externa", tone: "bg-sky-100 text-sky-900", name: "ANTÔNIO EXEMPLO COSTA", detail: "Sala Vermelha V01 → hospital de referência", when: "11/11 · 06h15" },
+  { kind: "Óbito", tone: "bg-red-100 text-red-800", name: "JOÃO FICTÍCIO RAMOS", detail: "UTI 1 U07", when: "10/11 · 23h05" },
+  { kind: "Alta", tone: "bg-emerald-100 text-emerald-800", name: "MARCOS FICTÍCIO SILVA", detail: "Enfermaria Clínica E03 · alta hospitalar", when: "10/11 · 16h30" },
+];
+
 function ActionsScene() {
   const actions = [
     { icon: ArrowLeftRight, label: "Transferir de setor", active: true },
@@ -538,6 +612,28 @@ function ActionsScene() {
             <Icon className="h-4 w-4 shrink-0" aria-hidden /> {label}
           </div>
         ))}
+      </div>
+      <div className="rounded-xl border border-border bg-background lg:col-span-2">
+        <div className="flex flex-wrap items-center justify-between gap-2 border-b border-border px-3 py-2.5">
+          <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Histórico de movimentações</p>
+          <div className="flex flex-wrap gap-1.5 text-[11px] font-medium">
+            <span className="rounded-full bg-emerald-100 px-2.5 py-1 text-emerald-800">Altas 12</span>
+            <span className="rounded-full bg-sky-100 px-2.5 py-1 text-sky-900">Transferências 5</span>
+            <span className="rounded-full bg-red-100 px-2.5 py-1 text-red-800">Óbitos 1</span>
+          </div>
+        </div>
+        <ul className="divide-y divide-border">
+          {HISTORY.map((entry) => (
+            <li key={entry.name} className="flex flex-wrap items-center gap-x-3 gap-y-1 px-3 py-2.5 text-sm">
+              <span className={`w-28 shrink-0 rounded-full px-2.5 py-1 text-center text-[11px] font-semibold ${entry.tone}`}>{entry.kind}</span>
+              <span className="order-last min-w-0 basis-full sm:order-none sm:flex-1 sm:basis-0">
+                <span className="block truncate font-medium text-foreground">{entry.name}</span>
+                <span className="text-xs text-muted-foreground">{entry.detail}</span>
+              </span>
+              <span className="ml-auto text-xs tabular-nums text-muted-foreground">{entry.when}</span>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );
@@ -729,12 +825,13 @@ function ManagementScene() {
     { name: "Observação Azul", used: 2, total: 6, tone: "bg-sky-500" },
     { name: "UTI 1", used: 9, total: 10, tone: "bg-primary" },
     { name: "UTI 2", used: 7, total: 10, tone: "bg-primary" },
+    { name: "Enfermaria Clínica", used: 24, total: 30, tone: "bg-teal-500" },
   ];
   const barRef = useRef<HTMLDivElement>(null);
   return (
     <div className="space-y-4">
       <div className="grid grid-cols-3 gap-2.5">
-        {[["63%", "ocupação geral"], ["2,8 dias", "permanência média na UTI"], ["7", "movimentações hoje"]].map(([value, label]) => (
+        {[["70%", "ocupação geral"], ["2,8 dias", "permanência média na UTI"], ["7", "movimentações hoje"]].map(([value, label]) => (
           <div key={label} className="rounded-xl border border-border bg-background p-3">
             <p className="text-lg font-bold tabular-nums text-foreground sm:text-xl">{value}</p>
             <p className="text-[11px] leading-snug text-muted-foreground">{label}</p>

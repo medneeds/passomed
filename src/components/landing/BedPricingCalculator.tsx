@@ -11,7 +11,7 @@ import {
  */
 
 interface Field {
-  key: "uti" | "red" | "observation";
+  key: "uti" | "red" | "observation" | "ward";
   label: string;
   hint: string;
   initial: number;
@@ -21,6 +21,7 @@ const FIELDS: Field[] = [
   { key: "uti", label: "Leitos de UTI", hint: "Geral ou especializada", initial: 10 },
   { key: "red", label: "Sala vermelha", hint: "Emergência / estabilização", initial: 0 },
   { key: "observation", label: "Observação", hint: "Salas amarela e azul", initial: 0 },
+  { key: "ward", label: "Enfermaria", hint: "Clínica, cirúrgica ou mista", initial: 0 },
 ];
 
 const MAX_BEDS = 200;
@@ -33,7 +34,7 @@ export function BedPricingCalculator() {
 
   const [cycle, setCycle] = useState<BillingCycle>("annual");
 
-  const total = beds.uti + beds.red + beds.observation;
+  const total = beds.uti + beds.red + beds.observation + beds.ward;
   const billable = billableBeds(total);
   const belowMinimum = total > 0 && total < MIN_BILLABLE_BEDS;
   const monthly = monthlyCents(billable);
@@ -49,6 +50,7 @@ export function BedPricingCalculator() {
       beds.uti ? `${beds.uti} de UTI` : null,
       beds.red ? `${beds.red} de sala vermelha` : null,
       beds.observation ? `${beds.observation} de observação` : null,
+      beds.ward ? `${beds.ward} de enfermaria` : null,
     ].filter(Boolean);
     const plan = cycle === "annual"
       ? `plano anual, ${formatBRL(annual)} à vista, implantação isenta`
@@ -110,9 +112,10 @@ export function BedPricingCalculator() {
 
         <div className="mt-6 flex flex-wrap gap-2">
           {[
-            { label: "UTI de 10 leitos", value: { uti: 10, red: 0, observation: 0 } },
-            { label: "UTI de 20 leitos", value: { uti: 20, red: 0, observation: 0 } },
-            { label: "Emergência: 5 vermelha + 10 observação", value: { uti: 0, red: 5, observation: 10 } },
+            { label: "UTI de 10 leitos", value: { uti: 10, red: 0, observation: 0, ward: 0 } },
+            { label: "UTI de 20 leitos", value: { uti: 20, red: 0, observation: 0, ward: 0 } },
+            { label: "Emergência: 5 vermelha + 10 observação", value: { uti: 0, red: 5, observation: 10, ward: 0 } },
+            { label: "Enfermaria de 30 leitos", value: { uti: 0, red: 0, observation: 0, ward: 30 } },
           ].map((preset) => (
             <button
               key={preset.label}

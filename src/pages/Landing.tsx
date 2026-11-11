@@ -391,7 +391,7 @@ export default function Landing() {
         title={<>Você já tem uma planilha. O que falta é gestão.</>}
         subtitle="O passômetro registra o que foi dito. O PassoMed mostra o que precisa ser feito, por quem e em qual leito."
       >
-        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {[
             {
               before: "Planilha que alguém precisa atualizar",
@@ -407,6 +407,16 @@ export default function Landing() {
               before: "Pendência perdida no meio do texto",
               title: "Pendências que não somem",
               body: "O que foi destacado no turno vira a lista de quem assume, com lembretes no horário certo.",
+            },
+            {
+              before: "Colunas fixas que ninguém preenche",
+              title: "Campos do jeito da unidade",
+              body: "A gestão escolhe o que cada setor registra. Não usa dieta ou dispositivos? A coluna sai. Emergência, UTI e enfermaria, cada uma com o seu formato.",
+            },
+            {
+              before: "Paciente que saiu e sumiu da planilha",
+              title: "Histórico de desfechos",
+              body: "Altas, óbitos e transferências externas ficam registrados com data, hora e responsável, prontos para consulta e relatório.",
             },
             {
               before: "Ficha procurada em pasta e grupo",
@@ -435,7 +445,7 @@ export default function Landing() {
             {
               step: "01",
               title: "Mapeia",
-              body: "Cada setor, cada leito, cada paciente visíveis em uma única tela. UTI, urgência e emergência, observação — conforme a configuração da unidade.",
+              body: "Cada setor, cada leito, cada paciente visíveis em uma única tela. Emergência, UTI e enfermaria, com os campos que a gestão de cada unidade escolhe registrar.",
             },
             {
               step: "02",
@@ -631,8 +641,12 @@ export default function Landing() {
                 a: "Os dados pertencem integralmente à instituição. O PassoMed apenas processa e disponibiliza dentro do escopo contratado, com isolamento por unidade.",
               },
               {
-                q: "O PassoMed funciona em UTI e emergência ao mesmo tempo?",
-                a: "Sim. Hoje a plataforma cobre UTI e urgência/emergência (sala vermelha e salas de observação), cada setor com a quantidade de leitos da sua unidade, no mesmo mapa. O módulo de enfermaria está em desenvolvimento.",
+                q: "O PassoMed funciona em emergência, UTI e enfermaria ao mesmo tempo?",
+                a: "Sim. A plataforma cobre emergência (sala vermelha e salas de observação), UTI e enfermaria, cada setor com a quantidade de leitos da sua unidade, no mesmo mapa. O formato é o mesmo nos três, adaptado à rotina de cada um.",
+              },
+              {
+                q: "Posso escolher quais campos aparecem em cada leito?",
+                a: "Sim. Os campos são definidos por unidade. Se a sua gestão não quer registrar dieta, dispositivos ou outro fluxo, essa coluna simplesmente não aparece. Cada setor fica só com o que a equipe usa.",
               },
               {
                 q: "Quanto custa?",
