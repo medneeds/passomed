@@ -30,7 +30,7 @@ bootstrapBrandingFromCache();
 
 createRoot(document.getElementById("root")!).render(
   <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
-    <BrowserRouter>
+    <BrowserRouter basename={import.meta.env.BASE_URL.replace(/\/$/, "") || undefined}>
       <AuthProvider>
         <HospitalProvider>
           <DepartmentProvider>

@@ -167,9 +167,9 @@ export default function AdminInstitutionsPage() {
                   <thead className="text-left text-xs uppercase tracking-wide text-muted-foreground">
                     <tr className="border-b">
                       <th className="py-2 pr-3 font-medium">Instituição</th>
-                      <th className="py-2 pr-3 font-medium">Situação</th>
-                      <th className="py-2 pr-3 text-right font-medium">Contratados</th>
-                      <th className="py-2 pr-3 text-right font-medium">Configurados</th>
+                      <th className="hidden py-2 pr-3 font-medium sm:table-cell">Situação</th>
+                      <th className="py-2 pr-3 text-right font-medium">Leitos</th>
+                      <th className="hidden py-2 pr-3 text-right font-medium md:table-cell">Configurados</th>
                       <th className="py-2 pr-3 text-right font-medium">Mensalidade</th>
                       <th className="py-2 font-medium"><span className="sr-only">Ações</span></th>
                     </tr>
@@ -177,30 +177,26 @@ export default function AdminInstitutionsPage() {
                   <tbody>
                     {rows.map((row) => (
                       <tr key={row.hospital_unit_id} className="border-b last:border-0">
-                        <td className="py-2 pr-3">
+                        <td className="min-w-0 py-2 pr-3">
                           <p className="font-medium">{row.hospital_name}</p>
-                          <p className="text-xs text-muted-foreground">
+                          <div className="mt-1 sm:hidden"><StatusBadge status={row.status} /></div>
+                          <p className="break-all text-xs text-muted-foreground">
                             {[row.state_abbreviation, row.slug ? `/auth?i=${row.slug}` : null].filter(Boolean).join(" · ")}
                           </p>
                         </td>
-                        <td className="py-2 pr-3">
-                          {row.status ? (
-                            <Badge variant={row.status === "active" ? "default" : "secondary"}>
-                              {CONTRACT_STATUS_LABEL[row.status] ?? row.status}
-                            </Badge>
-                          ) : (
-                            <span className="text-xs text-muted-foreground">Sem contrato</span>
-                          )}
+                        <td className="hidden py-2 pr-3 sm:table-cell">
+                          <StatusBadge status={row.status} />
                         </td>
                         <td className="py-2 pr-3 text-right tabular-nums">{row.contracted_beds ?? "—"}</td>
-                        <td className="py-2 pr-3 text-right tabular-nums">{row.configured_beds}</td>
+                        <td className="hidden py-2 pr-3 text-right tabular-nums md:table-cell">{row.configured_beds}</td>
                         <td className="py-2 pr-3 text-right tabular-nums">
                           {row.contracted_beds === null ? "—" : formatBRL(row.monthly_cents)}
                         </td>
                         <td className="py-2 text-right">
                           <Button variant="outline" size="sm" onClick={() => openEditor(row)}>
                             <Pencil className="h-3.5 w-3.5" />
-                            <span className="ml-1.5">Contrato</span>
+                            <span className="ml-1.5 hidden sm:inline">Contrato</span>
+                            <span className="sr-only sm:hidden">Editar contrato de {row.hospital_name}</span>
                           </Button>
                         </td>
                       </tr>
@@ -273,6 +269,15 @@ export default function AdminInstitutionsPage() {
         </DialogContent>
       </Dialog>
     </MainLayout>
+  );
+}
+
+function StatusBadge({ status }: { status: string | null }) {
+  if (!status) return <span className="text-xs text-muted-foreground">Sem contrato</span>;
+  return (
+    <Badge variant={status === "active" ? "default" : "secondary"} className="whitespace-nowrap">
+      {CONTRACT_STATUS_LABEL[status] ?? status}
+    </Badge>
   );
 }
 

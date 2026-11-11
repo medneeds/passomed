@@ -20,7 +20,9 @@ import logoFull from "@/assets/passomed-full-logo.png";
 const CONTACT_HREF = `https://wa.me/5598981659576?text=${encodeURIComponent(
   "Olá, Artur! Gostaria de mais informações sobre o PassoMed."
 )}`;
-const AUTH_HREF = "/auth";
+// BASE_URL é "/" em produção; muda só quando o build é publicado em subpasta.
+const AUTH_HREF = `${import.meta.env.BASE_URL}auth`;
+const LANDING_HREF = `${import.meta.env.BASE_URL}landing`;
 
 const Eyebrow = ({ children }: { children: ReactNode }) => (
   <span className="inline-block text-[0.72rem] md:text-xs font-landing-sans font-semibold uppercase tracking-[0.28em] text-gold">
@@ -230,7 +232,7 @@ export default function Landing() {
       {/* ── NAV ─────────────────────────────────────────────── */}
       <header className="sticky top-0 z-50 border-b border-border/60 bg-background/85 backdrop-blur supports-[backdrop-filter]:bg-background/70">
         <div className="container flex h-16 items-center justify-between gap-4">
-          <a href="/landing" className="flex items-center gap-2.5 group">
+          <a href={LANDING_HREF} className="flex items-center gap-2.5 group">
             <img
               src={logoP}
               alt=""

@@ -81,7 +81,12 @@ DECLARE
   v_state uuid;
   v_a uuid;  -- Hospital Demonstração (emergência + UTI)
   v_b uuid;  -- Hospital São Lucas (só UTI) — prova de isolamento e de troca de marca
+  -- Plantonistas de demonstração: senha conhecida (vai no link ?demo=uti).
   v_pw text := coalesce((SELECT value FROM demo.settings WHERE key = 'demo_password'), 'DEMO26');
+  -- Coordenadores de demonstração: senha própria, fora do link público.
+  v_admin_pw text := coalesce(
+    (SELECT value FROM demo.settings WHERE key = 'demo_admin_password'),
+    'G' || upper(substr(md5(random()::text), 1, 2)) || lpad(floor(random() * 1000)::int::text, 3, '0'));
   UE constant text := 'URGÊNCIA E EMERGÊNCIA ADULTO';
 BEGIN
   -- Estado e unidades -------------------------------------------------------
@@ -153,11 +158,11 @@ BEGIN
   ), 'demo', 2500);
 
   -- Usuários de demonstração ---------------------------------------------------
-  PERFORM demo.ensure_user('DEMO.GESTOR', 'Coordenação — Hospital Demonstração', v_pw, 'admin', v_a,
+  PERFORM demo.ensure_user('DEMO.GESTOR', 'Coordenação — Hospital Demonstração', v_admin_pw, 'admin', v_a,
                            ARRAY[UE, 'URGÊNCIA E EMERGÊNCIA PEDIÁTRICA', 'UTI']);
   PERFORM demo.ensure_user('DEMO.UTI', 'Plantonista UTI — Demonstração', v_pw, 'medico', v_a, ARRAY['UTI']);
   PERFORM demo.ensure_user('DEMO.URG', 'Plantonista Emergência — Demonstração', v_pw, 'medico', v_a, ARRAY[UE]);
-  PERFORM demo.ensure_user('SAOLUCAS.GESTOR', 'Coordenação — Hospital São Lucas', v_pw, 'admin', v_b, ARRAY['UTI']);
+  PERFORM demo.ensure_user('SAOLUCAS.GESTOR', 'Coordenação — Hospital São Lucas', v_admin_pw, 'admin', v_b, ARRAY['UTI']);
   PERFORM demo.ensure_user('SAOLUCAS.UTI', 'Plantonista UTI — São Lucas', v_pw, 'medico', v_b, ARRAY['UTI']);
 
   -- Pacientes fictícios ----------------------------------------------------------

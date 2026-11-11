@@ -96,12 +96,12 @@ Deno.serve(async (req) => {
           status: 400,
           headers: { ...corsHeaders, "Content-Type": "application/json" },
         }
+      );
+    }
 
     const scope = await tenantScope(supabaseClient, caller.id);
     if (!(await canManageUser(supabaseClient, scope, userId))) {
       return new Response(JSON.stringify({ error: FORBIDDEN_OTHER_UNIT }), { status: 403, headers: { ...corsHeaders, "Content-Type": "application/json" } });
-    }
-      );
     }
 
     // Handle auth updates (email/password)

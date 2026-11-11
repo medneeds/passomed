@@ -9,7 +9,10 @@ import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { LogIn, User, Lock, Sparkles, Building2, Eye, EyeOff, Shield, FileCheck, UserPlus } from "lucide-react";
 import { z } from "zod";
-import { whitelabel, brandHex } from "@/config/whitelabel";
+import { whitelabel, brandHex, getActiveBranding } from "@/config/whitelabel";
+import { IS_DEMO } from "@/components/DemoBanner";
+
+const DEMO_PASSWORD = import.meta.env.VITE_DEMO_PASSWORD as string | undefined;
 import { LoadingScreen } from "@/components/LoadingScreen";
 import { cn } from "@/lib/utils";
 import { IndividualSignUpForm } from "@/components/IndividualSignUpForm";
@@ -64,10 +67,13 @@ export default function AuthPage() {
   // ------------------------------------------------------------------
   const demoParam = (searchParams.get("demo") || "").toLowerCase();
   const demoConfig = useMemo(() => {
+    // Só existe no build do ambiente de demonstração (VITE_DEMO_MODE=true);
+    // a senha vem da configuração do build, nunca fica no código-fonte.
+    if (!IS_DEMO || !DEMO_PASSWORD) return null;
     if (demoParam === "uti") {
       return {
         username: "DEMO.UTI",
-        password: "UTI001",
+        password: DEMO_PASSWORD,
         department: "UTI" as Department,
         label: "UTI",
       };
@@ -75,7 +81,7 @@ export default function AuthPage() {
     if (demoParam === "urg" || demoParam === "urgencia" || demoParam === "emergencia") {
       return {
         username: "DEMO.URG",
-        password: "URG001",
+        password: DEMO_PASSWORD,
         department: "URGÊNCIA E EMERGÊNCIA ADULTO" as Department,
         label: "Urgência e Emergência Adulto",
       };
@@ -89,6 +95,18 @@ export default function AuthPage() {
     setLoginData({ username: demoConfig.username, password: demoConfig.password });
     setSelectedDepartment(demoConfig.department);
   }, [demoConfig]);
+
+  // Endereço de uma instituição (?i=slug ou subdomínio): já entra com a
+  // unidade dela selecionada; o usuário ainda pode trocar.
+  const institution = getActiveBranding();
+  useEffect(() => {
+    if (!institution?.hospital_unit_id || selectedHospitalId) return;
+    const unit = hospitals.find((h) => h.id === institution.hospital_unit_id);
+    if (unit) {
+      setSelectedState(unit.state_id);
+      setSelectedHospitalId(unit.id);
+    }
+  }, [institution?.hospital_unit_id, hospitals, selectedHospitalId]);
 
   // Auto-seleciona o primeiro estado e a primeira unidade quando carregam
   useEffect(() => {
@@ -274,13 +292,21 @@ export default function AuthPage() {
                   {/* Radiating halos behind the P */}
                   <div className="pointer-events-none absolute inset-0 -m-16 rounded-full bg-[radial-gradient(circle,rgba(201,168,76,0.55)_0%,rgba(201,168,76,0.25)_35%,transparent_70%)] blur-3xl animate-pulse" />
                   <div className="pointer-events-none absolute inset-0 -m-8 rounded-full bg-[radial-gradient(circle,rgba(255,235,170,0.45)_0%,transparent_65%)] blur-2xl" />
-                  <img
-                    src={logoPCross}
-                    alt={`${whitelabel.platform.name} logo`}
-                    width={192}
-                    height={192}
-                    className="relative h-44 w-44 xl:h-52 xl:w-52 drop-shadow-[0_0_28px_rgba(201,168,76,0.85)] [filter:drop-shadow(0_0_14px_rgba(255,225,150,0.7))_drop-shadow(0_18px_38px_rgba(201,168,76,0.55))]"
-                  />
+                  {institution?.logo_url ? (
+                    <img
+                      src={institution.logo_url}
+                      alt={whitelabel.institution.hospitalLogoAlt}
+                      className="relative max-h-40 max-w-[280px] rounded-2xl bg-white/95 p-3 object-contain shadow-xl"
+                    />
+                  ) : (
+                    <img
+                      src={logoPCross}
+                      alt={`${whitelabel.platform.name} logo`}
+                      width={192}
+                      height={192}
+                      className="relative h-44 w-44 xl:h-52 xl:w-52 drop-shadow-[0_0_28px_rgba(201,168,76,0.85)] [filter:drop-shadow(0_0_14px_rgba(255,225,150,0.7))_drop-shadow(0_18px_38px_rgba(201,168,76,0.55))]"
+                    />
+                  )}
                 </div>
               </div>
 
@@ -302,6 +328,12 @@ export default function AuthPage() {
                 <div className="h-0.5 w-16 mx-auto mt-1.5 bg-gradient-to-r from-transparent via-white/50 to-transparent rounded-full" />
               </div>
               
+              {institution?.display_name && (
+                <p className="mt-2 mb-1 text-sm xl:text-base font-semibold uppercase tracking-[0.18em] text-white/90 animate-in fade-in-0 duration-1000 delay-200">
+                  {institution.display_name}
+                </p>
+              )}
+
               {/* Slogan - smaller */}
               <p className="text-white/60 text-sm xl:text-base font-light tracking-wide animate-in fade-in-0 slide-in-from-bottom-4 duration-1000 delay-300 mb-2 italic">
                 {whitelabel.platform.slogan}
@@ -596,13 +628,21 @@ export default function AuthPage() {
               <div className="relative flex items-center justify-center mx-auto">
                 <div className="pointer-events-none absolute inset-0 -m-12 rounded-full bg-[radial-gradient(circle,rgba(201,168,76,0.55)_0%,rgba(201,168,76,0.22)_40%,transparent_70%)] blur-3xl animate-pulse" />
                 <div className="pointer-events-none absolute inset-0 -m-6 rounded-full bg-[radial-gradient(circle,rgba(255,235,170,0.45)_0%,transparent_65%)] blur-2xl" />
-                <img
-                  src={logoPCross}
-                  alt={`${whitelabel.platform.name} logo`}
-                  width={128}
-                  height={128}
-                  className="relative h-32 w-32 drop-shadow-[0_0_22px_rgba(201,168,76,0.85)] [filter:drop-shadow(0_0_12px_rgba(255,225,150,0.7))_drop-shadow(0_12px_28px_rgba(201,168,76,0.5))]"
-                />
+                {institution?.logo_url ? (
+                  <img
+                    src={institution.logo_url}
+                    alt={whitelabel.institution.hospitalLogoAlt}
+                    className="relative max-h-16 max-w-[180px] rounded-2xl bg-white/95 p-3 object-contain shadow-xl"
+                  />
+                ) : (
+                  <img
+                    src={logoPCross}
+                    alt={`${whitelabel.platform.name} logo`}
+                    width={128}
+                    height={128}
+                    className="relative h-32 w-32 drop-shadow-[0_0_22px_rgba(201,168,76,0.85)] [filter:drop-shadow(0_0_12px_rgba(255,225,150,0.7))_drop-shadow(0_12px_28px_rgba(201,168,76,0.5))]"
+                  />
+                )}
               </div>
             </div>
 
@@ -636,7 +676,7 @@ export default function AuthPage() {
               </div>
               <div>
                 <h2 className="text-sm font-bold text-gray-800 uppercase">Acesse sua conta</h2>
-                <p className="text-[10px] text-gray-500 italic">{whitelabel.platform.slogan.split('.')[0]}</p>
+                <p className="text-[10px] text-gray-500 italic">{institution?.display_name || whitelabel.platform.slogan.split('.')[0]}</p>
               </div>
             </div>
 
