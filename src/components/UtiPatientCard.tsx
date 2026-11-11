@@ -209,13 +209,13 @@ function SortableItem({ id, index, value, onEdit, onDelete, showDragHandle = tru
   // Highlight color styles — neutral, sutil, sem barulho visual
   const highlightStyles = {
     blue: {
-      bg: "bg-emerald-50/60 dark:bg-emerald-950/30 border-l-2 border-l-primary/60 dark:border-l-primary-glow/60 pl-1.5",
+      bg: "bg-primary/5 dark:bg-primary/10 border-l-2 border-l-primary/60 dark:border-l-primary-glow/60 pl-1.5",
       number: "text-primary dark:text-primary-glow",
       text: "text-foreground",
       star: "fill-gold text-gold"
     },
     yellow: {
-      bg: "bg-emerald-50/60 dark:bg-emerald-950/30 border-l-2 border-l-gold/60 dark:border-l-gold/60 pl-1.5",
+      bg: "bg-primary/5 dark:bg-primary/10 border-l-2 border-l-gold/60 dark:border-l-gold/60 pl-1.5",
       number: "text-primary dark:text-primary-glow",
       text: "text-foreground",
       star: "fill-gold text-gold"
@@ -936,29 +936,29 @@ export function UtiPatientCard({
   // Color schemes — paleta Esmeralda Prestige + identidade discreta por UTI
   const colorSchemes = {
     blue: {
-      card: "bg-gradient-to-r from-emerald-50/60 via-background to-background dark:from-emerald-950/25 dark:via-card dark:to-card border-emerald-200/50 dark:border-emerald-900/40 border-l-[3px] border-l-primary/70 dark:border-l-primary-glow/70 hover:shadow-gold transition-shadow",
-      bedBg: "bg-primary dark:bg-emerald-950 border border-gold/60 dark:border-gold/80 shadow-sm dark:shadow-[0_0_0_1px_hsl(var(--gold)/0.25)]",
+      card: "bg-gradient-to-r from-primary/5 via-background to-background dark:from-primary/10 dark:via-card dark:to-card border-primary/15 dark:border-primary/25 border-l-[3px] border-l-primary/70 dark:border-l-primary-glow/70 hover:shadow-gold transition-shadow",
+      bedBg: "bg-primary dark:bg-primary/10 border border-gold/60 dark:border-gold/80 shadow-sm dark:shadow-[0_0_0_1px_hsl(var(--gold)/0.25)]",
       bedText: "text-gold dark:text-[hsl(var(--gold))] font-extrabold tracking-wider dark:[text-shadow:0_0_8px_hsl(var(--gold)/0.45)]",
-      col1: "bg-emerald-50/40 dark:bg-emerald-950/20 border-emerald-200/50 dark:border-emerald-900/30",
+      col1: "bg-primary/5 dark:bg-primary/10 border-primary/15 dark:border-primary/25",
       col1Icon: "text-primary/70 dark:text-primary-glow/80",
-      col2: "bg-emerald-50/40 dark:bg-emerald-950/20 border-emerald-200/50 dark:border-emerald-900/30",
+      col2: "bg-primary/5 dark:bg-primary/10 border-primary/15 dark:border-primary/25",
       col2Icon: "text-primary/70 dark:text-primary-glow/80",
-      col3: "bg-emerald-50/40 dark:bg-emerald-950/20 border-emerald-200/50 dark:border-emerald-900/30",
+      col3: "bg-primary/5 dark:bg-primary/10 border-primary/15 dark:border-primary/25",
       col3Icon: "text-primary/70 dark:text-primary-glow/80",
-      col4: "bg-emerald-50/40 dark:bg-emerald-950/20 border-emerald-200/50 dark:border-emerald-900/30",
+      col4: "bg-primary/5 dark:bg-primary/10 border-primary/15 dark:border-primary/25",
       col4Icon: "text-primary/70 dark:text-primary-glow/80",
     },
     yellow: {
-      card: "bg-gradient-to-r from-emerald-50/60 via-background to-background dark:from-emerald-950/25 dark:via-card dark:to-card border-emerald-200/50 dark:border-emerald-900/40 border-l-[3px] border-l-gold/80 dark:border-l-gold/80 hover:shadow-gold transition-shadow",
+      card: "bg-gradient-to-r from-primary/5 via-background to-background dark:from-primary/10 dark:via-card dark:to-card border-primary/15 dark:border-primary/25 border-l-[3px] border-l-gold/80 dark:border-l-gold/80 hover:shadow-gold transition-shadow",
       bedBg: "bg-primary dark:bg-amber-950 border border-gold/70 dark:border-gold/85 shadow-sm dark:shadow-[0_0_0_1px_hsl(var(--gold)/0.3)]",
       bedText: "text-gold dark:text-[hsl(var(--gold))] font-extrabold tracking-wider dark:[text-shadow:0_0_8px_hsl(var(--gold)/0.5)]",
-      col1: "bg-emerald-50/40 dark:bg-emerald-950/20 border-emerald-200/50 dark:border-emerald-900/30",
+      col1: "bg-primary/5 dark:bg-primary/10 border-primary/15 dark:border-primary/25",
       col1Icon: "text-primary/70 dark:text-primary-glow/80",
-      col2: "bg-emerald-50/40 dark:bg-emerald-950/20 border-emerald-200/50 dark:border-emerald-900/30",
+      col2: "bg-primary/5 dark:bg-primary/10 border-primary/15 dark:border-primary/25",
       col2Icon: "text-primary/70 dark:text-primary-glow/80",
-      col3: "bg-emerald-50/40 dark:bg-emerald-950/20 border-emerald-200/50 dark:border-emerald-900/30",
+      col3: "bg-primary/5 dark:bg-primary/10 border-primary/15 dark:border-primary/25",
       col3Icon: "text-primary/70 dark:text-primary-glow/80",
-      col4: "bg-emerald-50/40 dark:bg-emerald-950/20 border-emerald-200/50 dark:border-emerald-900/30",
+      col4: "bg-primary/5 dark:bg-primary/10 border-primary/15 dark:border-primary/25",
       col4Icon: "text-primary/70 dark:text-primary-glow/80",
     }
   };
@@ -1197,8 +1197,8 @@ export function UtiPatientCard({
                     daysInUti > 4
                       ? "bg-red-50 dark:bg-red-950/30 border-red-300/60 dark:border-red-700/50"
                       : colorVariant === 'yellow'
-                        ? "bg-emerald-50/60 dark:bg-emerald-950/30 border-gold/40 dark:border-gold/40"
-                        : "bg-emerald-50/60 dark:bg-emerald-950/30 border-primary/30 dark:border-primary/40"
+                        ? "bg-primary/5 dark:bg-primary/10 border-gold/40 dark:border-gold/40"
+                        : "bg-primary/5 dark:bg-primary/10 border-primary/30 dark:border-primary/40"
                   )}>
                     <span className={cn(
                       "text-[9px] font-bold",

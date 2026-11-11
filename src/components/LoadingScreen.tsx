@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Sparkles } from "lucide-react";
 import { whitelabel } from "@/config/whitelabel";
-import logoPCross from "@/assets/logo-p-cross.png";
+import logoPCross from "@/assets/logo-p-cross-light.png";
 
 interface LoadingScreenProps {
   onComplete?: () => void;

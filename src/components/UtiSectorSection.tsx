@@ -178,18 +178,18 @@ export function UtiSectorSection({
   // Header color schemes — neutra com discreta identidade por UTI (UTI 1 azul, UTI 2 âmbar)
   const headerStyles = {
     blue: {
-      bg: "bg-gradient-to-r from-emerald-50/80 via-background to-transparent dark:from-emerald-950/30 dark:via-background dark:to-transparent border-l-[3px] border-l-primary/70 dark:border-l-primary-glow/70",
+      bg: "bg-gradient-to-r from-primary/5 via-background to-transparent dark:from-primary/10 dark:via-background dark:to-transparent border-l-[3px] border-l-primary/70 dark:border-l-primary-glow/70",
       title: "text-foreground",
       button: "border-primary/30 text-primary dark:text-primary-glow hover:bg-primary/10 dark:hover:bg-primary/20 hover:border-primary/50",
       chevron: "text-primary/70 dark:text-primary-glow/80",
-      counter: "border-primary/30 bg-background/80 dark:bg-emerald-950/40 text-primary dark:text-primary-glow"
+      counter: "border-primary/30 bg-background/80 dark:bg-primary/10 text-primary dark:text-primary-glow"
     },
     yellow: {
-      bg: "bg-gradient-to-r from-emerald-50/80 via-background to-transparent dark:from-emerald-950/30 dark:via-background dark:to-transparent border-l-[3px] border-l-gold/80 dark:border-l-gold/80",
+      bg: "bg-gradient-to-r from-primary/5 via-background to-transparent dark:from-primary/10 dark:via-background dark:to-transparent border-l-[3px] border-l-gold/80 dark:border-l-gold/80",
       title: "text-foreground",
       button: "border-gold/40 text-primary dark:text-primary-glow hover:bg-gold/10 dark:hover:bg-gold/15 hover:border-gold/60",
       chevron: "text-primary/70 dark:text-primary-glow/80",
-      counter: "border-gold/40 bg-background/80 dark:bg-emerald-950/40 text-primary dark:text-primary-glow"
+      counter: "border-gold/40 bg-background/80 dark:bg-primary/10 text-primary dark:text-primary-glow"
     }
   };
   const headerClass = headerStyles[colorVariant].bg;

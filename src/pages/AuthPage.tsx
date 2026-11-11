@@ -17,7 +17,7 @@ import { LoadingScreen } from "@/components/LoadingScreen";
 import { cn } from "@/lib/utils";
 import { IndividualSignUpForm } from "@/components/IndividualSignUpForm";
 import { ForgotPasswordForm } from "@/components/ForgotPasswordForm";
-import logoPCross from "@/assets/logo-p-cross.png";
+import logoPCross from "@/assets/logo-p-cross-light.png";
 import {
   Select,
   SelectContent,

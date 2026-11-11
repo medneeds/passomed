@@ -196,7 +196,7 @@ export default function Landing() {
       canonical.rel = "canonical";
       document.head.appendChild(canonical);
     }
-    canonical.href = "https://passomed.com.br/landing";
+    canonical.href = "https://www.passomed.com.br/";
 
     const ldId = "landing-jsonld";
     let ld = document.getElementById(ldId) as HTMLScriptElement | null;

@@ -1432,8 +1432,8 @@ const Index = () => {
                 ) : (
                   <div className="space-y-4">
                     {/* UTI Unit Toggle (top) */}
-                    <div className="flex items-center justify-between gap-3 p-2 rounded-xl border border-emerald-200/50 dark:border-emerald-900/40 bg-card print:hidden">
-                      <div className="inline-flex items-center gap-1 bg-emerald-50/70 dark:bg-emerald-950/40 rounded-lg p-1">
+                    <div className="flex items-center justify-between gap-3 p-2 rounded-xl border border-primary/15 dark:border-primary/25 bg-card print:hidden">
+                      <div className="inline-flex items-center gap-1 bg-primary/5 dark:bg-primary/10 rounded-lg p-1">
                         <button
                           onClick={() => setSelectedUtiUnit('UTI 1')}
                           className={cn(
@@ -1459,7 +1459,7 @@ const Index = () => {
                       </div>
                       <button
                         onClick={() => setSelectedUtiUnit(null)}
-                        className="text-[11px] font-medium text-muted-foreground hover:text-primary dark:hover:text-primary-glow transition-colors px-2 py-1 rounded-md hover:bg-emerald-50/60 dark:hover:bg-emerald-950/30"
+                        className="text-[11px] font-medium text-muted-foreground hover:text-primary dark:hover:text-primary-glow transition-colors px-2 py-1 rounded-md hover:bg-primary/5 dark:hover:bg-primary/10"
                       >
                         Trocar unidade
                       </button>
