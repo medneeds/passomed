@@ -1,9 +1,12 @@
 import { useMemo, useState } from "react";
 import { ArrowRight, Minus, Plus } from "lucide-react";
-import { formatBRL, monthlyCents, PRICE_PER_BED_CENTS } from "@/lib/billing";
+import {
+  ANNUAL_PAID_MONTHS, annualCents, billableBeds, BillingCycle, firstYearCents, formatBRL,
+  MIN_BILLABLE_BEDS, monthlyCents, PRICE_PER_BED_CENTS, SETUP_FEE_CENTS,
+} from "@/lib/billing";
 
 /**
- * Calculadora de mensalidade da landing: leitos × R$ 25.
+ * Calculadora de preço da landing: leitos × R$ 29,90, plano mensal ou anual.
  * Usa a mesma regra de `src/lib/billing.ts` que o painel do hospital usa.
  */
 
@@ -28,8 +31,15 @@ export function BedPricingCalculator() {
     () => Object.fromEntries(FIELDS.map((f) => [f.key, f.initial])) as Record<Field["key"], number>,
   );
 
+  const [cycle, setCycle] = useState<BillingCycle>("annual");
+
   const total = beds.uti + beds.red + beds.observation;
-  const monthly = monthlyCents(total);
+  const billable = billableBeds(total);
+  const belowMinimum = total > 0 && total < MIN_BILLABLE_BEDS;
+  const monthly = monthlyCents(billable);
+  const annual = annualCents(billable);
+  const price = cycle === "annual" ? annual : monthly;
+  const savings = firstYearCents(total, "monthly") - firstYearCents(total, "annual");
 
   const update = (key: Field["key"], value: number) =>
     setBeds((current) => ({ ...current, [key]: Math.min(MAX_BEDS, Math.max(0, Number.isFinite(value) ? Math.floor(value) : 0)) }));
@@ -40,11 +50,14 @@ export function BedPricingCalculator() {
       beds.red ? `${beds.red} de sala vermelha` : null,
       beds.observation ? `${beds.observation} de observação` : null,
     ].filter(Boolean);
+    const plan = cycle === "annual"
+      ? `plano anual, ${formatBRL(annual)} à vista, implantação isenta`
+      : `plano mensal, ${formatBRL(monthly)} por mês + implantação de ${formatBRL(SETUP_FEE_CENTS)}`;
     const text = total > 0
-      ? `Olá, Artur! Quero o PassoMed para ${total} leitos (${parts.join(", ")}). Pela calculadora ficou ${formatBRL(monthly)} por mês. Podemos conversar?`
+      ? `Olá, Artur! Quero o PassoMed para ${total} leitos (${parts.join(", ")}). Pela calculadora: ${plan}. Podemos conversar?`
       : "Olá, Artur! Gostaria de mais informações sobre o PassoMed.";
     return `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(text)}`;
-  }, [beds, total, monthly]);
+  }, [beds, total, monthly, annual, cycle]);
 
   return (
     <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-stretch">
@@ -114,20 +127,76 @@ export function BedPricingCalculator() {
       </div>
 
       <div className="flex flex-col rounded-2xl border border-gold/60 bg-card p-6 shadow-gold xl:p-8">
-        <span className="text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-gold">Sua mensalidade</span>
+        <div role="radiogroup" aria-label="Forma de pagamento" className="grid grid-cols-2 gap-1 rounded-full border border-border bg-background p-1">
+          {([
+            { value: "annual", label: "Anual", tag: "2 meses grátis" },
+            { value: "monthly", label: "Mensal", tag: null },
+          ] as const).map((option) => (
+            <button
+              key={option.value}
+              type="button"
+              role="radio"
+              aria-checked={cycle === option.value}
+              onClick={() => setCycle(option.value)}
+              className={`flex min-h-11 items-center justify-center gap-1.5 rounded-full px-3 text-sm font-medium transition-colors ${
+                cycle === option.value ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              {option.label}
+              {option.tag && (
+                <span className={`rounded-full px-2 py-0.5 text-[0.65rem] font-semibold ${cycle === option.value ? "bg-white/20" : "bg-gold/15 text-foreground"}`}>
+                  {option.tag}
+                </span>
+              )}
+            </button>
+          ))}
+        </div>
+
+        <span className="mt-6 text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-gold">
+          {cycle === "annual" ? "Anuidade à vista" : "Sua mensalidade"}
+        </span>
         <p className="mt-3 font-landing-display text-5xl leading-none tracking-tight text-foreground tabular-nums" aria-live="polite">
-          {formatBRL(monthly)}
-          <span className="ml-1 font-landing-sans text-base font-normal text-muted-foreground">/mês</span>
+          {formatBRL(price)}
+          <span className="ml-1 font-landing-sans text-base font-normal text-muted-foreground">
+            {cycle === "annual" ? "/ano" : "/mês"}
+          </span>
         </p>
         <p className="mt-3 text-sm text-muted-foreground">
-          {total} {total === 1 ? "leito" : "leitos"} × {formatBRL(PRICE_PER_BED_CENTS)} por leito
+          {billable} {billable === 1 ? "leito" : "leitos"} × {formatBRL(PRICE_PER_BED_CENTS)}
+          {cycle === "annual" ? ` × ${ANNUAL_PAID_MONTHS} meses (você usa 12)` : " por mês"}
         </p>
+        {belowMinimum && (
+          <p className="mt-2 text-xs text-muted-foreground">
+            O contrato mínimo é de {MIN_BILLABLE_BEDS} leitos: unidades menores pagam por {MIN_BILLABLE_BEDS}.
+          </p>
+        )}
 
-        <ul className="mt-6 flex-1 space-y-2.5 text-sm text-foreground">
+        <div className="mt-5 rounded-xl border border-border bg-background/60 p-4 text-sm">
+          <div className="flex items-baseline justify-between gap-3">
+            <span className="text-muted-foreground">Implantação (uma vez)</span>
+            {cycle === "annual" ? (
+              <span className="font-medium text-foreground">
+                <s className="mr-1.5 font-normal text-muted-foreground">{formatBRL(SETUP_FEE_CENTS)}</s>Isenta
+              </span>
+            ) : (
+              <span className="font-medium tabular-nums text-foreground">{formatBRL(SETUP_FEE_CENTS)}</span>
+            )}
+          </div>
+          {total > 0 && (
+            <p className="mt-2 text-xs text-muted-foreground">
+              {cycle === "annual"
+                ? `No primeiro ano você economiza ${formatBRL(savings)} em relação ao plano mensal.`
+                : `No plano anual o primeiro ano sai ${formatBRL(savings)} mais barato.`}
+            </p>
+          )}
+        </div>
+
+        <ul className="mt-5 flex-1 space-y-2.5 text-sm text-foreground">
           {[
             "Sem cobrança por usuário: o preço é só por leito",
             "Plataforma com o nome, o logo e as cores do hospital",
             "Mapa de leitos, passagem de plantão e protocolos",
+            "Implantação com cadastro, marca e treinamento remoto da equipe",
             "Atualizações contínuas incluídas",
           ].map((item) => (
             <li key={item} className="flex gap-2.5">
@@ -147,7 +216,7 @@ export function BedPricingCalculator() {
           <ArrowRight className="h-4 w-4" />
         </a>
         <p className="mt-3 text-center text-xs text-muted-foreground">
-          Cobrança mensal por boleto ou Pix, com nota fiscal.
+          Boleto ou Pix, com nota fiscal. Treinamento presencial é orçado à parte.
         </p>
       </div>
     </div>

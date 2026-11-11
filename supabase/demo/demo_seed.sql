@@ -152,10 +152,10 @@ BEGIN
     jsonb_build_object('department', UE,    'sector', 'blue',   'beds', 6),
     jsonb_build_object('department', 'UTI', 'sector', 'blue',   'beds', 10),
     jsonb_build_object('department', 'UTI', 'sector', 'yellow', 'beds', 10)
-  ), 'demo', 2500);
+  ), 'demo', 2990);
   PERFORM public.provision_unit_beds(v_b, jsonb_build_array(
     jsonb_build_object('department', 'UTI', 'sector', 'blue', 'beds', 10)
-  ), 'demo', 2500);
+  ), 'demo', 2990);
 
   -- Usuários de demonstração ---------------------------------------------------
   PERFORM demo.ensure_user('DEMO.GESTOR', 'Coordenação — Hospital Demonstração', v_admin_pw, 'admin', v_a,

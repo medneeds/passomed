@@ -1,11 +1,48 @@
 /** Regras de cobrança por leito — fonte única para telas e landing. */
 
-/** Preço de tabela: R$ 25,00 por leito fixo, por mês. */
-export const PRICE_PER_BED_CENTS = 2500;
+/** Preço de tabela: R$ 29,90 por leito fixo, por mês. */
+export const PRICE_PER_BED_CENTS = 2990;
 
+/** Contrato mínimo: unidades menores pagam por 10 leitos. */
+export const MIN_BILLABLE_BEDS = 10;
+
+/** Plano anual à vista: paga 10 meses, usa 12 ("2 meses grátis"). */
+export const ANNUAL_PAID_MONTHS = 10;
+
+/** Implantação: valor único por unidade, isento no plano anual. */
+export const SETUP_FEE_CENTS = 99000;
+
+export type BillingCycle = "monthly" | "annual";
+
+const safeBeds = (beds: number) => (Number.isFinite(beds) ? Math.max(0, Math.floor(beds)) : 0);
+
+/** Leitos faturados: o contratado, respeitando o mínimo (0 leitos = nada a faturar). */
+export function billableBeds(beds: number, minBeds: number = MIN_BILLABLE_BEDS): number {
+  const count = safeBeds(beds);
+  return count === 0 ? 0 : Math.max(count, minBeds);
+}
+
+/** Leitos × preço, sem aplicar o mínimo (use `billableBeds` antes, quando couber). */
 export function monthlyCents(beds: number, pricePerBedCents: number = PRICE_PER_BED_CENTS): number {
-  const safeBeds = Number.isFinite(beds) ? Math.max(0, Math.floor(beds)) : 0;
-  return safeBeds * pricePerBedCents;
+  return safeBeds(beds) * pricePerBedCents;
+}
+
+/** Anuidade à vista: 10 mensalidades. */
+export function annualCents(beds: number, pricePerBedCents: number = PRICE_PER_BED_CENTS): number {
+  return monthlyCents(beds, pricePerBedCents) * ANNUAL_PAID_MONTHS;
+}
+
+/** Implantação devida conforme o plano. */
+export function setupFeeCents(cycle: BillingCycle, feeCents: number = SETUP_FEE_CENTS): number {
+  return cycle === "annual" ? 0 : feeCents;
+}
+
+/** Total do primeiro ano (mensalidades ou anuidade + implantação). */
+export function firstYearCents(beds: number, cycle: BillingCycle, pricePerBedCents: number = PRICE_PER_BED_CENTS): number {
+  const billable = billableBeds(beds);
+  return cycle === "annual"
+    ? annualCents(billable, pricePerBedCents)
+    : monthlyCents(billable, pricePerBedCents) * 12 + (billable > 0 ? setupFeeCents("monthly") : 0);
 }
 
 export function formatBRL(cents: number): string {
@@ -36,6 +73,11 @@ export interface BillingSummary {
   contracted_monthly_cents: number;
   billing_day: number | null;
   started_on: string | null;
+  billing_cycle?: BillingCycle | null;
+  billable_beds?: number | null;
+  min_billable_beds?: number | null;
+  annual_cents?: number | null;
+  setup_fee_cents?: number | null;
   items: BillingItem[];
 }
 

@@ -10,7 +10,10 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Building2, Loader2, Pencil } from "lucide-react";
 import { toast } from "sonner";
 import { db } from "@/integrations/supabase/untyped";
-import { CONTRACT_STATUS_LABEL, formatBRL, monthlyCents, PRICE_PER_BED_CENTS } from "@/lib/billing";
+import {
+  annualCents, billableBeds, BillingCycle, CONTRACT_STATUS_LABEL, formatBRL, monthlyCents,
+  PRICE_PER_BED_CENTS, SETUP_FEE_CENTS,
+} from "@/lib/billing";
 
 interface OverviewRow {
   hospital_unit_id: string;
@@ -23,6 +26,8 @@ interface OverviewRow {
   price_per_bed_cents: number;
   monthly_cents: number;
   started_on: string | null;
+  billing_cycle?: BillingCycle | null;
+  billable_beds?: number | null;
 }
 
 const UE = "URGÊNCIA E EMERGÊNCIA ADULTO";
@@ -47,7 +52,8 @@ export default function AdminInstitutionsPage() {
   const [editing, setEditing] = useState<OverviewRow | null>(null);
   const [beds, setBeds] = useState<Record<string, string>>({});
   const [status, setStatus] = useState("trial");
-  const [price, setPrice] = useState("25");
+  const [price, setPrice] = useState("29,90");
+  const [cycle, setCycle] = useState<BillingCycle>("monthly");
   const [saving, setSaving] = useState(false);
 
   const load = useCallback(async () => {
@@ -72,7 +78,10 @@ export default function AdminInstitutionsPage() {
   const openEditor = async (row: OverviewRow) => {
     setEditing(row);
     setStatus(row.status ?? "trial");
-    setPrice(String((row.price_per_bed_cents ?? PRICE_PER_BED_CENTS) / 100).replace(".", ","));
+    setCycle(row.billing_cycle === "annual" ? "annual" : "monthly");
+    // Sem contrato ainda: começa no preço de tabela.
+    const cents = row.contracted_beds === null ? PRICE_PER_BED_CENTS : (row.price_per_bed_cents ?? PRICE_PER_BED_CENTS);
+    setPrice((cents / 100).toFixed(2).replace(".", ","));
     const { data } = await db
       .from("sector_bed_capacities")
       .select("department, sector, fixed_bed_count")
@@ -92,6 +101,13 @@ export default function AdminInstitutionsPage() {
   }, 0);
   const priceCents = Math.round(parseFloat(price.replace(",", ".")) * 100);
   const priceValid = Number.isFinite(priceCents) && priceCents >= 0;
+
+  const draftBillable = billableBeds(draftTotal);
+  const draftSummary = !priceValid
+    ? ""
+    : cycle === "annual"
+      ? `${formatBRL(annualCents(draftBillable, priceCents))} por ano, implantação isenta`
+      : `${formatBRL(monthlyCents(draftBillable, priceCents))} por mês + implantação de ${formatBRL(SETUP_FEE_CENTS)}`;
 
   const handleSave = async () => {
     if (!editing) return;
@@ -115,13 +131,14 @@ export default function AdminInstitutionsPage() {
       })),
       p_status: status,
       p_price_per_bed_cents: priceCents,
+      p_billing_cycle: cycle,
     });
     setSaving(false);
     if (error) {
       toast.error("Não foi possível salvar o contrato: " + error.message);
       return;
     }
-    toast.success(`Contrato salvo: ${draftTotal} leitos, ${formatBRL(monthlyCents(draftTotal, priceCents))}/mês.`);
+    toast.success(`Contrato salvo: ${draftTotal} leitos, ${draftSummary}.`);
     setEditing(null);
     load();
   };
@@ -170,7 +187,7 @@ export default function AdminInstitutionsPage() {
                       <th className="hidden py-2 pr-3 font-medium sm:table-cell">Situação</th>
                       <th className="py-2 pr-3 text-right font-medium">Leitos</th>
                       <th className="hidden py-2 pr-3 text-right font-medium md:table-cell">Configurados</th>
-                      <th className="py-2 pr-3 text-right font-medium">Mensalidade</th>
+                      <th className="py-2 pr-3 text-right font-medium">Receita/mês</th>
                       <th className="py-2 font-medium"><span className="sr-only">Ações</span></th>
                     </tr>
                   </thead>
@@ -191,6 +208,9 @@ export default function AdminInstitutionsPage() {
                         <td className="hidden py-2 pr-3 text-right tabular-nums md:table-cell">{row.configured_beds}</td>
                         <td className="py-2 pr-3 text-right tabular-nums">
                           {row.contracted_beds === null ? "—" : formatBRL(row.monthly_cents)}
+                          {row.billing_cycle === "annual" && (
+                            <span className="block text-[11px] font-normal text-muted-foreground">plano anual ÷ 12</span>
+                          )}
                         </td>
                         <td className="py-2 text-right">
                           <Button variant="outline" size="sm" onClick={() => openEditor(row)}>
@@ -219,7 +239,7 @@ export default function AdminInstitutionsPage() {
           </DialogHeader>
 
           <div className="space-y-4">
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
               <div className="space-y-1.5">
                 <Label>Situação</Label>
                 <Select value={status} onValueChange={setStatus}>
@@ -235,6 +255,16 @@ export default function AdminInstitutionsPage() {
                 <Label htmlFor="price">Preço por leito (R$)</Label>
                 <Input id="price" inputMode="decimal" value={price} aria-invalid={!priceValid}
                   onChange={(e) => setPrice(e.target.value)} />
+              </div>
+              <div className="col-span-2 space-y-1.5 sm:col-span-1">
+                <Label>Plano</Label>
+                <Select value={cycle} onValueChange={(value) => setCycle(value as BillingCycle)}>
+                  <SelectTrigger><SelectValue /></SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="monthly">Mensal</SelectItem>
+                    <SelectItem value="annual">Anual à vista</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
             </div>
 
@@ -253,8 +283,11 @@ export default function AdminInstitutionsPage() {
 
             <div className="rounded-lg border bg-muted/40 p-3 text-sm">
               <span className="font-medium">{draftTotal} leitos</span>
-              {priceValid && (
-                <> × {formatBRL(priceCents)} = <span className="font-semibold">{formatBRL(monthlyCents(draftTotal, priceCents))} por mês</span></>
+              {draftBillable !== draftTotal && draftTotal > 0 && (
+                <span className="text-muted-foreground"> (fatura pelo mínimo de {draftBillable})</span>
+              )}
+              {priceValid && draftTotal > 0 && (
+                <> × {formatBRL(priceCents)} = <span className="font-semibold">{draftSummary}</span></>
               )}
             </div>
           </div>

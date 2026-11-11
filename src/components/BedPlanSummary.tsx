@@ -48,6 +48,9 @@ export function BedPlanSummary() {
   const contracted = summary.contracted_beds;
   const remaining = contracted === null ? null : contracted - summary.configured_beds;
   const activeItems = summary.items.filter((item) => item.beds > 0);
+  const isAnnual = summary.billing_cycle === "annual";
+  const billable = summary.billable_beds ?? contracted ?? summary.configured_beds;
+  const minimumApplies = contracted !== null && billable > contracted;
 
   return (
     <Card>
@@ -63,7 +66,8 @@ export function BedPlanSummary() {
           )}
         </div>
         <CardDescription>
-          {formatBRL(summary.price_per_bed_cents)} por leito fixo ao mês. Leitos extras de corredor não são cobrados.
+          {formatBRL(summary.price_per_bed_cents)} por leito fixo ao mês
+          {isAnnual ? ", no plano anual à vista" : ""}. Leitos extras de corredor não são cobrados.
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
@@ -78,8 +82,13 @@ export function BedPlanSummary() {
             </p>
           </div>
           <div className="rounded-lg border p-3">
-            <p className="text-xs uppercase tracking-wide text-muted-foreground">Mensalidade</p>
-            <p className="text-2xl font-bold tabular-nums">{formatBRL(summary.contracted_monthly_cents)}</p>
+            <p className="text-xs uppercase tracking-wide text-muted-foreground">{isAnnual ? "Anuidade" : "Mensalidade"}</p>
+            <p className="text-2xl font-bold tabular-nums">
+              {formatBRL(isAnnual && summary.annual_cents != null ? summary.annual_cents : summary.contracted_monthly_cents)}
+            </p>
+            {minimumApplies && (
+              <p className="text-xs text-muted-foreground">Faturado pelo mínimo de {billable} leitos</p>
+            )}
           </div>
           <div className="rounded-lg border p-3">
             <p className="text-xs uppercase tracking-wide text-muted-foreground">

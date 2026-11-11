@@ -212,7 +212,7 @@ export default function Landing() {
       applicationCategory: "MedicalApplication",
       operatingSystem: "Web",
       description: desc,
-      offers: { "@type": "Offer", price: "25.00", priceCurrency: "BRL", description: "Por leito fixo, por mês" },
+      offers: { "@type": "Offer", price: "29.90", priceCurrency: "BRL", description: "Por leito fixo, por mês" },
     });
 
     return () => {
@@ -313,7 +313,7 @@ export default function Landing() {
             <p className="mt-4 text-xs text-muted-foreground">
               Conversa de 20 minutos com a equipe. Sem SDR, sem formulário longo.{" "}
               <a href="#contratar" className="font-medium text-foreground underline decoration-gold/60 underline-offset-4 hover:decoration-gold">
-                R$ 25 por leito ao mês — calcule o seu
+                A partir de R$ 29,90 por leito ao mês — calcule o seu
               </a>
             </p>
           </div>
@@ -565,8 +565,8 @@ export default function Landing() {
         variant="muted"
         fullWidthContent
         eyebrow="Preço"
-        title={<>R$ 25 por leito, por mês.</>}
-        subtitle="Sem taxa por usuário e sem pacote fechado: você paga pelos leitos fixos que acompanha, da UTI de 10 leitos ao hospital inteiro."
+        title={<>R$ 29,90 por leito, por mês.</>}
+        subtitle="Sem taxa por usuário: você paga pelos leitos fixos que acompanha. No plano anual são 2 meses grátis e a implantação sai isenta."
       >
         <BedPricingCalculator />
       </SectionShell>
@@ -606,7 +606,11 @@ export default function Landing() {
               },
               {
                 q: "Quanto custa?",
-                a: "R$ 25 por leito fixo, por mês. Uma UTI de 10 leitos paga R$ 250; uma emergência com 5 leitos de sala vermelha e 10 de observação paga R$ 375. Não há cobrança por usuário.",
+                a: "R$ 29,90 por leito fixo, por mês, com contrato mínimo de 10 leitos. Uma UTI de 10 leitos paga R$ 299 por mês; uma emergência com 5 leitos de sala vermelha e 10 de observação paga R$ 448,50. No plano anual à vista você paga 10 meses e usa 12. Não há cobrança por usuário.",
+              },
+              {
+                q: "Existe taxa de implantação?",
+                a: "Sim: R$ 990 por unidade, uma única vez, cobrindo o cadastro de setores, leitos e usuários, a aplicação da marca do hospital e o treinamento remoto da equipe. No plano anual a implantação é isenta. Treinamento presencial é orçado à parte.",
               },
               {
                 q: "Como os leitos são contados?",

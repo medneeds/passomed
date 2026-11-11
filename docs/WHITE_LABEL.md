@@ -11,7 +11,7 @@ Branch `whitelabel`. Nada aqui foi aplicado na produção (branch `main`, public
 | Isolamento | `admin` enxergava e gerenciava todas as unidades e usuários | `admin` = coordenador das unidades a que está vinculado; só `platform_admins` atravessa instituições |
 | Painel admin | Senha compartilhada `ADMIN1` no código | Acesso pelo papel do usuário, com rota protegida e checagem no banco |
 | Leitos fixos | V01–V07, A01–A06, Z01–Z06, U01–U10 fixos no código e nos gatilhos | `sector_bed_capacities` por unidade, configurável no painel |
-| Cobrança | Não existia | `bed_contracts` (leitos contratados × R$ 25), trava de quantitativo e `billing_invoices` |
+| Cobrança | Não existia | `bed_contracts` (leitos contratados × R$ 29,90), trava de quantitativo e `billing_invoices` |
 
 ## Papéis
 
@@ -29,10 +29,20 @@ Branch `whitelabel`. Nada aqui foi aplicado na produção (branch `main`, public
 
 ## Cobrança por leito
 
-- Preço padrão: `PRICE_PER_BED_CENTS = 2500` (`src/lib/billing.ts` e `bed_contracts.price_per_bed_cents`).
+Tabela de preços (11/11/2026), em `src/lib/billing.ts` e nos padrões de `bed_contracts`:
+
+| Item | Valor |
+| --- | --- |
+| Leito fixo, plano mensal | R$ 29,90 por mês |
+| Plano anual à vista | 10 mensalidades (2 meses grátis) |
+| Contrato mínimo | 10 leitos faturados |
+| Implantação | R$ 990 por unidade, uma vez; isenta no plano anual |
+
 - Conta leito **fixo configurado**; leito extra não entra.
 - `enforce_contracted_beds` impede configurar mais leitos do que o contratado.
-- `select public.generate_monthly_invoices();` gera a fatura do mês para cada contrato ativo (`billing_invoices`). A emissão de boleto/Pix e nota fiscal ainda não está integrada: `external_provider`/`external_id` estão reservados para isso.
+- O preço por leito é um campo do contrato: condições negociadas (ex.: fundadores a R$ 25) são definidas em Instituições e receita → Contrato.
+- `select public.generate_monthly_invoices();` gera as faturas do mês: mensal todo mês, anual só no mês de aniversário, implantação uma vez no mês de início (plano mensal).
+- A emissão de boleto/Pix e nota fiscal ainda não está integrada: `external_provider`/`external_id` estão reservados para isso.
 
 ## Publicar fora do Lovable
 
@@ -49,7 +59,7 @@ Variáveis do build: `VITE_SUPABASE_URL`, `VITE_SUPABASE_PUBLISHABLE_KEY`, `VITE
 
 ## Levar para a produção
 
-1. Aplicar no banco de produção, em ordem, as migrações `20261111000100` a `20261111000500`. Todas são idempotentes; a `000100` reescreve políticas RLS, então faça antes um backup e rode `supabase/tests/tenant_isolation.sql` num ambiente de homologação.
+1. Aplicar no banco de produção, em ordem, as migrações `20261111000100` a `20261111000600`. Todas são idempotentes; a `000100` reescreve políticas RLS, então faça antes um backup e rode `supabase/tests/tenant_isolation.sql` num ambiente de homologação.
 2. Publicar as funções de borda alteradas (`admin-create-user`, `admin-update-user`, `reset-user-password`, `process-data-deletion`, `setup-legacy-passwords`).
 3. Só então mesclar `whitelabel` em `main`: o front novo depende das tabelas e funções acima.
 
