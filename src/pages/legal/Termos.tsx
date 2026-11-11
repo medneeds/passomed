@@ -10,7 +10,8 @@ export default function Termos() {
       path="/termos"
     >
       <p>
-        Estes termos regulam o uso do site e da plataforma {COMPANY.brand}, operados por {COMPANY.legalName}, CNPJ{" "}
+        Estes termos regulam o uso do site e da plataforma {COMPANY.brand}, produto do {COMPANY.group}, operados por{" "}
+        {COMPANY.legalName}, CNPJ{" "}
         {COMPANY.cnpj}, com sede em {COMPANY.address}. Ao usar o site ou a plataforma, você concorda com eles.
         Instituições contratantes também seguem o contrato de prestação de serviços, que prevalece em caso de
         conflito.
@@ -78,7 +79,7 @@ export default function Termos() {
       <h2>7. Propriedade intelectual</h2>
       <p>
         A plataforma, o site, as marcas {COMPANY.brand} e Clinical Pass, os textos, as imagens e os vídeos pertencem
-        a {COMPANY.legalName}. Todos os direitos reservados. Os dados inseridos pela instituição continuam sendo
+        a {COMPANY.legalName}, empresa do {COMPANY.group}. Todos os direitos reservados. Os dados inseridos pela instituição continuam sendo
         dela. Quando a plataforma é usada com a identidade visual de uma instituição, as marcas dessa instituição
         continuam pertencendo a ela.
       </p>

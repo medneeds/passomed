@@ -8,13 +8,16 @@ export const COMPANY = {
   /** Endereço da sede, com cidade/UF e CEP */
   address: "Rua das Laranjeiras, Q62 C20 - Jardim Renascença, São Luís/MA, CEP 65075-250",
   /** Canal de atendimento e de privacidade (encarregado/DPO) */
-  contactEmail: "contato@medstation-ai.com.br",
+  contactEmail: "contato@passomed.com.br",
   /** Atendimento comercial por WhatsApp */
   supportWhatsapp: "(98) 98165-9576",
   supportWhatsappUrl: "https://wa.me/5598981659576",
   /** Encarregado pelo tratamento de dados pessoais (LGPD art. 41) */
   dpoName: "Artur Batista",
   site: "https://www.passomed.com.br",
+  /** Grupo empresarial do qual o PassoMed faz parte */
+  group: "Grupo MedNeeds",
+  groupProducts: ["MedStation", "PassoMed", "Arsenal Med", "MedNeeds", "MedNeeds Organizações", "Arsen"],
 } as const;
 
 /** Data da última revisão das políticas — atualize ao mudar o texto. */

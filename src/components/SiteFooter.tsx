@@ -35,6 +35,9 @@ export function SiteFooter() {
             substitui a passagem de plantão presencial à beira-leito nem o prontuário, e a decisão clínica é sempre
             da equipe assistente.
           </p>
+          <p>
+            O PassoMed é um produto do {COMPANY.group}: {COMPANY.groupProducts.join(" · ")}.
+          </p>
           <p>PassoMed e Clinical Pass são marcas de {COMPANY.legalName}. Reprodução do conteúdo sem autorização é proibida.</p>
         </div>
       </div>

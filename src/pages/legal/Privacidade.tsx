@@ -12,7 +12,8 @@ export default function Privacidade() {
       path="/privacidade"
     >
       <p>
-        Esta política explica como o {COMPANY.brand}, operado por {COMPANY.legalName}, CNPJ {COMPANY.cnpj}, com sede em{" "}
+        Esta política explica como o {COMPANY.brand}, produto do {COMPANY.group} operado por {COMPANY.legalName}, CNPJ{" "}
+        {COMPANY.cnpj}, com sede em{" "}
         {COMPANY.address}, trata dados pessoais de quem visita o site, de quem solicita uma demonstração e de quem usa
         a plataforma, nos termos da Lei Geral de Proteção de Dados (Lei 13.709/2018, "LGPD") e do Marco Civil da
         Internet (Lei 12.965/2014).
@@ -118,6 +119,11 @@ export default function Privacidade() {
         <li>Autoridades públicas, quando houver obrigação legal ou ordem judicial.</li>
       </ul>
       <p>Cada instituição enxerga somente os dados da própria unidade; o isolamento é aplicado no banco de dados.</p>
+      <p>
+        O {COMPANY.brand} faz parte do {COMPANY.group}, que reúne {COMPANY.groupProducts.join(", ")}. Os dados
+        tratados no {COMPANY.brand} não são compartilhados com os outros produtos do grupo. Se você pedir para
+        conhecer outro produto, usaremos seu contato apenas para responder a esse pedido.
+      </p>
 
       <h2>5. Transferência internacional</h2>
       <p>
