@@ -22,10 +22,13 @@ describe("endereço da instituição", () => {
 
   it("prioriza o parâmetro ?i= e ignora valor inválido", () => {
     localStorage.clear();
+    sessionStorage.clear();
     expect(resolveInstitutionSlug({ search: "?i=SaoLucas", hostname: "localhost" }, undefined)).toBe("saolucas");
-    // lembrado para a próxima abertura sem parâmetro
+    // lembrado só nesta aba
     expect(resolveInstitutionSlug({ search: "", hostname: "localhost" }, undefined)).toBe("saolucas");
-    localStorage.clear();
+    sessionStorage.clear();
+    // aba nova no endereço puro: marca padrão da plataforma
+    expect(resolveInstitutionSlug({ search: "", hostname: "localhost" }, undefined)).toBeNull();
     expect(resolveInstitutionSlug({ search: "?i=../../x", hostname: "localhost" }, undefined)).toBeNull();
   });
 });

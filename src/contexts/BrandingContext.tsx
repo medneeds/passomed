@@ -66,13 +66,26 @@ function fingerprint(b: InstitutionBranding | null): string {
 export function bootstrapBrandingFromCache(): void {
   const slug = resolveInstitutionSlug();
   const cached = readCache();
-  // Endereço de outra instituição: o cache não vale.
-  if (cached && slug && cached.slug && cached.slug !== slug) return;
-  if (cached) applyInstitutionBranding(cached);
+  if (!cached) return;
+  // O cache só vale para o endereço da própria instituição ou para quem já
+  // está com sessão aberta. Visitante no endereço puro vê a marca da plataforma.
+  if (slug ? cached.slug === slug : hasStoredSession()) applyInstitutionBranding(cached);
+}
+
+function hasStoredSession(): boolean {
+  try {
+    for (let i = 0; i < localStorage.length; i += 1) {
+      const key = localStorage.key(i) ?? "";
+      if (key.startsWith("sb-") && key.endsWith("-auth-token")) return true;
+    }
+  } catch {
+    /* sem localStorage */
+  }
+  return false;
 }
 
 export function BrandingProvider({ children }: { children: ReactNode }) {
-  const { user } = useAuth();
+  const { user, loading: authLoading } = useAuth();
   const { currentHospital } = useHospital();
   const [branding, setBranding] = useState<InstitutionBranding | null>(() => readCache());
   const [version, setVersion] = useState(0);
@@ -121,16 +134,20 @@ export function BrandingProvider({ children }: { children: ReactNode }) {
 
   // Antes do login: marca pública pelo endereço.
   useEffect(() => {
-    if (user || isPlatformPage) return;
+    if (user || authLoading || isPlatformPage) return;
     const slug = resolveInstitutionSlug();
-    if (!slug) return;
+    if (!slug) {
+      // Sem login e sem endereço de instituição: marca padrão da plataforma.
+      commit(null, true);
+      return;
+    }
     let cancelled = false;
     db.rpc("get_public_branding", { p_slug: slug }).then(({ data, error }: { data: InstitutionBranding | null; error: unknown }) => {
       if (cancelled || error || !data) return;
       commit(data, true);
     });
     return () => { cancelled = true; };
-  }, [user, commit, isPlatformPage]);
+  }, [user, authLoading, commit, isPlatformPage]);
 
   // Depois do login: marca da unidade selecionada.
   useEffect(() => {

@@ -2,8 +2,10 @@
  * Descobre de qual instituição é o endereço aberto, ANTES do login, para a
  * tela de entrada já sair com a marca certa.
  *
- * Ordem: parâmetro `?i=slug` → subdomínio (slug.dominio-base) → último slug
- * usado neste navegador.
+ * Ordem: parâmetro `?i=slug` → subdomínio (slug.dominio-base) → slug usado
+ * nesta aba. A lembrança vale só para a aba (sessionStorage): abrir o endereço
+ * puro de novo mostra a marca padrão da plataforma, e não a do último hospital
+ * visitado.
  */
 const STORAGE_KEY = "passomed.institution-slug";
 const SLUG_RE = /^[a-z0-9](?:[a-z0-9-]{0,38}[a-z0-9])?$/;
@@ -34,7 +36,7 @@ export function resolveInstitutionSlug(
   const fromHost = slugFromHostname(location.hostname, baseDomain);
   if (fromHost) return fromHost;
   try {
-    const stored = localStorage.getItem(STORAGE_KEY);
+    const stored = sessionStorage.getItem(STORAGE_KEY);
     return isValidSlug(stored) ? stored : null;
   } catch {
     return null;
@@ -43,9 +45,11 @@ export function resolveInstitutionSlug(
 
 export function remember(slug: string | null): void {
   try {
-    if (slug && isValidSlug(slug)) localStorage.setItem(STORAGE_KEY, slug);
-    else localStorage.removeItem(STORAGE_KEY);
+    if (slug && isValidSlug(slug)) sessionStorage.setItem(STORAGE_KEY, slug);
+    else sessionStorage.removeItem(STORAGE_KEY);
+    // versões anteriores guardavam no localStorage; limpa o resíduo
+    localStorage.removeItem(STORAGE_KEY);
   } catch {
-    /* navegador sem localStorage: segue sem lembrar */
+    /* navegador sem armazenamento: segue sem lembrar */
   }
 }
