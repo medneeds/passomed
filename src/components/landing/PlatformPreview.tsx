@@ -385,7 +385,7 @@ const SCREENS: SectorScreen[] = [
   },
   {
     id: "enfermaria",
-    label: "Enfermaria",
+    label: "Enfermaria · em breve",
     sectorTag: "ENF",
     icon: CheckCircle2,
     beds: ENFERMARIA,

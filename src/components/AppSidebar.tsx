@@ -14,6 +14,7 @@ import {
   ArrowRightLeft,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useHospital } from "@/contexts/HospitalContext";
 import { whitelabel } from "@/config/whitelabel";
 import { useState } from "react";
 import { AlertDialog, AlertDialogContent, AlertDialogHeader, AlertDialogTitle, AlertDialogDescription, AlertDialogFooter, AlertDialogCancel, AlertDialogAction } from "@/components/ui/alert-dialog";
@@ -60,6 +61,7 @@ export function AppSidebar({
   const { openMobile, setOpenMobile, state } = useSidebar();
   const navigate = useNavigate();
   const { signOut, user, role } = useAuth();
+  const { isPlatformAdmin } = useHospital();
   const isMobile = useIsMobile();
   const isCollapsed = state === "collapsed";
   const [showPasswordDialog, setShowPasswordDialog] = useState(false);
@@ -105,18 +107,29 @@ export function AppSidebar({
     {
       title: "PAINEL ADMIN",
       icon: BarChart3,
-      requiresPassword: true,
+      // Sem senha compartilhada: o painel só existe para o coordenador da
+      // unidade (papel admin), e cada tela é protegida de novo no banco.
+      adminOnly: true,
+      requiresPassword: false,
       items: [
         { name: "DASHBOARD DE GESTÃO", link: "/dashboard" },
         { name: "GESTÃO DE USUÁRIOS", link: "/user-management", badge: pendingResets > 0 ? pendingResets : undefined },
+        { name: "LEITOS E PLANO", link: "/admin/beds" },
+        { name: "IDENTIDADE VISUAL", link: "/admin/branding" },
         { name: "TRILHA DE AUDITORIA", link: "/audit-logs" },
         { name: "PRIVACIDADE LGPD", link: "/privacy" },
-        { name: "CADASTRAR ESTADOS", link: "/admin/states" },
-        { name: "CADASTRAR UNIDADES", link: "/admin/units" },
-        { name: "GERENCIAR COORDENADORES", link: "/admin/coordinators" },
         { name: "PROTOCOLOS SEPSE", link: "/admin/sepsis-protocols" },
         { name: "PROTOCOLOS AVC", link: "/admin/stroke-protocols" },
         { name: "PROTOCOLOS DOR TORÁCICA", link: "/admin/chest-pain-protocols" },
+        // Só o operador da plataforma (implantação de novas instituições)
+        ...(isPlatformAdmin
+          ? [
+              { name: "INSTITUIÇÕES E RECEITA", link: "/admin/institutions" },
+              { name: "CADASTRAR ESTADOS", link: "/admin/states" },
+              { name: "CADASTRAR UNIDADES", link: "/admin/units" },
+              { name: "GERENCIAR COORDENADORES", link: "/admin/coordinators" },
+            ]
+          : []),
       ],
     },
   ];
@@ -140,7 +153,7 @@ export function AppSidebar({
       })
     : allMenuItems;
 
-  const menuItems = baseMenuItems;
+  const menuItems = baseMenuItems.filter(item => !(item as { adminOnly?: boolean }).adminOnly || isCoordinator);
 
   const [pendingNavigation, setPendingNavigation] = useState<string | null>(null);
   const [selectedSection, setSelectedSection] = useState<string | null>(null);
@@ -160,7 +173,8 @@ export function AppSidebar({
   };
 
   const handlePasswordSubmit = () => {
-    if (password === whitelabel.admin.panelPassword) {
+    // A senha compartilhada do painel foi aposentada; o acesso é pelo papel.
+    if (isGestorMaster) {
       // Unlock the section
       if (selectedSection && !unlockedSections.includes(selectedSection)) {
         setUnlockedSections(prev => [...prev, selectedSection]);

@@ -38,6 +38,11 @@ import PrivacyPage from "./pages/PrivacyPage";
 import AdminStatesPage from "./pages/AdminStatesPage";
 import AdminUnitsPage from "./pages/AdminUnitsPage";
 import AdminCoordinatorsPage from "./pages/AdminCoordinatorsPage";
+import AdminBedsPage from "./pages/AdminBedsPage";
+import AdminBrandingPage from "./pages/AdminBrandingPage";
+import AdminInstitutionsPage from "./pages/AdminInstitutionsPage";
+import { AdminRoute } from "@/components/AdminRoute";
+import { DemoBanner } from "@/components/DemoBanner";
 
 
 import SepsisProtocolsAdminPage from "./pages/SepsisProtocolsAdminPage";
@@ -61,6 +66,7 @@ const App = () => {
       <PrivacyProvider>
       <PalliativeFarewellProvider>
       <TooltipProvider>
+        <DemoBanner />
         <Toaster />
         <Sonner />
         <Routes>
@@ -268,17 +274,17 @@ const App = () => {
         <Route
           path="/audit-logs"
           element={
-            <ProtectedRoute>
+            <AdminRoute>
               <AuditLogsPage />
-            </ProtectedRoute>
+            </AdminRoute>
           }
         />
         <Route
           path="/user-management"
           element={
-            <ProtectedRoute>
+            <AdminRoute>
               <UserManagementPage />
-            </ProtectedRoute>
+            </AdminRoute>
           }
         />
         <Route
@@ -289,28 +295,31 @@ const App = () => {
             </ProtectedRoute>
           }
         />
+        <Route path="/admin/beds" element={<AdminRoute><AdminBedsPage /></AdminRoute>} />
+        <Route path="/admin/branding" element={<AdminRoute><AdminBrandingPage /></AdminRoute>} />
+        <Route path="/admin/institutions" element={<AdminRoute platformOnly><AdminInstitutionsPage /></AdminRoute>} />
         <Route
           path="/admin/states"
           element={
-            <ProtectedRoute>
+            <AdminRoute platformOnly>
               <AdminStatesPage />
-            </ProtectedRoute>
+            </AdminRoute>
           }
         />
         <Route
           path="/admin/units"
           element={
-            <ProtectedRoute>
+            <AdminRoute platformOnly>
               <AdminUnitsPage />
-            </ProtectedRoute>
+            </AdminRoute>
           }
         />
         <Route
           path="/admin/coordinators"
           element={
-            <ProtectedRoute>
+            <AdminRoute platformOnly>
               <AdminCoordinatorsPage />
-            </ProtectedRoute>
+            </AdminRoute>
           }
         />
         <Route

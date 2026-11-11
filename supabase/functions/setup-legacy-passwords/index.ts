@@ -1,5 +1,34 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
+// ── Isolamento por instituição ───────────────────────────────────────────────
+// Estas funções rodam com a chave de serviço (ignoram a RLS), então a regra
+// "coordenador só alcança usuários da própria unidade" é aplicada aqui.
+// deno-lint-ignore no-explicit-any
+async function tenantScope(admin: any, callerId: string) {
+  const { data: pa } = await admin.from("platform_admins").select("user_id").eq("user_id", callerId).maybeSingle();
+  const { data: units } = await admin.from("user_hospital_assignments").select("hospital_unit_id").eq("user_id", callerId);
+  return {
+    isPlatformAdmin: !!pa,
+    unitIds: ((units ?? []) as { hospital_unit_id: string }[]).map((u) => u.hospital_unit_id),
+  };
+}
+// deno-lint-ignore no-explicit-any
+async function canManageUser(admin: any, scope: { isPlatformAdmin: boolean; unitIds: string[] }, targetId: string) {
+  if (scope.isPlatformAdmin) return true;
+  const { data: targetPa } = await admin.from("platform_admins").select("user_id").eq("user_id", targetId).maybeSingle();
+  if (targetPa) return false; // coordenador nunca altera o operador da plataforma
+  if (scope.unitIds.length === 0) return false;
+  const { data: shared } = await admin
+    .from("user_hospital_assignments")
+    .select("hospital_unit_id")
+    .eq("user_id", targetId)
+    .in("hospital_unit_id", scope.unitIds)
+    .limit(1);
+  return (shared ?? []).length > 0;
+}
+const FORBIDDEN_OTHER_UNIT = "Este usuário pertence a outra instituição.";
+
+
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers":
@@ -62,6 +91,12 @@ Deno.serve(async (req) => {
         JSON.stringify({ error: "Forbidden: admin role required" }),
         { status: 403, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
+    }
+
+    // Contas genéricas legadas são da plataforma inteira: só o operador mexe.
+    const scope = await tenantScope(supabaseAdmin, claimsData.claims.sub);
+    if (!scope.isPlatformAdmin) {
+      return new Response(JSON.stringify({ error: "Acesso restrito ao operador da plataforma." }), { status: 403, headers: { ...corsHeaders, "Content-Type": "application/json" } });
     }
 
     // Require explicit password in body — no insecure default

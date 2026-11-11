@@ -4,6 +4,8 @@ import { BrowserRouter } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
 import { DepartmentProvider } from "./contexts/DepartmentContext";
 import { HospitalProvider } from "./contexts/HospitalContext";
+import { BrandingProvider, bootstrapBrandingFromCache } from "./contexts/BrandingContext";
+import { ErrorBoundary } from "./components/ErrorBoundary";
 import App from "./App.tsx";
 import "./index.css";
 import "@fontsource/cormorant-garamond/400.css";
@@ -23,13 +25,20 @@ import "@fontsource/fira-sans/500.css";
 import "@fontsource/fira-sans/600.css";
 import "@fontsource/fira-sans/700.css";
 
+// Marca em cache aplicada antes do primeiro render (sem piscar a marca padrão).
+bootstrapBrandingFromCache();
+
 createRoot(document.getElementById("root")!).render(
   <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
     <BrowserRouter>
       <AuthProvider>
         <HospitalProvider>
           <DepartmentProvider>
-            <App />
+            <BrandingProvider>
+              <ErrorBoundary>
+                <App />
+              </ErrorBoundary>
+            </BrandingProvider>
           </DepartmentProvider>
         </HospitalProvider>
       </AuthProvider>

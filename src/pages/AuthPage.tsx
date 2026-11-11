@@ -9,7 +9,7 @@ import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { LogIn, User, Lock, Sparkles, Building2, Eye, EyeOff, Shield, FileCheck, UserPlus } from "lucide-react";
 import { z } from "zod";
-import { whitelabel } from "@/config/whitelabel";
+import { whitelabel, brandHex } from "@/config/whitelabel";
 import { LoadingScreen } from "@/components/LoadingScreen";
 import { cn } from "@/lib/utils";
 import { IndividualSignUpForm } from "@/components/IndividualSignUpForm";
@@ -169,7 +169,7 @@ export default function AuthPage() {
   if (authMode === "individual-signup") {
     return (
       <div className={cn(
-        "min-h-screen bg-gradient-to-br from-[#064e3b] via-[#0a5f44] to-[#0d7a5f] flex items-center justify-center p-4 relative overflow-hidden",
+        "min-h-screen bg-gradient-to-br from-brand-deep via-brand-mid to-brand-bright flex items-center justify-center p-4 relative overflow-hidden",
         "lg:p-0"
       )}>
         {/* Animated background elements */}
@@ -200,7 +200,7 @@ export default function AuthPage() {
   if (authMode === "forgot-password") {
     return (
       <div className={cn(
-        "min-h-screen bg-gradient-to-br from-[#064e3b] via-[#0a5f44] to-[#0d7a5f] flex items-center justify-center p-4 relative overflow-hidden",
+        "min-h-screen bg-gradient-to-br from-brand-deep via-brand-mid to-brand-bright flex items-center justify-center p-4 relative overflow-hidden",
         "lg:p-0"
       )}>
         {/* Animated background elements */}
@@ -228,7 +228,7 @@ export default function AuthPage() {
       )}
       
       <div className={cn(
-        "min-h-screen bg-gradient-to-br from-[#064e3b] via-[#0a5f44] to-[#0d7a5f] flex items-center justify-center p-4 relative overflow-hidden transition-opacity duration-500",
+        "min-h-screen bg-gradient-to-br from-brand-deep via-brand-mid to-brand-bright flex items-center justify-center p-4 relative overflow-hidden transition-opacity duration-500",
         "lg:p-0",
         showLoadingScreen && "opacity-0"
       )}>
@@ -351,28 +351,28 @@ export default function AuthPage() {
           <div className="w-[55%] xl:w-1/2 bg-white flex items-center justify-center p-8 xl:p-12 relative">
             {/* Subtle background pattern for form panel */}
             <div className="absolute inset-0 opacity-[0.015]" style={{
-              backgroundImage: `radial-gradient(circle at 1px 1px, #064e3b 1px, transparent 0)`,
+              backgroundImage: `radial-gradient(circle at 1px 1px, ${brandHex.deep} 1px, transparent 0)`,
               backgroundSize: '20px 20px'
             }} />
             
             {/* Decorative corner accent */}
-            <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-[#064e3b]/5 to-transparent" />
-            <div className="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-[#064e3b]/5 to-transparent" />
+            <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-brand-deep/5 to-transparent" />
+            <div className="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-brand-deep/5 to-transparent" />
             
             <div className="w-full max-w-[320px] relative z-10 animate-in fade-in-0 slide-in-from-right-8 duration-1000 delay-300">
               {/* Form header - minimal */}
               <div className="mb-3 text-center">
-                <div className="inline-flex items-center justify-center h-9 w-9 rounded-lg bg-gradient-to-br from-[#064e3b] to-[#0d7a5f] shadow-md shadow-[#064e3b]/25 mb-1.5">
+                <div className="inline-flex items-center justify-center h-9 w-9 rounded-lg bg-gradient-to-br from-brand-deep to-brand-bright shadow-md shadow-brand-deep/25 mb-1.5">
                   <LogIn className="h-4 w-4 text-white" />
                 </div>
                 <h2 className="text-base font-bold text-gray-900 uppercase">Acesse sua conta</h2>
               </div>
 
               {demoConfig && (
-                <div className="mb-3 rounded-lg border border-[#0d7a5f]/30 bg-gradient-to-br from-[#064e3b]/5 to-[#0d7a5f]/10 p-2.5 text-center animate-in fade-in-0 zoom-in-95 duration-500">
+                <div className="mb-3 rounded-lg border border-brand-bright/30 bg-gradient-to-br from-brand-deep/5 to-brand-bright/10 p-2.5 text-center animate-in fade-in-0 zoom-in-95 duration-500">
                   <div className="flex items-center justify-center gap-1 mb-1">
-                    <Sparkles className="h-3 w-3 text-[#064e3b]" />
-                    <span className="text-[9px] font-bold uppercase tracking-wider text-[#064e3b]">
+                    <Sparkles className="h-3 w-3 text-brand-deep" />
+                    <span className="text-[9px] font-bold uppercase tracking-wider text-brand-deep">
                       Modo Demonstração
                     </span>
                   </div>
@@ -402,7 +402,7 @@ export default function AuthPage() {
                     >
                       <SelectTrigger 
                         id="state-select-desktop"
-                        className="h-7 bg-gray-50/80 dark:bg-gray-50/80 border border-gray-200 focus:border-[#064e3b] focus:ring-1 focus:ring-[#064e3b]/10 rounded text-[10px] font-medium uppercase text-gray-900 dark:text-gray-900"
+                        className="h-7 bg-gray-50/80 dark:bg-gray-50/80 border border-gray-200 focus:border-brand-deep focus:ring-1 focus:ring-brand-deep/10 rounded text-[10px] font-medium uppercase text-gray-900 dark:text-gray-900"
                       >
                         <SelectValue placeholder="Selecione o estado" />
                       </SelectTrigger>
@@ -428,7 +428,7 @@ export default function AuthPage() {
                     >
                       <SelectTrigger 
                         id="hospital-select-desktop"
-                        className="h-7 bg-gray-50/80 dark:bg-gray-50/80 border border-gray-200 focus:border-[#064e3b] focus:ring-1 focus:ring-[#064e3b]/10 rounded text-[10px] font-medium uppercase text-gray-900 dark:text-gray-900 disabled:opacity-50"
+                        className="h-7 bg-gray-50/80 dark:bg-gray-50/80 border border-gray-200 focus:border-brand-deep focus:ring-1 focus:ring-brand-deep/10 rounded text-[10px] font-medium uppercase text-gray-900 dark:text-gray-900 disabled:opacity-50"
                       >
                         <SelectValue placeholder={selectedState ? "Selecione a unidade" : "Selecione o estado primeiro"} />
                       </SelectTrigger>
@@ -454,7 +454,7 @@ export default function AuthPage() {
                     >
                       <SelectTrigger 
                         id="department-select-desktop"
-                        className="h-7 bg-gray-50/80 dark:bg-gray-50/80 border border-gray-200 focus:border-[#064e3b] focus:ring-1 focus:ring-[#064e3b]/10 rounded text-[10px] font-medium uppercase text-gray-900 dark:text-gray-900 disabled:opacity-60"
+                        className="h-7 bg-gray-50/80 dark:bg-gray-50/80 border border-gray-200 focus:border-brand-deep focus:ring-1 focus:ring-brand-deep/10 rounded text-[10px] font-medium uppercase text-gray-900 dark:text-gray-900 disabled:opacity-60"
                       >
                         <SelectValue placeholder="Selecione o setor" />
                       </SelectTrigger>
@@ -492,7 +492,7 @@ export default function AuthPage() {
                           }
                         }}
                         placeholder="DIGITE SEU USUÁRIO"
-                        className="h-7 pl-7 bg-gray-50/80 border border-gray-200 focus:border-[#064e3b] focus:ring-1 focus:ring-[#064e3b]/10 rounded text-[10px] uppercase font-medium text-gray-900 placeholder:text-[9px] placeholder:uppercase placeholder:font-normal placeholder:text-gray-500"
+                        className="h-7 pl-7 bg-gray-50/80 border border-gray-200 focus:border-brand-deep focus:ring-1 focus:ring-brand-deep/10 rounded text-[10px] uppercase font-medium text-gray-900 placeholder:text-[9px] placeholder:uppercase placeholder:font-normal placeholder:text-gray-500"
                         disabled={loading}
                         maxLength={50}
                       />
@@ -515,7 +515,7 @@ export default function AuthPage() {
                           setLoginData({ ...loginData, password: newPassword });
                         }}
                         placeholder="EX: ABC123"
-                        className="h-7 pl-7 pr-7 bg-gray-50/80 border border-gray-200 focus:border-[#064e3b] focus:ring-1 focus:ring-[#064e3b]/10 rounded text-[10px] uppercase font-mono tracking-wider text-gray-900 placeholder:text-[9px] placeholder:uppercase placeholder:font-normal placeholder:font-sans placeholder:tracking-normal placeholder:text-gray-500"
+                        className="h-7 pl-7 pr-7 bg-gray-50/80 border border-gray-200 focus:border-brand-deep focus:ring-1 focus:ring-brand-deep/10 rounded text-[10px] uppercase font-mono tracking-wider text-gray-900 placeholder:text-[9px] placeholder:uppercase placeholder:font-normal placeholder:font-sans placeholder:tracking-normal placeholder:text-gray-500"
                         disabled={loading}
                         maxLength={6}
                       />
@@ -536,7 +536,7 @@ export default function AuthPage() {
                 <Button
                   type="submit"
                   disabled={loading}
-                  className="w-full h-8 mt-1 bg-gradient-to-r from-[#064e3b] to-[#0d7a5f] hover:from-[#043629] hover:to-[#064e3b] text-white font-bold uppercase rounded text-[11px] shadow-md shadow-[#064e3b]/25 transition-all duration-300 hover:shadow-lg hover:scale-[1.01]"
+                  className="w-full h-8 mt-1 bg-gradient-to-r from-brand-deep to-brand-bright hover:from-[#043629] hover:to-brand-deep text-white font-bold uppercase rounded text-[11px] shadow-md shadow-brand-deep/25 transition-all duration-300 hover:shadow-lg hover:scale-[1.01]"
                 >
                   {loading ? (
                     <div className="flex items-center gap-1.5">
@@ -556,7 +556,7 @@ export default function AuthPage() {
                   <button
                     type="button"
                     onClick={() => setAuthMode("forgot-password")}
-                    className="text-[9px] text-gray-400 hover:text-[#064e3b] transition-colors"
+                    className="text-[9px] text-gray-400 hover:text-brand-deep transition-colors"
                   >
                     Esqueci minha senha
                   </button>
@@ -564,7 +564,7 @@ export default function AuthPage() {
                     type="button"
                     variant="ghost"
                     onClick={() => setAuthMode("individual-signup")}
-                    className="text-[#064e3b] hover:text-[#043629] font-semibold text-[10px] uppercase hover:bg-[#064e3b]/5 gap-1 h-6 px-2"
+                    className="text-brand-deep hover:text-[#043629] font-semibold text-[10px] uppercase hover:bg-brand-deep/5 gap-1 h-6 px-2"
                   >
                     <UserPlus className="h-3 w-3" />
                     Criar conta
@@ -626,12 +626,12 @@ export default function AuthPage() {
           {/* Login Card */}
           <div className="bg-white backdrop-blur-2xl rounded-2xl shadow-2xl shadow-black/30 p-5 border border-white/40 relative overflow-hidden animate-in fade-in-0 zoom-in-95 duration-1000 delay-500">
             <div className="absolute inset-0 opacity-20 pointer-events-none">
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#064e3b]/10 to-transparent -translate-x-full animate-[shimmer_3s_ease-in-out_infinite]" />
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-brand-deep/10 to-transparent -translate-x-full animate-[shimmer_3s_ease-in-out_infinite]" />
             </div>
             
             {/* Header inside card */}
             <div className="flex items-center gap-3 mb-4 relative z-10">
-              <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-[#064e3b] to-[#0d7a5f] flex items-center justify-center shadow-md shadow-[#064e3b]/40">
+              <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-brand-deep to-brand-bright flex items-center justify-center shadow-md shadow-brand-deep/40">
                 <LogIn className="h-5 w-5 text-white" />
               </div>
               <div>
@@ -641,10 +641,10 @@ export default function AuthPage() {
             </div>
 
             {demoConfig && (
-              <div className="mb-3 rounded-lg border border-[#0d7a5f]/30 bg-gradient-to-br from-[#064e3b]/5 to-[#0d7a5f]/10 p-3 text-center relative z-10 animate-in fade-in-0 zoom-in-95 duration-500">
+              <div className="mb-3 rounded-lg border border-brand-bright/30 bg-gradient-to-br from-brand-deep/5 to-brand-bright/10 p-3 text-center relative z-10 animate-in fade-in-0 zoom-in-95 duration-500">
                 <div className="flex items-center justify-center gap-1.5 mb-1">
-                  <Sparkles className="h-3.5 w-3.5 text-[#064e3b]" />
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#064e3b]">
+                  <Sparkles className="h-3.5 w-3.5 text-brand-deep" />
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-brand-deep">
                     Modo Demonstração
                   </span>
                 </div>
@@ -679,7 +679,7 @@ export default function AuthPage() {
                   >
                     <SelectTrigger 
                       id="state-select-mobile"
-                      className="h-9 bg-gray-50 dark:bg-gray-50 border border-gray-200 focus:border-[#064e3b] rounded-lg text-xs font-medium uppercase text-gray-900 dark:text-gray-900"
+                      className="h-9 bg-gray-50 dark:bg-gray-50 border border-gray-200 focus:border-brand-deep rounded-lg text-xs font-medium uppercase text-gray-900 dark:text-gray-900"
                     >
                       <SelectValue placeholder="SELECIONE O ESTADO" />
                     </SelectTrigger>
@@ -709,7 +709,7 @@ export default function AuthPage() {
                   >
                     <SelectTrigger 
                       id="hospital-select-mobile"
-                      className="h-9 bg-gray-50 dark:bg-gray-50 border border-gray-200 focus:border-[#064e3b] rounded-lg text-xs font-medium uppercase text-gray-900 dark:text-gray-900 disabled:opacity-50"
+                      className="h-9 bg-gray-50 dark:bg-gray-50 border border-gray-200 focus:border-brand-deep rounded-lg text-xs font-medium uppercase text-gray-900 dark:text-gray-900 disabled:opacity-50"
                     >
                       <SelectValue placeholder={selectedState ? "SELECIONE" : "SELECIONE ESTADO PRIMEIRO"} />
                     </SelectTrigger>
@@ -739,7 +739,7 @@ export default function AuthPage() {
                   >
                     <SelectTrigger 
                       id="department-select-mobile"
-                      className="h-9 bg-gray-50 dark:bg-gray-50 border border-gray-200 focus:border-[#064e3b] rounded-lg text-xs font-medium uppercase text-gray-900 dark:text-gray-900 disabled:opacity-60"
+                      className="h-9 bg-gray-50 dark:bg-gray-50 border border-gray-200 focus:border-brand-deep rounded-lg text-xs font-medium uppercase text-gray-900 dark:text-gray-900 disabled:opacity-60"
                     >
                       <SelectValue placeholder="SELECIONE O SETOR" />
                     </SelectTrigger>
@@ -768,7 +768,7 @@ export default function AuthPage() {
                     id="login-username-mobile"
                     type="text"
                     placeholder="DIGITE SEU USUÁRIO"
-                    className="h-9 bg-gray-50 border border-gray-200 focus:border-[#064e3b] rounded-lg text-xs font-medium uppercase text-gray-900 placeholder:text-gray-500"
+                    className="h-9 bg-gray-50 border border-gray-200 focus:border-brand-deep rounded-lg text-xs font-medium uppercase text-gray-900 placeholder:text-gray-500"
                     value={loginData.username}
                     onChange={(e) => {
                       // Forçar uppercase e só permitir A-Z, 0-9 e ponto
@@ -798,7 +798,7 @@ export default function AuthPage() {
                       id="login-password-mobile"
                       type={showPassword ? "text" : "password"}
                       placeholder="EX: ABC123"
-                      className="h-9 bg-gray-50 border border-gray-200 focus:border-[#064e3b] rounded-lg pr-9 text-xs font-mono uppercase tracking-widest text-gray-900 placeholder:text-gray-500"
+                      className="h-9 bg-gray-50 border border-gray-200 focus:border-brand-deep rounded-lg pr-9 text-xs font-mono uppercase tracking-widest text-gray-900 placeholder:text-gray-500"
                       value={loginData.password}
                       onChange={(e) => {
                         // Forçar uppercase e só permitir A-Z e 0-9, max 6 caracteres
@@ -812,7 +812,7 @@ export default function AuthPage() {
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#064e3b]"
+                      className="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-brand-deep"
                       tabIndex={-1}
                     >
                       {showPassword ? <EyeOff className="h-3.5 w-3.5" /> : <Eye className="h-3.5 w-3.5" />}
@@ -825,7 +825,7 @@ export default function AuthPage() {
               <Button
                 type="submit"
                 disabled={loading}
-                className="w-full h-10 bg-gradient-to-r from-[#064e3b] to-[#0d7a5f] hover:from-[#043629] hover:to-[#064e3b] text-white font-bold text-xs rounded-lg shadow-md shadow-[#064e3b]/30 mt-3 uppercase"
+                className="w-full h-10 bg-gradient-to-r from-brand-deep to-brand-bright hover:from-[#043629] hover:to-brand-deep text-white font-bold text-xs rounded-lg shadow-md shadow-brand-deep/30 mt-3 uppercase"
               >
                 {loading ? (
                   <div className="flex items-center gap-2">
@@ -846,7 +846,7 @@ export default function AuthPage() {
                 <button
                   type="button"
                   onClick={() => setAuthMode("individual-signup")}
-                  className="text-[10px] text-[#064e3b] hover:text-[#043629] font-semibold uppercase flex items-center gap-1"
+                  className="text-[10px] text-brand-deep hover:text-[#043629] font-semibold uppercase flex items-center gap-1"
                 >
                   <UserPlus className="h-3 w-3" />
                   CRIAR CONTA
@@ -862,7 +862,7 @@ export default function AuthPage() {
               <button
                 type="button"
                 onClick={() => setAuthMode("forgot-password")}
-                className="text-[9px] text-gray-500 hover:text-[#064e3b] transition-colors text-center"
+                className="text-[9px] text-gray-500 hover:text-brand-deep transition-colors text-center"
               >
                 Esqueci minha senha
               </button>

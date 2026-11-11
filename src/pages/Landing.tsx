@@ -7,6 +7,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { PlatformPreview } from "@/components/landing/PlatformPreview";
+import { BedPricingCalculator } from "@/components/landing/BedPricingCalculator";
 import logoP from "@/assets/logo-p-cross.png";
 import logoFull from "@/assets/passomed-full-logo.png";
 
@@ -209,7 +210,7 @@ export default function Landing() {
       applicationCategory: "MedicalApplication",
       operatingSystem: "Web",
       description: desc,
-      offers: { "@type": "Offer", price: "0", priceCurrency: "BRL" },
+      offers: { "@type": "Offer", price: "25.00", priceCurrency: "BRL", description: "Por leito fixo, por mês" },
     });
 
     return () => {
@@ -247,7 +248,7 @@ export default function Landing() {
             <button onClick={scrollToPlatform} className="hover:text-foreground transition-colors">Plataforma</button>
             <a href="#modulos" className="hover:text-foreground transition-colors">Módulos</a>
             <a href="#diferenciais" className="hover:text-foreground transition-colors">Diferenciais</a>
-            <a href="#contratar" className="hover:text-foreground transition-colors">Contratar</a>
+            <a href="#contratar" className="hover:text-foreground transition-colors">Preço</a>
             <a href="#faq" className="hover:text-foreground transition-colors">FAQ</a>
           </nav>
           <div className="flex items-center gap-2 md:gap-3">
@@ -308,7 +309,10 @@ export default function Landing() {
               </button>
             </div>
             <p className="mt-4 text-xs text-muted-foreground">
-              Conversa de 20 minutos com a equipe. Sem SDR, sem formulário longo.
+              Conversa de 20 minutos com a equipe. Sem SDR, sem formulário longo.{" "}
+              <a href="#contratar" className="font-medium text-foreground underline decoration-gold/60 underline-offset-4 hover:decoration-gold">
+                R$ 25 por leito ao mês — calcule o seu
+              </a>
             </p>
           </div>
 
@@ -380,7 +384,7 @@ export default function Landing() {
         fullWidthContent
         eyebrow="A proposta"
         title={<>Um mapa vivo do seu setor hospitalar. Em tempo real.</>}
-        subtitle="O PassoMed transforma cada leito do seu setor em um registro clínico vivo — da admissão ao desfecho. Deslize entre Urgência, UTI e Enfermaria."
+        subtitle="O PassoMed transforma cada leito do seu setor em um registro clínico vivo — da admissão ao desfecho. Deslize entre Urgência e UTI. O módulo de Enfermaria está em desenvolvimento."
       >
         <div className="relative">
           <PlatformPreview />
@@ -399,7 +403,7 @@ export default function Landing() {
             {
               step: "01",
               title: "Mapeia",
-              body: "Cada setor, cada leito, cada paciente visíveis em uma única tela. UTI, enfermaria, urgência e emergência, observação — conforme a configuração da unidade.",
+              body: "Cada setor, cada leito, cada paciente visíveis em uma única tela. UTI, urgência e emergência, observação — conforme a configuração da unidade.",
             },
             {
               step: "02",
@@ -517,43 +521,52 @@ export default function Landing() {
 
       {/* ── 11 COMO CONTRATAR ──────────────────────────────── */}
       <SectionShell
-        id="contratar"
-        variant="muted"
-        eyebrow="Como contratar"
-        title={<>Três formatos, uma plataforma.</>}
-        subtitle="Da unidade isolada à rede multi-hospitalar — o escopo se adapta, o produto é o mesmo."
+        id="sua-marca"
+        eyebrow="Com a marca do seu hospital"
+        title={<>A equipe abre a plataforma e vê o hospital dela.</>}
+        subtitle="Nome, logo e cores da instituição nas telas e nos documentos impressos. O coordenador ajusta no painel, sem depender de programador."
       >
         <div className="grid sm:grid-cols-3 gap-5">
           {[
-              { tier: "Unidade", body: "Para uma única unidade clínica (UTI, enfermaria, urgência ou observação)." },
-              { tier: "Hospital", body: "Para a operação completa de um hospital com múltiplas unidades clínicas.", featured: true },
-              { tier: "Rede", body: "Para grupos hospitalares com isolamento de dados por instituição." },
-          ].map((p) => (
-            <div
-              key={p.tier}
-              className={`rounded-2xl border p-6 xl:p-7 flex flex-col transition-all duration-500 ${
-                p.featured
-                  ? "border-gold/60 bg-card shadow-gold"
-                  : "border-border bg-card hover:border-primary/30 hover:-translate-y-0.5"
-              }`}
-            >
-              {p.featured && (
-                <span className="self-start mb-3 text-[0.65rem] uppercase tracking-[0.22em] text-gold font-semibold">
-                  Mais comum
-                </span>
-              )}
-              <h3 className="font-landing-display text-2xl text-foreground">{p.tier}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground flex-1">{p.body}</p>
-              <a
-                href={CONTACT_HREF}
-                className="mt-6 inline-flex items-center justify-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground hover:shadow-glow transition-all"
+            { name: "Hospital Santa Clara", from: "#12305C", to: "#1D4E89", tag: "Azul institucional" },
+            { name: "Instituto Vida", from: "#5B1A2E", to: "#8A2F47", tag: "Vinho" },
+            { name: "Hospital Regional", from: "#064E3B", to: "#0D7A5F", tag: "Esmeralda (padrão)" },
+          ].map((brand) => (
+            <div key={brand.name} className="overflow-hidden rounded-2xl border border-border bg-card">
+              <div
+                className="flex h-28 items-end p-5"
+                style={{ background: `linear-gradient(135deg, ${brand.from}, ${brand.to})` }}
               >
-                Entre em contato
-                <ArrowRight className="h-4 w-4" />
-              </a>
+                <span className="font-landing-display text-xl leading-tight text-white">{brand.name}</span>
+              </div>
+              <div className="flex items-center justify-between gap-3 p-5">
+                <span className="text-sm text-muted-foreground">{brand.tag}</span>
+                <span
+                  className="rounded-full px-3 py-1 text-xs font-medium text-white"
+                  style={{ backgroundColor: brand.from }}
+                >
+                  Botão
+                </span>
+              </div>
             </div>
           ))}
         </div>
+        <p className="mt-6 text-sm leading-relaxed text-muted-foreground max-w-3xl">
+          Nomes de exemplo. As cores dos setores (vermelha, amarela, azul) e os alertas clínicos são iguais em toda instituição:
+          quem troca de hospital não precisa reaprender o mapa. Os dados de cada instituição ficam isolados no banco de dados.
+        </p>
+      </SectionShell>
+
+      {/* ── 11 PREÇO ───────────────────────────────────────── */}
+      <SectionShell
+        id="contratar"
+        variant="muted"
+        fullWidthContent
+        eyebrow="Preço"
+        title={<>R$ 25 por leito, por mês.</>}
+        subtitle="Sem taxa por usuário e sem pacote fechado: você paga pelos leitos fixos que acompanha, da UTI de 10 leitos ao hospital inteiro."
+      >
+        <BedPricingCalculator />
       </SectionShell>
 
       {/* ── 12 FAQ ─────────────────────────────────────────── */}
@@ -586,8 +599,20 @@ export default function Landing() {
                 a: "Os dados pertencem integralmente à instituição. O PassoMed apenas processa e disponibiliza dentro do escopo contratado, com isolamento por unidade.",
               },
               {
-                q: "O PassoMed funciona em UTI, enfermaria e urgência ao mesmo tempo?",
-                a: "Sim. Cada setor é configurado conforme a sua realidade (slots fixos em UTI, leitos dinâmicos em enfermaria, observação em urgência) e todos convivem no mesmo mapa.",
+                q: "O PassoMed funciona em UTI e emergência ao mesmo tempo?",
+                a: "Sim. Hoje a plataforma cobre UTI e urgência/emergência (sala vermelha e salas de observação), cada setor com a quantidade de leitos da sua unidade, no mesmo mapa. O módulo de enfermaria está em desenvolvimento.",
+              },
+              {
+                q: "Quanto custa?",
+                a: "R$ 25 por leito fixo, por mês. Uma UTI de 10 leitos paga R$ 250; uma emergência com 5 leitos de sala vermelha e 10 de observação paga R$ 375. Não há cobrança por usuário.",
+              },
+              {
+                q: "Como os leitos são contados?",
+                a: "Contam os leitos fixos configurados em cada setor. Leitos extras abertos em dia de superlotação não são cobrados. Se a unidade crescer, o contrato é ampliado e o novo leito passa a aparecer no mapa.",
+              },
+              {
+                q: "A plataforma pode ter a marca do meu hospital?",
+                a: "Sim. Nome, logo e cores da instituição aparecem nas telas e nos documentos impressos, e o próprio coordenador ajusta isso no painel.",
               },
           ].map((item, i) => (
             <AccordionItem key={i} value={`item-${i}`} className="border-border">
@@ -647,7 +672,7 @@ export default function Landing() {
               <li><button onClick={scrollToPlatform} className="hover:text-foreground transition-colors">Plataforma</button></li>
               <li><a href="#modulos" className="hover:text-foreground transition-colors">Módulos</a></li>
               <li><a href="#diferenciais" className="hover:text-foreground transition-colors">Diferenciais</a></li>
-              <li><a href="#contratar" className="hover:text-foreground transition-colors">Contratar</a></li>
+              <li><a href="#contratar" className="hover:text-foreground transition-colors">Preço</a></li>
               <li><a href="#faq" className="hover:text-foreground transition-colors">FAQ</a></li>
             </ul>
           </div>

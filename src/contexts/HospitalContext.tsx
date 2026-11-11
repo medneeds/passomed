@@ -1,5 +1,7 @@
 import { createContext, useContext, useState, ReactNode, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { db } from "@/integrations/supabase/untyped";
+import { useAuth } from "@/contexts/AuthContext";
 
 export interface State {
   id: string;
@@ -20,6 +22,8 @@ interface HospitalContextType {
   states: State[];
   hospitals: HospitalUnit[];
   isLoading: boolean;
+  /** Operador da plataforma: atravessa instituições (implantação e suporte). */
+  isPlatformAdmin: boolean;
   setCurrentHospital: (hospital: HospitalUnit) => void;
   fetchStatesAndHospitals: () => Promise<void>;
 }
@@ -35,6 +39,8 @@ export function HospitalProvider({ children }: { children: ReactNode }) {
   const [states, setStates] = useState<State[]>([]);
   const [hospitals, setHospitals] = useState<HospitalUnit[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isPlatformAdmin, setIsPlatformAdmin] = useState(false);
+  const { user } = useAuth();
 
   const fetchStatesAndHospitals = async () => {
     try {
@@ -56,7 +62,26 @@ export function HospitalProvider({ children }: { children: ReactNode }) {
         .order('name');
 
       if (hospitalsError) throw hospitalsError;
-      setHospitals(hospitalsData || []);
+
+      // Usuário logado só enxerga (e alterna entre) as unidades a que está
+      // vinculado; o operador da plataforma vê todas. Sem login (tela de
+      // cadastro) a lista segue completa.
+      let visibleHospitals = hospitalsData || [];
+      let platformAdmin = false;
+      if (user) {
+        const { data: access, error: accessError } = await db.rpc("my_access");
+        if (!accessError && access) {
+          platformAdmin = !!access.is_platform_admin;
+          if (!platformAdmin) {
+            const allowed = new Set<string>(access.unit_ids || []);
+            visibleHospitals = visibleHospitals.filter(h => allowed.has(h.id));
+          }
+        }
+        // Se a função ainda não existe no banco (migração pendente), mantém
+        // o comportamento antigo: lista completa, e a RLS decide o acesso.
+      }
+      setIsPlatformAdmin(platformAdmin);
+      setHospitals(visibleHospitals);
 
       // Try to restore from localStorage or set default
       const storedStateId = localStorage.getItem(STORAGE_KEY_STATE);
@@ -64,7 +89,7 @@ export function HospitalProvider({ children }: { children: ReactNode }) {
 
       if (storedStateId && storedHospitalId) {
         const state = statesData?.find(s => s.id === storedStateId);
-        const hospital = hospitalsData?.find(h => h.id === storedHospitalId);
+        const hospital = visibleHospitals.find(h => h.id === storedHospitalId);
         
         if (state && hospital) {
           setCurrentState(state);
@@ -75,13 +100,17 @@ export function HospitalProvider({ children }: { children: ReactNode }) {
       }
 
       // Default: primeiro estado e primeira unidade disponíveis (whitelabel-agnostic).
-      const defaultState = statesData?.[0];
-      const defaultHospital = hospitalsData?.find(h => h.state_id === defaultState?.id) ?? hospitalsData?.[0];
+      const defaultHospital = visibleHospitals[0];
+      const defaultState = statesData?.find(s => s.id === defaultHospital?.state_id) ?? statesData?.[0];
       if (defaultState && defaultHospital) {
         setCurrentState(defaultState);
         setCurrentHospitalState(defaultHospital);
         localStorage.setItem(STORAGE_KEY_STATE, defaultState.id);
         localStorage.setItem(STORAGE_KEY_HOSPITAL, defaultHospital.id);
+      } else if (user) {
+        // Logado e sem unidade acessível: não mantém seleção de outra instituição.
+        setCurrentHospitalState(null);
+        localStorage.removeItem(STORAGE_KEY_HOSPITAL);
       }
     } catch (error) {
       console.error('Error fetching states and hospitals:', error);
@@ -104,7 +133,9 @@ export function HospitalProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     fetchStatesAndHospitals();
-  }, []);
+    // Refaz ao entrar/sair: a lista de unidades depende de quem está logado.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user?.id]);
 
   return (
     <HospitalContext.Provider
@@ -114,6 +145,7 @@ export function HospitalProvider({ children }: { children: ReactNode }) {
         states,
         hospitals,
         isLoading,
+        isPlatformAdmin,
         setCurrentHospital,
         fetchStatesAndHospitals,
       }}

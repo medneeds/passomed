@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
+import { useHospital } from "@/contexts/HospitalContext";
 import {
   Dialog,
   DialogContent,
@@ -41,6 +42,7 @@ interface CreateUserDialogProps {
 }
 
 export function CreateUserDialog({ open, onOpenChange, onSuccess }: CreateUserDialogProps) {
+  const { currentHospital } = useHospital();
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -104,6 +106,7 @@ export function CreateUserDialog({ open, onOpenChange, onSuccess }: CreateUserDi
           phone: formData.phone || null,
           email: formData.email || null,
           role: formData.role,
+          hospitalUnitId: currentHospital?.id ?? null,
         },
       });
 

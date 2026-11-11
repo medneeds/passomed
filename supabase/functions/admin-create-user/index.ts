@@ -1,5 +1,34 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
+// ── Isolamento por instituição ───────────────────────────────────────────────
+// Estas funções rodam com a chave de serviço (ignoram a RLS), então a regra
+// "coordenador só alcança usuários da própria unidade" é aplicada aqui.
+// deno-lint-ignore no-explicit-any
+async function tenantScope(admin: any, callerId: string) {
+  const { data: pa } = await admin.from("platform_admins").select("user_id").eq("user_id", callerId).maybeSingle();
+  const { data: units } = await admin.from("user_hospital_assignments").select("hospital_unit_id").eq("user_id", callerId);
+  return {
+    isPlatformAdmin: !!pa,
+    unitIds: ((units ?? []) as { hospital_unit_id: string }[]).map((u) => u.hospital_unit_id),
+  };
+}
+// deno-lint-ignore no-explicit-any
+async function canManageUser(admin: any, scope: { isPlatformAdmin: boolean; unitIds: string[] }, targetId: string) {
+  if (scope.isPlatformAdmin) return true;
+  const { data: targetPa } = await admin.from("platform_admins").select("user_id").eq("user_id", targetId).maybeSingle();
+  if (targetPa) return false; // coordenador nunca altera o operador da plataforma
+  if (scope.unitIds.length === 0) return false;
+  const { data: shared } = await admin
+    .from("user_hospital_assignments")
+    .select("hospital_unit_id")
+    .eq("user_id", targetId)
+    .in("hospital_unit_id", scope.unitIds)
+    .limit(1);
+  return (shared ?? []).length > 0;
+}
+const FORBIDDEN_OTHER_UNIT = "Este usuário pertence a outra instituição.";
+
+
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers":
@@ -58,7 +87,16 @@ Deno.serve(async (req) => {
       );
     }
 
-    const { username, password, fullName, crm, specialty, phone, email, role } = await req.json();
+    const { username, password, fullName, crm, specialty, phone, email, role, hospitalUnitId } = await req.json();
+
+    // O usuário novo nasce vinculado a uma unidade do coordenador que o criou.
+    const scope = await tenantScope(supabaseClient, caller.id);
+    const targetUnitId: string | null = hospitalUnitId || (scope.unitIds.length === 1 ? scope.unitIds[0] : null);
+    if (!scope.isPlatformAdmin) {
+      if (!targetUnitId || !scope.unitIds.includes(targetUnitId)) {
+        return new Response(JSON.stringify({ error: "Selecione uma unidade da sua instituição para o novo usuário." }), { status: 403, headers: { ...corsHeaders, "Content-Type": "application/json" } });
+      }
+    }
 
     if (!username || !password || !fullName) {
       return new Response(
@@ -150,6 +188,23 @@ Deno.serve(async (req) => {
 
     if (profileError) {
       console.error("Error updating profile:", profileError);
+    }
+
+    if (targetUnitId) {
+      const { data: existing } = await supabaseClient
+        .from("user_hospital_assignments")
+        .select("hospital_unit_id")
+        .eq("user_id", userId)
+        .eq("hospital_unit_id", targetUnitId)
+        .limit(1);
+      if (!existing || existing.length === 0) {
+        const { error: assignError } = await supabaseClient
+          .from("user_hospital_assignments")
+          .insert({ user_id: userId, hospital_unit_id: targetUnitId });
+        if (assignError) {
+          console.error("Error assigning hospital unit:", assignError);
+        }
+      }
     }
 
     // Assign role (default to medico)

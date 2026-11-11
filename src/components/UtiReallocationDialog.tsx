@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo } from "react";
+import { isWithinFixedRange } from "@/utils/bedCapacityStore";
 import { Patient } from "@/types/patient";
 import {
   Dialog,
@@ -78,7 +79,7 @@ export function UtiReallocationDialog({
 
     const filterBySector = (sector: string) =>
       allPatients.filter(p => {
-        const isFixedBed = /^U(0[1-9]|10)$/.test(p.bedNumber);
+        const isFixedBed = isWithinFixedRange('UTI', sector, p.bedNumber);
         const isNotCurrentPatient = p.id !== patient?.id;
         return p.sector === sector && isFixedBed && isStrictlyVacant(p) && isNotCurrentPatient;
       }).sort((a, b) => {

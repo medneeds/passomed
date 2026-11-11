@@ -66,6 +66,11 @@ export default {
           DEFAULT: "hsl(var(--stable))",
           foreground: "hsl(var(--stable-foreground))",
         },
+        brand: {
+          deep: "hsl(var(--brand-deep) / <alpha-value>)",
+          mid: "hsl(var(--brand-mid) / <alpha-value>)",
+          bright: "hsl(var(--brand-bright) / <alpha-value>)",
+        },
         gold: {
           DEFAULT: "hsl(var(--gold))",
           foreground: "hsl(var(--gold-foreground))",

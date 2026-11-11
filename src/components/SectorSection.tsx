@@ -1,5 +1,7 @@
 import { Patient, SectorType } from "@/types/patient";
 import { SECTOR_BED_CONFIG } from "@/utils/bedNaming";
+import { getFixedBedCount } from "@/utils/bedCapacityStore";
+import { useDepartment } from "@/contexts/DepartmentContext";
 import { PatientCard } from "./PatientCard";
 import { Activity, Printer, Plus, ChevronDown, GripVertical } from "lucide-react";
 import { SectorBedIcon } from "@/components/SectorBedIcon";
@@ -157,6 +159,7 @@ export function SectorSection({
   onRefetch,
   onRequestFromQueue
 }: SectorSectionProps) {
+  const { currentDepartment } = useDepartment();
   const info = sectorInfo[sector];
   const displayTitle = customTitle || info.title;
   const displayIcon = customIcon || info.icon;
@@ -300,7 +303,7 @@ export function SectorSection({
               <p className="text-base font-bold text-foreground print:text-[10px]">
                 {isFixedBedSector ? sortedPatients.filter(p => !p.isVacant).length : patients.length}
                 {SECTOR_BED_CONFIG[sector] && SECTOR_BED_CONFIG[sector].maxRegularBeds !== Infinity && (
-                  <span className="text-xs font-normal text-muted-foreground">/{SECTOR_BED_CONFIG[sector].maxRegularBeds}</span>
+                  <span className="text-xs font-normal text-muted-foreground">/{getFixedBedCount(currentDepartment, sector)}</span>
                 )}
               </p>
             </div>
