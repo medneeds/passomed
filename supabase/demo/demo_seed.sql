@@ -260,19 +260,19 @@ BEGIN
   FROM generate_series(1, 12) n
   LEFT JOIN (VALUES
     (1, 'ANA FICTÍCIA PEREIRA', '58 ANOS', E'PNEUMONIA COMUNITÁRIA\nDM2 DESCOMPENSADO', E'HAS\nDM2',
-       to_char(now() - interval '5 days', 'DD/MM/YYYY'), to_char(now() + interval '1 day', 'DD/MM/YYYY'),
+       now() - interval '5 days', to_char(now() + interval '1 day', 'DD/MM/YYYY'),
        E'CEFTRIAXONA D6/7\nINSULINA BASAL-BOLUS', E'ORAL PARA DIABETES', E'PCR 48, EM QUEDA', E'TRANSIÇÃO PARA VIA ORAL\nORIENTAÇÃO DE ALTA'),
     (2, 'OSVALDO EXEMPLO MARTINS', '71 ANOS', E'ICC DESCOMPENSADA — PERFIL B', E'IAM PRÉVIO\nFA',
-       to_char(now() - interval '3 days', 'DD/MM/YYYY'), to_char(now() + interval '2 days', 'DD/MM/YYYY'),
+       now() - interval '3 days', to_char(now() + interval '2 days', 'DD/MM/YYYY'),
        E'FUROSEMIDA EV\nAJUSTE DE BETABLOQUEADOR', E'HIPOSSÓDICA\nRESTRIÇÃO HÍDRICA 1 L', E'BNP EM QUEDA\nCREATININA 1,4', E'PESO DIÁRIO\nECOCARDIOGRAMA'),
     (3, 'DALVA DEMONSTRAÇÃO COSTA', '64 ANOS', E'PO DE COLECISTECTOMIA VIDEOLAPAROSCÓPICA', E'HAS',
-       to_char(now() - interval '1 day', 'DD/MM/YYYY'), to_char(now(), 'DD/MM/YYYY'),
+       now() - interval '1 day', to_char(now(), 'DD/MM/YYYY'),
        E'ANALGESIA VO\nDEAMBULAÇÃO', E'LEVE', NULL, E'ALTA HOJE SE ACEITAR DIETA'),
     (5, 'GERALDO FICTÍCIO ARAÚJO', '49 ANOS', E'CELULITE EXTENSA EM MIE', E'OBESIDADE\nINSUFICIÊNCIA VENOSA',
-       to_char(now() - interval '4 days', 'DD/MM/YYYY'), to_char(now() + interval '3 days', 'DD/MM/YYYY'),
+       now() - interval '4 days', to_char(now() + interval '3 days', 'DD/MM/YYYY'),
        E'OXACILINA D4', E'GERAL', E'LEUCO 11.200', E'REAVALIAR DESCALONAMENTO\nUSG DOPPLER'),
     (8, 'NEUSA EXEMPLO BATISTA', '83 ANOS', E'ITU COMPLICADA\nDELIRIUM EM RESOLUÇÃO', E'DEMÊNCIA\nDRC ESTÁGIO 3',
-       to_char(now() - interval '6 days', 'DD/MM/YYYY'), to_char(now() + interval '1 day', 'DD/MM/YYYY'),
+       now() - interval '6 days', to_char(now() + interval '1 day', 'DD/MM/YYYY'),
        E'CIPROFLOXACINO VO D2', E'PASTOSA ASSISTIDA', E'UROCULTURA: E. COLI SENSÍVEL', E'CONVERSA COM A FAMÍLIA\nALTA COM CUIDADOR')
   ) AS d(bed, name, age, dx, hx, adm, alta, conducts, diet, exams, pend) ON d.bed = n;
 
