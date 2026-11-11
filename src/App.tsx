@@ -2,7 +2,9 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { useAuth } from "@/contexts/AuthContext";
+import { resolveInstitutionSlug } from "@/lib/institutionSlug";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 import { MainLayout } from "@/components/MainLayout";
 import { PrivacyProvider } from "@/contexts/PrivacyContext";
@@ -60,6 +62,26 @@ import GoIndicatorsPage from "./pages/go/GoIndicatorsPage";
 
 const queryClient = new QueryClient();
 
+/**
+ * Endereço raiz. Quem está logado vai para o mapa; visitante vê a landing.
+ * Se o endereço é de uma instituição (subdomínio ou ?i=), o visitante vai
+ * direto para o login com a marca dela.
+ */
+function HomeRoute() {
+  const { user, loading } = useAuth();
+  const location = useLocation();
+  if (loading) return null;
+  if (user) {
+    return (
+      <ProtectedRoute>
+        <Index />
+      </ProtectedRoute>
+    );
+  }
+  if (resolveInstitutionSlug()) return <Navigate to={`/auth${location.search}`} replace />;
+  return <Landing />;
+}
+
 const App = () => {
   const [isHandoverOpen, setIsHandoverOpen] = useState(false);
   
@@ -74,14 +96,7 @@ const App = () => {
         <Routes>
           <Route path="/auth" element={<AuthPage />} />
           <Route path="/landing" element={<Landing />} />
-          <Route
-            path="/"
-            element={
-              <ProtectedRoute>
-                <Index />
-              </ProtectedRoute>
-            }
-          />
+          <Route path="/" element={<HomeRoute />} />
         <Route
           path="/handovers"
           element={

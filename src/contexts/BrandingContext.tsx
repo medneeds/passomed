@@ -96,7 +96,8 @@ export function BrandingProvider({ children }: { children: ReactNode }) {
   // A landing é a página da PLATAFORMA: nunca veste a marca de uma instituição,
   // mesmo que o visitante tenha a de algum hospital guardada no navegador.
   const { pathname } = useLocation();
-  const isPlatformPage = pathname === "/landing";
+  // A raiz também é a landing para quem não está logado e não veio por endereço de instituição.
+  const isPlatformPage = pathname === "/landing" || (pathname === "/" && !user && !authLoading && !resolveInstitutionSlug());
   const platformPageRef = useRef(isPlatformPage);
   platformPageRef.current = isPlatformPage;
   useLayoutEffect(() => {
