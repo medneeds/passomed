@@ -279,6 +279,7 @@ export function RequestUtiAllocationDialog({ open, onOpenChange }: RequestUtiAll
         utiAdmissionDate: [],
         utiDischargePrediction: [],
         utiAllergies: [],
+        utiDiet: [],
         utiAdmissionReason: [],
         utiCurrentStatus: [],
         utiDevices: [],

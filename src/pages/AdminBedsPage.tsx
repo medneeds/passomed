@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Loader2, BedDouble, Save } from "lucide-react";
 import { toast } from "sonner";
+import { isInpatientDepartment, inpatientSectorLabel } from "@/utils/departments";
 import { DEPARTMENTS, DEPARTMENT_LABELS, Department } from "@/contexts/DepartmentContext";
 import { useHospital } from "@/contexts/HospitalContext";
 import { useSectorBedCapacities } from "@/hooks/useSectorBedCapacities";
@@ -123,7 +124,7 @@ export default function AdminBedsPage() {
                         ? "Nenhum leito fixo"
                         : `${padBed(prefix, 1)} — ${padBed(prefix, count)}`;
                     const label =
-                      dept === "UTI" ? UTI_SECTOR_LABELS[sector] : SECTOR_LABELS[sector];
+                      isInpatientDepartment(dept) ? inpatientSectorLabel(dept, sector) : SECTOR_LABELS[sector];
                     return (
                       <div
                         key={sector}

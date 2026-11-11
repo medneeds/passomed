@@ -119,7 +119,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         const isAdmin = (roleData?.role as UserRole) === "admin";
         setAllowedDepartments(
           isAdmin
-            ? ["URGÊNCIA E EMERGÊNCIA ADULTO", "URGÊNCIA E EMERGÊNCIA PEDIÁTRICA", "UTI"]
+            ? ["URGÊNCIA E EMERGÊNCIA ADULTO", "URGÊNCIA E EMERGÊNCIA PEDIÁTRICA", "UTI", "ENFERMARIA"]
             : fetched
         );
       }

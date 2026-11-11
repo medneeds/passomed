@@ -3,7 +3,8 @@ import { createContext, useContext, useState, ReactNode, useEffect } from "react
 export type Department = 
   | "URGÊNCIA E EMERGÊNCIA ADULTO"
   | "URGÊNCIA E EMERGÊNCIA PEDIÁTRICA"
-  | "UTI";
+  | "UTI"
+  | "ENFERMARIA";
 
 interface DepartmentContextType {
   currentDepartment: Department;
@@ -48,12 +49,14 @@ export const DEPARTMENTS: Department[] = [
   "URGÊNCIA E EMERGÊNCIA ADULTO",
   "URGÊNCIA E EMERGÊNCIA PEDIÁTRICA",
   "UTI",
+  "ENFERMARIA",
 ];
 
 export const DEPARTMENT_LABELS: Record<Department, string> = {
   "URGÊNCIA E EMERGÊNCIA ADULTO": "UE ADULTO",
   "URGÊNCIA E EMERGÊNCIA PEDIÁTRICA": "UE PEDIÁTRICA",
   "UTI": "UTI",
+  "ENFERMARIA": "ENFERMARIA",
 };
 
 export function getDepartmentLabel(dept: Department | string | null | undefined): string {

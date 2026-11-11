@@ -16,16 +16,20 @@ export type CapacityRow = {
 
 export const DEFAULT_FIXED_COUNTS: Record<string, Record<string, number>> = {
   UTI: { blue: 10, yellow: 10 },
+  // Enfermaria nasce sem leitos: a unidade define o quantitativo que contratou.
+  ENFERMARIA: { blue: 0, yellow: 0 },
   __default__: { red: 7, yellow: 6, blue: 6 },
 };
 
 export const DEFAULT_PREFIXES: Record<string, Record<string, string>> = {
   UTI: { blue: 'U', yellow: 'U' },
+  ENFERMARIA: { blue: 'E', yellow: 'E' },
   __default__: { red: 'V', yellow: 'A', blue: 'Z' },
 };
 
 export const CONFIGURABLE_SECTORS: Record<string, string[]> = {
   UTI: ['blue', 'yellow'],
+  ENFERMARIA: ['blue', 'yellow'],
   __default__: ['red', 'yellow', 'blue'],
 };
 
@@ -54,7 +58,7 @@ export function subscribeCapacities(listener: () => void) {
 }
 
 export function getSectorGroup(department: string | null | undefined) {
-  return department === 'UTI' ? 'UTI' : '__default__';
+  return department === 'UTI' || department === 'ENFERMARIA' ? department : '__default__';
 }
 
 export function getDefaultFixedBedCount(department: string | null | undefined, sector: string) {

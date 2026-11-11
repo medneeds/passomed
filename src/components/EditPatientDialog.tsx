@@ -1,3 +1,4 @@
+import { isInpatientDepartment, inpatientNoun, inpatientLongName, inpatientUnitLabel } from "@/utils/departments";
 import { useState, useEffect } from "react";
 import { Patient, PatientCategory } from "@/types/patient";
 import {
@@ -110,7 +111,7 @@ export function EditPatientDialog({
   const [formData, setFormData] = useState(patient);
   const [admissionHistoryLocal, setAdmissionHistoryLocal] = useState("");
   const { currentDepartment } = useDepartment();
-  const isUti = currentDepartment === "UTI";
+  const isUti = isInpatientDepartment(currentDepartment);
 
   // Reset form data when patient changes or dialog opens
   useEffect(() => {
@@ -143,6 +144,7 @@ export function EditPatientDialog({
       admissionDate: new Date().toISOString().slice(0, 16).replace("T", " "),
       utiDevices: [],
       utiAllergies: [],
+      utiDiet: [],
       utiCulturesAntibiotics: [],
       utiSpecialties: [],
       utiCurrentStatus: [],

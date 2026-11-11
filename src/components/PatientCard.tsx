@@ -1,3 +1,5 @@
+import { useFieldSettings } from "@/hooks/useFieldSettings";
+import { isInpatientDepartment, inpatientNoun, inpatientLongName, inpatientUnitLabel } from "@/utils/departments";
 import { useState, useRef, useEffect, useCallback, useMemo, memo } from "react";
 import { Patient, SectorType, MedicalResponsibility } from "@/types/patient";
 import { Card } from "@/components/ui/card";
@@ -790,6 +792,7 @@ export function PatientCard({ patient, onUpdate, onDelete, onUndelete, selection
   const config = sectorConfig[patient.sector];
   const { toast: toastHook } = useToast();
   const { currentDepartment } = useDepartment();
+  const { showField } = useFieldSettings();
   const isPediatric = currentDepartment === "URGÊNCIA E EMERGÊNCIA PEDIÁTRICA";
   const { calculateAge, isCalculating } = useAgeCalculator(isPediatric);
   const navigate = useNavigate();
@@ -1771,7 +1774,7 @@ export function PatientCard({ patient, onUpdate, onDelete, onUndelete, selection
                 <div className="flex flex-col flex-1 min-w-0 md:col-span-4">
                 <div className="flex items-center gap-1.5 mb-0.5">
                   <span className="text-xs md:text-[10px] font-medium text-muted-foreground">Paciente</span>
-                  {stayTimer && currentDepartment !== "UTI" && (
+                  {stayTimer && !isInpatientDepartment(currentDepartment) && (
                     <div 
                       className={cn(
                         "inline-flex items-center gap-0.5 px-1.5 py-0 rounded-full text-[8px] font-semibold border print:hidden",
@@ -2022,7 +2025,7 @@ export function PatientCard({ patient, onUpdate, onDelete, onUndelete, selection
               {/* Fim do wrapper mobile Leito+Paciente */}
 
             {/* UTI - Campos específicos logo após nome do paciente */}
-            {currentDepartment === "UTI" && (
+            {isInpatientDepartment(currentDepartment) && (
               <>
                 {/* Bloco Administrativo - Linha 1 */}
                 <div className="w-full md:col-span-12 border-l-2 border-primary/20 pl-3 py-2 bg-muted/5 rounded-r">
@@ -3279,7 +3282,7 @@ export function PatientCard({ patient, onUpdate, onDelete, onUndelete, selection
             )}
 
             {/* Hipóteses / Diagnósticos - apenas para outros departamentos */}
-            {currentDepartment !== "UTI" && (
+            {!isInpatientDepartment(currentDepartment) && showField(currentDepartment, "diagnoses") && (
               <div className="flex flex-col md:col-span-3 relative">
                 <div className="flex items-center gap-1 mb-0.5">
                   <span className="text-[10px] font-medium text-muted-foreground">Hipóteses / Diagnósticos</span>
@@ -3375,7 +3378,7 @@ export function PatientCard({ patient, onUpdate, onDelete, onUndelete, selection
             )}
 
             {/* Antecedentes - apenas para outros departamentos */}
-            {currentDepartment !== "UTI" && (
+            {!isInpatientDepartment(currentDepartment) && showField(currentDepartment, "medicalHistory") && (
               <div className="flex flex-col md:col-span-3 relative">
                 <div className="flex items-center gap-1 mb-0.5">
                   <span className="text-[10px] font-medium text-muted-foreground">Antecedentes</span>
@@ -3479,7 +3482,7 @@ export function PatientCard({ patient, onUpdate, onDelete, onUndelete, selection
             )}
 
             {/* Exames - apenas para outros departamentos */}
-            {currentDepartment !== "UTI" && (
+            {!isInpatientDepartment(currentDepartment) && showField(currentDepartment, "relevantExams") && (
               <div className="flex flex-col md:col-span-3 relative">
                 <div className="flex items-center gap-2 mb-0.5">
                   <span className="text-[10px] font-medium text-muted-foreground">Exames</span>
@@ -3606,7 +3609,7 @@ export function PatientCard({ patient, onUpdate, onDelete, onUndelete, selection
             )}
 
             {/* Programações / Pendências - apenas para outros departamentos */}
-            {currentDepartment !== "UTI" && (
+            {!isInpatientDepartment(currentDepartment) && showField(currentDepartment, "pendencies") && (
               <div className="flex flex-col md:col-span-5 relative">
                 <div className="flex items-center gap-3 mb-0.5">
                   <span className="text-[10px] font-medium text-muted-foreground">Programações / Pendências</span>

@@ -1,3 +1,4 @@
+import { isInpatientDepartment, inpatientNoun, inpatientLongName, inpatientUnitLabel } from "@/utils/departments";
 import { useState, useEffect, useMemo } from "react";
 import { isWithinFixedRange } from "@/utils/bedCapacityStore";
 import { Patient } from "@/types/patient";
@@ -79,7 +80,7 @@ export function UtiReallocationDialog({
 
     const filterBySector = (sector: string) =>
       allPatients.filter(p => {
-        const isFixedBed = isWithinFixedRange('UTI', sector, p.bedNumber);
+        const isFixedBed = isWithinFixedRange(currentDepartment, sector, p.bedNumber);
         const isNotCurrentPatient = p.id !== patient?.id;
         return p.sector === sector && isFixedBed && isStrictlyVacant(p) && isNotCurrentPatient;
       }).sort((a, b) => {
@@ -92,7 +93,7 @@ export function UtiReallocationDialog({
       "UTI 1": filterBySector("blue"),
       "UTI 2": filterBySector("yellow"),
     };
-  }, [allPatients, patient?.id]);
+  }, [allPatients, patient?.id, currentDepartment]);
 
   // Get available beds for selected unit
   const availableBeds = targetUnit ? emptyBeds[targetUnit as keyof typeof emptyBeds] || [] : [];
@@ -185,6 +186,7 @@ export function UtiReallocationDialog({
           uti_admission_date: toFirstIsoDate(patient.utiAdmissionDate),
           uti_discharge_prediction: patient.utiDischargePrediction?.join('\n') || null,
           uti_allergies: patient.utiAllergies?.join('\n') || null,
+          uti_diet: patient.utiDiet?.join('\n') || null,
           uti_admission_reason: patient.utiAdmissionReason?.join('\n') || null,
           uti_current_status: patient.utiCurrentStatus?.join('\n') || null,
           uti_devices: patient.utiDevices?.join('\n') || null,
@@ -223,6 +225,7 @@ export function UtiReallocationDialog({
           uti_admission_date: null,
           uti_discharge_prediction: null,
           uti_allergies: null,
+          uti_diet: null,
           uti_admission_reason: null,
           uti_current_status: null,
           uti_devices: null,
@@ -330,7 +333,7 @@ export function UtiReallocationDialog({
                 <SelectItem value="UTI 1">
                   <div className="flex items-center gap-2">
                     <BedDouble className="h-4 w-4 text-blue-500" />
-                    <span>UTI Unidade 1</span>
+                    <span>{inpatientNoun(currentDepartment)} Unidade 1</span>
                     <Badge variant="secondary" className="ml-2 text-xs">
                       {emptyBeds["UTI 1"].length} vago(s)
                     </Badge>
@@ -339,7 +342,7 @@ export function UtiReallocationDialog({
                 <SelectItem value="UTI 2">
                   <div className="flex items-center gap-2">
                     <BedDouble className="h-4 w-4 text-amber-500" />
-                    <span>UTI Unidade 2</span>
+                    <span>{inpatientNoun(currentDepartment)} Unidade 2</span>
                     <Badge variant="secondary" className="ml-2 text-xs">
                       {emptyBeds["UTI 2"].length} vago(s)
                     </Badge>
@@ -395,7 +398,7 @@ export function UtiReallocationDialog({
           {totalEmptyBeds === 0 && (
             <div className="p-3 bg-red-50 dark:bg-red-950/30 border border-red-200 dark:border-red-800 rounded-lg">
               <p className="text-sm text-red-700 dark:text-red-400">
-                Não há leitos vagos disponíveis em nenhuma unidade de UTI.
+                Não há leitos vagos disponíveis em nenhuma unidade de {inpatientNoun(currentDepartment)}.
               </p>
             </div>
           )}

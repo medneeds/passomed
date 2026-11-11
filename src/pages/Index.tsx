@@ -1,5 +1,6 @@
+import { isInpatientDepartment, inpatientNoun, inpatientLongName, inpatientUnitLabel } from "@/utils/departments";
 import { RELEASED_BED_FIELDS } from "@/utils/releaseBed";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { SectorSection } from "@/components/SectorSection";
 import { SectorBedIcon } from "@/components/SectorBedIcon";
 import { EmptySectorState } from "@/components/EmptySectorState";
@@ -205,8 +206,12 @@ const Index = () => {
     else sessionStorage.removeItem('selected_uti_unit');
   }, [selectedUtiUnit]);
   // Reset selection when leaving UTI department
+  const previousDepartmentRef = useRef(currentDepartment);
   useEffect(() => {
-    if (currentDepartment !== 'UTI') setSelectedUtiUnit(null);
+    // Trocou de departamento (UTI ↔ enfermaria ou saída da internação): volta ao seletor.
+    if (previousDepartmentRef.current === currentDepartment) return;
+    previousDepartmentRef.current = currentDepartment;
+    setSelectedUtiUnit(null);
   }, [currentDepartment]);
   const [isNotesSectionOpen, setIsNotesSectionOpen] = useState(false);
   const [printingSector, setPrintingSector] = useState<string | null>(null);
@@ -491,10 +496,11 @@ const Index = () => {
       admissionDate: new Date().toISOString().slice(0, 16).replace('T', ' '),
       highlightedPendencies: [],
       patientCategory: category || 'clinica_medica',
-      ...(currentDepartment === 'UTI' && {
+      ...(isInpatientDepartment(currentDepartment) && {
         utiAdmissionDate: [],
         utiDischargePrediction: [],
         utiAllergies: [],
+        utiDiet: [],
         utiAdmissionReason: [],
         utiCurrentStatus: [],
         utiDevices: [],
@@ -613,6 +619,7 @@ const Index = () => {
         utiAdmissionDate: patient.utiAdmissionDate,
         utiDischargePrediction: patient.utiDischargePrediction,
         utiAllergies: patient.utiAllergies,
+        utiDiet: patient.utiDiet,
         utiAdmissionReason: patient.utiAdmissionReason,
         utiCurrentStatus: patient.utiCurrentStatus,
         utiDevices: patient.utiDevices,
@@ -900,14 +907,14 @@ const Index = () => {
     // On mobile, open the preview dialog for better PDF generation
     if (isMobile) {
       // Use UTI-specific dialog for UTI department
-      if (currentDepartment === "UTI") {
+      if (isInpatientDepartment(currentDepartment)) {
         setPreviewUtiMapMode('compact');
       } else {
         setPreviewMapMode('compact');
       }
     } else {
       // Desktop: for UTI, always use preview dialog with selection
-      if (currentDepartment === "UTI") {
+      if (isInpatientDepartment(currentDepartment)) {
         setPreviewUtiMapMode('compact');
       } else {
         // Desktop: use traditional print approach for other departments
@@ -924,7 +931,7 @@ const Index = () => {
   const handlePrintSector = (sector: string) => {
     // Para UTI, usa o mesmo fluxo do botão do cabeçalho (preview dialog otimizado)
     // respeitando a unidade do setor clicado (blue = UTI 1, yellow = UTI 2).
-    if (currentDepartment === "UTI" && (sector === "blue" || sector === "yellow")) {
+    if (isInpatientDepartment(currentDepartment) && (sector === "blue" || sector === "yellow")) {
       setSelectedUtiUnit(sector === "blue" ? "UTI 1" : "UTI 2");
       setPreviewUtiMapMode('compact');
       return;
@@ -977,7 +984,7 @@ const Index = () => {
         {/* Print-only layout - Hidden on screen, visible only when printing */}
         {printMode && (
           <div className="print-layout-container">
-            {currentDepartment === "UTI" ? (() => {
+            {isInpatientDepartment(currentDepartment) ? (() => {
               // Para UTI: respeita a unidade selecionada (UTI 1 = blue, UTI 2 = yellow)
               // Quando uma unidade está selecionada e não há filtro de setor/seleção,
               // imprime apenas os pacientes daquela unidade.
@@ -1416,7 +1423,7 @@ const Index = () => {
           {/* Main Content */}
           <main className="container mx-auto px-2 sm:px-4 py-3 sm:py-6 print:py-0 print:px-1 pt-[120px] sm:pt-[110px] print:pt-3">
             <div className="space-y-3 sm:space-y-4 print:space-y-1">
-              {currentDepartment === "UTI" ? (
+              {isInpatientDepartment(currentDepartment) ? (
                 selectedUtiUnit === null ? (
                   <UtiUnitSelector
                     patients={patients}
@@ -1436,7 +1443,7 @@ const Index = () => {
                               : "text-muted-foreground hover:text-foreground"
                           )}
                         >
-                          UTI 1
+                          {inpatientUnitLabel(currentDepartment, 'UTI 1')}
                         </button>
                         <button
                           onClick={() => setSelectedUtiUnit('UTI 2')}
@@ -1447,7 +1454,7 @@ const Index = () => {
                               : "text-muted-foreground hover:text-foreground"
                           )}
                         >
-                          UTI 2
+                          {inpatientUnitLabel(currentDepartment, 'UTI 2')}
                         </button>
                       </div>
                       <button
@@ -1473,7 +1480,7 @@ const Index = () => {
                         onTransfer={handleTransferPatient}
                         onPrintPatient={handlePrintPatient}
                         onRefetch={refetch}
-                        customTitle="UNIDADE DE TERAPIA INTENSIVA 1"
+                        customTitle={`${inpatientLongName(currentDepartment).toUpperCase()} 1`}
                         customIcon={<span className="w-2.5 h-2.5 rounded-full bg-primary border border-gold/50" />}
                         colorVariant="blue"
                         allPatients={patients}
@@ -1495,7 +1502,7 @@ const Index = () => {
                         onTransfer={handleTransferPatient}
                         onPrintPatient={handlePrintPatient}
                         onRefetch={refetch}
-                        customTitle="UNIDADE DE TERAPIA INTENSIVA 2"
+                        customTitle={`${inpatientLongName(currentDepartment).toUpperCase()} 2`}
                         customIcon={<span className="w-2.5 h-2.5 rounded-full bg-gold border border-primary/40" />}
                         colorVariant="yellow"
                         allPatients={patients}

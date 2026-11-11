@@ -46,6 +46,7 @@ export interface Patient {
   utiAdmissionDate?: string[];
   utiDischargePrediction?: string[];
   utiAllergies?: string[];
+  utiDiet?: string[];
   utiAdmissionReason?: string[];
   utiCurrentStatus?: string[];
   utiDevices?: string[];

@@ -116,7 +116,7 @@ export function BedPlanSummary() {
                     <td className="px-3 py-2">
                       {item.label}
                       <span className="ml-2 text-xs text-muted-foreground">
-                        {item.department === "UTI" ? "" : item.department.includes("PEDIÁTRICA") ? "UE Pediátrica" : "UE Adulto"}
+                        {item.department === "UTI" || item.department === "ENFERMARIA" ? "" : item.department.includes("PEDIÁTRICA") ? "UE Pediátrica" : "UE Adulto"}
                       </span>
                     </td>
                     <td className="px-3 py-2 text-right tabular-nums">{item.beds}</td>

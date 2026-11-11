@@ -125,6 +125,7 @@ BEGIN
   DELETE FROM public.bed_allocation_requests WHERE hospital_unit_id IN (v_a, v_b);
   ALTER TABLE public.patients DISABLE TRIGGER USER;
   DELETE FROM public.patients WHERE hospital_unit_id IN (v_a, v_b);
+  DELETE FROM public.unit_field_settings WHERE hospital_unit_id IN (v_a, v_b);
   ALTER TABLE public.patients ENABLE TRIGGER USER;
   DELETE FROM public.audit_logs WHERE hospital_unit_id IN (v_a, v_b) OR hospital_unit_id IS NULL;
 
@@ -151,7 +152,8 @@ BEGIN
     jsonb_build_object('department', UE,    'sector', 'yellow', 'beds', 10),
     jsonb_build_object('department', UE,    'sector', 'blue',   'beds', 6),
     jsonb_build_object('department', 'UTI', 'sector', 'blue',   'beds', 10),
-    jsonb_build_object('department', 'UTI', 'sector', 'yellow', 'beds', 10)
+    jsonb_build_object('department', 'UTI', 'sector', 'yellow', 'beds', 10),
+    jsonb_build_object('department', 'ENFERMARIA', 'sector', 'blue', 'beds', 12)
   ), 'demo', 2990);
   PERFORM public.provision_unit_beds(v_b, jsonb_build_array(
     jsonb_build_object('department', 'UTI', 'sector', 'blue', 'beds', 10)
@@ -159,8 +161,9 @@ BEGIN
 
   -- Usuários de demonstração ---------------------------------------------------
   PERFORM demo.ensure_user('DEMO.GESTOR', 'Coordenação — Hospital Demonstração', v_admin_pw, 'admin', v_a,
-                           ARRAY[UE, 'URGÊNCIA E EMERGÊNCIA PEDIÁTRICA', 'UTI']);
+                           ARRAY[UE, 'URGÊNCIA E EMERGÊNCIA PEDIÁTRICA', 'UTI', 'ENFERMARIA']);
   PERFORM demo.ensure_user('DEMO.UTI', 'Plantonista UTI — Demonstração', v_pw, 'medico', v_a, ARRAY['UTI']);
+  PERFORM demo.ensure_user('DEMO.ENF', 'Plantonista Enfermaria — Demonstração', v_pw, 'medico', v_a, ARRAY['ENFERMARIA']);
   PERFORM demo.ensure_user('DEMO.URG', 'Plantonista Emergência — Demonstração', v_pw, 'medico', v_a, ARRAY[UE]);
   PERFORM demo.ensure_user('SAOLUCAS.GESTOR', 'Coordenação — Hospital São Lucas', v_admin_pw, 'admin', v_b, ARRAY['UTI']);
   PERFORM demo.ensure_user('SAOLUCAS.UTI', 'Plantonista UTI — São Lucas', v_pw, 'medico', v_b, ARRAY['UTI']);
@@ -247,6 +250,31 @@ BEGIN
        E'CEFTRIAXONA D4', E'TRE HOJE\nFISIOTERAPIA MOTORA', E'RETIRAR DRENO')
   ) AS d(sector, bed, name, age, dx, hx, adm, reason, status, devices, atb, conducts, pend)
     ON d.sector = s.sector AND d.bed = n;
+
+  -- Hospital Demonstração · Enfermaria 1 (12)
+  INSERT INTO public.patients (bed_number, name, age, sector, department, state_id, hospital_unit_id,
+                               diagnoses, medical_history, uti_admission_date, uti_discharge_prediction,
+                               uti_daily_conducts, uti_diet, relevant_exams, pendencies, display_order, is_vacant)
+  SELECT 'E' || lpad(n::text, 2, '0'), coalesce(d.name, ''), d.age, 'blue', 'ENFERMARIA', v_state, v_a,
+         d.dx, d.hx, d.adm, d.alta, d.conducts, d.diet, d.exams, d.pend, n, d.name IS NULL
+  FROM generate_series(1, 12) n
+  LEFT JOIN (VALUES
+    (1, 'ANA FICTÍCIA PEREIRA', '58 ANOS', E'PNEUMONIA COMUNITÁRIA\nDM2 DESCOMPENSADO', E'HAS\nDM2',
+       to_char(now() - interval '5 days', 'DD/MM/YYYY'), to_char(now() + interval '1 day', 'DD/MM/YYYY'),
+       E'CEFTRIAXONA D6/7\nINSULINA BASAL-BOLUS', E'ORAL PARA DIABETES', E'PCR 48, EM QUEDA', E'TRANSIÇÃO PARA VIA ORAL\nORIENTAÇÃO DE ALTA'),
+    (2, 'OSVALDO EXEMPLO MARTINS', '71 ANOS', E'ICC DESCOMPENSADA — PERFIL B', E'IAM PRÉVIO\nFA',
+       to_char(now() - interval '3 days', 'DD/MM/YYYY'), to_char(now() + interval '2 days', 'DD/MM/YYYY'),
+       E'FUROSEMIDA EV\nAJUSTE DE BETABLOQUEADOR', E'HIPOSSÓDICA\nRESTRIÇÃO HÍDRICA 1 L', E'BNP EM QUEDA\nCREATININA 1,4', E'PESO DIÁRIO\nECOCARDIOGRAMA'),
+    (3, 'DALVA DEMONSTRAÇÃO COSTA', '64 ANOS', E'PO DE COLECISTECTOMIA VIDEOLAPAROSCÓPICA', E'HAS',
+       to_char(now() - interval '1 day', 'DD/MM/YYYY'), to_char(now(), 'DD/MM/YYYY'),
+       E'ANALGESIA VO\nDEAMBULAÇÃO', E'LEVE', NULL, E'ALTA HOJE SE ACEITAR DIETA'),
+    (5, 'GERALDO FICTÍCIO ARAÚJO', '49 ANOS', E'CELULITE EXTENSA EM MIE', E'OBESIDADE\nINSUFICIÊNCIA VENOSA',
+       to_char(now() - interval '4 days', 'DD/MM/YYYY'), to_char(now() + interval '3 days', 'DD/MM/YYYY'),
+       E'OXACILINA D4', E'GERAL', E'LEUCO 11.200', E'REAVALIAR DESCALONAMENTO\nUSG DOPPLER'),
+    (8, 'NEUSA EXEMPLO BATISTA', '83 ANOS', E'ITU COMPLICADA\nDELIRIUM EM RESOLUÇÃO', E'DEMÊNCIA\nDRC ESTÁGIO 3',
+       to_char(now() - interval '6 days', 'DD/MM/YYYY'), to_char(now() + interval '1 day', 'DD/MM/YYYY'),
+       E'CIPROFLOXACINO VO D2', E'PASTOSA ASSISTIDA', E'UROCULTURA: E. COLI SENSÍVEL', E'CONVERSA COM A FAMÍLIA\nALTA COM CUIDADOR')
+  ) AS d(bed, name, age, dx, hx, adm, alta, conducts, diet, exams, pend) ON d.bed = n;
 
   -- Hospital São Lucas · UTI (10) — instituição separada, marca própria
   INSERT INTO public.patients (bed_number, name, age, sector, department, state_id, hospital_unit_id,

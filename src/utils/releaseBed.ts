@@ -30,6 +30,7 @@ export const RELEASED_BED_FIELDS: Partial<Patient> = {
   utiAdmissionDate: [],
   utiDischargePrediction: [],
   utiAllergies: [],
+  utiDiet: [],
   utiAdmissionReason: [],
   utiCurrentStatus: [],
   utiDevices: [],

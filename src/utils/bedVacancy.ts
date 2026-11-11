@@ -1,3 +1,4 @@
+import { isInpatientDepartment } from "@/utils/departments";
 import { supabase } from "@/integrations/supabase/client";
 import { vacantPatientSlotPayload } from "@/utils/patientSlotPayload";
 import { isWithinFixedRange } from "@/utils/bedCapacityStore";
@@ -14,7 +15,7 @@ export function isFixedBed(
   bedNumber: string | null | undefined,
 ): boolean {
   if (!sector || !bedNumber) return false;
-  if (department === "UTI" && sector !== "blue" && sector !== "yellow") return false;
+  if (isInpatientDepartment(department) && sector !== "blue" && sector !== "yellow") return false;
   return isWithinFixedRange(department, sector, bedNumber);
 }
 

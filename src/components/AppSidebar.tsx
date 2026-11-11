@@ -115,6 +115,7 @@ export function AppSidebar({
         { name: "DASHBOARD DE GESTÃO", link: "/dashboard" },
         { name: "GESTÃO DE USUÁRIOS", link: "/user-management", badge: pendingResets > 0 ? pendingResets : undefined },
         { name: "LEITOS E PLANO", link: "/admin/beds" },
+        { name: "CAMPOS DO LEITO", link: "/admin/fields" },
         { name: "IDENTIDADE VISUAL", link: "/admin/branding" },
         { name: "TRILHA DE AUDITORIA", link: "/audit-logs" },
         { name: "PRIVACIDADE LGPD", link: "/privacy" },

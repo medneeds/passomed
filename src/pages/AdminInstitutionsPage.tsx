@@ -43,6 +43,8 @@ const SECTORS: { department: string; sector: string; label: string }[] = [
   { department: UE_PED, sector: "blue", label: "UE Pediátrica · Observação Azul" },
   { department: "UTI", sector: "blue", label: "UTI 1" },
   { department: "UTI", sector: "yellow", label: "UTI 2" },
+  { department: "ENFERMARIA", sector: "blue", label: "Enfermaria 1" },
+  { department: "ENFERMARIA", sector: "yellow", label: "Enfermaria 2" },
 ];
 const keyOf = (department: string, sector: string) => `${department}|${sector}`;
 

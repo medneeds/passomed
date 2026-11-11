@@ -1632,6 +1632,7 @@ export type Database = {
           uti_admission_date: string | null
           uti_admission_reason: string | null
           uti_allergies: string | null
+          uti_diet: string | null
           uti_cultures_antibiotics: string | null
           uti_current_status: string | null
           uti_daily_conducts: string | null
@@ -1690,6 +1691,7 @@ export type Database = {
           uti_admission_date?: string | null
           uti_admission_reason?: string | null
           uti_allergies?: string | null
+          uti_diet?: string | null
           uti_cultures_antibiotics?: string | null
           uti_current_status?: string | null
           uti_daily_conducts?: string | null
@@ -1748,6 +1750,7 @@ export type Database = {
           uti_admission_date?: string | null
           uti_admission_reason?: string | null
           uti_allergies?: string | null
+          uti_diet?: string | null
           uti_cultures_antibiotics?: string | null
           uti_current_status?: string | null
           uti_daily_conducts?: string | null

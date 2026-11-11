@@ -1,3 +1,6 @@
+import { useFieldSettings } from "@/hooks/useFieldSettings";
+import { isWardDepartment } from "@/utils/departments";
+import { useDepartment } from "@/contexts/DepartmentContext";
 import { releaseBedForFilling } from "@/utils/releaseBed";
 import { Patient } from "@/types/patient";
 import { useState, useRef, useEffect, useMemo } from "react";
@@ -98,6 +101,14 @@ function parseAdmissionDate(dateStr: string): Date | null {
   }
   return null;
 }
+
+/** Colunas principais do cartão: a grade acompanha quantas a unidade deixou ligadas. */
+const MAIN_COLUMN_GRID: Record<number, string> = {
+  1: "md:grid-cols-1",
+  2: "md:grid-cols-2",
+  3: "md:grid-cols-3",
+  4: "md:grid-cols-4",
+};
 
 // Calculate days in UTI
 function calculateDaysInUti(admissionDate: string[] | undefined): number {
@@ -837,6 +848,11 @@ export function UtiPatientCard({
   const [isReallocationDialogOpen, setIsReallocationDialogOpen] = useState(false);
 
   // Derive current UTI unit from colorVariant if not provided
+  const { currentDepartment: cardDepartment } = useDepartment();
+  const isWard = isWardDepartment(cardDepartment);
+  const { showField } = useFieldSettings();
+  const show = (key: string) => showField(cardDepartment, key);
+  const visibleMainColumns = ['diagnoses', 'medicalHistory', 'dailyConducts', 'pendencies'].filter(show).length;
   const derivedUtiUnit = currentUtiUnit || (colorVariant === 'blue' ? 'UTI 1' : 'UTI 2');
   const { namesHidden } = usePrivacy();
   const displayName = maskName(patient.name, namesHidden);
@@ -889,6 +905,7 @@ export function UtiPatientCard({
       utiAdmissionDate: [],
       utiAdmissionReason: [],
       utiAllergies: [],
+      utiDiet: [],
       utiCurrentStatus: [],
       utiDevices: [],
       utiSpecialties: [],
@@ -1012,6 +1029,7 @@ export function UtiPatientCard({
   const dispositivos = getFieldArray("utiDevices");
   const culturasAtb = getFieldArray("utiCulturesAntibiotics");
   const alergias = getFieldArray("utiAllergies");
+  const dieta = getFieldArray("utiDiet");
   const diagnosticos = getFieldArray("diagnoses");
   const especialidades = getFieldArray("utiSpecialties");
   const exames = getFieldArray("relevantExams");
@@ -1213,7 +1231,7 @@ export function UtiPatientCard({
 
                   {/* UTI Admission Date */}
                   <div className="hidden md:flex shrink-0 items-center gap-1 text-muted-foreground bg-muted/50 px-1.5 py-0.5 rounded">
-                    <span className="text-[9px]">Admissão UTI:</span>
+                    <span className="text-[9px]">{isWard ? "Admissão:" : "Admissão UTI:"}</span>
                     <InlineEditableField
                       value={patient.utiAdmissionDate?.[0] || ""}
                       onUpdate={(v) => handleUpdateField("utiAdmissionDate", v ? [v] : [])}
@@ -1223,7 +1241,7 @@ export function UtiPatientCard({
                   </div>
 
                   {/* Discharge Prediction */}
-                  <div className="hidden md:flex shrink-0 items-center gap-1 text-muted-foreground bg-muted/50 px-1.5 py-0.5 rounded">
+                  <div className={cn(show("dischargePrediction") ? "hidden md:flex" : "hidden", "shrink-0 items-center gap-1 text-muted-foreground bg-muted/50 px-1.5 py-0.5 rounded")}>
                     <span className="text-[9px]">Previsão de Alta:</span>
                     <InlineEditableField
                       value={previsaoAlta[0] || ""}
@@ -1245,8 +1263,8 @@ export function UtiPatientCard({
 
               {/* Row 2: 4 columns on desktop, 2x2 grid on mobile - Collapsible */}
               {!isCollapsed && (
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-1 md:gap-1.5 animate-in fade-in slide-in-from-top-1 duration-200">
-                  <div className={cn("rounded-lg p-1 md:p-1.5 shadow-sm border backdrop-blur-sm hover:shadow-md transition-shadow", colors.col1)}>
+                <div className={cn("grid grid-cols-2 gap-1 md:gap-1.5 animate-in fade-in slide-in-from-top-1 duration-200", MAIN_COLUMN_GRID[visibleMainColumns] ?? "md:grid-cols-4")}>
+                  <div className={cn("rounded-lg p-1 md:p-1.5 shadow-sm border backdrop-blur-sm hover:shadow-md transition-shadow", colors.col1, !show("diagnoses") && "hidden")}>
                     <InlineEditableArray
                       items={diagnosticos}
                       onUpdate={(items) => handleUpdateField("diagnoses", items)}
@@ -1264,7 +1282,7 @@ export function UtiPatientCard({
                       highlightColorVariant={colorVariant}
                     />
                   </div>
-                  <div className={cn("rounded-lg p-1 md:p-1.5 shadow-sm border backdrop-blur-sm hover:shadow-md transition-shadow", colors.col2)}>
+                  <div className={cn("rounded-lg p-1 md:p-1.5 shadow-sm border backdrop-blur-sm hover:shadow-md transition-shadow", colors.col2, !show("medicalHistory") && "hidden")}>
                     <InlineEditableArray
                       items={antecedentes}
                       onUpdate={(items) => handleUpdateField("medicalHistory", items)}
@@ -1282,7 +1300,7 @@ export function UtiPatientCard({
                       highlightColorVariant={colorVariant}
                     />
                   </div>
-                  <div className={cn("rounded-lg p-1 md:p-1.5 shadow-sm border backdrop-blur-sm hover:shadow-md transition-shadow", colors.col3)}>
+                  <div className={cn("rounded-lg p-1 md:p-1.5 shadow-sm border backdrop-blur-sm hover:shadow-md transition-shadow", colors.col3, !show("dailyConducts") && "hidden")}>
                     <InlineEditableArray
                       items={condutasDia}
                       onUpdate={(items) => handleUpdateField("utiDailyConducts", items)}
@@ -1300,7 +1318,7 @@ export function UtiPatientCard({
                       highlightColorVariant={colorVariant}
                     />
                   </div>
-                  <div className={cn("rounded-lg p-1 md:p-1.5 shadow-sm border backdrop-blur-sm hover:shadow-md transition-all", colors.col4)}>
+                  <div className={cn("rounded-lg p-1 md:p-1.5 shadow-sm border backdrop-blur-sm hover:shadow-md transition-all", colors.col4, !show("pendencies") && "hidden")}>
                     <InlineEditableArray
                       items={pendencias}
                       onUpdate={(items) => handleUpdateField("pendencies", items)}
@@ -1366,7 +1384,7 @@ export function UtiPatientCard({
                       
                       <DropdownMenuItem onClick={() => setIsReallocationDialogOpen(true)}>
                         <BedDouble className="h-4 w-4 mr-2 text-primary" />
-                        Realocar Leito/UTI
+                        {isWard ? "Realocar Leito/Enfermaria" : "Realocar Leito/UTI"}
                       </DropdownMenuItem>
                       
                       <DropdownMenuSeparator />
@@ -1420,26 +1438,33 @@ export function UtiPatientCard({
               </div>
 
               {/* Patient safety items */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-2">
                 <InlineEditableArray
                   items={dispositivos}
                   onUpdate={(items) => handleUpdateField("utiDevices", items)}
                   label="DISPOSITIVOS"
-                  colorClass="bg-muted/50 border border-border/50"
+                  colorClass={cn("bg-muted/50 border border-border/50", !show("devices") && "hidden")}
                   alwaysShowAll
                 />
                 <InlineEditableArray
                   items={alergias}
                   onUpdate={(items) => handleUpdateField("utiAllergies", items)}
                   label="ALERGIAS"
-                  colorClass="bg-muted/50 border border-border/50"
+                  colorClass={cn("bg-muted/50 border border-border/50", !show("allergies") && "hidden")}
                   alwaysShowAll
                 />
                 <InlineEditableArray
                   items={culturasAtb}
                   onUpdate={(items) => handleUpdateField("utiCulturesAntibiotics", items)}
                   label="CULTURAS / ATB"
-                  colorClass="bg-muted/50 border border-border/50"
+                  colorClass={cn("bg-muted/50 border border-border/50", !show("cultures") && "hidden")}
+                  alwaysShowAll
+                />
+                <InlineEditableArray
+                  items={dieta}
+                  onUpdate={(items) => handleUpdateField("utiDiet", items)}
+                  label="DIETA"
+                  colorClass={cn("bg-muted/50 border border-border/50", !show("diet") && "hidden")}
                   alwaysShowAll
                 />
               </div>
@@ -1451,21 +1476,21 @@ export function UtiPatientCard({
                     items={setorOrigem}
                     onUpdate={(items) => handleUpdateField("utiOriginSector", items)}
                     label="SETOR DE ORIGEM"
-                    colorClass="bg-muted/50 border border-border/50"
+                    colorClass={cn("bg-muted/50 border border-border/50", !show("originSector") && "hidden")}
                     alwaysShowAll
                   />
                   <InlineEditableArray
                     items={especialidades}
                     onUpdate={(items) => handleUpdateField("utiSpecialties", items)}
                     label="ESPECIALIDADES ENVOLVIDAS"
-                    colorClass="bg-muted/50 border border-border/50"
+                    colorClass={cn("bg-muted/50 border border-border/50", !show("specialties") && "hidden")}
                     alwaysShowAll
                   />
                   <InlineEditableArray
                     items={exames}
                     onUpdate={(items) => handleUpdateField("relevantExams", items)}
                     label="EXAMES"
-                    colorClass="bg-muted/50 border border-border/50"
+                    colorClass={cn("bg-muted/50 border border-border/50", !show("relevantExams") && "hidden")}
                     alwaysShowAll
                   />
                 </div>

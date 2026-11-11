@@ -11,11 +11,12 @@ import { formatBirthDateDisplay, birthDateToISO } from "@/utils/calculateDetaile
 import { vacantPatientSlotPayload } from "@/utils/patientSlotPayload";
 import { setCapacityRows, getFixedBedNumbers, isWithinFixedRange, getBedPrefix } from "@/utils/bedCapacityStore";
 import { isExtraBed } from "@/utils/bedNaming";
+import { isInpatientDepartment } from "@/utils/departments";
 
 
 const UTI_FIXED_BEDS = Array.from({ length: 10 }, (_, index) => `U${String(index + 1).padStart(2, '0')}`);
-const isFixedUtiBed = (sector?: string, bedNumber?: string) =>
-  (sector === 'blue' || sector === 'yellow') && !!bedNumber && isWithinFixedRange('UTI', sector, bedNumber);
+const isFixedUtiBed = (sector?: string, bedNumber?: string, department: string = 'UTI') =>
+  (sector === 'blue' || sector === 'yellow') && !!bedNumber && isWithinFixedRange(department, sector, bedNumber);
 
 
 export function usePatients(department?: Department) {
@@ -76,7 +77,7 @@ export function usePatients(department?: Department) {
 
       // Self-heal: garante que todos os leitos fixos configurados existam.
       // Se algum leito estiver ausente, recria como vago.
-      if (department && department !== 'UTI') {
+      if (department && !isInpatientDepartment(department)) {
         const FIXED_BEDS: { bed_number: string; sector: string }[] = ['red', 'yellow', 'blue']
           .flatMap(sector =>
             getFixedBedNumbers(department, sector).map(bed_number => ({ bed_number, sector }))
@@ -142,10 +143,10 @@ export function usePatients(department?: Department) {
       }
 
       // Self-heal: UTI 1 (blue) and UTI 2 (yellow) are fixed capacity units.
-      if (department === 'UTI') {
+      if (department && isInpatientDepartment(department)) {
         const FIXED_UTI_BEDS: { bed_number: string; sector: string; display_order: number }[] = [
-          ...getFixedBedNumbers('UTI', 'blue').map((b, index) => ({ bed_number: b, sector: 'blue', display_order: index + 1 })),
-          ...getFixedBedNumbers('UTI', 'yellow').map((b, index) => ({ bed_number: b, sector: 'yellow', display_order: index + 1 })),
+          ...getFixedBedNumbers(department, 'blue').map((b, index) => ({ bed_number: b, sector: 'blue', display_order: index + 1 })),
+          ...getFixedBedNumbers(department, 'yellow').map((b, index) => ({ bed_number: b, sector: 'yellow', display_order: index + 1 })),
         ];
         const existingKeys = new Set((data || []).map((p: any) => `${p.sector}:${p.bed_number}`));
         const missing = FIXED_UTI_BEDS.filter(b => !existingKeys.has(`${b.sector}:${b.bed_number}`));
@@ -160,7 +161,7 @@ export function usePatients(department?: Department) {
                 is_vacant: true,
                 bed_status: 'available',
                 display_order: m.display_order,
-                department: 'UTI',
+                department,
                 state_id: currentState.id,
                 hospital_unit_id: currentHospital.id,
               })) as any
@@ -170,7 +171,7 @@ export function usePatients(department?: Department) {
               .select('*')
               .eq('hospital_unit_id', currentHospital.id)
               .eq('state_id', currentState.id)
-              .eq('department', 'UTI')
+              .eq('department', department)
               .order('display_order')
               .order('bed_number');
             if (refreshed) {
@@ -184,8 +185,8 @@ export function usePatients(department?: Department) {
       }
 
 
-      const visibleData = department === 'UTI'
-        ? (data || []).filter((p: any) => isFixedUtiBed(p.sector, p.bed_number))
+      const visibleData = isInpatientDepartment(department)
+        ? (data || []).filter((p: any) => isFixedUtiBed(p.sector, p.bed_number, department))
         : (data || []);
 
       const mappedPatients: Patient[] = visibleData.map(p => ({
@@ -224,6 +225,7 @@ export function usePatients(department?: Department) {
         }) : [],
         utiDischargePrediction: p.uti_discharge_prediction ? p.uti_discharge_prediction.split('\n').filter(Boolean) : [],
         utiAllergies: p.uti_allergies ? p.uti_allergies.split('\n').filter(Boolean) : [],
+        utiDiet: p.uti_diet ? p.uti_diet.split('\n').filter(Boolean) : [],
         utiAdmissionReason: p.uti_admission_reason ? p.uti_admission_reason.split('\n').filter(Boolean) : [],
         utiCurrentStatus: p.uti_current_status ? p.uti_current_status.split('\n').filter(Boolean) : [],
         utiDevices: p.uti_devices ? p.uti_devices.split('\n').filter(Boolean) : [],
@@ -297,7 +299,7 @@ export function usePatients(department?: Department) {
     pendingWritesRef.current.set(patientId, (pendingWritesRef.current.get(patientId) || 0) + 1);
 
     const persist = async () => {
-      const isProtectedUtiSlot = department === 'UTI' && isFixedUtiBed(currentPatient?.sector, currentPatient?.bedNumber);
+      const isProtectedUtiSlot = isInpatientDepartment(department) && isFixedUtiBed(currentPatient?.sector, currentPatient?.bedNumber, department);
       const dbUpdates: any = {};
       
       if (updates.bedNumber !== undefined && !isProtectedUtiSlot) dbUpdates.bed_number = updates.bedNumber;
@@ -348,6 +350,7 @@ export function usePatients(department?: Department) {
       }
       if (updates.utiDischargePrediction !== undefined) dbUpdates.uti_discharge_prediction = updates.utiDischargePrediction.length > 0 ? updates.utiDischargePrediction.join('\n') : null;
       if (updates.utiAllergies !== undefined) dbUpdates.uti_allergies = updates.utiAllergies.length > 0 ? updates.utiAllergies.join('\n') : null;
+      if (updates.utiDiet !== undefined) dbUpdates.uti_diet = updates.utiDiet.length > 0 ? updates.utiDiet.join('\n') : null;
       if (updates.utiAdmissionReason !== undefined) dbUpdates.uti_admission_reason = updates.utiAdmissionReason.length > 0 ? updates.utiAdmissionReason.join('\n') : null;
       if (updates.utiCurrentStatus !== undefined) dbUpdates.uti_current_status = updates.utiCurrentStatus.length > 0 ? updates.utiCurrentStatus.join('\n') : null;
       if (updates.utiDevices !== undefined) dbUpdates.uti_devices = updates.utiDevices.length > 0 ? updates.utiDevices.join('\n') : null;
@@ -481,6 +484,7 @@ export function usePatients(department?: Department) {
       }
       if (patient.utiDischargePrediction && patient.utiDischargePrediction.length > 0) dbData.uti_discharge_prediction = patient.utiDischargePrediction.join('\n');
       if (patient.utiAllergies && patient.utiAllergies.length > 0) dbData.uti_allergies = patient.utiAllergies.join('\n');
+      if (patient.utiDiet && patient.utiDiet.length > 0) dbData.uti_diet = patient.utiDiet.join('\n');
       if (patient.utiAdmissionReason && patient.utiAdmissionReason.length > 0) dbData.uti_admission_reason = patient.utiAdmissionReason.join('\n');
       if (patient.utiCurrentStatus && patient.utiCurrentStatus.length > 0) dbData.uti_current_status = patient.utiCurrentStatus.join('\n');
       if (patient.utiDevices && patient.utiDevices.length > 0) dbData.uti_devices = patient.utiDevices.join('\n');
@@ -531,6 +535,7 @@ export function usePatients(department?: Department) {
         }) : [],
         utiDischargePrediction: data.uti_discharge_prediction ? data.uti_discharge_prediction.split('\n').filter(Boolean) : [],
         utiAllergies: data.uti_allergies ? data.uti_allergies.split('\n').filter(Boolean) : [],
+        utiDiet: data.uti_diet ? data.uti_diet.split('\n').filter(Boolean) : [],
         utiAdmissionReason: data.uti_admission_reason ? data.uti_admission_reason.split('\n').filter(Boolean) : [],
         utiCurrentStatus: data.uti_current_status ? data.uti_current_status.split('\n').filter(Boolean) : [],
         utiDevices: data.uti_devices ? data.uti_devices.split('\n').filter(Boolean) : [],
@@ -594,8 +599,8 @@ export function usePatients(department?: Department) {
         /^[VAZ]\d{2}$/.test(target.bedNumber); // V01-V07, A01-A06, Z01-Z06
       const isFixedUtiBed =
         target &&
-        department === 'UTI' &&
-        /^U(0[1-9]|10)$/.test(target.bedNumber); // U01-U10 (UTI 1 & UTI 2)
+        isInpatientDepartment(department) &&
+        (/^U(0[1-9]|10)$/.test(target.bedNumber) || isWithinFixedRange(department, target.sector, target.bedNumber));
 
       if (isFixedEmergencyBed || isFixedUtiBed) {
         console.log('Vacating fixed bed (preserving slot):', target.bedNumber);
@@ -748,6 +753,7 @@ export function usePatients(department?: Department) {
     }) : [],
     utiDischargePrediction: record.uti_discharge_prediction ? record.uti_discharge_prediction.split('\n').filter(Boolean) : [],
     utiAllergies: record.uti_allergies ? record.uti_allergies.split('\n').filter(Boolean) : [],
+    utiDiet: record.uti_diet ? record.uti_diet.split('\n').filter(Boolean) : [],
     utiAdmissionReason: record.uti_admission_reason ? record.uti_admission_reason.split('\n').filter(Boolean) : [],
     utiCurrentStatus: record.uti_current_status ? record.uti_current_status.split('\n').filter(Boolean) : [],
     utiDevices: record.uti_devices ? record.uti_devices.split('\n').filter(Boolean) : [],

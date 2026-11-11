@@ -1,6 +1,9 @@
+import { isInpatientDepartment, inpatientNoun, inpatientLongName, inpatientUnitLabel } from "@/utils/departments";
 import { Patient } from "@/types/patient";
 import { Activity, ArrowRight, BedDouble, Users } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useDepartment } from "@/contexts/DepartmentContext";
+import { getFixedBedNumbers } from "@/utils/bedCapacityStore";
 
 interface UtiUnitSelectorProps {
   patients: Patient[];
@@ -8,6 +11,13 @@ interface UtiUnitSelectorProps {
 }
 
 export function UtiUnitSelector({ patients, onSelect }: UtiUnitSelectorProps) {
+  const { currentDepartment } = useDepartment();
+  const noun = inpatientNoun(currentDepartment);
+  const longName = inpatientLongName(currentDepartment);
+  const bedRange = (sector: string) => {
+    const beds = getFixedBedNumbers(currentDepartment, sector);
+    return beds.length ? `Leitos ${beds[0]} — ${beds[beds.length - 1]}` : 'Sem leitos configurados';
+  };
   // UTI 1 = sector 'blue' or 'red' | UTI 2 = sector 'yellow'
   const uti1 = patients.filter(p => p.sector === 'blue' || p.sector === 'red');
   const uti2 = patients.filter(p => p.sector === 'yellow');
@@ -24,16 +34,16 @@ export function UtiUnitSelector({ patients, onSelect }: UtiUnitSelectorProps) {
   }> = [
     {
       unit: 'UTI 1',
-      title: 'Unidade de Terapia Intensiva 1',
-      subtitle: 'Leitos U01 — U10',
+      title: `${longName} 1`,
+      subtitle: bedRange('blue'),
       accentBorder: 'border-l-primary/70',
       accentDot: 'bg-primary',
       list: uti1,
     },
     {
       unit: 'UTI 2',
-      title: 'Unidade de Terapia Intensiva 2',
-      subtitle: 'Leitos U01 — U10',
+      title: `${longName} 2`,
+      subtitle: bedRange('yellow'),
       accentBorder: 'border-l-gold/80',
       accentDot: 'bg-gold',
       list: uti2,
@@ -47,21 +57,21 @@ export function UtiUnitSelector({ patients, onSelect }: UtiUnitSelectorProps) {
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-emerald-200/60 dark:border-emerald-800/40 bg-emerald-50/60 dark:bg-emerald-950/30 mb-4">
             <Activity className="h-3.5 w-3.5 text-primary dark:text-primary-glow" />
             <span className="text-[11px] uppercase tracking-wider font-semibold text-primary dark:text-primary-glow">
-              Setor UTI
+              Setor {noun}
             </span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-bold text-foreground mb-2">
             Selecione a unidade
           </h1>
           <p className="text-sm text-muted-foreground">
-            Escolha qual UTI você deseja visualizar e gerenciar agora.
+            Escolha qual unidade de {noun} você deseja visualizar e gerenciar agora.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
           {cards.map((c) => {
             const occupied = occ(c.list);
-            const total = c.list.length || 10;
+            const total = c.list.length;
             return (
               <button
                 key={c.unit}
