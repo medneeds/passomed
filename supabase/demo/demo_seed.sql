@@ -136,7 +136,7 @@ BEGIN
     (v_a, 'demo', 'HD', 'Hospital Demonstração', 'Rede Demonstração',
      'Ambiente de demonstração — dados fictícios', NULL, NULL, NULL, NULL),
     (v_b, 'saolucas', 'HSL', 'Hospital São Lucas', 'Rede São Lucas',
-     'Cuidado intensivo com precisão', '#12305C', '#1D4E89', '#C9A227', NULL)
+     'Cuidado intensivo com precisão', '#064E3B', '#0D7A5F', '#C9A227', NULL)
   ON CONFLICT (hospital_unit_id) DO UPDATE
     SET slug = EXCLUDED.slug, abbreviation = EXCLUDED.abbreviation,
         display_name = EXCLUDED.display_name, network_name = EXCLUDED.network_name,

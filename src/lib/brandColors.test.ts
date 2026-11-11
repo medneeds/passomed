@@ -26,15 +26,17 @@ describe("brandColors", () => {
   it("sem cor da instituição, mantém exatamente o padrão PassoMed", () => {
     expect(brandCssVars(null)).toEqual(DEFAULT_BRAND.vars);
     expect(brandCssVars("não é cor")).toEqual(DEFAULT_BRAND.vars);
-    expect(brandHexTones(null)).toEqual({ deep: "#064e3b", mid: "#0a5f44", bright: "#0d7a5f" });
+    expect(brandHexTones(null)).toEqual({ deep: "#13315e", mid: "#173c73", bright: "#1b4788" });
+    // o padrão é legível com texto branco
+    expect(contrastRatio(brandHexTones(null).bright, "#ffffff")).toBeGreaterThanOrEqual(4.5);
   });
 
   it("usa o matiz da instituição em toda a paleta", () => {
-    const vars = brandCssVars("#12305C");
-    expect(vars["--brand-h"]).toBe(String(hexToHsl("#12305C").h));
+    const vars = brandCssVars("#064E3B");
+    expect(vars["--brand-h"]).toBe(String(hexToHsl("#064E3B").h));
     expect(vars["--tint-h"]).toBe(vars["--brand-h"]);
     expect(vars["--gold"]).toBeUndefined();
-    expect(brandCssVars("#12305C", "#C9A227")["--gold"]).toMatch(/^\d+ \d+% \d+%$/);
+    expect(brandCssVars("#064E3B", "#C9A227")["--gold"]).toMatch(/^\d+ \d+% \d+%$/);
   });
 
   it.each(["#ffe600", "#00d4ff", "#ff7ab8", "#ffffff", "#7cfc00", "#1a73e8", "#000000"])(

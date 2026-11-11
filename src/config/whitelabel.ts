@@ -63,11 +63,11 @@ export const whitelabel = {
   // ── Cores do Tema (gradiente principal) ──
   theme: {
     /** Cor primária do gradiente (from) */
-    gradientFrom: "#064e3b",
+    gradientFrom: DEFAULT_BRAND.primary,
     /** Cor intermediária do gradiente (via) */
-    gradientVia: "#0a5f44",
+    gradientVia: DEFAULT_BRAND.mid,
     /** Cor final do gradiente (to) */
-    gradientTo: "#0d7a5f",
+    gradientTo: DEFAULT_BRAND.bright,
     /** Classe Tailwind do gradiente de fundo principal */
     bgGradient: "bg-gradient-to-br from-brand-deep via-brand-mid to-brand-bright",
   },

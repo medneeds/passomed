@@ -6,7 +6,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { PlatformPreview } from "@/components/landing/PlatformPreview";
+import { ExperienceShowcase } from "@/components/landing/ExperienceShowcase";
 import { BedPricingCalculator } from "@/components/landing/BedPricingCalculator";
 import logoP from "@/assets/logo-p-cross.png";
 import logoFull from "@/assets/passomed-full-logo.png";
@@ -171,9 +171,9 @@ export default function Landing() {
   useEffect(() => {
     const prevTitle = document.title;
     document.title =
-      "PassoMed — Plataforma de passagem de plantão à beira leito";
+      "PassoMed Clinical Pass — Plataforma de gestão de leitos";
     const desc =
-      "O passômetro médico evoluiu. O PassoMed unifica mapa de leitos, decisões clínicas, passagem de plantão e protocolos da unidade em uma plataforma desenhada para a beira leito.";
+      "Muito além do passômetro. O PassoMed Clinical Pass é a plataforma de gestão de leitos que reúne mapa em tempo real, movimentação de pacientes, pendências, passagem de plantão e os documentos da sua unidade.";
     const setMeta = (name: string, content: string, attr: "name" | "property" = "name") => {
       let el = document.querySelector(`meta[${attr}="${name}"]`);
       if (!el) {
@@ -184,9 +184,9 @@ export default function Landing() {
       el.setAttribute("content", content);
     };
     setMeta("description", desc);
-    setMeta("og:title", "PassoMed — Plataforma clínica à beira leito", "property");
+    setMeta("og:title", "PassoMed Clinical Pass — Plataforma de gestão de leitos", "property");
     setMeta("og:description", desc, "property");
-    setMeta("twitter:title", "PassoMed — Plataforma clínica à beira leito");
+    setMeta("twitter:title", "PassoMed Clinical Pass — Plataforma de gestão de leitos");
     setMeta("twitter:description", desc);
 
     let canonical = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
@@ -243,7 +243,7 @@ export default function Landing() {
               PassoMed
             </span>
             <span className="hidden sm:inline text-[0.6rem] uppercase tracking-[0.22em] text-gold border-l border-border pl-2 ml-1">
-              Clinical
+              Clinical Pass
             </span>
           </a>
           <nav className="hidden lg:flex items-center gap-7 text-sm text-muted-foreground">
@@ -280,18 +280,18 @@ export default function Landing() {
 
         <div className="container py-20 md:py-24 space-y-14 md:space-y-16">
           <div className="max-w-4xl">
-            <Eyebrow>Plataforma de passagem de plantão · à beira leito</Eyebrow>
+            <Eyebrow>Plataforma de gestão de leitos · Clinical Pass</Eyebrow>
             <div className="mt-5 inline-flex items-center gap-2 rounded-full border border-gold/40 bg-gold/10 px-3 py-1 text-xs font-medium text-gold">
               <Repeat className="h-3 w-3" />
-              O passômetro médico evoluiu.
+              Muito além do passômetro.
             </div>
             <h1 className="mt-6 font-landing-display text-[2.5rem] sm:text-5xl md:text-[3.5rem] xl:text-[4rem] leading-[1.02] tracking-tight text-foreground">
-              Cada decisão clínica registrada.{" "}
-              <span className="text-primary">Cada leito visto.</span>{" "}
-              Cada plantão passado sem ruído.
+              Gestão de leitos em tempo real.{" "}
+              <span className="text-primary">Pendências à vista.</span>{" "}
+              Plantão passado sem ruído.
             </h1>
             <p className="mt-7 max-w-2xl text-base md:text-lg leading-relaxed text-muted-foreground">
-              O PassoMed transforma a passagem de plantão em um fluxo único: mapa de leitos, decisões clínicas, exames, plano terapêutico e protocolos da unidade — tudo na mesma tela.
+              Planilha e passômetro só guardam texto. O PassoMed gerencia o setor: cada leito, cada movimentação, cada pendência e os documentos da sua unidade em um só lugar, com a marca do seu hospital.
             </p>
 
             <div className="mt-9 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
@@ -318,9 +318,12 @@ export default function Landing() {
             </p>
           </div>
 
-          {/* Mockup vivo do Mapa — full-width abaixo do bloco principal */}
+          {/* Demonstração navegável da plataforma */}
           <div className="w-full">
-            <PlatformPreview />
+            <p className="mb-3 text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
+              Toque nas áreas para ver como é usar
+            </p>
+            <ExperienceShowcase />
           </div>
         </div>
       </section>
@@ -329,8 +332,8 @@ export default function Landing() {
       <section className="border-y border-border/60 bg-secondary/30">
         <div className="container py-8 md:py-10 grid md:grid-cols-3 gap-6 md:gap-12 text-center md:text-left">
           {[
-            "Passagem de plantão segura e organizada",
-            "Informações confiáveis registradas pelo próprio médico",
+            "Leitos, movimentações e pendências em tempo real",
+            "Documentos e protocolos da unidade em um só lugar",
             "Isolamento de dados por unidade hospitalar",
           ].map((t) => (
             <div key={t} className="flex items-center justify-center md:justify-start gap-3">
@@ -380,16 +383,43 @@ export default function Landing() {
         </div>
       </SectionShell>
 
-      {/* ── 04 SOLUÇÃO ──────────────────────────────────────── */}
+      {/* ── 04 ALÉM DO PASSÔMETRO ───────────────────────────── */}
       <SectionShell
         variant="emerald"
         fullWidthContent
         eyebrow="A proposta"
-        title={<>Um mapa vivo do seu setor hospitalar. Em tempo real.</>}
-        subtitle="O PassoMed transforma cada leito do seu setor em um registro clínico vivo — da admissão ao desfecho. Deslize entre Urgência e UTI. O módulo de Enfermaria está em desenvolvimento."
+        title={<>Você já tem uma planilha. O que falta é gestão.</>}
+        subtitle="O passômetro registra o que foi dito. O PassoMed mostra o que precisa ser feito, por quem e em qual leito."
       >
-        <div className="relative">
-          <PlatformPreview />
+        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+          {[
+            {
+              before: "Planilha que alguém precisa atualizar",
+              title: "Mapa de leitos vivo",
+              body: "Ocupação, tempo de permanência e conduta de cada leito, atualizados para a equipe inteira no mesmo instante.",
+            },
+            {
+              before: "Transferência avisada por mensagem",
+              title: "Movimentação com histórico",
+              body: "Transferir entre setores, realocar, solicitar vaga e dar alta saem do próprio leito. O histórico acompanha o paciente.",
+            },
+            {
+              before: "Pendência perdida no meio do texto",
+              title: "Pendências que não somem",
+              body: "O que foi destacado no turno vira a lista de quem assume, com lembretes no horário certo.",
+            },
+            {
+              before: "Ficha procurada em pasta e grupo",
+              title: "Documentos da sua unidade",
+              body: "Protocolos, termos e fichas da instituição em um lugar só, organizados por unidade.",
+            },
+          ].map((c) => (
+            <article key={c.title} className="rounded-2xl border border-white/15 bg-white/[0.06] p-6">
+              <p className="text-xs text-primary-foreground/60 line-through decoration-gold/70">{c.before}</p>
+              <h3 className="mt-3 font-landing-display text-xl leading-snug text-primary-foreground">{c.title}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-primary-foreground/80">{c.body}</p>
+            </article>
+          ))}
         </div>
       </SectionShell>
 
@@ -530,9 +560,9 @@ export default function Landing() {
       >
         <div className="grid sm:grid-cols-3 gap-5">
           {[
-            { name: "Hospital Santa Clara", from: "#12305C", to: "#1D4E89", tag: "Azul institucional" },
+            { name: "Hospital Santa Clara", from: "#13315E", to: "#1B4788", tag: "Azul (padrão)" },
             { name: "Instituto Vida", from: "#5B1A2E", to: "#8A2F47", tag: "Vinho" },
-            { name: "Hospital Regional", from: "#064E3B", to: "#0D7A5F", tag: "Esmeralda (padrão)" },
+            { name: "Hospital Regional", from: "#064E3B", to: "#0D7A5F", tag: "Esmeralda" },
           ].map((brand) => (
             <div key={brand.name} className="overflow-hidden rounded-2xl border border-border bg-card">
               <div
@@ -664,7 +694,7 @@ export default function Landing() {
               <span className="font-landing-display text-2xl text-foreground leading-none">PassoMed</span>
             </div>
             <p className="mt-4 text-muted-foreground max-w-xs">
-              Plataforma clínica à beira leito. Desenhada para o médico que prescreve, evolui e passa o plantão.
+              PassoMed Clinical Pass. Plataforma de gestão de leitos, desenhada para quem cuida do setor e passa o plantão.
             </p>
             <img
               src={logoFull}

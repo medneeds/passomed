@@ -1,4 +1,5 @@
-import { createContext, Fragment, ReactNode, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
+import { createContext, Fragment, ReactNode, useCallback, useContext, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { db } from "@/integrations/supabase/untyped";
 import { useAuth } from "@/contexts/AuthContext";
 import { useHospital } from "@/contexts/HospitalContext";
@@ -76,6 +77,20 @@ export function BrandingProvider({ children }: { children: ReactNode }) {
   const [branding, setBranding] = useState<InstitutionBranding | null>(() => readCache());
   const [version, setVersion] = useState(0);
   const appliedRef = useRef(fingerprint(readCache()));
+  const brandingRef = useRef<InstitutionBranding | null>(branding);
+  brandingRef.current = branding;
+
+  // A landing é a página da PLATAFORMA: nunca veste a marca de uma instituição,
+  // mesmo que o visitante tenha a de algum hospital guardada no navegador.
+  const { pathname } = useLocation();
+  const isPlatformPage = pathname === "/landing";
+  const platformPageRef = useRef(isPlatformPage);
+  platformPageRef.current = isPlatformPage;
+  useLayoutEffect(() => {
+    if (!isPlatformPage) return;
+    applyInstitutionBranding(null);
+    return () => applyInstitutionBranding(brandingRef.current);
+  }, [isPlatformPage]);
 
   const commit = useCallback((next: InstitutionBranding | null, persist: boolean) => {
     const fp = fingerprint(next);
@@ -85,7 +100,7 @@ export function BrandingProvider({ children }: { children: ReactNode }) {
     }
     if (fp === appliedRef.current) return;
     appliedRef.current = fp;
-    applyInstitutionBranding(next);
+    if (!platformPageRef.current) applyInstitutionBranding(next);
     setBranding(next);
     setVersion((v) => v + 1);
   }, []);
@@ -106,7 +121,7 @@ export function BrandingProvider({ children }: { children: ReactNode }) {
 
   // Antes do login: marca pública pelo endereço.
   useEffect(() => {
-    if (user) return;
+    if (user || isPlatformPage) return;
     const slug = resolveInstitutionSlug();
     if (!slug) return;
     let cancelled = false;
@@ -115,7 +130,7 @@ export function BrandingProvider({ children }: { children: ReactNode }) {
       commit(data, true);
     });
     return () => { cancelled = true; };
-  }, [user, commit]);
+  }, [user, commit, isPlatformPage]);
 
   // Depois do login: marca da unidade selecionada.
   useEffect(() => {

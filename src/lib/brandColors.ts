@@ -25,19 +25,22 @@ export interface BrandCssVars {
   "--gold"?: string;
 }
 
-/** Padrão PassoMed (esmeralda). Deve espelhar os valores de `:root` no index.css. */
+/** Padrão PassoMed (azul-marinho + dourado). Deve espelhar os valores de `:root` no index.css. */
 export const DEFAULT_BRAND = {
-  primary: "#064e3b",
-  mid: "#0a5f44",
-  bright: "#0d7a5f",
+  primary: "#13315e",
+  mid: "#173c73",
+  bright: "#1b4788",
   vars: {
-    "--brand-h": "160",
-    "--brand-s": "84%",
-    "--brand-l": "16%",
-    "--brand-s-soft": "70%",
-    "--tint-h": "150",
+    "--brand-h": "216",
+    "--brand-s": "67%",
+    "--brand-l": "22%",
+    "--brand-s-soft": "67%",
+    "--tint-h": "216",
   } as BrandCssVars,
 };
+
+/** Esmeralda da identidade anterior, mantida como opção pronta para instituições. */
+export const EMERALD_BRAND = "#064e3b";
 
 const HEX_RE = /^#?([0-9a-f]{6})$/i;
 
@@ -87,7 +90,7 @@ const clamp = (value: number, min: number, max: number) => Math.min(max, Math.ma
 /**
  * Cor primária "de trabalho": mesmo matiz da marca, mas com luminosidade e
  * saturação limitadas para o texto branco por cima continuar legível
- * (a primária original do PassoMed tem L = 16%).
+ * (a primária padrão do PassoMed tem L = 22%).
  */
 export function workingPrimary(primaryHex: string): Hsl {
   const { h, s, l } = hexToHsl(primaryHex);

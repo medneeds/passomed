@@ -18,14 +18,14 @@
   
   :root {
     /* ── Marca da instituição ─────────────────────────────────────────
-       Estes cinco valores definem toda a paleta. O padrão é o esmeralda
+       Estes cinco valores definem toda a paleta. O padrão é o azul-marinho
        PassoMed; BrandingContext sobrescreve em tempo de execução com a cor
        de cada instituição (ver src/lib/brandColors.ts). */
-    --brand-h: 160;
-    --brand-s: 84%;
-    --brand-l: 16%;
-    --brand-s-soft: 70%;
-    --tint-h: 150;
+    --brand-h: 216;
+    --brand-s: 67%;
+    --brand-l: 22%;
+    --brand-s-soft: 67%;
+    --tint-h: 216;
     /* Tons para fundos em gradiente (login, carregamento, cabeçalhos) */
     --brand-deep: var(--brand-h) var(--brand-s) var(--brand-l);
     --brand-mid: var(--brand-h) var(--brand-s) calc(var(--brand-l) + 5%);
