@@ -214,7 +214,7 @@ BEGIN
   INSERT INTO public.patients (bed_number, name, age, sector, department, state_id, hospital_unit_id,
                                diagnoses, medical_history, uti_admission_date, uti_admission_reason, uti_current_status,
                                uti_devices, uti_cultures_antibiotics, uti_daily_conducts, pendencies, display_order, is_vacant)
-  SELECT 'U' || lpad(n::text, 2, '0'), d.name, d.age, s.sector, 'UTI', v_state, v_a,
+  SELECT 'U' || lpad(n::text, 2, '0'), coalesce(d.name, ''), d.age, s.sector, 'UTI', v_state, v_a,
          d.dx, d.hx, d.adm, d.reason, d.status, d.devices, d.atb, d.conducts, d.pend, n, d.name IS NULL
   FROM (VALUES ('blue'), ('yellow')) s(sector)
   CROSS JOIN generate_series(1, 10) n
@@ -246,7 +246,7 @@ BEGIN
   -- Hospital São Lucas · UTI (10) — instituição separada, marca própria
   INSERT INTO public.patients (bed_number, name, age, sector, department, state_id, hospital_unit_id,
                                diagnoses, uti_admission_date, uti_admission_reason, uti_current_status, display_order, is_vacant)
-  SELECT 'U' || lpad(n::text, 2, '0'), d.name, d.age, 'blue', 'UTI', v_state, v_b,
+  SELECT 'U' || lpad(n::text, 2, '0'), coalesce(d.name, ''), d.age, 'blue', 'UTI', v_state, v_b,
          d.dx, d.adm, d.reason, d.status, n, d.name IS NULL
   FROM generate_series(1, 10) n
   LEFT JOIN (VALUES
