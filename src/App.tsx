@@ -40,6 +40,7 @@ import AdminUnitsPage from "./pages/AdminUnitsPage";
 import AdminCoordinatorsPage from "./pages/AdminCoordinatorsPage";
 import AdminBedsPage from "./pages/AdminBedsPage";
 import AdminFieldsPage from "./pages/AdminFieldsPage";
+import AdminLeadsPage from "./pages/AdminLeadsPage";
 import AdminBrandingPage from "./pages/AdminBrandingPage";
 import AdminInstitutionsPage from "./pages/AdminInstitutionsPage";
 import { AdminRoute } from "@/components/AdminRoute";
@@ -299,6 +300,7 @@ const App = () => {
         <Route path="/admin/beds" element={<AdminRoute><AdminBedsPage /></AdminRoute>} />
         <Route path="/admin/fields" element={<AdminRoute><AdminFieldsPage /></AdminRoute>} />
         <Route path="/admin/branding" element={<AdminRoute><AdminBrandingPage /></AdminRoute>} />
+        <Route path="/admin/leads" element={<AdminRoute platformOnly><AdminLeadsPage /></AdminRoute>} />
         <Route path="/admin/institutions" element={<AdminRoute platformOnly><AdminInstitutionsPage /></AdminRoute>} />
         <Route
           path="/admin/states"

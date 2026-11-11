@@ -1,3 +1,4 @@
+import { LEAD_PREFILL_EVENT, LeadPrefill } from "@/components/landing/LeadForm";
 import { useMemo, useState } from "react";
 import { ArrowRight, Minus, Plus } from "lucide-react";
 import {
@@ -44,6 +45,17 @@ export function BedPricingCalculator() {
 
   const update = (key: Field["key"], value: number) =>
     setBeds((current) => ({ ...current, [key]: Math.min(MAX_BEDS, Math.max(0, Number.isFinite(value) ? Math.floor(value) : 0)) }));
+
+  // Leva leitos, setores e plano já preenchidos para o formulário de cadastro.
+  const sendToForm = () => {
+    const sectors: LeadPrefill["sectors"] = [];
+    if (beds.red || beds.observation) sectors.push("emergencia");
+    if (beds.uti) sectors.push("uti");
+    if (beds.ward) sectors.push("enfermaria");
+    window.dispatchEvent(
+      new CustomEvent<LeadPrefill>(LEAD_PREFILL_EVENT, { detail: { beds: total || undefined, cycle, sectors } }),
+    );
+  };
 
   const contactHref = useMemo(() => {
     const parts = [
@@ -210,13 +222,20 @@ export function BedPricingCalculator() {
         </ul>
 
         <a
+          href="#cadastro"
+          onClick={sendToForm}
+          className="mt-7 inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-medium text-primary-foreground transition-all hover:shadow-glow md:text-base"
+        >
+          Solicitar proposta com estes números
+          <ArrowRight className="h-4 w-4" />
+        </a>
+        <a
           href={contactHref}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-7 inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-medium text-primary-foreground transition-all hover:shadow-glow md:text-base"
+          className="mt-3 inline-flex min-h-11 items-center justify-center text-sm font-medium text-foreground underline decoration-gold/60 underline-offset-4 hover:decoration-gold"
         >
-          Quero esta proposta no WhatsApp
-          <ArrowRight className="h-4 w-4" />
+          Ou enviar pelo WhatsApp
         </a>
         <p className="mt-3 text-center text-xs text-muted-foreground">
           Boleto ou Pix, com nota fiscal. Treinamento presencial é orçado à parte.

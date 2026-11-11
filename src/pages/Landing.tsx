@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import { ArrowRight, Check, Shield, Bed, ClipboardList, Activity, Layers, Lock, ChevronDown, Repeat, LogIn } from "lucide-react";
+import { ArrowRight, MessageCircle, Check, Shield, Bed, ClipboardList, Activity, Layers, Lock, ChevronDown, Repeat, LogIn } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
@@ -7,6 +7,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { ExperienceShowcase } from "@/components/landing/ExperienceShowcase";
+import { LeadForm } from "@/components/landing/LeadForm";
 import { BedPricingCalculator } from "@/components/landing/BedPricingCalculator";
 import logoP from "@/assets/logo-p-cross.png";
 import logoFull from "@/assets/passomed-full-logo.png";
@@ -262,7 +263,7 @@ export default function Landing() {
               Entrar
             </a>
             <a
-              href={CONTACT_HREF}
+              href="#cadastro"
               className="hidden sm:inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2.5 md:px-5 text-xs md:text-sm font-medium text-primary-foreground shadow-sm hover:shadow-glow transition-all"
             >
               Agendar demonstração
@@ -295,10 +296,10 @@ export default function Landing() {
 
             <div className="mt-9 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
               <a
-                href={CONTACT_HREF}
+                href="#cadastro"
                 className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full bg-primary px-7 py-3.5 text-sm md:text-base font-medium text-primary-foreground shadow-md hover:shadow-glow transition-all"
               >
-                Agendar demonstração e conversa
+                Agendar demonstração
                 <ArrowRight className="h-4 w-4" />
               </a>
               <button
@@ -310,7 +311,7 @@ export default function Landing() {
               </button>
             </div>
             <p className="mt-4 text-xs text-muted-foreground">
-              Conversa de 20 minutos com a equipe. Sem SDR, sem formulário longo.{" "}
+              Demonstração de 20 minutos com a equipe.{" "}
               <a href="#contratar" className="font-medium text-foreground underline decoration-gold/60 underline-offset-4 hover:decoration-gold">
                 A partir de R$ 29,90 por leito ao mês — calcule o seu
               </a>
@@ -676,27 +677,51 @@ export default function Landing() {
         </Accordion>
       </SectionShell>
 
-      {/* ── 13 CTA FINAL ───────────────────────────────────── */}
-      <section className="relative overflow-hidden bg-gradient-emerald">
-        <div className="container py-20 md:py-28 text-center">
-          <Eyebrow>
-            <span className="text-gold">Vamos conversar</span>
-          </Eyebrow>
-          <h2 className="mt-5 font-landing-display text-3xl sm:text-4xl md:text-5xl leading-[1.05] tracking-tight text-primary-foreground max-w-3xl mx-auto">
-            Pronto para ver o seu setor em uma única tela?
-          </h2>
-          <p className="mt-6 text-base md:text-lg text-primary-foreground/85">
-            20 minutos com a equipe demonstrativa.
-          </p>
-          <a
-            href={CONTACT_HREF}
-            className="mt-9 inline-flex items-center justify-center gap-2 rounded-full bg-gold px-8 py-4 text-sm md:text-base font-semibold text-gold-foreground shadow-gold hover:brightness-110 transition-all"
-          >
-            Agendar conversa
-            <ArrowRight className="h-4 w-4" />
-          </a>
+      {/* ── 13 CADASTRO ─────────────────────────────────────── */}
+      <section id="cadastro" className="relative scroll-mt-20 overflow-hidden bg-gradient-emerald">
+        <div className="container grid gap-10 py-16 md:py-24 lg:grid-cols-[1fr_1.15fr] lg:items-start">
+          <div>
+            <Eyebrow>
+              <span className="text-gold">Vamos conversar</span>
+            </Eyebrow>
+            <h2 className="mt-5 font-landing-display text-3xl sm:text-4xl md:text-5xl leading-[1.05] tracking-tight text-primary-foreground">
+              Pronto para ver o seu setor em uma única tela?
+            </h2>
+            <p className="mt-5 max-w-md text-base md:text-lg leading-relaxed text-primary-foreground/85">
+              Preencha o cadastro e a equipe entra em contato para uma demonstração de 20 minutos, com os setores e a
+              quantidade de leitos da sua unidade.
+            </p>
+            <ul className="mt-6 space-y-3 text-sm text-primary-foreground/85">
+              {["Resposta pelo WhatsApp informado", "Proposta com o valor exato por leito", "Sem compromisso de contratação"].map((line) => (
+                <li key={line} className="flex items-center gap-2.5">
+                  <Check className="h-4 w-4 shrink-0 text-gold" aria-hidden /> {line}
+                </li>
+              ))}
+            </ul>
+            <a
+              href={CONTACT_HREF}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-8 inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-white/30 px-6 text-sm font-medium text-primary-foreground transition-colors hover:bg-white/10"
+            >
+              <MessageCircle className="h-4 w-4" aria-hidden /> Prefere tirar uma dúvida antes? WhatsApp
+            </a>
+          </div>
+          <LeadForm whatsappHref={CONTACT_HREF} />
         </div>
       </section>
+
+      {/* Dúvidas rápidas: WhatsApp sempre à mão */}
+      <a
+        href={CONTACT_HREF}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Tirar dúvidas pelo WhatsApp"
+        className="fixed bottom-5 right-5 z-40 inline-flex h-14 items-center gap-2 rounded-full bg-[#128C7E] px-4 text-sm font-semibold text-white shadow-lg transition-transform hover:scale-105 sm:px-5"
+      >
+        <MessageCircle className="h-6 w-6" aria-hidden />
+        <span className="hidden sm:inline">Dúvidas? WhatsApp</span>
+      </a>
 
       {/* ── 14 FOOTER ──────────────────────────────────────── */}
       <footer className="border-t border-border bg-background">

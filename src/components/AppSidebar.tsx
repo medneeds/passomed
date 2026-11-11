@@ -1,3 +1,4 @@
+import { useLeadsSummary } from "@/hooks/useLeadsSummary";
 import {
   Users,
   BookOpen,
@@ -62,6 +63,7 @@ export function AppSidebar({
   const navigate = useNavigate();
   const { signOut, user, role } = useAuth();
   const { isPlatformAdmin } = useHospital();
+  const { summary: leadsSummary } = useLeadsSummary({ notify: true });
   const isMobile = useIsMobile();
   const isCollapsed = state === "collapsed";
   const [showPasswordDialog, setShowPasswordDialog] = useState(false);
@@ -125,6 +127,7 @@ export function AppSidebar({
         // Só o operador da plataforma (implantação de novas instituições)
         ...(isPlatformAdmin
           ? [
+              { name: "CADASTROS DA LANDING", link: "/admin/leads", badge: leadsSummary?.new ? leadsSummary.new : undefined },
               { name: "INSTITUIÇÕES E RECEITA", link: "/admin/institutions" },
               { name: "CADASTRAR ESTADOS", link: "/admin/states" },
               { name: "CADASTRAR UNIDADES", link: "/admin/units" },
