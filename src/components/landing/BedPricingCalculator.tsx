@@ -180,6 +180,12 @@ export function BedPricingCalculator() {
           {billable} {billable === 1 ? "leito" : "leitos"} × {formatBRL(PRICE_PER_BED_CENTS)}
           {cycle === "annual" ? ` × ${ANNUAL_PAID_MONTHS} meses (você usa 12)` : " por mês"}
         </p>
+        {total > 0 && !belowMinimum && (
+          <p className="mt-3 inline-flex w-fit items-center rounded-full bg-gold/15 px-3 py-1 text-xs font-semibold text-foreground">
+            {formatBRL(Math.round((cycle === "annual" ? annual : monthly * 12) / 365 / billable))} por leito, por dia
+            {cycle === "monthly" && <span className="ml-1 font-normal text-muted-foreground">(média anual)</span>}
+          </p>
+        )}
         {belowMinimum && (
           <p className="mt-2 text-xs text-muted-foreground">
             O contrato mínimo é de {MIN_BILLABLE_BEDS} leitos: unidades menores pagam por {MIN_BILLABLE_BEDS}.

@@ -316,7 +316,7 @@ export default function Landing() {
             <p className="mt-4 text-xs text-muted-foreground">
               Demonstração de 20 minutos com a equipe.{" "}
               <a href="#contratar" className="font-medium text-foreground underline decoration-gold/60 underline-offset-4 hover:decoration-gold">
-                A partir de R$ 29,90 por leito ao mês — calcule o seu
+                Menos de R$ 1 por dia por leito — calcule o seu
               </a>
             </p>
           </div>
@@ -625,8 +625,8 @@ export default function Landing() {
         variant="muted"
         fullWidthContent
         eyebrow="Preço"
-        title={<>R$ 29,90 por leito, por mês.</>}
-        subtitle="Sem taxa por usuário: você paga pelos leitos fixos que acompanha. No plano anual são 2 meses grátis e a implantação sai isenta."
+        title={<>Menos de R$ 1 por dia por leito.</>}
+        subtitle="É o que custa tirar o plantão da planilha. R$ 29,90 por leito ao mês (R$ 0,98 por dia na média anual) ou R$ 0,82 por dia no plano anual, com 2 meses grátis e implantação isenta. Sem taxa por usuário. Contrato mínimo de 10 leitos; no plano mensal, implantação de R$ 990 paga uma única vez."
       >
         <BedPricingCalculator />
       </SectionShell>
@@ -670,7 +670,7 @@ export default function Landing() {
               },
               {
                 q: "Quanto custa?",
-                a: "R$ 29,90 por leito fixo, por mês, com contrato mínimo de 10 leitos. Uma UTI de 10 leitos paga R$ 299 por mês; uma emergência com 5 leitos de sala vermelha e 10 de observação paga R$ 448,50. No plano anual à vista você paga 10 meses e usa 12. Não há cobrança por usuário.",
+                a: "Menos de R$ 1 por dia por leito: R$ 29,90 por leito fixo, por mês (R$ 0,98 por dia na média anual), com contrato mínimo de 10 leitos. Uma UTI de 10 leitos paga R$ 299 por mês; uma emergência com 5 leitos de sala vermelha e 10 de observação paga R$ 448,50. No plano anual à vista você paga 10 meses e usa 12, o que dá R$ 0,82 por dia por leito, e a implantação de R$ 990 sai isenta. Não há cobrança por usuário.",
               },
               {
                 q: "Existe taxa de implantação?",
